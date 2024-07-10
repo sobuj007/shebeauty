@@ -5,14 +5,30 @@ import 'package:sizer/sizer.dart';
 mixin AppFonts {
   static const fontFamilyName = 'Roboto';
 
-  static double h1 = 20.sp;
-  static double h2 = 18.sp;
-  static double h3 = 16.sp;
-  static double h4 = 15.sp;
-  static double h5 = 13.sp;
-  static double h6 = 11.sp;
-  static double h7 = 9.sp;
-  static double h8 = 8.sp;
+  static double splashtitle =20.sp;
+  static double h1 =18.sp;
+  static double h2 = 16.sp;
+  static double h3 = 14.sp;
+  static double h4 = 12.sp;
+  static double h5 = 10.sp;
+  static double h6 = 8.sp;
+  static double h7 = 7.sp;
+  static double h8 = 5.sp;
+ /********************************************************** H1 **************************** */
+static  fontSplashtitle(c) {
+    return TextStyle(
+        fontFamily: fontFamilyName,
+        fontSize: AppFonts.splashtitle,
+        fontWeight: FontWeight.w200,
+        color: c);
+  }
+  static  custom(c,f,fw) {
+    return TextStyle(
+        fontFamily: fontFamilyName,
+        fontSize: f,
+        fontWeight: fw,
+        color: c);
+  }
  /********************************************************** H1 **************************** */
 static  fontH1light(c) {
     return TextStyle(

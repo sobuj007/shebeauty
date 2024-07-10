@@ -2,8 +2,13 @@ import 'dart:io';
 
 
 
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:shebeauty/main.dart';
+import 'package:shebeauty/utils/appFonts.dart';
+import 'package:shebeauty/utils/appLanguage.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../utils/custom widget/TitleWithViewButton.dart';
 
@@ -27,6 +32,8 @@ class _WomanState extends State<Woman> {
     "Khilkhet"
   ];
   List cityitem = ["Dhaka", "Chattogram", "Rajshahi", "Syhlet", "Rongpur"];
+  List itemsCategory=["beautytreatment.png","foot.png","haircutting.png","makeup.png","manicure.png","massage.png","wax.png","woman.png"];
+  List itemsCategoryName=["Treatment","foot","haircutting","makeup","manicure","massage","wax","woman"];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,7 +44,7 @@ class _WomanState extends State<Woman> {
         child: ListView(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * .22,
+              height:22.h,
               child: Stack(
                 children: [
                   Positioned(
@@ -47,8 +54,10 @@ class _WomanState extends State<Woman> {
                           color: Colors.black26,
                           borderRadius: BorderRadius.circular(15)),
                       width: MediaQuery.of(context).size.width,
-                      child: Center(child: Text("data")),
-                    ),
+                      child: ads()
+                      
+                      ),
+                    
                   ),
                   Positioned(
                       bottom: 1,
@@ -60,7 +69,7 @@ class _WomanState extends State<Woman> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Container(
-                                width: MediaQuery.of(context).size.width * .77,
+                                width:77.w,
                                 decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(15)),
@@ -93,24 +102,37 @@ class _WomanState extends State<Woman> {
             Column(
               children: [
                 TitleWithViewButton(
-                  title: "Category",
+                  title: applng.getLang(6),
                   route: "c",
                 ),
                 /********************** category bloc *************************** */
                 Container(
-                  height: MediaQuery.of(context).size.height * .12,
+                  height: 14.h,
                   //color: Colors.green,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 10,
+                    itemCount: itemsCategory.length,
                     itemBuilder: (context, index) {
-                      return Card(
-                        color: Colors.black38,
-                        child: Container(
-                          // width: 200,
-                          //height: 20,
-                          width: MediaQuery.of(context).size.width * .20,
-                          //height: MediaQuery.of(context).size.height * .01,
+                      return Container(
+                        height: 16.h,
+                                  width:25.w,
+                        child: Card(
+                          color: Colors.white,
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Column(
+                              children: [
+                                Container(
+                                  // width: 200,
+                                  height: 8.h,
+                                  width:10.w,
+                                  child: Image(image: AssetImage("assets/imgs/${itemsCategory[index]}",),fit: BoxFit.contain,),
+                                 
+                                ),
+                                Text(itemsCategoryName[index].toString().toUpperCase(),style: AppFonts.fontH4semi(Colors.black),),
+                              ],
+                            ),
+                          ),
                         ),
                       );
                     },
@@ -118,20 +140,20 @@ class _WomanState extends State<Woman> {
                 ),
                 /********************************* provider bloc ************* */
                 TitleWithViewButton(
-                  title: "Provider",
+                  title: applng.getLang(7),
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height * .14,
+                  height: MediaQuery.of(context).size.height * .18,
                   //color: Colors.green,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: 10,
                     itemBuilder: (context, index) {
                       return Card(
-                        color: Colors.black38,
+                        color: Colors.blue,
                         child: Container(
-                          width: MediaQuery.of(context).size.width * .28,
-                          height: MediaQuery.of(context).size.height * .13,
+                          width:38.w,
+                          height: 13.h,
                         ),
                       );
                     },
@@ -139,7 +161,7 @@ class _WomanState extends State<Woman> {
                 ),
                 /********************************* near me Bloc ******************* */
                 TitleWithViewButton(
-                  title: "Near Me",
+                  title: applng.getLang(8),
                 ),
                 neaarMe(context)
               ],
@@ -200,5 +222,24 @@ class _WomanState extends State<Woman> {
         ),
       ),
     );
+  }
+
+  ads(){
+   return Swiper(
+    
+  itemBuilder: (BuildContext context, int index) {
+    return Image.network(
+      // "https://via.placeholder.com/288x188",
+      "https://foru.co.id/wp-content/uploads/2015/05/Memilih-advertising-agency.jpg",
+      fit: BoxFit.fill,
+    );
+  },
+  autoplay: true,
+duration: 1000,
+  autoplayDelay: 8000,
+  itemCount: 10,
+  viewportFraction: 1,
+  scale: 0.9,
+);
   }
 }

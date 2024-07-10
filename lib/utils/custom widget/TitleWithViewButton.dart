@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shebeauty/main.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../category/Screens/Category.dart';
 
@@ -16,7 +18,7 @@ class _TitleWithViewButtonState extends State<TitleWithViewButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * .035,
+      height: 4.h,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -32,7 +34,7 @@ class _TitleWithViewButtonState extends State<TitleWithViewButton> {
                 }
               },
               child: Text(
-                "View All",
+                applng.getLang(9),
                 style: TextStyle(fontSize: 12),
               ))
         ],

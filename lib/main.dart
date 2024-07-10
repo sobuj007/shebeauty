@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shebeauty/routes/AppRouts.dart';
+import 'package:shebeauty/utils/appLanguage.dart';
 import 'package:sizer/sizer.dart';
 
+AppLanguage applng= AppLanguage();
 void main() {
   runApp(const SheBeauty());
 }
