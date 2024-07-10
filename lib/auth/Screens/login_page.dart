@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shebeauty/main.dart';
 import 'package:shebeauty/utils/appColors.dart';
 import 'package:shebeauty/utils/appFonts.dart';
@@ -126,16 +127,22 @@ class _LoginState extends State<Login> {
               SizedBox(
               height: 2.h,
             ),
-            Container(
-              width: 100.w,
-              height: 6.h,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: AppColors.themeColer,
-                  borderRadius: BorderRadius.circular(10)),
-              child: Text(
-                applng.getLang(10).toString().toUpperCase(),
-                style: AppFonts.fontH2bold(AppColors.themeWhite),
+            /************* login button ******************* */
+            GestureDetector(
+              onTap: (){
+                Get.toNamed('/layout');
+              },
+              child: Container(
+                width: 100.w,
+                height: 6.h,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: AppColors.themeColer,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Text(
+                  applng.getLang(10).toString().toUpperCase(),
+                  style: AppFonts.fontH2bold(AppColors.themeWhite),
+                ),
               ),
             ),Expanded(child: SizedBox()),
             Row(mainAxisAlignment: MainAxisAlignment.center,

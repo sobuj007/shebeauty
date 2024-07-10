@@ -129,7 +129,7 @@ class _WomanState extends State<Woman> {
                                   child: Image(image: AssetImage("assets/imgs/${itemsCategory[index]}",),fit: BoxFit.contain,),
                                  
                                 ),
-                                Text(itemsCategoryName[index].toString().toUpperCase(),style: AppFonts.fontH4semi(Colors.black),),
+                                Text(itemsCategoryName[index].toString().toUpperCase(),style: AppFonts.fontH6semi(Colors.black),),
                               ],
                             ),
                           ),

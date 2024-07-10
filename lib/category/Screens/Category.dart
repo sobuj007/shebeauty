@@ -74,7 +74,7 @@ class _AppCategoryState extends State<AppCategory> {
                                   width:10.w,
                                   child: Image(image: AssetImage("assets/imgs/${itemsCategory[index]}",),fit: BoxFit.contain,),
                                   //height: MediaQuery.of(context).size.height * .01,
-                                               ),Text(itemsCategoryName[index].toString().toUpperCase(),style: AppFonts.fontH4semi(Colors.black),),
+                                               ),Text(itemsCategoryName[index].toString().toUpperCase(),style: AppFonts.fontH5semi(Colors.black),),
                              ]
             ))))));
           },
