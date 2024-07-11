@@ -24,6 +24,7 @@ class _LoginState extends State<Login> {
           child: Padding(
         padding: EdgeInsets.all(2.h),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               child: Center(
@@ -33,10 +34,18 @@ class _LoginState extends State<Login> {
                 ),
               ),
             ),
+              SizedBox(
+              height: 2.h,
+            ),
             Text(
               applng.getLang(1),
               style: AppFonts.fontH1bold(Colors.black),
             ),
+            
+        SizedBox(
+              height: 2.h,
+            ),
+            
             /**************************************** usename field ********************************** */
             TextField(
               controller: username,
