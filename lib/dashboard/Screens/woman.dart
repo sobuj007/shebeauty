@@ -2,6 +2,7 @@ import 'dart:io';
 
 
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -49,14 +50,12 @@ class _WomanState extends State<Woman> {
                 children: [
                   Positioned(
                     child: Container(
-                      height: 150,
-                      decoration: BoxDecoration(
-                          color: Colors.black26,
-                          borderRadius: BorderRadius.circular(15)),
-                      width: MediaQuery.of(context).size.width,
-                      child: ads()
+                      height: 18.h,width: 100.w,
+
+                     child:  ads()
+                    )
                       
-                      ),
+                      
                     
                   ),
                   Positioned(
@@ -228,11 +227,23 @@ class _WomanState extends State<Woman> {
    return Swiper(
     
   itemBuilder: (BuildContext context, int index) {
-    return Image.network(
-      // "https://via.placeholder.com/288x188",
-      "https://foru.co.id/wp-content/uploads/2015/05/Memilih-advertising-agency.jpg",
-      fit: BoxFit.fill,
-    );
+    return Container(
+                      height: 150,
+                      decoration: BoxDecoration(
+                          color: Colors.black26,
+                          image: DecorationImage(image: CachedNetworkImageProvider(
+       "https://foru.co.id/wp-content/uploads/2015/05/Memilih-advertising-agency.jpg",
+       
+   
+    ),fit: BoxFit.fill),
+                          borderRadius: BorderRadius.circular(15)),
+                      width: MediaQuery.of(context).size.width);
+                     
+    // return Image.network(
+    //   // "https://via.placeholder.com/288x188",
+    //   "https://foru.co.id/wp-content/uploads/2015/05/Memilih-advertising-agency.jpg",
+    //   fit: BoxFit.fill,
+    // );
   },
   autoplay: true,
 duration: 1000,

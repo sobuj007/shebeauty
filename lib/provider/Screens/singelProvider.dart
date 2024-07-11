@@ -7,6 +7,7 @@ import 'SingelDescription.dart';
 import 'Singelprofile.dart';
 
 class SingelProvider extends StatefulWidget {
+
   const SingelProvider({super.key});
 
   @override

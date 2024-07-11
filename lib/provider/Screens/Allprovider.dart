@@ -1,5 +1,9 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shebeauty/utils/appColors.dart';
+import 'package:shebeauty/utils/appFonts.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../utils/custom widget/CustomAppbar.dart';
 import 'singelProvider.dart';
@@ -14,163 +18,236 @@ class AllProvider extends StatefulWidget {
 }
 
 class _AllProviderState extends State<AllProvider> {
-  TextEditingController serachController = TextEditingController();
+   TextEditingController _searchController = TextEditingController();
+  List<Item> _allItems = List<Item>.generate(
+    100,
+    (i) => Item(
+      name: 'Item $i',
+      location: 'Location ${i % 10}',
+      time: DateTime.now().subtract(Duration(days: i)),
+    ),
+  );
+  List<Item> _filteredItems = [];
+  String? _selectedLocation;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    // widget.selectedBody.add("All");
-    // setState(() {});
+    _filteredItems.addAll(_allItems);
+    _searchController.addListener(_filterList);
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _filterList() {
+    List<Item> results = [];
+    if (_searchController.text.isEmpty && _selectedLocation == null) {
+      results = _allItems;
+    } else {
+      results = _allItems.where((item) {
+        final matchesName = item.name
+            .toLowerCase()
+            .contains(_searchController.text.toLowerCase());
+        final matchesLocation = _selectedLocation == null ||
+            item.location == _selectedLocation;
+        return matchesName && matchesLocation;
+      }).toList();
+    }
+    setState(() {
+      _filteredItems = results;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-          child: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: ListView(
-          children: [
-            CustomAppbar(
-              title: "All Provider",
+      appBar: AppBar(
+        leading: GestureDetector(child: Icon(Icons.arrow_back_ios,color: AppColors.themeWhite,),onTap: (){Navigator.pop(context);},),
+        backgroundColor: AppColors.themeColer,
+        title: Text('AllProvider',style: AppFonts.fontH3regular(AppColors.themeWhite),),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: 6.8.h,
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                         height: 6.8.h,
+
+                      width: 75.w,
+                      child: TextField(
+                        controller: _searchController,
+                        style: AppFonts.fontH5semi(AppColors.themeBlack),
+                        decoration: InputDecoration(
+                          hintText: "Search here",
+                          hintStyle: AppFonts.fontH4semi(AppColors.themehint),
+                          prefixIcon: Icon(Icons.search),
+                         
+
+                          contentPadding: EdgeInsets.symmetric(horizontal: 4.w,vertical: 0.w),
+                         // labelText: 'Search',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                        ),
+                      ),
+                    ),
+                     Container(
+                      decoration: BoxDecoration(border: Border.all(width: .5),borderRadius: 
+                      BorderRadius.circular(15)),
+                      child: Padding(
+                       padding: const EdgeInsets.all(8.0),
+                       child: Icon(Icons.sort,color: AppColors.themeBlack,),
+                     )),
+                  //  Card(child: Container(height: 8.h,width: 6.h, child: ))
+                  ],
+                ),
+              ),
             ),
-            searchWidget(),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-              child: Column(
+              padding:  EdgeInsets.symmetric(horizontal: 2.w),
+              child: Row(
+                mainAxisAlignment: 
+                MainAxisAlignment.spaceBetween,
                 children: [
+                  /**************************************** */
                   Container(
-                    height: MediaQuery.of(context).size.height * .05,
-                    // // (.06 * widget.selectedBody.length % 2),
-                    // width: MediaQuery.of(context).size.width,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: widget.selectedBody.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15)),
-                          elevation: 2,
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 1),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    widget.selectedBody[index].toString(),
-                                    style: TextStyle(fontSize: 12),
-                                  ),
-                                  SizedBox(
-                                    width: 6,
-                                  ),
-                                  GestureDetector(
-                                      onTap: (() {
-                                        widget.selectedBody
-                                            .remove(widget.selectedBody[index]);
-                                        setState(() {});
-                                      }),
-                                      child: Icon(
-                                        Icons.close,
-                                        size: 13,
-                                      ))
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
+                    width: 30.w,
+                    child: DropdownButton<String>(
+                      isExpanded: true,
+                      hint: Text('Select Location'),
+                      style: AppFonts.fontH4regular(AppColors.themeBlack),
+                      value: _selectedLocation,
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _selectedLocation = newValue;
+                          _filterList();
+                        });
                       },
+                      items: [
+                        DropdownMenuItem(
+                          value: null,
+                          child: Text('All Locations'),
+                        ),
+                        ...List.generate(
+                          10,
+                          (i) => DropdownMenuItem(
+                            value: 'Location $i',
+                            child: Text('Location $i'),
+                          ),
+                        )
+                      ],
                     ),
                   ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Container(
-                    height: MediaQuery.of(context).size.height * .75,
-                    //    (.80 - (.5 * (widget.selectedBody.length % 3))),
-                    // color: Colors.grey.shade100,
-                    child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      itemCount: 10,
-                      itemBuilder: (BuildContext context, int index) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => SingelProvider()));
-                          },
-                          child: Card(
-                            child: Container(
-                              height: 150,
-                              width: 100,
-                              color: Colors.blueAccent.shade400,
-                            ),
-                          ),
-                        );
+                  /********************************************************  */
+                   Container(
+                    width: 30.w,
+                    child: DropdownButton<String>(
+                      isExpanded: true,
+                      hint: Text('Select Location'),
+                      style: AppFonts.fontH4regular(AppColors.themeBlack),
+                      value: _selectedLocation,
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _selectedLocation = newValue;
+                          _filterList();
+                        });
                       },
+                      items: [
+                        DropdownMenuItem(
+                          value: null,
+                          child: Text('All Locations'),
+                        ),
+                        ...List.generate(
+                          10,
+                          (i) => DropdownMenuItem(
+                            value: 'Location $i',
+                            child: Text('Location $i'),
+                          ),
+                        )
+                      ],
                     ),
-                  )
+                  ),
+                  /****************************************  */
+                   Container(
+                    width: 30.w,
+                    child: DropdownButton<String>(
+                      isExpanded: true,
+                      hint: Text('Select Location'),
+                      style: AppFonts.fontH4regular(AppColors.themeBlack),
+                      value: _selectedLocation,
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _selectedLocation = newValue;
+                          _filterList();
+                        });
+                      },
+                      items: [
+                        DropdownMenuItem(
+                          value: null,
+                          child: Text('All Locations'),
+                        ),
+                        ...List.generate(
+                          10,
+                          (i) => DropdownMenuItem(
+                            value: 'Location $i',
+                            child: Text('Location $i'),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ],
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: _filteredItems.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: (){
+                       Get.toNamed(
+           "/singelprovider",
+              arguments: {
+                'id': 1,
+                'name': 'John Doe',
+                'isVerified': true,
+              },
+            );
+                    },
+                    child: ListTile(
+                      
+                    
+                      
+                      title: Text(_filteredItems[index].name),
+                      subtitle: Text(
+                          '${_filteredItems[index].location} - ${_filteredItems[index].time}'),
+                    ),
+                  );
+                },
               ),
             ),
           ],
         ),
-      )),
-    );
-  }
-
-  searchWidget() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width * .77,
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(15)),
-            child: TextField(
-              controller: serachController,
-              decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 2.0, vertical: 1.0),
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  )),
-            ),
-          ),
-          Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
-              child: IconButton(
-                  onPressed: () {
-                    showpopup(context);
-                  },
-                  icon: Icon(Icons.sort)))
-        ],
       ),
     );
   }
+}
 
-  showpopup(context) {
-    showDialog(
-        context: context,
-        builder: ((context) {
-          return Padding(
-            padding: const EdgeInsets.all(40.0),
-            child: Container(
-              height: 300,
-              color: Colors.amber,
-              child: Text("data"),
-            ),
-          );
-        }));
-  }
+class Item {
+  final String name;
+  final String location;
+  final DateTime time;
+
+  Item({required this.name, required this.location, required this.time});
 }
