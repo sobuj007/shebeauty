@@ -20,65 +20,69 @@ class _AppCategoryState extends State<AppCategory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            CustomAppbar(
-              title: "Category",
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height * .88,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListView(
-                  children: [category(context)],
-                ),
+      body: Column(
+        children: [
+          CustomAppbar(
+            title: "Category",
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height * .88,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: [category(context)],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
   category(context) {
     return Container(
-      height: MediaQuery.of(context).size.height,
+      height: MediaQuery.of(context).size.height*.80,
       width: MediaQuery.of(context).size.width,
-      child: Flexible(
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
+      child: Row(
+        children: [
+          Expanded(
+            child: GridView.builder(
+              padding: EdgeInsets.zero,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+              ),
+              itemCount: 6,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                    onTap: (() {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => AppSubCategory()));
+                    }),
+                    child: Container(
+                            height: 16.h,
+                                      width:25.w,
+                            child: Card(
+                              color: Colors.white,
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      // width: 200,
+                                      height: 8.h,
+                                      width:10.w,
+                                      child: Image(image: AssetImage("assets/imgs/${itemsCategory[index]}",),fit: BoxFit.contain,),
+                                      //height: MediaQuery.of(context).size.height * .01,
+                                                   ),Text(itemsCategoryName[index].toString().toUpperCase(),style: AppFonts.fontH5semi(Colors.black),),
+                                 ]
+                ))))));
+              },
+            ),
           ),
-          itemCount: 6,
-          itemBuilder: (BuildContext context, int index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GestureDetector(
-                onTap: (() {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => AppSubCategory()));
-                }),
-                child: Container(
-                        height: 16.h,
-                                  width:25.w,
-                        child: Card(
-                          color: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Column(
-                              children: [
-                                Container(
-                                  // width: 200,
-                                  height: 8.h,
-                                  width:10.w,
-                                  child: Image(image: AssetImage("assets/imgs/${itemsCategory[index]}",),fit: BoxFit.contain,),
-                                  //height: MediaQuery.of(context).size.height * .01,
-                                               ),Text(itemsCategoryName[index].toString().toUpperCase(),style: AppFonts.fontH5semi(Colors.black),),
-                             ]
-            ))))));
-          },
-        ),
+        ],
       ),
     );
   }

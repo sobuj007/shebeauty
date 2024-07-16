@@ -36,7 +36,7 @@ class CustomAppbar extends StatelessWidget {
     return  AppBar(
         leading: GestureDetector(child: Icon(Icons.arrow_back_ios,color: AppColors.themeWhite,),onTap: (){Navigator.pop(context);},),
         backgroundColor: AppColors.themeColer,
-        title: Text('AllProvider',style: AppFonts.fontH3regular(AppColors.themeWhite),),
+        title: Text(title.toString(),style: AppFonts.fontH3regular(AppColors.themeWhite),),
       );
   }
 }

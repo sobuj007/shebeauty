@@ -80,7 +80,7 @@ class APpPageRoutes{
     /********************************* splash ******************** */
     GetPage(
     name: AppRoutes.appsingelprovider,
-    page:()=> SingelProvider(),
+    page:()=> SingelProvider(item:[]),
     transition: Transition.cupertino),
   
     

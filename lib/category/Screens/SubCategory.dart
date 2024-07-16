@@ -48,24 +48,23 @@ class _AppSubCategoryState extends State<AppSubCategory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-          child: Column(
-        children: [
-          CustomAppbar(
-            title: "Sub Category",
+      body: Column(
+              children: [
+      CustomAppbar(
+        title: "Sub Category",
+      ),
+      Container(
+        height: MediaQuery.of(context).size.height * .88,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListView(
+            
+            children: [subcategory(context)],
           ),
-          Container(
-            height: MediaQuery.of(context).size.height * .88,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListView(
-                
-                children: [subcategory(context)],
-              ),
+        ),
+      ),
+              ],
             ),
-          ),
-        ],
-      )),
     );
   }
 
@@ -73,37 +72,42 @@ class _AppSubCategoryState extends State<AppSubCategory> {
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      child: Flexible(
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
+      child: Row(
+        children: [
+          Expanded(
+            child: GridView.builder(
+        padding: EdgeInsets.zero,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+              ),
+              itemCount: itemData.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      showpopup(context);
+                    },
+                    child: Card(
+                      color: Colors.white,
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Column(
+                          children: [
+                            Container(
+                              // width: 200,
+                              height: 8.h,
+                              width:10.w,
+                              child: Image(image: AssetImage("assets/imgs/${itemData[index]['img']}",),fit: BoxFit.contain,),
+                              //height: MediaQuery.of(context).size.height * .01,
+                                           ),Text(itemData[index]['name'].toString().toUpperCase(),style: AppFonts.fontH6semi(Colors.black),),
+                         ]
+                                ))),)
+                );
+              },
+            ),
           ),
-          itemCount: itemData.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GestureDetector(
-                onTap: () {
-                  showpopup(context);
-                },
-                child: Card(
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Column(
-                      children: [
-                        Container(
-                          // width: 200,
-                          height: 8.h,
-                          width:10.w,
-                          child: Image(image: AssetImage("assets/imgs/${itemData[index]['img']}",),fit: BoxFit.contain,),
-                          //height: MediaQuery.of(context).size.height * .01,
-                                       ),Text(itemData[index]['name'].toString().toUpperCase(),style: AppFonts.fontH6semi(Colors.black),),
-                     ]
-                            ))),)
-            );
-          },
-        ),
+        ],
       ),
     );
   }
