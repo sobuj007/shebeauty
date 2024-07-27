@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shebeauty/provider/Screens/SingelAppointment.dart';
+import 'package:shebeauty/utils/appColors.dart';
+import 'package:shebeauty/utils/appFonts.dart';
 
 import '../../utils/custom widget/CustomAppbar.dart';
 import 'SingelDescription.dart';
@@ -30,7 +32,7 @@ class _SingelProviderState extends State<SingelProvider> {
               child: Column(
       children: [
         CustomAppbar(
-          title: "Singel Provider",
+          title: args.name.toString(),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -43,13 +45,13 @@ class _SingelProviderState extends State<SingelProvider> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text("Appointment"),
+                      child: Text("Appointment",style: AppFonts.fontH6semi(AppColors.themeBlack),),
                     ),
                     selectpage == 0
                         ? Container(
                             width: 80,
                             height: 2,
-                            color: Colors.blue,
+                            color: AppColors.themeColer,
                           )
                         : SizedBox()
                   ],
@@ -63,13 +65,13 @@ class _SingelProviderState extends State<SingelProvider> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text("Description"),
+                      child: Text("Description",style: AppFonts.fontH6semi(AppColors.themeBlack),),
                     ),
                     selectpage == 1
                         ? Container(
                             width: 80,
                             height: 2,
-                            color: Colors.blue,
+                            color: AppColors.themeColer,
                           )
                         : SizedBox()
                   ],
@@ -83,13 +85,13 @@ class _SingelProviderState extends State<SingelProvider> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text("Profile"),
+                        child: Text("Profile",style: AppFonts.fontH6semi(AppColors.themeBlack),),
                       ),
                       selectpage == 2
                           ? Container(
                               width: 80,
                               height: 2,
-                              color: Colors.blue,
+                              color: AppColors.themeColer,
                             )
                           : SizedBox()
                     ],
@@ -115,8 +117,8 @@ class _SingelProviderState extends State<SingelProvider> {
               },
               children: [
                 SingelAppointment(item: args,),
-                SingelDescription(),
-                SingelProfile(),
+                SingelDescription(item: args,),
+                SingelProfile(item: args,),
               ],
             ),
           ),

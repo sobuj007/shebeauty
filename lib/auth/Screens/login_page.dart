@@ -39,7 +39,7 @@ class _LoginState extends State<Login> {
             ),
             Text(
               applng.getLang(1),
-              style: AppFonts.fontH1bold(Colors.black),
+              style: AppFonts.fontH3semi(Colors.black),
             ),
             
         SizedBox(
@@ -53,9 +53,9 @@ class _LoginState extends State<Login> {
                   contentPadding:
                       EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
                   label: Text(applng.getLang(2)),
-                  labelStyle: AppFonts.fontH3semi(AppColors.themeBlack),
+                  labelStyle: AppFonts.fontH5normal(AppColors.themeBlack),
                   hintText: "example@gmail.com",
-                  hintStyle: AppFonts.fontH3regular(AppColors.themehint),
+                  hintStyle: AppFonts.fontH4regular(AppColors.themehint),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(color: AppColors.themeColer))),
@@ -87,15 +87,15 @@ class _LoginState extends State<Login> {
                   contentPadding:
                       EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
                   label: Text(applng.getLang(3)),
-                  labelStyle: AppFonts.fontH3semi(AppColors.themeBlack),
+                  labelStyle: AppFonts.fontH5normal(AppColors.themeBlack),
                   hintText: "******",
-                  hintStyle: AppFonts.fontH3regular(AppColors.themehint),
+                  hintStyle: AppFonts.fontH5regular(AppColors.themehint),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(color: AppColors.themeColer))),
             ),
             SizedBox(
-              height: 1.h,
+              height: 1.5.h,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -123,18 +123,18 @@ class _LoginState extends State<Login> {
                     ),
                     Text(
                       applng.getLang(5),
-                      style: AppFonts.fontH4semi(AppColors.themeBlack),
+                      style: AppFonts.fontH6normal(AppColors.themeBlack),
                     )
                   ],
                 ),
                 Text(
                   applng.getLang(4),
-                  style: AppFonts.fontH4semi(AppColors.themeBlack),
+                  style: AppFonts.fontH5normal(AppColors.themeBlack),
                 ),
               ],
             ),
               SizedBox(
-              height: 2.h,
+              height: 2.8.h,
             ),
             /************* login button ******************* */
             GestureDetector(
@@ -150,7 +150,7 @@ class _LoginState extends State<Login> {
                     borderRadius: BorderRadius.circular(10)),
                 child: Text(
                   applng.getLang(10).toString().toUpperCase(),
-                  style: AppFonts.fontH2bold(AppColors.themeWhite),
+                  style: AppFonts.fontH3bold(AppColors.themeWhite),
                 ),
               ),
             ),Expanded(child: SizedBox()),
@@ -158,12 +158,12 @@ class _LoginState extends State<Login> {
               children: [
               Text(
                 applng.getLang(11).toString(),
-                style: AppFonts.fontH4bold(AppColors.themeBlack),
+                style: AppFonts.fontH6regular(AppColors.themeBlack),
               ),
               SizedBox(width: 1.w,),
               Text(
                 applng.getLang(12).toString(),
-                style: AppFonts.fontH2bold(AppColors.themeBlack),
+                style: AppFonts.fontH4bold(AppColors.themeBlack),
               ),
             ],)
           ],

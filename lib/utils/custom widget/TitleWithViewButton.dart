@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shebeauty/main.dart';
+import 'package:shebeauty/utils/appColors.dart';
+import 'package:shebeauty/utils/appFonts.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../category/Screens/Category.dart';
@@ -23,7 +25,7 @@ class _TitleWithViewButtonState extends State<TitleWithViewButton> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(widget.title.toString(),
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              style: AppFonts.fontH4normal(AppColors.themeColer)),
           SizedBox(),
           TextButton(
               onPressed: () {

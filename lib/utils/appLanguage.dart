@@ -1,4 +1,4 @@
-import 'dart:ffi';
+
 
 class AppLanguage{
   
@@ -23,19 +23,19 @@ class AppLanguage{
     13:'All Provider',
     14:'Book Now',
     15:'View All',
-    16:'View All',
-    17:'View All',
-    18:'View All',
-    19:'View All',
-    20:'View All',
-    21:'View All',
-    22:'View All',
-    23:'View All',
-    24:'View All',
-    25:'View All',
-    26:'View All',
-    27:'View All',
-    28:'View All',
+    16:"Category : ",
+    17:"Sub-Category : ",
+    18:"Service price : ",
+    19:"Gender : ",
+    20:"Price",
+    21:"Provider Availability : ",
+    22:"Time",
+    23:"Time Slot",
+    24:'Choose Time',
+    25:'Product Quantity',
+    26:'Total ',
+    27:'Service Quantity',
+    28:'Total Services',
     29:'View All',
     30:'View All',
     31:'View All',

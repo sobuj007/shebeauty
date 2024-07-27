@@ -8,7 +8,8 @@ import '../../utils/appFonts.dart';
 import '../../utils/custom widget/CustomAppbar.dart';
 
 class AppSubCategory extends StatefulWidget {
-  const AppSubCategory({super.key});
+final cat;
+  const AppSubCategory({this.cat,super.key});
 
   @override
   State<AppSubCategory> createState() => _AppSubCategoryState();
@@ -51,7 +52,7 @@ class _AppSubCategoryState extends State<AppSubCategory> {
       body: Column(
               children: [
       CustomAppbar(
-        title: "Sub Category",
+        title: " ${widget.cat} -Sub Category",
       ),
       Container(
         height: MediaQuery.of(context).size.height * .88,
@@ -100,7 +101,7 @@ class _AppSubCategoryState extends State<AppSubCategory> {
                               width:10.w,
                               child: Image(image: AssetImage("assets/imgs/${itemData[index]['img']}",),fit: BoxFit.contain,),
                               //height: MediaQuery.of(context).size.height * .01,
-                                           ),Text(itemData[index]['name'].toString().toUpperCase(),style: AppFonts.fontH6semi(Colors.black),),
+                                           ),Text(itemData[index]['name'].toString().toUpperCase(),style: AppFonts.fontH8regular(Colors.black),),
                          ]
                                 ))),)
                 );
@@ -126,7 +127,7 @@ class _AppSubCategoryState extends State<AppSubCategory> {
                 children: [
                   Text(
                     "Body Part:",
-                    style: AppFonts.fontH3semi(AppColors.themeBlack),
+                    style: AppFonts.fontH4semi(AppColors.themeBlack),
                   ),
                   GroupButton(
 
@@ -138,9 +139,9 @@ class _AppSubCategoryState extends State<AppSubCategory> {
                         textPadding: EdgeInsets.symmetric(horizontal: 1.w,vertical: .5.w),
                         selectedColor: Colors.amberAccent,
                         unselectedTextStyle:
-                            AppFonts.fontH5semi( Colors.black),
+                            AppFonts.fontH7semi( Colors.black),
                         selectedTextStyle:
-                            AppFonts.fontH5semi( Colors.black)),
+                            AppFonts.fontH7semi( Colors.black)),
                     isRadio: false,
                     onSelected: ((value, index, isSelected) {
                 
@@ -171,7 +172,7 @@ class _AppSubCategoryState extends State<AppSubCategory> {
                                   decoration: BoxDecoration(color: AppColors.themeColer,borderRadius: BorderRadius.circular(15)),
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text("Search",style: AppFonts.fontH3bold(AppColors.themeWhite),),
+                                    child: Text("Search",style: AppFonts.fontH4bold(AppColors.themeWhite),),
                                   ),
                                 ))),
                       ],

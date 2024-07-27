@@ -45,9 +45,11 @@ class Item {
   final String category;
   final String img_url;
   final String servicePrice;
+  final String slot;
   final String subcategory;
   final List<String> time;
   final String gender;
+  final String available;
   final List<String> location;
   final double rating;
   final List<String> bodypart;
@@ -58,7 +60,9 @@ class Item {
     required this.description,
     required this.price,
     required this.time,
+    required this.slot,
     required this.img_url,
+    required this.available,
     required this.servicePrice,
 
     required this.gender,
@@ -84,6 +88,8 @@ List<Item> items = [
     gender: 'female',
     location: ['Mirpur-1', 'bijoy Soroni', 'banani', 'shamoly'],
     rating: 4.5,
+      available:"8.00 AM to 10.0PM",
+    slot: "45",
     bodypart: ['hand', 'face', 'leg', ''],
   ),
   Item(
@@ -99,6 +105,8 @@ List<Item> items = [
     gender: 'male',
     location: ['Mirpur-2', 'kafrul', 'Gulsahan', 'Badda'],
     rating: 3.5,
+      available:"8.00 AM to 10.0PM",
+    slot: "45",
     bodypart: ['hand', 'face', 'leg', ''],
   ),
   Item(
@@ -112,8 +120,11 @@ List<Item> items = [
     subcategory:"Cold WaX",
     time: ['10.5', '5.30', '8.00'],
     gender: 'Both',
+   
     location: ['Mirpur-1', 'Uttora', 'banani', 'shamoly'],
     rating: 4.5,
+      available:"8.00 AM to 10.0PM",
+    slot: "45",
     bodypart: ['hand', 'face', 'leg', ''],
   ),
     Item(
@@ -129,6 +140,8 @@ List<Item> items = [
     gender: 'Both',
     location: ['Mirpur-1', 'Nikunjo', 'banani', 'shamoly'],
     rating: 1.5,
+    available:"8.00 AM to 10.0PM",
+    slot: "45",
     bodypart: ['hand'],
   ),
     Item(
@@ -144,6 +157,8 @@ List<Item> items = [
     gender: 'Both',
     location: ['bashundhora', 'kuril', 'banani', 'shamoly'],
     rating: 4.5,
+      available:"8.00 AM to 10.0PM",
+    slot: "45",
     bodypart: [ 'face', 'leg', ''],
   ),
 ];

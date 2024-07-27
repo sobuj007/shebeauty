@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:shebeauty/main.dart';
+import 'package:sizer/sizer.dart';
+
+import '../../utils/appColors.dart';
+import '../../utils/appFonts.dart';
+import '../../utils/custom widget/Customratings.dart';
+import '../Model/allproviderDataModel.dart';
 
 class SingelProfile extends StatefulWidget {
-  const SingelProfile({super.key});
+  final item;
+  const SingelProfile({this.item,super.key});
 
   @override
   State<SingelProfile> createState() => _SingelProfileState();
@@ -12,9 +20,60 @@ class _SingelProfileState extends State<SingelProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Center(
-        child: Text("Profile"),
-      )),
+          child: Padding(
+            padding:  EdgeInsets.symmetric(horizontal: 2.5.h),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                     children: [
+                       Row(
+                         children: [
+                          Icon(Icons.verified,color: AppColors.themeColer,
+                          ),
+                          SizedBox(width:5 
+                          ,),
+                           Text(
+                                                        items[0].name.toUpperCase(),
+                                                        style: AppFonts.fontH5bold(
+                                                            AppColors.themeColer),
+                                                        maxLines: 2,
+                                                        overflow: TextOverflow.ellipsis,
+                                                      ),
+                         ],
+                       ),
+                        Rattings(
+                                              rate: items[0].rating.toString(),
+                                            ),
+                     ],
+                   ),
+                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(children: [
+                        Text(applng.getLang(21),style: AppFonts.fontH6regular(AppColors.themeColer),),
+                        Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),border: Border.all(width: 1,color: AppColors.themehint)),child: 
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(items[0].available),
+                        ),)
+                      ],),
+                      Column(children: [
+                        Text(applng.getLang(28),style: AppFonts.fontH6regular(AppColors.themeColer),),
+                        Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),border: Border.all(width: 1,color: AppColors.themehint)),child: 
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(items[0].available),
+                        ),)
+                      ],),
+                    ],
+                   )
+                
+                  
+              ],
+            ),
+          )),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:shebeauty/main.dart';
 import 'package:shebeauty/routes/AppRouts.dart';
 import 'package:shebeauty/utils/appColors.dart';
@@ -139,7 +140,7 @@ class _AllProviderState extends State<AllProvider> {
                                       children: [
                                         Text(
                                           _filteredItems[index].name,
-                                          style: AppFonts.fontH4semi(
+                                          style: AppFonts.fontH5semi(
                                               AppColors.themeBlack),
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
@@ -160,7 +161,7 @@ class _AllProviderState extends State<AllProvider> {
                                         Expanded(
                                           child: Text(
                                             _filteredItems[index].description,
-                                            style: AppFonts.fontH6semi(
+                                            style: AppFonts.fontH7normal(
                                                 AppColors.themeBlack),
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
@@ -182,19 +183,19 @@ class _AllProviderState extends State<AllProvider> {
                                               _filteredItems[index]
                                                   .gender
                                                   .toString(),
-                                          style: AppFonts.fontH5semi(
+                                          style: AppFonts.fontH6semi(
                                               AppColors.themeBlack),
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           textAlign: TextAlign.start,
                                         ),
                                         RichText(text: TextSpan(
-                                          text: "price",
-                                          style: AppFonts.fontH5semi(AppColors.themeBlack),
+                                          text: "price ",
+                                          style: AppFonts.fontH6semi(AppColors.themeBlack),
             
                                           children: [
                                             TextSpan(text: _filteredItems[index].price,
-                                          style: AppFonts.fontH2semi(
+                                          style: AppFonts.fontH3semi(
                                               AppColors.themeColer))
             
                                         ]),)
@@ -224,14 +225,14 @@ class _AllProviderState extends State<AllProvider> {
                                       children: [
                                         Text(
                                             _filteredItems[index].category,
-                                            style: AppFonts.fontH5semi(
+                                            style: AppFonts.fontH7semi(
                                                 AppColors.themeBlack),
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         Text(
                                             _filteredItems[index].subcategory,
-                                            style: AppFonts.fontH5semi(
+                                            style: AppFonts.fontH7semi(
                                                 AppColors.themeBlack),
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
@@ -254,7 +255,7 @@ class _AllProviderState extends State<AllProvider> {
                                       alignment: Alignment.center,
                                       child: Text(
                                         applng.getLang(14),
-                                        style: AppFonts.fontH4semi(
+                                        style: AppFonts.fontH6semi(
                                             AppColors.themeWhite),
                                       ),
                                     ),
@@ -282,7 +283,15 @@ class _AllProviderState extends State<AllProvider> {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Filter Options'),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('Filter Options'),
+            IconButton(onPressed: (){
+              Get.close(1);
+            }, icon: Icon(Icons.close))
+          ],
+        ),
         content: StatefulBuilder(
           builder: (BuildContext context, setState) {
             return Container(

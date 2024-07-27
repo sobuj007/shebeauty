@@ -1,4 +1,4 @@
-package com.shebeauty.user.shebeauty
+package com.example.shebeauty
 
 import io.flutter.embedding.android.FlutterActivity
 

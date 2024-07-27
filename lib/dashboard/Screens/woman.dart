@@ -1,12 +1,11 @@
 import 'dart:io';
 
-
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shebeauty/main.dart';
+import 'package:shebeauty/utils/appColors.dart';
 import 'package:shebeauty/utils/appFonts.dart';
 import 'package:shebeauty/utils/appLanguage.dart';
 import 'package:sizer/sizer.dart';
@@ -33,8 +32,26 @@ class _WomanState extends State<Woman> {
     "Khilkhet"
   ];
   List cityitem = ["Dhaka", "Chattogram", "Rajshahi", "Syhlet", "Rongpur"];
-  List itemsCategory=["beautytreatment.png","foot.png","haircutting.png","makeup.png","manicure.png","massage.png","wax.png","woman.png"];
-  List itemsCategoryName=["Treatment","foot","haircutting","makeup","manicure","massage","wax","woman"];
+  List itemsCategory = [
+    "beautytreatment.png",
+    "foot.png",
+    "haircutting.png",
+    "makeup.png",
+    "manicure.png",
+    "massage.png",
+    "wax.png",
+    "woman.png"
+  ];
+  List itemsCategoryName = [
+    "Treatment",
+    "foot",
+    "haircutting",
+    "makeup",
+    "manicure",
+    "massage",
+    "wax",
+    "woman"
+  ];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,19 +62,12 @@ class _WomanState extends State<Woman> {
         child: ListView(
           children: [
             Container(
-              height:22.h,
+              height: 22.h,
               child: Stack(
                 children: [
                   Positioned(
-                    child: Container(
-                      height: 18.h,width: 100.w,
-
-                     child:  ads()
-                    )
-                      
-                      
-                    
-                  ),
+                      child:
+                          Container(height: 18.h, width: 100.w, child: ads())),
                   Positioned(
                       bottom: 1,
                       child: Padding(
@@ -68,7 +78,7 @@ class _WomanState extends State<Woman> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Container(
-                                width:77.w,
+                                width: 77.w,
                                 decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(15)),
@@ -114,7 +124,7 @@ class _WomanState extends State<Woman> {
                     itemBuilder: (context, index) {
                       return Container(
                         height: 16.h,
-                                  width:25.w,
+                        width: 25.w,
                         child: Card(
                           color: Colors.white,
                           child: Padding(
@@ -124,11 +134,20 @@ class _WomanState extends State<Woman> {
                                 Container(
                                   // width: 200,
                                   height: 8.h,
-                                  width:10.w,
-                                  child: Image(image: AssetImage("assets/imgs/${itemsCategory[index]}",),fit: BoxFit.contain,),
-                                 
+                                  width: 10.w,
+                                  child: Image(
+                                    image: AssetImage(
+                                      "assets/imgs/${itemsCategory[index]}",
+                                    ),
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
-                                Text(itemsCategoryName[index].toString().toUpperCase(),style: AppFonts.fontH6semi(Colors.black),),
+                                Text(
+                                  itemsCategoryName[index]
+                                      .toString()
+                                      .toUpperCase(),
+                                  style: AppFonts.fontH7semi(Colors.black),
+                                ),
                               ],
                             ),
                           ),
@@ -150,9 +169,30 @@ class _WomanState extends State<Woman> {
                     itemBuilder: (context, index) {
                       return Card(
                         color: Colors.blue,
+                  //  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                         child: Container(
-                          width:38.w,
+                          width: 38.w,
                           height: 13.h,
+                          decoration: BoxDecoration(
+                           // borderRadius: BorderRadius.circular(10),
+                            image: DecorationImage(
+                                image: CachedNetworkImageProvider(
+                                  "https://foru.co.id/wp-content/uploads/2015/05/Memilih-advertising-agency.jpg",
+                                ),
+                                fit: BoxFit.fill,),
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10) ,color: Colors.black38,),
+                            child: Padding(
+                              padding:  EdgeInsets.all(2.w),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                                         Text("Womans Doll".toUpperCase(),style: AppFonts.fontH6semi(AppColors.themeWhite),),
+                              ],),
+                            ),
+                           
+                          ),
                         ),
                       );
                     },
@@ -223,34 +263,33 @@ class _WomanState extends State<Woman> {
     );
   }
 
-  ads(){
-   return Swiper(
-    
-  itemBuilder: (BuildContext context, int index) {
-    return Container(
-                      height: 150,
-                      decoration: BoxDecoration(
-                          color: Colors.black26,
-                          image: DecorationImage(image: CachedNetworkImageProvider(
-       "https://foru.co.id/wp-content/uploads/2015/05/Memilih-advertising-agency.jpg",
-       
-   
-    ),fit: BoxFit.fill),
-                          borderRadius: BorderRadius.circular(15)),
-                      width: MediaQuery.of(context).size.width);
-                     
-    // return Image.network(
-    //   // "https://via.placeholder.com/288x188",
-    //   "https://foru.co.id/wp-content/uploads/2015/05/Memilih-advertising-agency.jpg",
-    //   fit: BoxFit.fill,
-    // );
-  },
-  autoplay: true,
-duration: 1000,
-  autoplayDelay: 8000,
-  itemCount: 10,
-  viewportFraction: 1,
-  scale: 0.9,
-);
+  ads() {
+    return Swiper(
+      itemBuilder: (BuildContext context, int index) {
+        return Container(
+            height: 150,
+            decoration: BoxDecoration(
+                color: Colors.black26,
+                image: DecorationImage(
+                    image: CachedNetworkImageProvider(
+                      "https://foru.co.id/wp-content/uploads/2015/05/Memilih-advertising-agency.jpg",
+                    ),
+                    fit: BoxFit.fill),
+                borderRadius: BorderRadius.circular(15)),
+            width: MediaQuery.of(context).size.width);
+
+        // return Image.network(
+        //   // "https://via.placeholder.com/288x188",
+        //   "https://foru.co.id/wp-content/uploads/2015/05/Memilih-advertising-agency.jpg",
+        //   fit: BoxFit.fill,
+        // );
+      },
+      autoplay: true,
+      duration: 1000,
+      autoplayDelay: 8000,
+      itemCount: 10,
+      viewportFraction: 1,
+      scale: 0.9,
+    );
   }
 }

@@ -3,17 +3,17 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 mixin AppFonts {
-  static const fontFamilyName = 'Roboto';
+  static const fontFamilyName = 'Poppins';
 
   static double splashtitle =20.sp;
   static double h1 =18.sp;
   static double h2 = 16.sp;
-  static double h3 = 14.sp;
-  static double h4 = 12.sp;
-  static double h5 = 10.sp;
-  static double h6 = 8.sp;
-  static double h7 = 7.sp;
-  static double h8 = 5.sp;
+  static double h3 = 15.sp;
+  static double h4 = 13.sp;
+  static double h5 = 12.sp;
+  static double h6 = 10.sp;
+  static double h7 = 8.sp;
+  static double h8 = 6.sp;
  /********************************************************** H1 **************************** */
 static  fontSplashtitle(c) {
     return TextStyle(
@@ -58,7 +58,7 @@ static  fontH1normal(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h1,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w500,
         color: c);
   }
 
@@ -66,7 +66,7 @@ static  fontH1normal(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h1,
-        fontWeight: FontWeight.w700,
+        fontWeight: FontWeight.w800,
         color: c);
   }
 
@@ -74,7 +74,7 @@ static  fontH1normal(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h1,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w600,
         color: c);
   }
 
@@ -91,7 +91,7 @@ static  fontH2light(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h2,
-        fontWeight: FontWeight.w300,
+        fontWeight: FontWeight.w500,
         color: c);
   }
 
@@ -99,7 +99,7 @@ static  fontH2light(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h2,
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.w400,
         color: c);
   }
 
