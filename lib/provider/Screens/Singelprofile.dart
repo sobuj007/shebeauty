@@ -68,12 +68,56 @@ class _SingelProfileState extends State<SingelProfile> {
                         ),)
                       ],),
                     ],
-                   )
-                
+                   ),
+                /**********************************certificates **************************** */
+certificates(context),
+
+
+
+
+
+
+
+
+
                   
               ],
             ),
           )),
+    );
+  }
+
+  certificates(context){
+    return Column(
+      children: [
+        Text(applng.getLang(29),style: AppFonts.fontH5normal(AppColors.themeColer),),
+        Container(
+          height: 250,
+          width: MediaQuery.of(context).size.width,
+          child: Flexible(
+            child: GridView.builder(
+              
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: MediaQuery.of(context).size.width /
+                  (MediaQuery.of(context).size.height / 5
+                  ),
+            ),
+              itemCount: 6,
+               shrinkWrap: true,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding:  EdgeInsets.symmetric(vertical: 1.h,horizontal: 1.w),
+                  child: Container(
+                    decoration: BoxDecoration(color: AppColors.themeimgbg),
+                    child: Center(child: Text("data")),
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

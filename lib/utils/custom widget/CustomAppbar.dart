@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shebeauty/utils/appColors.dart';
 
 import '../appFonts.dart';
@@ -36,7 +37,7 @@ class CustomAppbar extends StatelessWidget {
     return  AppBar(
         leading: GestureDetector(child: Icon(Icons.arrow_back_ios,color: AppColors.themeWhite,),onTap: (){Navigator.pop(context);},),
         backgroundColor: AppColors.themeColer,
-        title: Text(title.toString(),style: AppFonts.fontH3regular(AppColors.themeWhite),),
+        title: Text(title.toString().toUpperCase(),style: AppFonts.fontH4regular(AppColors.themeWhite),),
       );
   }
 }

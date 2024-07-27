@@ -97,11 +97,11 @@ class _AppSubCategoryState extends State<AppSubCategory> {
                           children: [
                             Container(
                               // width: 200,
-                              height: 8.h,
+                              height: 7.h,
                               width:10.w,
                               child: Image(image: AssetImage("assets/imgs/${itemData[index]['img']}",),fit: BoxFit.contain,),
                               //height: MediaQuery.of(context).size.height * .01,
-                                           ),Text(itemData[index]['name'].toString().toUpperCase(),style: AppFonts.fontH8regular(Colors.black),),
+                                           ),Center(child: Text(itemData[index]['name'].toString().toUpperCase(),style: AppFonts.fontH7semi(Colors.black),maxLines: 2,textAlign: TextAlign.center,)),
                          ]
                                 ))),)
                 );
