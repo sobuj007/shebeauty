@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:shebeauty/cart/Screens/mycart.dart';
+import 'package:shebeauty/cart/Screens/wishlist.dart';
+
+import 'package:shebeauty/main.dart';
+import 'package:shebeauty/utils/appColors.dart';
+import 'package:shebeauty/utils/appFonts.dart';
 
 class MyCart extends StatefulWidget {
   const MyCart({super.key});
@@ -27,12 +33,13 @@ class _MyCartState extends State<MyCart> {
                   GestureDetector(
                     child: Column(
                       children: [
-                        Text("WishList"),
+                        Text("WishList".toUpperCase(),style: AppFonts.fontH5semi(AppColors.themeBlack),),
                         selectpage == 0
                             ? Container(
                                 width: 80,
                                 height: 2,
                                 color: Colors.blue,
+
                               )
                             : SizedBox()
                       ],
@@ -47,7 +54,8 @@ class _MyCartState extends State<MyCart> {
                   GestureDetector(
                     child: Column(
                       children: [
-                        Text("cart"),
+                        Text("cart".
+                        toUpperCase(),style: AppFonts.fontH5semi(AppColors.themeBlack),),
                         selectpage == 1
                             ? Container(
                                 width: 80,
@@ -76,16 +84,10 @@ class _MyCartState extends State<MyCart> {
                       duration: Duration(seconds: 1), curve: Curves.easeIn);
                 },
                 children: [
-                  Container(
-                    height: 200,
-                    color: Colors.amber,
-                    child: Text("data333"),
-                  ),
-                  Container(
-                    height: 200,
-                    color: Colors.blue,
-                    child: Text("data"),
-                  )
+                Wishlist(),
+         MyCartItem()
+       
+                  
                 ],
               ),
             ),
