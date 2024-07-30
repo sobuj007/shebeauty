@@ -1,24 +1,29 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shebeauty/provider/Model/allproviderDataModel.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:shebeauty/main.dart';
+import 'package:shebeauty/utils/appFonts.dart';
+import 'package:shebeauty/utils/custom%20widget/CustomAppbar.dart';
+import 'package:shebeauty/utils/custom%20widget/Customratings.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../main.dart';
+import '../../provider/Model/allproviderDataModel.dart';
 import '../../routes/AppRouts.dart';
 import '../../utils/appColors.dart';
-import '../../utils/appFonts.dart';
-import '../../utils/custom widget/Customratings.dart';
-class MyCartItem extends StatefulWidget {
-  const MyCartItem({super.key});
+import '../Controllers/cartCOntroller.dart';
+class MyListedCart2 extends StatefulWidget {
+  const MyListedCart2({super.key});
 
   @override
-  State<MyCartItem> createState() => _MyCartItemState();
+  State<MyListedCart2> createState() => _MyListedCart2State();
 }
 
-class _MyCartItemState extends State<MyCartItem> {
-  List<Item> _items2 =[];
-  List<Item> _filteredItems2 = [];
+class _MyListedCart2State extends State<MyListedCart2> {
+ var _items2 =[];
+  //var cartController.items = [];
   String _selectedLocation = 'All';
   double _selectedRating = 0.0;
   String _selectedBodyPart = 'All';
@@ -28,10 +33,11 @@ class _MyCartItemState extends State<MyCartItem> {
 @override
   void initState() {
     // TODO: implement initState
-    _items2=CartItem;
-  _filteredItems2=CartItem;
+
+  
     
   }
+   final CartController cartController = Get.put(CartController());
    
 
   @override
@@ -40,9 +46,9 @@ class _MyCartItemState extends State<MyCartItem> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          // CustomAppbar(
-          //   title: "All provider",
-          // ),
+          CustomAppbar(
+            title: "My Cart",
+          ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
             child: Row(
@@ -91,17 +97,17 @@ class _MyCartItemState extends State<MyCartItem> {
           Flexible(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: .5.h),
-              child: _filteredItems2.isEmpty?Center(child: Text("MyCart is Empty",style: AppFonts.fontH5semi(AppColors.themeColer),),):
+              child: cartController.items.isEmpty?Center(child: Text("MyListedCart is Empty",style: AppFonts.fontH5semi(AppColors.themeColer),),):
                ListView.builder(
                 // shrinkWrap: true,
                 padding: EdgeInsets.zero,
             
-                itemCount: _filteredItems2.length,
+                itemCount: cartController.items.length,
                 itemBuilder: (context, index) {
                   // return ListTile(
-                  //   title: Text(_filteredItems2[index].name),
-                  //   subtitle: Text(_filteredItems2[index].description),
-                  //   trailing: Text(_filteredItems2[index].rating.toString()),
+                  //   title: Text(cartController.items[index].name),
+                  //   subtitle: Text(cartController.items[index].description),
+                  //   trailing: Text(cartController.items[index].rating.toString()),
                   // );
                   return Container(
                     height: 20.h,
@@ -119,12 +125,13 @@ class _MyCartItemState extends State<MyCartItem> {
                           decoration: BoxDecoration(
                               image: DecorationImage(
                                   image: CachedNetworkImageProvider(
-                                    _filteredItems2[index].img_url,
+                                    cartController.items[index].img.toString(),
                                   ),
                                   fit: BoxFit.cover),
                               borderRadius: BorderRadius.circular(10)),
                             child: Container(color: const Color.fromARGB(60, 100, 99, 99),),
                         ),
+                    
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -143,17 +150,17 @@ class _MyCartItemState extends State<MyCartItem> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          _filteredItems2[index].name,
+                                          cartController.items[index].name,
                                           style: AppFonts.fontH5semi(
                                               AppColors.themeBlack),
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                         ),
-                                        Rattings(
-                                          rate: _filteredItems2[index]
-                                              .rating
-                                              .toString(),
-                                        )
+                                        // Rattings(
+                                        //   rate: cartController.items[index]
+                                        //       .rating
+                                        //       .toString(),
+                                        // )
                                       ],
                                     ),
                                   ),
@@ -162,15 +169,15 @@ class _MyCartItemState extends State<MyCartItem> {
                                     height: 3.5.h,
                                     child: Row(
                                       children: [
-                                        Expanded(
-                                          child: Text(
-                                            _filteredItems2[index].description,
-                                            style: AppFonts.fontH7normal(
-                                                AppColors.themeBlack),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ),
+                                        // Expanded(
+                                        //   child: Text(
+                                        //     cartController.items[index].description,
+                                        //     style: AppFonts.fontH7normal(
+                                        //         AppColors.themeBlack),
+                                        //     maxLines: 2,
+                                        //     overflow: TextOverflow.ellipsis,
+                                        //   ),
+                                        // ),
                                       ],
                                     ),
                                   ),
@@ -182,29 +189,29 @@ class _MyCartItemState extends State<MyCartItem> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
-                                          "Gender : " +
-                                              _filteredItems2[index]
-                                                  .gender
-                                                  .toString(),
-                                          style: AppFonts.fontH6semi(
-                                              AppColors.themeBlack),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          textAlign: TextAlign.start,
-                                        ),
+                                        // Text(
+                                        //   "Gender : " +
+                                        //       cartController.items[index]
+                                        //           .gender
+                                        //           .toString(),
+                                        //   style: AppFonts.fontH6semi(
+                                        //       AppColors.themeBlack),
+                                        //   maxLines: 1,
+                                        //   overflow: TextOverflow.ellipsis,
+                                        //   textAlign: TextAlign.start,
+                                        // ),
                                         RichText(text: TextSpan(
                                           text: "price ",
                                           style: AppFonts.fontH6semi(AppColors.themeBlack),
             
                                           children: [
-                                            TextSpan(text: _filteredItems2[index].price,
-                                          style: AppFonts.fontH3semi(
-                                              AppColors.themeColer))
+                                          //   TextSpan(text: cartController.items[index].price,
+                                          // style: AppFonts.fontH3semi(
+                                          //     AppColors.themeColer))
             
                                         ]),)
                                         // Text(
-                                        //   "price" + _filteredItems2[index].price,
+                                        //   "price" + cartController.items[index].price,
                                         //   style: AppFonts.fontH4semi(
                                         //       AppColors.themeBlack),
                                         //   maxLines: 2,
@@ -227,26 +234,26 @@ class _MyCartItemState extends State<MyCartItem> {
                                     child: Column( crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
-                                            _filteredItems2[index].category,
-                                            style: AppFonts.fontH7semi(
-                                                AppColors.themeBlack),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        Text(
-                                            _filteredItems2[index].subcategory,
-                                            style: AppFonts.fontH7semi(
-                                                AppColors.themeBlack),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
+                                        // Text(
+                                        //     cartController.items[index].category,
+                                        //     style: AppFonts.fontH7semi(
+                                        //         AppColors.themeBlack),
+                                        //     maxLines: 2,
+                                        //     overflow: TextOverflow.ellipsis,
+                                        //   ),
+                                        // Text(
+                                        //     cartController.items[index].subcategory,
+                                        //     style: AppFonts.fontH7semi(
+                                        //         AppColors.themeBlack),
+                                        //     maxLines: 2,
+                                        //     overflow: TextOverflow.ellipsis,
+                                        //   ),
                                     
                                     ],),
                                   ),
                                   GestureDetector(
                                     onTap: (){
-                                      Get.toNamed(AppRoutes.appsingelprovider,arguments: _filteredItems2[index]);
+                                      Get.toNamed(AppRoutes.appsingelprovider,arguments: cartController.items[index]);
                                     },
                                     child: Container(
                                       height: 5.h,
@@ -480,7 +487,7 @@ class _MyCartItemState extends State<MyCartItem> {
             child: Text('Apply'),
             onPressed: () {
               setState(() {
-                _applyFilters();
+               // _applyFilters();
               });
               Navigator.of(context).pop();
             },
@@ -491,24 +498,24 @@ class _MyCartItemState extends State<MyCartItem> {
   );
 }
 
-  void _applyFilters() {
-    setState(() {
-      _filteredItems2 = items.where((item) {
-        bool matchesLocation = _selectedLocation == 'All' ||
-            item.location.contains(_selectedLocation);
-        bool matchesRating = item.rating >= _selectedRating;
-        bool matchesBodyPart = _selectedBodyPart == 'All' ||
-            item.bodypart.contains(_selectedBodyPart);
-        bool matchesTime =
-            _selectedTime == 'All' || item.time.contains(_selectedTime);
-        bool matchesSearchQuery =
-            item.name.toLowerCase().contains(_searchQuery.toLowerCase());
-        return matchesLocation &&
-            matchesRating &&
-            matchesBodyPart &&
-            matchesTime &&
-            matchesSearchQuery;
-      }).toList();
-    });
-  }
+  // void _applyFilters() {
+  //   setState(() {
+  //     cartController.items = items.where((item) {
+  //       bool matchesLocation = _selectedLocation == 'All' ||
+  //           item.location.contains(_selectedLocation);
+  //       bool matchesRating = item.rating >= _selectedRating;
+  //       bool matchesBodyPart = _selectedBodyPart == 'All' ||
+  //           item.bodypart.contains(_selectedBodyPart);
+  //       bool matchesTime =
+  //           _selectedTime == 'All' || item.time.contains(_selectedTime);
+  //       bool matchesSearchQuery =
+  //           item.name.toLowerCase().contains(_searchQuery.toLowerCase());
+  //       return matchesLocation &&
+  //           matchesRating &&
+  //           matchesBodyPart &&
+  //           matchesTime &&
+  //           matchesSearchQuery;
+  //     }).toList();
+  //   });
+  // }
 }

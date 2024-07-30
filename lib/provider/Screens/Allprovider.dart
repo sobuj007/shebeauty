@@ -7,6 +7,7 @@ import 'package:shebeauty/routes/AppRouts.dart';
 import 'package:shebeauty/utils/appColors.dart';
 import 'package:shebeauty/utils/appFonts.dart';
 import 'package:shebeauty/utils/appThemes.dart';
+import 'package:shebeauty/utils/custom%20widget/CustomAppbar2.dart';
 import 'package:shebeauty/utils/custom%20widget/Customratings.dart';
 import 'package:sizer/sizer.dart';
 
@@ -29,6 +30,7 @@ class _AllProviderState extends State<AllProvider> {
   double _selectedRating = 0.0;
   String _selectedBodyPart = 'All';
   String _selectedTime = 'All';
+  String _selectedGender = 'All';
   String _searchQuery = '';
 
   @override
@@ -37,7 +39,7 @@ class _AllProviderState extends State<AllProvider> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          CustomAppbar(
+          CustomAppbar2(
             title: "All provider",
           ),
           Padding(
@@ -71,7 +73,7 @@ class _AllProviderState extends State<AllProvider> {
                     onChanged: (query) {
                       setState(() {
                         _searchQuery = query;
-                       // _applyFilters();
+                       _applyFilters();
                       });
                     },
                   ),
@@ -286,7 +288,7 @@ class _AllProviderState extends State<AllProvider> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Filter Options'),
+            Text('Filter Options',style: AppFonts.fontH5semi(AppColors.themeBlack),),
             IconButton(onPressed: (){
               Get.close(1);
             }, icon: Icon(Icons.close))
@@ -307,38 +309,41 @@ class _AllProviderState extends State<AllProvider> {
                         width: 18.w,
                         child: Text(
                           "Location :",
-                          style: AppFonts.fontH4semi(AppColors.themeBlack),
+                          style: AppFonts.fontH6semi(AppColors.themeBlack),
                         ),
                       ),
                       SizedBox(width: 2.w),
-                      Container(
-                        width: 35.w,
+                      Expanded(
+                        
+                        child: Container(
+                          // width: 35.w,
                         height: 6.h,
                         alignment: Alignment.bottomRight,
                         decoration: BoxDecoration(
                           border: Border.all(width: 1, color: AppColors.themeborder),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: DropdownButton<String>(
-                          alignment: Alignment.centerRight,
-                          padding: EdgeInsets.symmetric(horizontal: 5),
-                          underline: SizedBox(),
-                          value: _selectedLocation,
-                          items: ['All', 'Mirpur-1', 'bijoy Soroni', 'banani', 'shamoly', 'badda', 'Bashundhara R/A']
-                              .map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(
-                                value,
-                                style: AppFonts.fontH5semi(AppColors.themeColer),
-                              ),
-                            );
-                          }).toList(),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              _selectedLocation = newValue!;
-                            });
-                          },
+                          child: DropdownButton<String>(
+                            alignment: Alignment.centerRight, isExpanded: true, 
+                            padding: EdgeInsets.symmetric(horizontal: 5.w),
+                            underline: SizedBox(),
+                            value: _selectedLocation,
+                            items: ['All', 'Mirpur-1', 'bijoy Soroni', 'banani', 'shamoly', 'badda', 'Bashundhara R/A']
+                                .map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(
+                                  value,
+                                  style: AppFonts.fontH6semi(AppColors.themeColer),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                _selectedLocation = newValue!;
+                              });
+                            },
+                          ),
                         ),
                       ),
                     ],
@@ -352,34 +357,41 @@ class _AllProviderState extends State<AllProvider> {
                         width: 18.w,
                         child: Text(
                           "Rating :",
-                          style: AppFonts.fontH4semi(AppColors.themeBlack),
+                          style: AppFonts.fontH6semi(AppColors.themeBlack),
                         ),
                       ),
                       SizedBox(width: 2.w),
-                      Container(
-                        width: 35.w,
-                        height: 5.h,
-                        alignment: Alignment.bottomRight,
-                        decoration: BoxDecoration(
-                          border: Border.all(width: 1, color: AppColors.themeborder),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: DropdownButton<double>(
-                          value: _selectedRating,
-                          items: [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0].map((double value) {
-                            return DropdownMenuItem<double>(
-                              value: value,
-                              child: Text(
-                                value.toString(),
-                                style: AppFonts.fontH5semi(AppColors.themeColer),
-                              ),
-                            );
-                          }).toList(),
-                          onChanged: (double? newValue) {
-                            setState(() {
-                              _selectedRating = newValue!;
-                            });
-                          },
+                      Expanded(
+                        child: Container(
+                       
+                          height: 5.h,
+                          alignment: Alignment.bottomRight,
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 1, color: AppColors.themeborder),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                           padding: EdgeInsets.symmetric(horizontal: 5.w),
+                          child: DropdownButton<double>(
+                            value: _selectedRating,
+                             underline: Container(),
+
+                                padding: EdgeInsets.symmetric(horizontal: 5),
+                                 isExpanded: true, 
+                            items: [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0].map((double value) {
+                              return DropdownMenuItem<double>(
+                                value: value,
+                                child: Text(
+                                  value.toString(),
+                                  style: AppFonts.fontH6semi(AppColors.themeColer),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (double? newValue) {
+                              setState(() {
+                                _selectedRating = newValue!;
+                              });
+                            },
+                          ),
                         ),
                       ),
                     ],
@@ -392,35 +404,38 @@ class _AllProviderState extends State<AllProvider> {
                       Container(
                         width: 18.w,
                         child: Text(
-                          "Body Part :",
-                          style: AppFonts.fontH4semi(AppColors.themeBlack),
+                          "BodyPart :",
+                          style: AppFonts.fontH6semi(AppColors.themeBlack),
                         ),
                       ),
                       SizedBox(width: 2.w),
-                      Container(
-                        width: 35.w,
-                        height: 5.h,
-                        alignment: Alignment.bottomRight,
-                        decoration: BoxDecoration(
-                          border: Border.all(width: 1, color: AppColors.themeborder),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: DropdownButton<String>(
-                          value: _selectedBodyPart,
-                          items: ['All', 'hand', 'face', 'leg'].map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(
-                                value.toString(),
-                                style: AppFonts.fontH5semi(AppColors.themeColer),
-                              ),
-                            );
-                          }).toList(),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              _selectedBodyPart = newValue!;
-                            });
-                          },
+                      Expanded(
+                        child: Container(
+                   
+                          height: 5.h,
+                          alignment: Alignment.bottomRight,
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 1, color: AppColors.themeborder),
+                            borderRadius: BorderRadius.circular(10),
+                          ), padding: EdgeInsets.symmetric(horizontal: 5.w),
+                          child: DropdownButton<String>(
+                            value: _selectedBodyPart,isExpanded: true,  underline: Container(),
+                            items: ['All', 'hand', 'face', 'leg'].map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                 
+                                child: Text(
+                                  value.toString(),
+                                  style: AppFonts.fontH6semi(AppColors.themeColer),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                _selectedBodyPart = newValue!;
+                              });
+                            },
+                          ),
                         ),
                       ),
                     ],
@@ -434,34 +449,81 @@ class _AllProviderState extends State<AllProvider> {
                         width: 18.w,
                         child: Text(
                           "Time :",
-                          style: AppFonts.fontH4semi(AppColors.themeBlack),
+                          style: AppFonts.fontH6semi(AppColors.themeBlack),
                         ),
                       ),
                       SizedBox(width: 2.w),
-                      Container(
-                        width: 35.w,
-                        height: 5.h,
-                        alignment: Alignment.bottomRight,
-                        decoration: BoxDecoration(
-                          border: Border.all(width: 1, color: AppColors.themeborder),
-                          borderRadius: BorderRadius.circular(10),
+                      Expanded(
+                        child: Container(
+                        
+                          height: 5.h,
+                          alignment: Alignment.bottomRight,
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 1, color: AppColors.themeborder),
+                            borderRadius: BorderRadius.circular(10),
+                          ), padding: EdgeInsets.symmetric(horizontal: 5.w),
+                          child: DropdownButton<String>(
+                            value: _selectedTime, isExpanded: true, 
+                            underline: Container(),
+                            items: ['All', '10.5', '5.30', '8.00'].map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(
+                                  value,
+                                  style: AppFonts.fontH6semi(AppColors.themeColer),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                _selectedTime = newValue!;
+                              });
+                            },
+                          ),
                         ),
-                        child: DropdownButton<String>(
-                          value: _selectedTime,
-                          items: ['All', '10.5', '5.30', '8.00'].map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(
-                                value,
-                                style: AppFonts.fontH5semi(AppColors.themeColer),
-                              ),
-                            );
-                          }).toList(),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              _selectedTime = newValue!;
-                            });
-                          },
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 2.w),
+                  /*********************************************Gender*************  */
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: 18.w,
+                        child: Text(
+                          "Gender :",
+                          style: AppFonts.fontH6semi(AppColors.themeBlack),
+                        ),
+                      ),
+                      SizedBox(width: 2.w),
+                      Expanded(
+                        child: Container(
+                        
+                          height: 5.h,
+                          alignment: Alignment.bottomRight,
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 1, color: AppColors.themeborder),
+                            borderRadius: BorderRadius.circular(10),
+                          ), padding: EdgeInsets.symmetric(horizontal: 5.w),
+                          child: DropdownButton<String>(
+                            value: _selectedGender, isExpanded: true, 
+                            underline: Container(),
+                            items: ['All', 'Female', 'Male', 'Both'].map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(
+                                  value,
+                                  style: AppFonts.fontH6semi(AppColors.themeColer),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                _selectedGender = newValue!;
+                              });
+                            },
+                          ),
                         ),
                       ),
                     ],
@@ -473,7 +535,9 @@ class _AllProviderState extends State<AllProvider> {
         ),
         actions: [
           TextButton(
-            child: Text('Apply'),
+            child: Text('Apply',style: AppFonts.fontH5black(AppColors.themeColer
+            ),
+            ),
             onPressed: () {
               setState(() {
                 _applyFilters();
@@ -495,14 +559,18 @@ class _AllProviderState extends State<AllProvider> {
         bool matchesRating = item.rating >= _selectedRating;
         bool matchesBodyPart = _selectedBodyPart == 'All' ||
             item.bodypart.contains(_selectedBodyPart);
+        bool matchesGender = _selectedGender == 'All' ||
+            item.gender.toString().toUpperCase().contains(_selectedGender.toUpperCase());
         bool matchesTime =
             _selectedTime == 'All' || item.time.contains(_selectedTime);
+      
         bool matchesSearchQuery =
             item.name.toLowerCase().contains(_searchQuery.toLowerCase());
         return matchesLocation &&
             matchesRating &&
             matchesBodyPart &&
             matchesTime &&
+            matchesGender &&
             matchesSearchQuery;
       }).toList();
     });

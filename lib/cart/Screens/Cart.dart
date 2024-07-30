@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shebeauty/cart/Screens/mycart.dart';
+import 'package:shebeauty/cart/Screens/MyListedCart.dart';
+
 import 'package:shebeauty/cart/Screens/wishlist.dart';
 
 import 'package:shebeauty/main.dart';
@@ -38,7 +39,7 @@ class _MyCartState extends State<MyCart> {
                             ? Container(
                                 width: 80,
                                 height: 2,
-                                color: Colors.blue,
+                                color: AppColors.themeColer,
 
                               )
                             : SizedBox()
@@ -60,7 +61,7 @@ class _MyCartState extends State<MyCart> {
                             ? Container(
                                 width: 80,
                                 height: 2,
-                                color: Colors.blue,
+                                color: AppColors.themeColer,
                               )
                             : SizedBox()
                       ],
@@ -80,12 +81,16 @@ class _MyCartState extends State<MyCart> {
                 controller: controller,
                 onPageChanged: (value) {
                   selectpage = value;
-                  controller.animateToPage(value,
+                  setState(() {
+                        controller.animateToPage(value,
                       duration: Duration(seconds: 1), curve: Curves.easeIn);
+                      });
                 },
                 children: [
                 Wishlist(),
-         MyCartItem()
+               MyListedCart()
+             
+       
        
                   
                 ],

@@ -6,8 +6,9 @@ import 'package:shebeauty/utils/appLanguage.dart';
 import 'package:sizer/sizer.dart';
 
 AppLanguage applng= AppLanguage();
-List<Item> wishListItem =[];
-List<Item> CartItem =[];
+var wishListItem =<Item>[].obs;
+var cartListItem =[].obs;
+// RxInt countCartItem=CartItem.length.obs;
 
 
 void main() {

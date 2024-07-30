@@ -6,8 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shebeauty/provider/Model/allproviderDataModel.dart';
 import 'package:shebeauty/utils/appLanguage.dart';
+import 'package:shebeauty/utils/appStyle.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../cart/Controllers/cartCOntroller.dart';
+import '../../cart/Model/cartModel.dart';
 import '../../main.dart';
 import '../../routes/AppRouts.dart';
 import '../../utils/appColors.dart';
@@ -24,25 +27,29 @@ class SingelAppointment extends StatefulWidget {
 }
 
 class _SingelAppointmentState extends State<SingelAppointment> {
-    bool isfav = false;
+  bool isfav = false;
+  String date = "";
+  TimeOfDay _selectedTime = TimeOfDay.now();
+  int productQun = 1;
+  int servicesQun = 1;
+  double total = 0;
+   final CartController cartController = Get.put(CartController());
+
   @override
   void initState() {
     super.initState();
     coutntotal();
-         if(wishListItem.contains(widget.item)){
-      isfav=true;
-      setState(() {
-        print(widget.item);
-      });
-    }else{
-       print(widget.item);
-    }
-   
+    date =
+        (DateTime.now().day.toString() + "+" + DateTime.now().month.toString())
+            .toString();
+    if (wishListItem.contains(widget.item)) {
+      isfav = true;
+      setState(() {});
+    } else {}
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
@@ -146,22 +153,17 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                                 onPressed: () {
                                                   setState(() {
                                                     isfav = !isfav;
-                                                    if(wishListItem.contains(widget.item)){
-                                                      
-                                                      wishListItem.remove(widget.item);
-                                                    }else{
-                                                       wishListItem.add(widget.item );
-                                                       //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: content))
-                                                     Get.snackbar(
-              'Wishlist',
-              'Product add to wishlist',
-              snackPosition: SnackPosition.BOTTOM,
-              backgroundColor: Colors.blue,
-              colorText: Colors.white,
-              borderRadius: 10,
-              margin: EdgeInsets.all(10),
-              duration: Duration(seconds: 3),
-            );
+                                                    if (wishListItem.contains(
+                                                        widget.item)) {
+                                                      wishListItem
+                                                          .remove(widget.item);
+                                                    } else {
+                                                      wishListItem
+                                                          .add(widget.item);
+                                                      //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: content))
+                                                      AppStyle.snackbar(
+                                                          'Wishlist',
+                                                          'Product add to wishlist');
                                                     }
                                                     //wishList.add(items);
                                                   });
@@ -175,10 +177,13 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                                     : Icon(
                                                         Icons
                                                             .favorite_border_outlined,
-                                                        color: const Color.fromARGB(255, 56, 45, 49),
+                                                        color: const Color
+                                                            .fromARGB(
+                                                            255, 56, 45, 49),
                                                       )),
                                             Rattings(
-                                              rate: widget.item.rating.toString(),
+                                              rate:
+                                                  widget.item.rating.toString(),
                                             ),
                                           ],
                                         )
@@ -212,7 +217,9 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                       children: [
                                         Text(
                                           applng.getLang(19) +
-                                              widget.item.gender.toString().toUpperCase(),
+                                              widget.item.gender
+                                                  .toString()
+                                                  .toUpperCase(),
                                           style: AppFonts.fontH7semi(
                                               AppColors.themeBlack),
                                           maxLines: 1,
@@ -226,7 +233,9 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                                   AppColors.themeBlack),
                                               children: [
                                                 TextSpan(
-                                                    text:" "+ widget.item.price + "Tk",
+                                                    text: " " +
+                                                        widget.item.price +
+                                                        "Tk",
                                                     style: AppFonts.fontH1semi(
                                                         AppColors.themeColer))
                                               ]),
@@ -244,70 +253,102 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                   ),
                 ),
                 Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      applng.getLang(21),
-                      style: AppFonts.fontH6regular(AppColors.themeColer),
+                    Column(
+                      children: [
+                        Text(
+                          applng.getLang(21),
+                          style: AppFonts.fontH6regular(AppColors.themeColer),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              border: Border.all(
+                                  width: 1, color: AppColors.themehint)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(widget.item.available),
+                          ),
+                        )
+                      ],
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          border:
-                              Border.all(width: 1, color: AppColors.themehint)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(widget.item.available),
-                      ),
-                    )
+                    Column(
+                      children: [
+                        Text(
+                          applng.getLang(32),
+                          style: AppFonts.fontH6regular(AppColors.themeColer),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              border: Border.all(
+                                  width: 1, color: AppColors.themehint)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(widget.item.slot.toString()),
+                          ),
+                        )
+                      ],
+                    ),
                   ],
                 ),
-                Column(
-                  children: [
-                    Text(
-                      applng.getLang(32),
-                      style: AppFonts.fontH6regular(AppColors.themeColer),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          border:
-                              Border.all(width: 1, color: AppColors.themehint)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(widget.item.slot.toString()),
-                      ),
-                    )
-                  ],
-                ),
-              ],
-            ),
                 timeslot()
               ]),
             ),
           ],
         ),
-      ),  bottomNavigationBar: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CartItem.contains(widget.item)?Container(height: 6.h,width: 100.w,decoration: BoxDecoration(color: AppColors.themehint,borderRadius: BorderRadius.circular(15)),alignment: Alignment.center,child: Text(applng.getLang(33),style: AppFonts.fontH4semi(AppColors.themeWhite),),) : GestureDetector(onTap: (){
-               
-                setState(() {
-                  CartItem.add(widget.item); 
-                });
-               },child: Container(height: 6.h,width: 100.w,decoration: BoxDecoration(color: AppColors.themeColer,borderRadius: BorderRadius.circular(15)),alignment: Alignment.center,child: Text(applng.getLang(14),style: AppFonts.fontH4semi(AppColors.themeWhite),),)),
-            ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: cartListItem.any((i) => i['name'] == widget.item.name)
+            ? Container(
+                height: 6.h,
+                width: 100.w,
+                decoration: BoxDecoration(
+                    color: AppColors.themedisable,
+                    borderRadius: BorderRadius.circular(15)),
+                alignment: Alignment.center,
+                child: Text(
+                  applng.getLang(33),
+                  style: AppFonts.fontH7regular(AppColors.themehint),
+                ),
+              )
+            : GestureDetector(
+                onTap: () {
+                   final CartItem sampleItem = CartItem(
+    id: widget.item.id.toString(),
+    name: widget.item.name.toString(),
+    img: widget.item.img_url.toString(),
+    selectedTime: _selectedTime.toString(),
+    selectedDate: date,
+    selectedServicsQun: servicesQun.toString(),
+    selectedProductQun:  productQun.toString(),
+    product: widget.item,
+  );
+
+                
+                  setState(() {
+                    AppStyle.snackbar('Cart', 'Product added to Cart');
+                   cartController.addItem(sampleItem);
+                   
+                  });
+                },
+                child: Container(
+                  height: 6.h,
+                  width: 100.w,
+                  decoration: BoxDecoration(
+                      color: AppColors.themeColer,
+                      borderRadius: BorderRadius.circular(15)),
+                  alignment: Alignment.center,
+                  child: Text(
+                    applng.getLang(14),
+                    style: AppFonts.fontH4semi(AppColors.themeWhite),
+                  ),
+                )),
+      ),
     );
   }
-
-  String date ="";
- TimeOfDay _selectedTime = TimeOfDay.now();
-int productQun= 1;
-int servicesQun= 1;
-double total=0;
-
-
 
   timeslot() {
     return Column(
@@ -316,14 +357,14 @@ double total=0;
         EasyDateTimeLine(
           initialDate: DateTime.now(),
           onDateChange: (selectedDate) {
-           date = selectedDate.day.toString()+"+"+selectedDate.month.toString() as String;
-           
+            date = selectedDate.day.toString() +
+                "+" +
+                selectedDate.month.toString() as String;
           },
           activeColor: AppColors.themeColer,
           dayProps: EasyDayProps(
             height: 8.h,
             width: 12.w,
-         
             inactiveDayDecoration: BoxDecoration(
                 border: Border.all(
                   width: .5,
@@ -334,12 +375,16 @@ double total=0;
             todayHighlightColor: AppColors.themehint,
           ),
         ),
-         SizedBox(height: 2.h,),
+        SizedBox(
+          height: 2.h,
+        ),
         Text(
           applng.getLang(23),
           style: AppFonts.fontH4semi(AppColors.themeColer),
         ),
-        SizedBox(height: 2.h,),
+        SizedBox(
+          height: 2.h,
+        ),
         /*************************************** choose time  */
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -349,7 +394,7 @@ double total=0;
               style: AppFonts.fontH6semi(AppColors.themeColer),
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 _selectTime(context);
               },
               child: Text(
@@ -357,10 +402,9 @@ double total=0;
                 style: AppFonts.fontH4semi(AppColors.themeColer),
               ),
             ),
-
           ],
         ),
-     
+
         /*************************************** choose services  ************************/
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -369,8 +413,9 @@ double total=0;
               applng.getLang(27),
               style: AppFonts.fontH6semi(AppColors.themeBlack),
             ),
-           CustomCounterproduct(context,)
-
+            CustomCounterproduct(
+              context,
+            )
           ],
         ),
         Row(
@@ -380,8 +425,7 @@ double total=0;
               applng.getLang(25),
               style: AppFonts.fontH6semi(AppColors.themeBlack),
             ),
-           CustomCounterService(context)
-
+            CustomCounterService(context)
           ],
         ),
         /************************************ */
@@ -392,23 +436,25 @@ double total=0;
               applng.getLang(26),
               style: AppFonts.fontH5semi(AppColors.themeBlack),
             ),
-             Text(
-             total.toString(),
+            Text(
+              total.toString(),
               style: AppFonts.fontH3semi(AppColors.themeBlack),
             ),
-          
-
           ],
         ),
-        SizedBox(height: 1.5.h,),
-        Divider(height: 1,),
-         SizedBox(height: 1.5.h,),
+        SizedBox(
+          height: 1.5.h,
+        ),
+        Divider(
+          height: 1,
+        ),
+        SizedBox(
+          height: 1.5.h,
+        ),
         recomandation(context)
       ],
     );
   }
-
- 
 
   Future<void> _selectTime(BuildContext context) async {
     final TimeOfDay? picked = await showTimePicker(
@@ -422,140 +468,110 @@ double total=0;
     }
   }
 
-
-CustomCounterproduct(BuildContext context) {
-  return Row(
+  CustomCounterproduct(BuildContext context) {
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         IconButton(
-          icon: Icon(Icons.remove,size:15),
-          onPressed:(){
-            setState(() {
-             if(productQun>1){
-               productQun--;
-               
-              coutntotal();
-             }
-            });
-          }
-        ),
+            icon: Icon(Icons.remove, size: 15),
+            onPressed: () {
+              setState(() {
+                if (productQun > 1) {
+                  productQun--;
+
+                  coutntotal();
+                }
+              });
+            }),
         Text(
-         productQun.toString(),
+          productQun.toString(),
           style: AppFonts.fontH3semi(AppColors.themeColer),
         ),
         IconButton(
-          icon: Icon(Icons.add,size:15),
-          onPressed: (){
+          icon: Icon(Icons.add, size: 15),
+          onPressed: () {
             setState(() {
               productQun++;
-              
+
               coutntotal();
             });
           },
         ),
-      ],);
-}
-     
+      ],
+    );
+  }
 
-  
-
- 
-  
- 
-CustomCounterService(BuildContext context) {
-  return Row(
+  CustomCounterService(BuildContext context) {
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         IconButton(
-          icon: Icon(Icons.remove,size:15),
-          onPressed:(){
-            setState(() {
-              if(servicesQun>1){
-                servicesQun--;
-              }
+            icon: Icon(Icons.remove, size: 15),
+            onPressed: () {
+              setState(() {
+                if (servicesQun > 1) {
+                  servicesQun--;
+                }
 
-              coutntotal();
-            });
-          }
-        ),
+                coutntotal();
+              });
+            }),
         Text(
-         servicesQun.toString(),
+          servicesQun.toString(),
           style: AppFonts.fontH3semi(AppColors.themeColer),
         ),
         IconButton(
-          icon: Icon(Icons.add,size:15),
-          onPressed:(){
+          icon: Icon(Icons.add, size: 15),
+          onPressed: () {
             setState(() {
               servicesQun++;
-              
+
               coutntotal();
             });
-
           },
         ),
-      ],);
-}
-     
+      ],
+    );
+  }
 
-   _incrementCounteraService() {
+  _incrementCounteraService() {
     servicesQun++;
-   setState(() {
-     
-   });
+    setState(() {});
     coutntotal();
   }
 
-   _decrementCounterService() {
-    if(servicesQun>0){servicesQun--;
-  setState(() {
-     
-   });
+  _decrementCounterService() {
+    if (servicesQun > 0) {
+      servicesQun--;
+      setState(() {});
     }
-   
-
- 
     coutntotal();
   }
 
+  coutntotal() {
+    var p = int.parse(widget.item.price) * productQun;
+    var s = int.parse(widget.item.servicePrice) * servicesQun;
 
-coutntotal(){
-var p= int.parse(widget.item.price)*productQun;
-var s= int.parse(widget.item.servicePrice)*servicesQun;
+    setState(() {
+      total = double.parse((p + s).toString());
+    });
+  }
 
-  setState(() {
-    
-
-  total = double.parse((p+s).toString());
-
-
-
-
-
-
-
-
-
-
-
-
-  });
+  recomandation(context) => Container(
+        height: MediaQuery.of(context).size.height * .18,
+        //color: Colors.green,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return Card(
+              color: Colors.blue,
+              child: Container(
+                width: 38.w,
+                height: 13.h,
+              ),
+            );
+          },
+        ),
+      );
 }
-
-   recomandation(context) => Container(
-                  height: MediaQuery.of(context).size.height * .18,
-                  //color: Colors.green,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return Card(
-                        color: Colors.blue,
-                        child: Container(
-                          width:38.w,
-                          height: 13.h,
-                        ),
-                      );
-                    },
-                  ),
-                );}
-

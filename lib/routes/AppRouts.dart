@@ -2,6 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shebeauty/auth/Screens/login_page.dart';
+import 'package:shebeauty/cart/Screens/MyListedCart.dart';
+import 'package:shebeauty/cart/Screens/myListedCart2.dart';
+
 import 'package:shebeauty/category/Screens/Category.dart';
 import 'package:shebeauty/category/Screens/SubCategory.dart';
 import 'package:shebeauty/dashboard/Screens/layout.dart';
@@ -18,6 +21,9 @@ abstract class AppRoutes{
   static const  appsubcategory=_Path.AppSubCategory;
    static const  allprovider=_Path.AllProvider;
  static const appsingelprovider=_Path.AppsingelProvider;
+ static const myListedCart=_Path.MyListedCart;
+ static const myListedCart2=_Path.MyListedCart2;
+ 
 
 }
 
@@ -34,6 +40,9 @@ abstract class _Path{
   static const AllProvider="/allprovider";
    static const AppSubCategory="/subcategory";
  static const AppsingelProvider="/singelprovider";
+ static const MyListedCart="/myListedcart";
+ static const MyListedCart2="/myListedcart2";
+
 
 }
 
@@ -82,7 +91,16 @@ class APpPageRoutes{
     name: AppRoutes.appsingelprovider,
     page:()=> SingelProvider(item:[]),
     transition: Transition.cupertino),
-  
-    
+    /********************************* splash ******************** */
+    GetPage(
+    name: AppRoutes.myListedCart,
+    page:()=> MyListedCart(),
+    transition: Transition.cupertino),
+    /********************************* splash ******************** */
+    GetPage(
+    name: AppRoutes.myListedCart2,
+    page:()=> MyListedCart2(),
+    transition: Transition.cupertino),
+
   ];
 }
