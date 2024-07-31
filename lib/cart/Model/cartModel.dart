@@ -8,7 +8,7 @@ class CartItem {
   String selectedDate;
   String selectedServicsQun;
   String selectedProductQun;
-  Item product;
+  Item item;
 
   CartItem({
     required this.id,
@@ -18,7 +18,7 @@ class CartItem {
     required this.selectedDate,
     required this.selectedServicsQun,
     required this.selectedProductQun, 
-    required this. product, 
+    required this. item, 
   });
 
   // Method to convert from JSON to CartItem
@@ -29,7 +29,7 @@ class CartItem {
       img: json['img'],
       selectedTime: json['selectedTime'],
       selectedDate: json['selectedDate'],
-      product: json['product'],
+      item: json['product'],
       selectedServicsQun: json['selectedServicsQun'],
       selectedProductQun: json['selectedProductQun'],
     );
@@ -45,7 +45,7 @@ class CartItem {
       'selectedDate': selectedDate,
       'selectedServicsQun': selectedServicsQun,
       'selectedProductQun': selectedProductQun,
-      'product':  product,
+      'product':  item,
     };
   }
 }

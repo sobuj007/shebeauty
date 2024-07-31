@@ -145,9 +145,11 @@ class _MyListedCart2State extends State<MyListedCart2> {
                                 children: [
                                   Container(
                                     width: 58.w,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      // mainAxisAlignment:
+                                      //     MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
                                           cartController.items[index].name,
@@ -155,6 +157,58 @@ class _MyListedCart2State extends State<MyListedCart2> {
                                               AppColors.themeBlack),
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
+                                        ),
+                                        Text(
+                                          cartController.items[index].item.category,
+                                          style: AppFonts.fontH7semi(
+                                              AppColors.themeBlack),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        Text(
+                                          cartController.items[index].item.subcategory,
+                                          style: AppFonts.fontH7semi(
+                                              AppColors.themeBlack),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                             "P.Price : "+ cartController.items[index].item.servicePrice,
+                                              style: AppFonts.fontH7semi(
+                                                  AppColors.themeBlack),
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            Text(
+                                               "S.Price : "+cartController.items[index].item.price,
+                                              style: AppFonts.fontH7semi(
+                                                  AppColors.themeBlack),
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ],
+                                        ),
+                                         Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                             "Date : "+ cartController.items[index].selectedDate,
+                                              style: AppFonts.fontH7semi(
+                                                  AppColors.themeBlack),
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            Text(
+                                               "Time : "+cartController.items[index].selectedTime,
+                                              style: AppFonts.fontH7semi(
+                                                  AppColors.themeBlack),
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ],
                                         ),
                                         // Rattings(
                                         //   rate: cartController.items[index]
@@ -164,62 +218,9 @@ class _MyListedCart2State extends State<MyListedCart2> {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(
-                                    width: 58.w,
-                                    height: 3.5.h,
-                                    child: Row(
-                                      children: [
-                                        // Expanded(
-                                        //   child: Text(
-                                        //     cartController.items[index].description,
-                                        //     style: AppFonts.fontH7normal(
-                                        //         AppColors.themeBlack),
-                                        //     maxLines: 2,
-                                        //     overflow: TextOverflow.ellipsis,
-                                        //   ),
-                                        // ),
-                                      ],
-                                    ),
-                                  ),
-                                       /************************** gender */
-                                  Container(
-                                    height: 4.h,
-                                    width: 58.w,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        // Text(
-                                        //   "Gender : " +
-                                        //       cartController.items[index]
-                                        //           .gender
-                                        //           .toString(),
-                                        //   style: AppFonts.fontH6semi(
-                                        //       AppColors.themeBlack),
-                                        //   maxLines: 1,
-                                        //   overflow: TextOverflow.ellipsis,
-                                        //   textAlign: TextAlign.start,
-                                        // ),
-                                        RichText(text: TextSpan(
-                                          text: "price ",
-                                          style: AppFonts.fontH6semi(AppColors.themeBlack),
-            
-                                          children: [
-                                          //   TextSpan(text: cartController.items[index].price,
-                                          // style: AppFonts.fontH3semi(
-                                          //     AppColors.themeColer))
-            
-                                        ]),)
-                                        // Text(
-                                        //   "price" + cartController.items[index].price,
-                                        //   style: AppFonts.fontH4semi(
-                                        //       AppColors.themeBlack),
-                                        //   maxLines: 2,
-                                        //   overflow: TextOverflow.ellipsis,
-                                        // ),
-                                      ],
-                                    ),
-                                  ),
+                                 
+                                       
+                                 
                                 ],
                               ),
                             ),
@@ -253,7 +254,7 @@ class _MyListedCart2State extends State<MyListedCart2> {
                                   ),
                                   GestureDetector(
                                     onTap: (){
-                                      Get.toNamed(AppRoutes.appsingelprovider,arguments: cartController.items[index]);
+                                      Get.toNamed(AppRoutes.viewappointment,arguments: cartController.items[index]);
                                     },
                                     child: Container(
                                       height: 5.h,
@@ -265,7 +266,7 @@ class _MyListedCart2State extends State<MyListedCart2> {
                                       ),
                                       alignment: Alignment.center,
                                       child: Text(
-                                        applng.getLang(14),
+                                        applng.getLang(35),
                                         style: AppFonts.fontH6semi(
                                             AppColors.themeWhite),
                                       ),

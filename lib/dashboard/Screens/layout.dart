@@ -59,7 +59,7 @@ class _LayoutState extends State<Layout> {
     //  hoverColor: AppColors.themeColer, // tab button hover color
     haptic: true, // haptic feedback
     tabBorderRadius: 15, 
-    tabActiveBorder: Border.all(color: Colors.black, width: .5), // tab button border
+    tabActiveBorder: Border.all(color: AppColors.themeimgbg, width: .2), // tab button border
      // tabBorder: Border.all(color: AppColors.themeColer, width: 1), // tab button border
     //tabShadow: [BoxShadow(color: Colors.grey.withOpacity(0.5), blurRadius: 8)], // tab button shadow
     curve: Curves.easeOutExpo, // tab animation curves
@@ -68,7 +68,7 @@ class _LayoutState extends State<Layout> {
     //color: Colors.grey[800], // unselected icon color
     activeColor: AppColors.bgColer, // selected icon and text color
     iconSize: 24, // tab button icon size
-    tabBackgroundColor: Colors.purple.withOpacity(0.1), // selected tab background color
+    tabBackgroundColor: AppColors.themeColer.withOpacity(0.1), // selected tab background color
     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
     selectedIndex: selectPageIndex, // navigation bar padding
     onTabChange: (v){

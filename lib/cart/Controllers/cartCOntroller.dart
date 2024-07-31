@@ -1,8 +1,8 @@
+import 'package:get/get.dart';
 import 'dart:convert';
 
-import 'package:get/get.dart';
 import '../Model/cartModel.dart';
-
+ // Import your CartItem model
 
 class CartController extends GetxController {
   var items = <CartItem>[].obs;
@@ -12,14 +12,19 @@ class CartController extends GetxController {
   }
 
   void removeItem(String id) {
-    items.removeWhere((item) => item.id == id);
+    items.removeWhere((item) => item.item.id == id);
   }
 
   void clearCart() {
     items.clear();
   }
 
-  // Method to convert the cart to JSON
+  // Check if item exists by name
+  bool itemExists(String name) {
+    return items.any((i) => i.item.name == name);
+  }
+
+  // Convert cart to JSON
   String toJson() {
     return jsonEncode(items.map((item) => item.toJson()).toList());
   }

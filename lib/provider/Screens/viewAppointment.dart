@@ -18,15 +18,15 @@ import '../../utils/appFonts.dart';
 import '../../utils/custom widget/Customratings.dart';
 import '../../utils/custom widget/custom_counter.dart';
 
-class SingelAppointment extends StatefulWidget {
+class ViewAppointment extends StatefulWidget {
   final item;
-  const SingelAppointment({this.item, super.key});
+  const ViewAppointment({this.item, super.key});
 
   @override
-  State<SingelAppointment> createState() => _SingelAppointmentState();
+  State<ViewAppointment> createState() => _ViewAppointmentState();
 }
 
-class _SingelAppointmentState extends State<SingelAppointment> {
+class _ViewAppointmentState extends State<ViewAppointment> {
   bool isfav = false;
   String date = "";
   TimeOfDay _selectedTime = TimeOfDay.now();

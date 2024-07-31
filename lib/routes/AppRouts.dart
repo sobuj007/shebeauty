@@ -10,6 +10,7 @@ import 'package:shebeauty/category/Screens/SubCategory.dart';
 import 'package:shebeauty/dashboard/Screens/layout.dart';
 import 'package:shebeauty/provider/Screens/Allprovider.dart';
 import 'package:shebeauty/provider/Screens/singelProvider.dart';
+import 'package:shebeauty/provider/Screens/viewAppointment.dart';
 import 'package:shebeauty/splash_page.dart';
 
 abstract class AppRoutes{
@@ -23,6 +24,7 @@ abstract class AppRoutes{
  static const appsingelprovider=_Path.AppsingelProvider;
  static const myListedCart=_Path.MyListedCart;
  static const myListedCart2=_Path.MyListedCart2;
+  static const viewappointment=_Path.ViewAppoinment;
  
 
 }
@@ -42,6 +44,7 @@ abstract class _Path{
  static const AppsingelProvider="/singelprovider";
  static const MyListedCart="/myListedcart";
  static const MyListedCart2="/myListedcart2";
+ static const ViewAppoinment="/viewAppoinment";
 
 
 }
@@ -100,6 +103,11 @@ class APpPageRoutes{
     GetPage(
     name: AppRoutes.myListedCart2,
     page:()=> MyListedCart2(),
+    transition: Transition.cupertino),
+    /********************************* splash ******************** */
+    GetPage(
+    name: AppRoutes.viewappointment,
+    page:()=> ViewAppointment(item: [],),
     transition: Transition.cupertino),
 
   ];
