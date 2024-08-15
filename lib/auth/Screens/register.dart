@@ -4,20 +4,24 @@ import 'package:shebeauty/auth/Controllers/loginController.dart';
 import 'package:shebeauty/main.dart';
 import 'package:shebeauty/utils/appColors.dart';
 import 'package:shebeauty/utils/appFonts.dart';
+import 'package:shebeauty/utils/appStyle.dart';
 import 'package:sizer/sizer.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Register extends StatefulWidget {
+  const Register({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Register> createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
+class _RegisterState extends State<Register> {
   TextEditingController username = TextEditingController();
+  TextEditingController fullname = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController confirmpass = TextEditingController();
   bool ischeck = false;
   bool isPassview = true;
+  bool isPassview2 = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,6 +53,22 @@ class _LoginState extends State<Login> {
             
             /**************************************** usename field ********************************** */
             TextField(
+              controller: fullname,
+              decoration: InputDecoration(
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
+                  label: Text(applng.getLang(37)),
+                  labelStyle: AppFonts.fontH5normal(AppColors.themeBlack),
+                  hintText: "jhon deo",
+                  hintStyle: AppFonts.fontH4regular(AppColors.themehint),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: AppColors.themeColer))),
+            ),
+            SizedBox(
+              height: 2.h,
+            ),
+            TextField(
               controller: username,
               decoration: InputDecoration(
                   contentPadding:
@@ -75,12 +95,7 @@ class _LoginState extends State<Login> {
                         : Icon(Icons.visibility),
                     onPressed: () {
                       setState(() {
-                        //  if(isPassview==true){
-                        //   isPassview=false;
-
-                        //  }else{
-                        //   isPassview=true;
-                        //  }
+                      
                         isPassview = !isPassview;
                       });
                     },
@@ -88,6 +103,35 @@ class _LoginState extends State<Login> {
                   contentPadding:
                       EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
                   label: Text(applng.getLang(3)),
+                  labelStyle: AppFonts.fontH5normal(AppColors.themeBlack),
+                  hintText: "******",
+                  hintStyle: AppFonts.fontH5regular(AppColors.themehint),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: AppColors.themeColer))),
+            ),
+            SizedBox(
+              height: 1.5.h,
+            ),
+            //*****************************8 confirm passs */
+            TextField(
+              controller: confirmpass,
+              obscureText: isPassview2,
+              decoration: InputDecoration(
+                  suffixIcon: IconButton(
+                    icon: isPassview2
+                        ? Icon(Icons.visibility_off)
+                        : Icon(Icons.visibility),
+                    onPressed: () {
+                      setState(() {
+                      
+                        isPassview2 = !isPassview2;
+                      });
+                    },
+                  ),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
+                  label: Text(applng.getLang(39)),
                   labelStyle: AppFonts.fontH5normal(AppColors.themeBlack),
                   hintText: "******",
                   hintStyle: AppFonts.fontH5regular(AppColors.themehint),
@@ -123,15 +167,12 @@ class _LoginState extends State<Login> {
                       width: 1.w,
                     ),
                     Text(
-                      applng.getLang(5),
+                      applng.getLang(40),
                       style: AppFonts.fontH6normal(AppColors.themeBlack),
                     )
                   ],
                 ),
-                Text(
-                  applng.getLang(4),
-                  style: AppFonts.fontH5normal(AppColors.themeBlack),
-                ),
+               
               ],
             ),
               SizedBox(
@@ -140,8 +181,23 @@ class _LoginState extends State<Login> {
             /************* login button ******************* */
             GestureDetector(
               onTap: (){
+                if(fullname.text.isEmpty||username.text.isEmpty||password.text.isEmpty){
+                  AppStyle.snackbar('warning', "field can't be empty");
+                }else{
+                   if(password.text==confirmpass.text){  if(ischeck!=true){
+                       AppStyle.snackbar('warning', " please check the trems condtions");
+                 }else{
+                  LoginContoller().register(fullname.text,username.text, password.text,confirmpass.text,context);
+                 }
+                  
+                  }else{
+                      AppStyle.snackbar('warning', "password and confirm password not match !");
+                  }
                
-                LoginContoller().logins(username.text, password.text,context);
+                
+                }
+               
+                
 
 
                 // Get.toNamed('/layout');
@@ -154,7 +210,7 @@ class _LoginState extends State<Login> {
                     color: AppColors.themeColer,
                     borderRadius: BorderRadius.circular(10)),
                 child: Text(
-                  applng.getLang(10).toString().toUpperCase(),
+                  applng.getLang(12).toString().toUpperCase(),
                   style: AppFonts.fontH3bold(AppColors.themeWhite),
                 ),
               ),
@@ -168,10 +224,10 @@ class _LoginState extends State<Login> {
               SizedBox(width: 1.w,),
               GestureDetector(
                 onTap: (){
-                  Get.offNamed('/register');
+                  Get.offNamed('/login');
                 },
                 child: Text(
-                  applng.getLang(12).toString(),
+                  applng.getLang(10).toString(),
                   style: AppFonts.fontH4bold(AppColors.themeBlack),
                 ),
               ),

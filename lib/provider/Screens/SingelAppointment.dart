@@ -1,4 +1,4 @@
-import 'dart:ffi';
+
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:shebeauty/provider/Model/allproviderDataModel.dart';
 import 'package:shebeauty/utils/appLanguage.dart';
 import 'package:shebeauty/utils/appStyle.dart';
+import 'package:shebeauty/utils/custom%20widget/CustomAppbar.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../cart/Controllers/cartCOntroller.dart';
@@ -40,7 +41,7 @@ class _SingelAppointmentState extends State<SingelAppointment> {
     super.initState();
     coutntotal();
     date =
-        (DateTime.now().day.toString() + "+" + DateTime.now().month.toString())
+        (DateTime.now().day.toString() + "/" + DateTime.now().month.toString()+ "/" +DateTime.now().year.toString())
             .toString();
     if (wishListItem.contains(widget.item)) {
       isfav = true;
@@ -55,6 +56,7 @@ class _SingelAppointmentState extends State<SingelAppointment> {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
         child: Column(
           children: [
+           
             Expanded(
               child: ListView(padding: EdgeInsets.zero, children: [
                 Expanded(
@@ -316,21 +318,24 @@ class _SingelAppointmentState extends State<SingelAppointment> {
               )
             : GestureDetector(
                 onTap: () {
-                   final CartItem sampleItem = CartItem(
-    id: widget.item.id.toString(),
-    name: widget.item.name.toString(),
-    img: widget.item.img_url.toString(),
-    selectedTime: _selectedTime.toString(),
-    selectedDate: date,
-    selectedServicsQun: servicesQun.toString(),
-    selectedProductQun:  productQun.toString(),
-    item: widget.item,
-  );
+                   var customTime = _formatTimeOfDay(_selectedTime);
+  //                  final CartItem sampleItem = CartItem(
+  //   id: widget.item.id.toString(),
+  //   name: widget.item.name.toString(),
+  //   img: widget.item.img_url.toString(),
+  //   selectedTime: customTime.toString(),
+  //   selectedDate: date,
+  //   selectedServicsQun: servicesQun.toString(),
+  //   selectedProductQun:  productQun.toString(),
+  //   // orderfor:widget.item.,
+  //   // orderby:,
+  //   item: widget.item,
+  // );
 
                 
                   setState(() {
                     AppStyle.snackbar('Cart', 'Product added to Cart');
-                   cartController.addItem(sampleItem);
+                  // cartController.addItem(sampleItem);
                    
                   });
                 },
@@ -350,6 +355,12 @@ class _SingelAppointmentState extends State<SingelAppointment> {
     );
   }
 
+// Function to format TimeOfDay to a string
+  String _formatTimeOfDay(TimeOfDay timeOfDay) {
+    final hours = timeOfDay.hour.toString().padLeft(2, '0');
+    final minutes = timeOfDay.minute.toString().padLeft(2, '0');
+    return '$hours:$minutes';
+  }
   timeslot() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -357,9 +368,8 @@ class _SingelAppointmentState extends State<SingelAppointment> {
         EasyDateTimeLine(
           initialDate: DateTime.now(),
           onDateChange: (selectedDate) {
-            date = selectedDate.day.toString() +
-                "+" +
-                selectedDate.month.toString() as String;
+            date = (selectedDate.day.toString() + "/" + selectedDate.month.toString()+ "/" +selectedDate.year.toString())
+            .toString();
           },
           activeColor: AppColors.themeColer,
           dayProps: EasyDayProps(

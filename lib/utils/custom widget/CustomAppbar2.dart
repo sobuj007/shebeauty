@@ -60,7 +60,7 @@ class CustomAppbar2 extends StatelessWidget {
             );
             }),
           ),onTap: () {
-          Get.offAndToNamed(AppRoutes.myListedCart2);
+          Get.toNamed(AppRoutes.myListedCart2);
           },)
         ],
       );

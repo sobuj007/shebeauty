@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
 import 'package:shebeauty/main.dart';
+
 import 'package:shebeauty/routes/AppRouts.dart';
+import 'package:shebeauty/utils/appApis.dart';
 import 'package:shebeauty/utils/appColors.dart';
 import 'package:shebeauty/utils/appFonts.dart';
 import 'package:shebeauty/utils/appThemes.dart';
@@ -12,8 +14,9 @@ import 'package:shebeauty/utils/custom%20widget/Customratings.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../utils/custom widget/CustomAppbar.dart';
+import '../Controllers/ProductContorller.dart';
 import '../Model/allproviderDataModel.dart';
-import 'singelProvider.dart';
+
 
 class AllProvider extends StatefulWidget {
   List<String> selectedBody;
@@ -24,8 +27,9 @@ class AllProvider extends StatefulWidget {
 }
 
 class _AllProviderState extends State<AllProvider> {
-  List<Item> _items = items;
-  List<Item> _filteredItems = items;
+     final ProductController controller = Get.put(ProductController());
+  List<Item> _items = [];
+  List<Item> _filteredItems = [];
   String _selectedLocation = 'All';
   double _selectedRating = 0.0;
   String _selectedBodyPart = 'All';
@@ -71,24 +75,24 @@ class _AllProviderState extends State<AllProvider> {
                     ),
                     style: AppFonts.fontH4regular(AppColors.themeBlack),
                     onChanged: (query) {
-                      setState(() {
-                        _searchQuery = query;
-                       _applyFilters();
-                      });
+                      // setState(() {
+                      //   _searchQuery = query;
+                      // _applyFilters();
+                      // });
                     },
                   ),
                 ),
-                Card(
-                  child: IconButton(
-                    icon: Icon(Icons.filter_list),
-                    onPressed: () => _showFilterDialog(context),
-                  ),
-                ),
+                // Card(
+                //   child: IconButton(
+                //     icon: Icon(Icons.filter_list),
+                //     onPressed: () => _showFilterDialog(context),
+                //   ),
+                // ),
               ],
             ),
           ),
-          Flexible(
-            child: Padding(
+          Obx((){
+            return Padding(
               padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: .5.h),
               child: ListView.builder(
                 // shrinkWrap: true,
@@ -96,11 +100,7 @@ class _AllProviderState extends State<AllProvider> {
             
                 itemCount: _filteredItems.length,
                 itemBuilder: (context, index) {
-                  // return ListTile(
-                  //   title: Text(_filteredItems[index].name),
-                  //   subtitle: Text(_filteredItems[index].description),
-                  //   trailing: Text(_filteredItems[index].rating.toString()),
-                  // );
+            
                   return Container(
                     height: 20.h,
                     width: 100.w,
@@ -117,7 +117,7 @@ class _AllProviderState extends State<AllProvider> {
                           decoration: BoxDecoration(
                               image: DecorationImage(
                                   image: CachedNetworkImageProvider(
-                                    _filteredItems[index].img_url,
+                                   AppAppis.makeimgUrl (_filteredItems[index].img_url),
                                   ),
                                   fit: BoxFit.cover),
                               borderRadius: BorderRadius.circular(10)),
@@ -141,7 +141,7 @@ class _AllProviderState extends State<AllProvider> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          _filteredItems[index].name,
+                                          _filteredItems[index].name??"",
                                           style: AppFonts.fontH5semi(
                                               AppColors.themeBlack),
                                           maxLines: 2,
@@ -272,8 +272,10 @@ class _AllProviderState extends State<AllProvider> {
                   );
                 },
               ),
-            ),
-          ),
+            );
+
+          })
+         
         ],
       ),
     );
@@ -540,7 +542,7 @@ class _AllProviderState extends State<AllProvider> {
             ),
             onPressed: () {
               setState(() {
-                _applyFilters();
+              //  _applyFilters();
               });
               Navigator.of(context).pop();
             },
@@ -551,28 +553,7 @@ class _AllProviderState extends State<AllProvider> {
   );
 }
 
-  void _applyFilters() {
-    setState(() {
-      _filteredItems = items.where((item) {
-        bool matchesLocation = _selectedLocation == 'All' ||
-            item.location.contains(_selectedLocation);
-        bool matchesRating = item.rating >= _selectedRating;
-        bool matchesBodyPart = _selectedBodyPart == 'All' ||
-            item.bodypart.contains(_selectedBodyPart);
-        bool matchesGender = _selectedGender == 'All' ||
-            item.gender.toString().toUpperCase().contains(_selectedGender.toUpperCase());
-        bool matchesTime =
-            _selectedTime == 'All' || item.time.contains(_selectedTime);
-      
-        bool matchesSearchQuery =
-            item.name.toLowerCase().contains(_searchQuery.toLowerCase());
-        return matchesLocation &&
-            matchesRating &&
-            matchesBodyPart &&
-            matchesTime &&
-            matchesGender &&
-            matchesSearchQuery;
-      }).toList();
-    });
-  }
+  
+  
+
 }

@@ -1,58 +1,70 @@
+
+
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:group_button/group_button.dart';
+import 'package:shebeauty/category/Controllers/getAllinfocontoller.dart';
+import 'package:shebeauty/category/Model/getAllinfoData.dart';
+import 'package:shebeauty/provider/Screens/myprovider.dart';
+import 'package:shebeauty/provider/Screens/myprovider2.dart';
 import 'package:shebeauty/utils/appColors.dart';
 import 'package:sizer/sizer.dart';
 
+
 import '../../provider/Screens/Allprovider.dart';
+import '../../utils/appApis.dart';
 import '../../utils/appFonts.dart';
 import '../../utils/custom widget/CustomAppbar.dart';
 
 class AppSubCategory extends StatefulWidget {
-final cat;
-  const AppSubCategory({this.cat,super.key});
+final cat_id;
+   AppSubCategory({this.cat_id,super.key});
 
   @override
   State<AppSubCategory> createState() => _AppSubCategoryState();
 }
 
 class _AppSubCategoryState extends State<AppSubCategory> {
-  List<String> bodypart = [
-    "Eyebrows",
-    "Upper lip",
-    "Chin",
-    "Sideburns",
-    "Full face",
-    "Underarms",
-    "Arms",
-    "Legs",
-    "Bikini line",
-    "Brazilian",
-    "Back",
-    "Chest",
-    "Stomach",
-    "Full body"
-    
-  ];
-  List<Map<String, String>> itemData = [
-    {"name": "Honey Wax", "img": "honeywax.png"},
-    {"name": "Fruit Wax", "img": "friuts.png"},
-    {"name": "Pre-Made Wax", "img": "strip.png"},
-    {"name": "Cold Soft Wax", "img": "cold.png"},
-    {"name": "Warm Hard Wax", "img": "hard.png"},
-    {"name": "Warm Soft Wax", "img": "wax.png"},
-    // {"name": "Sugar Wax", "img": "sugarwax.png"},
-    // {"name": "Sugar Wax", "img": "sugarwax.png"},
-    // {"name": "Sugar Wax", "img": "sugarwax.png"},
-  ];
+ List<Subcategories> displayedList=[];
+ List<String> displayedListBodyPart=[];
 
-  List<String> selectedBodyValue = [];
+final AllinfoController allinfo=Get.find();
+
+List selectedBodyValue=<String>[].obs();
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+   // Filter the list
+ 
+   print(allinfo.subcategories);
+   displayedList=allinfo.filterSubcategoriesByName(widget.cat_id.toString());
+   print(displayedList);
+
+  }
+  filtebodypart(id){
+    List<BodyParts> data=allinfo.filterBodypartsByName(id.toString());
+     setState(() {
+      displayedListBodyPart = data.map<String>((bodyPart) => bodyPart.bodypartName ?? '').toList();
+    
+     });
+    
+     displayedListBodyPart.isNotEmpty?showpopup(context,id):Future.delayed(Duration.zero, () async {
+ Get.to(MyProvider2(),arguments:{"subcategory":allinfo.subcategories,"bodypart":selectedBodyValue,"subid":id});
+});
+    
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
               children: [
       CustomAppbar(
-        title: " ${widget.cat} -Sub Category",
+        title: "Sub Category",
       ),
       Container(
         height: MediaQuery.of(context).size.height * .88,
@@ -81,13 +93,15 @@ class _AppSubCategoryState extends State<AppSubCategory> {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
               ),
-              itemCount: itemData.length,
+              itemCount: displayedList.length,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: GestureDetector(
                     onTap: () {
-                      showpopup(context);
+                      selectedBodyValue=[];
+                      filtebodypart(displayedList[index].id);
+                     // showpopup(context);
                     },
                     child: Card(
                       color: Colors.white,
@@ -99,9 +113,11 @@ class _AppSubCategoryState extends State<AppSubCategory> {
                               // width: 200,
                               height: 7.h,
                               width:10.w,
-                              child: Image(image: AssetImage("assets/imgs/${itemData[index]['img']}",),fit: BoxFit.contain,),
+                              child: Image(image: CachedNetworkImageProvider(
+                                  AppAppis.makeimgUrl(displayedList[index].image),
+                                  ),fit: BoxFit.contain,),
                               //height: MediaQuery.of(context).size.height * .01,
-                                           ),Center(child: Text(itemData[index]['name'].toString().toUpperCase(),style: AppFonts.fontH7semi(Colors.black),maxLines: 2,textAlign: TextAlign.center,)),
+                                           ),Center(child: Text(displayedList[index].subcategoryName.toString().toUpperCase(),style: AppFonts.fontH7semi(Colors.black),maxLines: 2,textAlign: TextAlign.center,)),
                          ]
                                 ))),)
                 );
@@ -113,12 +129,13 @@ class _AppSubCategoryState extends State<AppSubCategory> {
     );
   }
 
-  showpopup(context) {
+  showpopup(context,id) {
     showModalBottomSheet(
         context: context,
         builder: ((context) {
           return Container(
-            height: 15.h+(5.h*bodypart.length/2),
+           // height: 15.h+(5.h*bodypart.length/2),
+            height: 30.h+(5.h),
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
@@ -143,15 +160,18 @@ class _AppSubCategoryState extends State<AppSubCategory> {
                         selectedTextStyle:
                             AppFonts.fontH7semi( Colors.black)),
                     isRadio: false,
-                    onSelected: ((value, index, isSelected) {
-                
-                      if (isSelected == false) {
-                        selectedBodyValue.remove(value);
-                      } else {
-                        selectedBodyValue.add(value);
-                      }
+                    onSelected: ((value, index, isSelected) {   
+               
+               if (isSelected) {
+       
+ selectedBodyValue.add(index .toString());
+        } else {   selectedBodyValue.remove(index.toString());
+         
+        }
+// For debugging purposes
+                   
                     }),
-                    buttons: bodypart,
+                    buttons: displayedListBodyPart,
                   ),
                  Row(
                       children: [
@@ -159,14 +179,11 @@ class _AppSubCategoryState extends State<AppSubCategory> {
                             child: GestureDetector(
                               
                                onTap: () {
-                                  print(selectedBodyValue);
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) => AllProvider(
-                                                selectedBody: selectedBodyValue,
-                                              )));
-                                },
+                                 Navigator.pop(context);
+                                 Future.delayed(Duration.zero, () async {
+  Get.to(MyProvider2(),arguments:{"subcategory":allinfo.subcategories,"bodypart":selectedBodyValue,"subid":id});
+});
+                                    },
                                 child: Container(
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(color: AppColors.themeColer,borderRadius: BorderRadius.circular(15)),

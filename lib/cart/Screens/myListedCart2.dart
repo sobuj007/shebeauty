@@ -109,6 +109,7 @@ class _MyListedCart2State extends State<MyListedCart2> {
                   //   subtitle: Text(cartController.items[index].description),
                   //   trailing: Text(cartController.items[index].rating.toString()),
                   // );
+  
                   return Container(
                     height: 20.h,
                     width: 100.w,
@@ -243,9 +244,9 @@ class _MyListedCart2State extends State<MyListedCart2> {
                                         //     overflow: TextOverflow.ellipsis,
                                         //   ),
                                         // Text(
-                                        //     cartController.items[index].subcategory,
+                                        //     cartController.items[index].subcategory,F
                                         //     style: AppFonts.fontH7semi(
-                                        //         AppColors.themeBlack),
+                                        //         AppColors.themeBlack),F
                                         //     maxLines: 2,
                                         //     overflow: TextOverflow.ellipsis,
                                         //   ),

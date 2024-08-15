@@ -8,6 +8,7 @@ class CartItem {
   String selectedDate;
   String selectedServicsQun;
   String selectedProductQun;
+  String orderfor;
   Item item;
 
   CartItem({
@@ -18,6 +19,7 @@ class CartItem {
     required this.selectedDate,
     required this.selectedServicsQun,
     required this.selectedProductQun, 
+    required this.orderfor, 
     required this. item, 
   });
 
@@ -32,6 +34,7 @@ class CartItem {
       item: json['product'],
       selectedServicsQun: json['selectedServicsQun'],
       selectedProductQun: json['selectedProductQun'],
+      orderfor: json['orderfor'],
     );
   }
 
@@ -45,6 +48,7 @@ class CartItem {
       'selectedDate': selectedDate,
       'selectedServicsQun': selectedServicsQun,
       'selectedProductQun': selectedProductQun,
+      'orderfor': orderfor,
       'product':  item,
     };
   }
