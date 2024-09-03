@@ -39,6 +39,7 @@ class _LayoutState extends State<Layout> {
   Widget build(BuildContext context) {
  
 ucon.getinfo();
+adsController.fetchData();
 return Obx((){
    return Scaffold(
         body: SafeArea(
@@ -60,7 +61,41 @@ return Obx((){
                 children: [
                   Positioned(
                       child:
-                          Container(height: 18.h, width: 100.w, child: ads())),
+                          Container(height: 18.h, width: 100.w, child:  (adsController.adslist.isEmpty)? 
+            Center(child: CircularProgressIndicator())
+        : 
+        Container(
+                        height: 19.h,
+                        child: adsController.adslist.isNotEmpty
+                            ? Padding(
+                              padding:  EdgeInsets.symmetric(horizontal:  2.h,vertical: 1.h),
+                              child: Swiper(
+                                  itemBuilder: (BuildContext context, int index) {
+                                    return Container(
+                                      height: 150,
+                                      decoration: BoxDecoration(
+                                        color: Colors.black26,
+                                        image: DecorationImage(
+                                          image: CachedNetworkImageProvider(
+                                              adsController.adslist[index].image),
+                                          fit: BoxFit.fill,
+                                        ),
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                      width: MediaQuery.of(context).size.width,
+                                    );
+                                  },
+                                  autoplay: true,
+                                  duration: 1000,
+                                  autoplayDelay: 8000,
+                                  itemCount: adsController.adslist.length,
+                                  viewportFraction: 1,
+                                  scale: 0.9,
+                                ),
+                            )
+                            : Center(child: CircularProgressIndicator()),
+                      ),)
+    ),
                   Positioned(
                       bottom: 1,
                       child: SizedBox(),
@@ -108,7 +143,26 @@ return Obx((){
         ),
         bottomNavigationBar:bottomnab()
         
-        
+        //  BottomNavigationBar(
+        //   currentIndex: selectPageIndex,
+        //   selectedItemColor: AppColors.themeColer,
+        //   selectedFontSize:12.sp,
+        //   unselectedItemColor: Colors.black54,
+        //   onTap: (value) {
+        //     selectPageIndex = value;
+        //     setState(() {});
+        //   },
+        //   items: [
+        //     BottomNavigationBarItem(icon: Icon(Icons.woman), label: "Woman",),
+        //     BottomNavigationBarItem(icon: Icon(Icons.man), label: "Man"),
+        //     BottomNavigationBarItem(
+        //         icon: Icon(Icons.shopping_cart), label: "Wishlist"),
+        //     BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+        //   ],
+        // )
+        // Container(width: MediaQuery.of(context).size.width,
+        // child: ,
+        // ),
         );
  
 });

@@ -28,7 +28,7 @@ class AllinfoController extends GetxController {
 
         // Update the observable with the parsed data
         allinfoModel.value = allInfo;
-         print(allinfoModel.value);  // Debug print
+     
       } else {
         // print(res.reasonPhrase);
       }

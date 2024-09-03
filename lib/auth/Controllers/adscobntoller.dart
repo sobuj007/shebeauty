@@ -10,7 +10,7 @@ class AdsController extends GetxController {
   // Observable list of stores
   var adslist = [].obs;
 
-  Future<void> fetchData(String token) async {
+  Future<void> fetchData() async {
     var headersList = {
        'Accept': 'application/json' 
      
