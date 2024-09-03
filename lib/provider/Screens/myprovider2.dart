@@ -53,6 +53,14 @@ class MyProvider2 extends StatelessWidget {
     //controller.fetchProducts();
    final ProductController controller = Get.put(ProductController());
      var arg=Get.arguments;
+      final id =arg?['subid'];
+          if(id==null){
+          controller.product;
+          }else{
+          controller.filterBySubcategory(arg['subid'].toString());
+      
+         
+          }
     return Scaffold(
         body: Column(children: [
       CustomAppbar2(
@@ -66,12 +74,8 @@ class MyProvider2 extends StatelessWidget {
           return Center(child: Text('No products available'));
         }
          else {
-           final id =arg?['subid'];
-          if(id==null){
-            _filteredItems =controller.product;
-          }else{
-            _filteredItems =controller.filterBySubcategory(arg['subid'].toString());
-          }
+          
+          _filteredItems=controller.filteredList;
           
 
           return _filteredItems.isEmpty? Center(child: Text('No products available')): Padding(
@@ -217,7 +221,7 @@ class MyProvider2 extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                       _filteredItems[index].category ??
+                                       con.getCategoryNameById(int.parse(_filteredItems[index].category.toString()))!.toUpperCase() ??
                                             "",
                                         style: AppFonts.fontH7semi(
                                             AppColors.themeBlack),
@@ -225,7 +229,7 @@ class MyProvider2 extends StatelessWidget {
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                       Text(
-                                       _filteredItems[index].subcategory ??
+                                      con.getSubcategoryNameById (int.parse(_filteredItems[index].subcategory.toString()))!.toUpperCase() ??
                                             "",
                                         style: AppFonts.fontH7semi(
                                             AppColors.themeBlack),
@@ -272,7 +276,7 @@ class MyProvider2 extends StatelessWidget {
     ]));
   }
   myserach(controller){
- return  Obx((){
+ 
 return Padding(
         padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
         child: Row(
@@ -323,7 +327,7 @@ return Padding(
           ],
         ),
       );
-   });
+   
         
       
   }

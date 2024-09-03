@@ -7,7 +7,7 @@ class AppLanguage{
 
 
   Map<int,String> En={
-    0:'She ',
+    0:'Ghore Parlour ',
     1:'Welcome To Beauty App',
     2:'Usename/Email',
     3:'Password',

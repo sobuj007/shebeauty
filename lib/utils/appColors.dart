@@ -4,6 +4,7 @@ mixin AppColors{
 
 
   static const themeColer=Colors.pink;
+  static const applogo=Color.fromARGB(223, 252, 77, 255);
   static const bgColer=Colors.pink;
   static const themeWhite=Colors.white;
   static const disxount=Colors.amber;

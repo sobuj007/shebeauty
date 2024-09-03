@@ -31,7 +31,7 @@ class _LoginState extends State<Login> {
               child: Center(
                 child: Text(
                   applng.getLang(0),
-                  style: AppFonts.fontSplashtitle(Colors.black),
+                  style: AppFonts.fontSplashtitle(AppColors.applogo),
                 ),
               ),
             ),
@@ -75,12 +75,7 @@ class _LoginState extends State<Login> {
                         : Icon(Icons.visibility),
                     onPressed: () {
                       setState(() {
-                        //  if(isPassview==true){
-                        //   isPassview=false;
-
-                        //  }else{
-                        //   isPassview=true;
-                        //  }
+                       
                         isPassview = !isPassview;
                       });
                     },

@@ -3,14 +3,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:shebeauty/auth/Model/userModel.dart';
-import 'package:shebeauty/category/Controllers/getAllinfocontoller.dart';
-import 'package:shebeauty/main.dart';
+
 import 'package:shebeauty/utils/appApis.dart';
 import 'package:shebeauty/utils/appStyle.dart';
+import 'package:shebeauty/utils/custom%20widget/sharedpref.dart';
 
-class LoginContoller {
- 
+class LoginContoller  {
+
   logins(username, password, context) async {
     try {
       AppStyle.showloader(context);
@@ -29,20 +28,27 @@ class LoginContoller {
 
       if (res.statusCode >= 200 && res.statusCode < 300) {
             Map<String, dynamic> jsonResponse = jsonDecode(resBody);
-
-        // Update the observable with the parsed data
-        UserDataModel.fromJson(jsonResponse);
-        tdata.setuser(jsonResponse['user']);
-   
-        var data = await AllinfoController().addItem();
-        if (data) {
-          Navigator.pop(context);
+          //  if(jsonResponse['profile']==null){
+          //   Map<String,dynamic> d={"message":"no Data"};
+          //   Mypref().saveprofile(d,jsonResponse['user'],jsonResponse['token']);
+          //  }
+      
+        Mypref().saveprofile(jsonResponse['profile']?? {},jsonResponse['user'],jsonResponse['token']);
+ 
+      // var data = await AllinfoController().addItem();print(data);
+        if ( jsonResponse['user']['role'].toString()=='user') {
+        
+           Navigator.pop(context);
           Get.offNamed('/layout');
           AppStyle.snackbar("Success", "Welcome to SheBeauty");
+          
         } else {
-          AppStyle.snackbar("Error", "Somthing Wrong! Data not Found");
+           Navigator.pop(context);
+          AppStyle.snackbar("Error", "Plesase use Provider app to login");
           
         }
+
+       
       } else {
         AppStyle.snackbar("Unauthorized", "Username and password doen't match");
         Navigator.pop(context);
@@ -77,6 +83,7 @@ class LoginContoller {
 
       if (res.statusCode >= 200 && res.statusCode < 300) {
         //  UserDataModel.fromJson(json.decode(resBody) );
+        
         Navigator.pop(context);
         AppStyle.snackbar("Success", " User register Successfull");
         Get.offNamed('/login');

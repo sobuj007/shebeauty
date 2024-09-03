@@ -31,8 +31,9 @@ class _SplashState extends State<Splash> {
     return Scaffold(body: SafeArea(child: Column(mainAxisAlignment: MainAxisAlignment.center,
     crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-      Center(child: Text(AppConstant.appName,style: AppFonts.fontH8semi(AppColors.themeBlack),)),
-      Text(AppConstant.appName,style: AppFonts.custom(AppColors.themeBlack,24.sp,FontWeight.bold),)
+        Center(child: Image(image: AssetImage('assets/GhoreParlor.png'),fit: BoxFit.contain,width: 50.w,))
+      // Center(child: Text(AppConstant.appName,style: AppFonts.fontH8semi(AppColors.themeBlack),)),
+      // Text(AppConstant.appName,style: AppFonts.custom(AppColors.themeBlack,24.sp,FontWeight.bold),)
     ],))
     );
   }

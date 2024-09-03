@@ -47,7 +47,7 @@ List selectedBodyValue=<String>[].obs();
   filtebodypart(id){
     List<BodyParts> data=allinfo.filterBodypartsByName(id.toString());
      setState(() {
-      displayedListBodyPart = data.map<String>((bodyPart) => bodyPart.bodypartName ?? '').toList();
+      displayedListBodyPart = data.map<String>((bodyPart) => bodyPart.name ?? '').toList();
     
      });
     
@@ -117,7 +117,7 @@ List selectedBodyValue=<String>[].obs();
                                   AppAppis.makeimgUrl(displayedList[index].image),
                                   ),fit: BoxFit.contain,),
                               //height: MediaQuery.of(context).size.height * .01,
-                                           ),Center(child: Text(displayedList[index].subcategoryName.toString().toUpperCase(),style: AppFonts.fontH7semi(Colors.black),maxLines: 2,textAlign: TextAlign.center,)),
+                                           ),Center(child: Text(displayedList[index].name.toString().toUpperCase(),style: AppFonts.fontH7semi(Colors.black),maxLines: 2,textAlign: TextAlign.center,)),
                          ]
                                 ))),)
                 );

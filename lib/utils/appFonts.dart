@@ -5,7 +5,7 @@ import 'package:sizer/sizer.dart';
 mixin AppFonts {
   static const fontFamilyName = 'Poppins';
 
-  static double splashtitle =20.sp;
+  static double splashtitle =23.sp;
   static double h1 =18.sp;
   static double h2 = 16.sp;
   static double h3 = 15.sp;
@@ -19,7 +19,7 @@ static  fontSplashtitle(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.splashtitle,
-        fontWeight: FontWeight.w200,
+        fontWeight: FontWeight.w600,
         color: c);
   }
   static  custom(c,f,fw) {

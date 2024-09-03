@@ -72,8 +72,8 @@ class ProductController extends GetxController {
   filterBySubcategory(String subcategory) {
     filteredList.value =
         product.where((product) => product.subcategory == subcategory).toList();
-    //product = filteredList;
-    return filteredList;
+   // product.value = filteredList;
+     filteredList;
   }
 
   // Function to update selected gender

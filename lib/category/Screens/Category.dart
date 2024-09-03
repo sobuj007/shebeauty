@@ -23,6 +23,7 @@ class AppCategory extends StatefulWidget {
 class _AppCategoryState extends State<AppCategory> {
  
    final AllinfoController con=Get.find();
+  //final arg=Get.arguments();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +48,7 @@ class _AppCategoryState extends State<AppCategory> {
   }
 
   category(context) {
+    print(widget.catedata);
     return Container(
       height: MediaQuery.of(context).size.height*.80,
       width: MediaQuery.of(context).size.width,
@@ -55,7 +57,7 @@ class _AppCategoryState extends State<AppCategory> {
           Expanded(
             child: Obx(
               () {
-                 if (con.categories == null) {
+                 if (con.getCategoriesByGender(widget.catedata.toString()) == null) {
           return Center(child: CircularProgressIndicator());
         }
 
@@ -69,7 +71,7 @@ class _AppCategoryState extends State<AppCategory> {
                   ),
                   itemCount:con.categories!.length,
                   itemBuilder: (BuildContext context, int index) {
-                    final cate=con.categories![index];
+                    final cate=con.getCategoriesByGender(widget.catedata)![index];
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
@@ -92,7 +94,7 @@ class _AppCategoryState extends State<AppCategory> {
                                   width: 10.w,
                                   child: Image(
                                     image: CachedNetworkImageProvider(
-                                  AppAppis.makeimgUrl(cate.image),
+                                 cate.image
                                   ),
                                     fit: BoxFit.contain,
                                   ),

@@ -19,7 +19,7 @@ Temp tdata=Temp();
 
 
 void main() {
-   Get.put(LoginContoller());
+  
      Get.put(AllinfoController());
  
   
