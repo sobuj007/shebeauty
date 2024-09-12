@@ -135,11 +135,11 @@ class APpPageRoutes{
     page:()=> NotificationPage(),
     transition: Transition.cupertino),
     /********************************* splash ******************** */
-    GetPage(
-    name: AppRoutes.myprovider,
-    page:()=> MyProvider(),
-    transition: Transition.cupertino),
-    /********************************* splash ******************** */
+    // GetPage(
+    // name: AppRoutes.myprovider,
+    // page:()=> MyProvider(),
+    // transition: Transition.cupertino),
+    // /********************************* splash ******************** */
     GetPage(
     name: AppRoutes.myprovider2,
     page:()=> MyProvider2(),

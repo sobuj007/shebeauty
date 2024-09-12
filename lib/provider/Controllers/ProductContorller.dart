@@ -1,18 +1,25 @@
-import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
-import 'package:http/http.dart' as http;
-import 'package:shebeauty/utils/appApis.dart';
-import 'dart:convert';
-import '../Model/allProductModel.dart';
+import 'dart:ffi';
 
-class ProductController extends GetxController {
-  var product = <Allproduct>[].obs;
-  var fil2 = <Allproduct>[].obs;
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'package:shebeauty/main.dart';
+import 'dart:convert';
+
+import 'package:shebeauty/provider/Model/allProductModel.dart';
+// Adjust the import as needed
+
+class AllProductController extends GetxController {
   var isLoading = true.obs;
-   final TextEditingController filterController = TextEditingController();
-// The full list of products
-  var filteredList = <Allproduct>[].obs;
+  var allProducts = [].obs;
+  var product = <Products>[].obs;
+  var filteredList = <Products>[].obs;
+  var searchQuery = ''.obs;
+  var subcatid = ''.obs;
+  var fil2 = <Products>[].obs;
+var isAllProductsChecked = false.obs; // Checkbox state
+  final TextEditingController filterController = TextEditingController();
+
   // RxList for selected genders and ratings
   var _selectedGender = ['All', 'Male', 'Female'].obs;
   var _selectedRating = [1.0, 2.0, 3.0, 4.0, 5.0].obs;
@@ -20,88 +27,115 @@ class ProductController extends GetxController {
   // RxString for single selected value
   var selectedGender = 'All'.obs;
   var selectedRating = 1.0.obs;
-    var searchQuery = ''.obs;
+
   // RxString for search query
- 
+
   @override
   void onInit() {
     fetchProducts();
-      searchQuery.listen((query) => filterItemsQuery(query)); 
     super.onInit();
-  //  filterText.listen((text) => _filterItems(text));
   }
 
   Future<void> fetchProducts() async {
+    var token = tdata.getuser();
+    var headersList = {
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json',
+    };
+    var url = Uri.parse('https://softisan.xyz/api/serviceproducts/getall');
+    var req = http.Request('GET', url);
+    req.headers.addAll(headersList);
+
     try {
       isLoading(true);
-      final response = await http.get(Uri.parse(AppAppis.getallproduct),
-          headers: {
-            'Content-type': 'application/json',
-            'Accept': 'application/json'
-          });
 
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> data =
-            json.decode(response.body) as Map<String, dynamic>;
+      var res = await req.send();
+      final resBody = await res.stream.bytesToString();
 
-        final List<dynamic> productList =
-            data['allproduct'] as List<dynamic>? ?? [];
+      // Print the raw response for debugging
+      print('Response Status Code: ${res.statusCode}');
+      print('Response Body: $resBody');
 
-        if (productList != null) {
-          product.value = productList
-              .where((item) => item != null) // Filter out null items
-              .map((json) => Allproduct.fromJson(json as Map<String, dynamic>))
-              .toList();
-        }
+      if (res.statusCode == 200) {
+        final jsonData = jsonDecode(resBody);
+        print('Decoded JSON: $jsonData');
+
+        // Ensure the JSON matches the expected format
+        //  var allProductModel=  AllProductModel.fromJson(jsonData);
+
+        AllProductModel allProductModel = AllProductModel.fromJson(jsonData);
+
+        // Update your state with the fetched data
+
+        filteredList.value = allProductModel.products!;
+        product.value=allProductModel.products!;
       } else {
-        // Handle error
-
-        Get.snackbar('Error', 'Failed to load products');
+        print('Failed to load products with status code: ${res.statusCode}');
+        throw Exception('Failed to load products');
       }
     } catch (e) {
-      // Handle exception
-      print(e);
-      Get.snackbar('Error', 'An error occurred: $e');
+      print('Error fetching products: $e');
     } finally {
-      isLoading.value = false;
+      isLoading(false);
     }
   }
-  // The filtered list of products
 
-  // Function to filter products by subcategory
-  filterBySubcategory(String subcategory) {
-    filteredList.value =
-        product.where((product) => product.subcategory == subcategory).toList();
-   // product.value = filteredList;
-     filteredList;
+// Function to filter products by subcategory_id from the 'product' list
+  void filterBySubcategory(String id) {
+     
+//    if(subcategoryId.isEmpty){
+// filteredList.value = product;
+//    }else{
+     subcatid.value=id;
+    filteredList.value = product.where((prod) {
+      return prod.subcategoryId == id.toString();
+    }).toList();
+  //  }
   }
+ 
 
   // Function to update selected gender
   void updateSelectedGender(String gender) {
-    selectedGender.value = gender;
-   // filterProducts(); // Update the filtered products list
+    print(gender);
+     filteredList.value = product.where((prod) {
+      return prod.gender == gender.toLowerCase();
+    }).toList();
+     // Update the filtered products list
   }
 
-  // Function to update selected rating
-  void updateSelectedRating(double rating) {
-    selectedRating.value = rating;
-   // filterProducts(); // Update the filtered products list
+  // // Function to update selected rating
+  // void updateSelectedRating(double rating) {
+  //   selectedRating.value = rating;
+  //   // filterProducts(); // Update the filtered products list
+  // }
+ // Additional filter: for gender and ratings from the 'product' list
+  void applyGenderFilter() {
+    filteredList.value = product.where((prod) {
+      if (selectedGender.value == 'All') {
+        return true; // No filtering by gender if 'All' is selected
+      }
+      return prod.gender?.toLowerCase() == selectedGender.value.toLowerCase();
+    }).toList();
   }
 
-  
-
- 
+  // void applyRatingFilter(double minRating) {
+  //   // Assuming you have a `rating` field in the Products model
+  //   filteredList.value = product.where((prod) {
+  //     return prod.rating! >= minRating; // Filter products by rating
+  //   }).toList();
+  // }
   void filterItemsQuery(String query) {
     final lowerQuery = query.toLowerCase();
     if (lowerQuery.isEmpty) {
-      fil2.value=(product);
+      fil2.value = (product);
     } else {
-      fil2.value = product.where((prod) =>
-          prod.name != null &&
-          prod.name!.toLowerCase().contains(lowerQuery)).toList();
-    
+      fil2.value = product
+          .where((prod) =>
+              prod.name != null &&
+              prod.name!.toLowerCase().contains(lowerQuery))
+          .toList();
     }
-    filteredList=fil2;
+    filteredList = fil2;
     print("object");
     print(filteredList.value);
   }
@@ -109,6 +143,31 @@ class ProductController extends GetxController {
   void updateSearchQuery(String query) {
     searchQuery.value = query;
     filterItemsQuery(searchQuery.value);
-  } 
+  }
+   // Toggle between showing all products and filtering by subcategory
+   toggleAllProducts(bool isChecked) {
+    isAllProductsChecked.value = isChecked;
 
+    if (isChecked) {
+     filteredList.value = product; // Show all products
+     
+    } else {
+       
+   filterBySubcategory(subcatid.value);
+    
+    }
+    print(filteredList);
+   
+  }
+
+  // Call this function when the checkbox changes
+  void updateFilters(bool isChecked,) {
+    if (isChecked) {
+      // No subcategory filter applied, fetch all products
+      filteredList.value = product;
+    } else {
+      // Apply combined filters when checkbox is unchecked
+       filterBySubcategory(subcatid.value);
+    }
+  }
 }

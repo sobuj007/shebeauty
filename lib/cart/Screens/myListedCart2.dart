@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:shebeauty/category/Controllers/getAllinfocontoller.dart';
 import 'package:shebeauty/main.dart';
 import 'package:shebeauty/utils/appFonts.dart';
 import 'package:shebeauty/utils/custom%20widget/CustomAppbar.dart';
@@ -22,6 +23,8 @@ class MyListedCart2 extends StatefulWidget {
 }
 
 class _MyListedCart2State extends State<MyListedCart2> {
+
+  var allinfoController=Get.put(AllinfoController());
  var _items2 =[];
   //var cartController.items = [];
   String _selectedLocation = 'All';
@@ -99,8 +102,10 @@ class _MyListedCart2State extends State<MyListedCart2> {
               padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: .5.h),
               child: cartController.items.isEmpty?Center(child: Text("MyListedCart is Empty",style: AppFonts.fontH5semi(AppColors.themeColer),),):
                ListView.builder(
-                // shrinkWrap: true,
+                 shrinkWrap: true,
+                
                 padding: EdgeInsets.zero,
+                
             
                 itemCount: cartController.items.length,
                 itemBuilder: (context, index) {
@@ -160,14 +165,15 @@ class _MyListedCart2State extends State<MyListedCart2> {
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                         Text(
-                                          cartController.items[index].item.category,
+                                         allinfoController.getCategoryNameById( int.parse(cartController.items[index].item.categoryId)).toString(),
                                           style: AppFonts.fontH7semi(
                                               AppColors.themeBlack),
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                         Text(
-                                          cartController.items[index].item.subcategory,
+                                          // cartController.items[index].item.subcategoryId.toString(),
+                                          allinfoController.getSubcategoryNameById( int.parse(cartController.items[index].item.subcategoryId.toString())).toString(),
                                           style: AppFonts.fontH7semi(
                                               AppColors.themeBlack),
                                           maxLines: 2,
@@ -177,14 +183,14 @@ class _MyListedCart2State extends State<MyListedCart2> {
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                             "P.Price : "+ cartController.items[index].item.servicePrice,
+                                             "S.Price : "+ cartController.items[index].item.sprice.toString(),
                                               style: AppFonts.fontH7semi(
                                                   AppColors.themeBlack),
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                             ),
                                             Text(
-                                               "S.Price : "+cartController.items[index].item.price,
+                                               "P.Price : "+cartController.items[index].item.pprice.toString(),
                                               style: AppFonts.fontH7semi(
                                                   AppColors.themeBlack),
                                               maxLines: 2,

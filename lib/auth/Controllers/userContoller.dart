@@ -8,7 +8,7 @@ class Usercontoller extends GetxController{
 var profile = {}.obs;
  var user ={}.obs;
   var token = ''.obs;
-    late Map<String, dynamic> userdata;
+    var userdata={}.obs;
 
 @override
   void onInit() {
@@ -17,21 +17,25 @@ var profile = {}.obs;
   }
 
 
-  getinfo() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    userdata = (await Mypref().retrieveDataDynamically())!;
-    // if (userdata) {
-   profile.assignAll(userdata['profile']?? {});
-    user.assignAll(userdata['user']);
-    token.value=userdata['token'];
-// setState(() {
+ getinfo() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
 
-// });
+  // Retrieve data dynamically and check if it's null
+  var retrievedData = await Mypref().retrieveDataDynamically();
+  
+  // Ensure userdata is not null before assigning
+  if (retrievedData != null) {
+    userdata.value = retrievedData;
 
-    // } else {
-    //   print("No data found.");
-   // }
+    // Safely access profile and user properties
+    profile.assignAll(userdata['profile'] ?? {});
+    user.assignAll(userdata['user'] ?? {});
+    token.value = userdata['token'] ?? '';
+  } else {
+    // Handle the case when userdata is null
+    print("No data found.");
   }
+}
 
   getUser()=>user.value;
   getProfile()=>profile.value;

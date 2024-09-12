@@ -43,7 +43,7 @@ class _SingelDescriptionState extends State<SingelDescription> {
                           decoration: BoxDecoration(
                               image: DecorationImage(
                                   image: CachedNetworkImageProvider(
-                                    items[0].img_url,
+                                  widget.item.image??"",
                                   ),
                                   fit: BoxFit.cover),
                               borderRadius: BorderRadius.circular(10)),
@@ -56,8 +56,8 @@ class _SingelDescriptionState extends State<SingelDescription> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                   
-                    Text("Appointment",style: AppFonts.fontH2semi(AppColors.themeColer
-                  ),),  Text(items[0].description.toString()),
+                    Text(widget.item.name,style: AppFonts.fontH2semi(AppColors.themeColer
+                  ),),  Text(widget.item.description.toString()),
                     
     //                 HtmlWidget(''' <div class="menu-container">
     //     <div class="menu">

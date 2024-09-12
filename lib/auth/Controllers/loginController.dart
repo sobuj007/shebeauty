@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:shebeauty/main.dart';
 
 import 'package:shebeauty/utils/appApis.dart';
 import 'package:shebeauty/utils/appStyle.dart';
+import 'package:shebeauty/utils/custom%20widget/Temp.dart';
 import 'package:shebeauty/utils/custom%20widget/sharedpref.dart';
 
 class LoginContoller  {
@@ -34,6 +36,9 @@ class LoginContoller  {
           //  }
       
         Mypref().saveprofile(jsonResponse['profile']?? {},jsonResponse['user'],jsonResponse['token']);
+      tdata.setuser(jsonResponse['token']);
+      print(jsonResponse['token']);
+      print(jsonResponse['profile']);
  
       // var data = await AllinfoController().addItem();print(data);
         if ( jsonResponse['user']['role'].toString()=='user') {

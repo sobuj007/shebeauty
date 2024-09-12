@@ -1,12 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shebeauty/main.dart';
+import 'package:shebeauty/utils/appApis.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../utils/appColors.dart';
 import '../../utils/appFonts.dart';
 import '../../utils/custom widget/Customratings.dart';
+import '../Controllers/agentProfileContoller.dart';
 import '../Model/allproviderDataModel.dart';
 
 class SingelProfile extends StatefulWidget {
@@ -18,13 +21,23 @@ class SingelProfile extends StatefulWidget {
 }
 
 class _SingelProfileState extends State<SingelProfile> {
+    var agentcontroller = Get.put(AgentProfileController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
           child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 2.5.h),
-        child: ListView(
+        child:Obx((){
+          if(agentcontroller.profilesdata==null){
+             return CircularProgressIndicator();
+          }
+          if(agentcontroller.profilesdata!.isEmpty){
+            return Center(child: Text("No Data Found"),);
+
+          }
+        var prof=agentcontroller.profilesdata;
+          return  ListView(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -39,16 +52,16 @@ class _SingelProfileState extends State<SingelProfile> {
                       width: 5,
                     ),
                     Text(
-                      widget.item.name.toUpperCase(),
+                      prof![0].storename.toString().toUpperCase(),
                       style: AppFonts.fontH5bold(AppColors.themeColer),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),
-                Rattings(
-                  rate: widget.item.rating.toString(),
-                ),
+                // Rattings(
+                //   rate: widget.item.rating.toString(),
+                // ),
               ],
             ),
             SizedBox(
@@ -63,16 +76,16 @@ class _SingelProfileState extends State<SingelProfile> {
                       applng.getLang(21),
                       style: AppFonts.fontH6regular(AppColors.themeColer),
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          border:
-                              Border.all(width: 1, color: AppColors.themehint)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(widget.item.available),
-                      ),
-                    )
+                    // Container(
+                    //   decoration: BoxDecoration(
+                    //       borderRadius: BorderRadius.circular(5),
+                    //       border:
+                    //           Border.all(width: 1, color: AppColors.themehint)),
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.all(8.0),
+                    //     child: Text(widget.item.available),
+                    //   ),
+                    // )
                   ],
                 ),
                 Column(
@@ -81,16 +94,16 @@ class _SingelProfileState extends State<SingelProfile> {
                       applng.getLang(28),
                       style: AppFonts.fontH6regular(AppColors.themeColer),
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          border:
-                              Border.all(width: 1, color: AppColors.themehint)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(widget.item.available),
-                      ),
-                    )
+                    // Container(
+                    //   decoration: BoxDecoration(
+                    //       borderRadius: BorderRadius.circular(5),
+                    //       border:
+                    //           Border.all(width: 1, color: AppColors.themehint)),
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.all(8.0),
+                    //     child: Text(widget.item.available),
+                    //   ),
+                    // )
                   ],
                 ),
               ],
@@ -110,9 +123,12 @@ class _SingelProfileState extends State<SingelProfile> {
             certificates(context),
             Servics(context)
           ],
+        );
+      
+        })
+        
         ),
-      )),
-    );
+    ));
   }
 
   customerReview() {
@@ -161,7 +177,15 @@ class _SingelProfileState extends State<SingelProfile> {
   }
 
   certificates(context) {
-    return Column(
+    return Obx((){
+      if(agentcontroller.certificate==null){
+        return Center(child: CircularProgressIndicator(),);
+      }
+      if(agentcontroller.certificate!.isEmpty){
+        return Center(child: Text('No Data Found'),);
+      }
+      var cerdata= agentcontroller.certificate;
+      return  Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
@@ -180,15 +204,23 @@ class _SingelProfileState extends State<SingelProfile> {
                   childAspectRatio: MediaQuery.of(context).size.width /
                       (MediaQuery.of(context).size.height / 5),
                 ),
-                itemCount: 6,
+                itemCount: cerdata!.length,
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding:
                         EdgeInsets.symmetric(vertical: 1.h, horizontal: 1.w),
                     child: Container(
-                      decoration: BoxDecoration(color: AppColors.themeimgbg),
-                      child: Center(child: Text("data")),
+                      decoration: BoxDecoration(color: AppColors.themeimgbg,
+                      image:  DecorationImage(
+                          image:
+                              CachedNetworkImageProvider(cerdata[index].image??""),
+                          fit: BoxFit.cover),
+                      borderRadius: BorderRadius.circular(10)),
+                      
+                      
+                     
+                     // child: Center(child: Text("data")),
                     ),
                   );
                 },
@@ -198,10 +230,20 @@ class _SingelProfileState extends State<SingelProfile> {
         ),
       ],
     );
-  }
+  
+    });
+   }
 
   Servics(context) {
-    return Column(
+    return Obx((){
+      if(agentcontroller.exparts==null){
+        return Center(child: CircularProgressIndicator(),);
+      }
+      if(agentcontroller.exparts!.isEmpty){
+        return Center(child: Text('No Data Found'),);
+      }
+      var expdata= agentcontroller.exparts;
+return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
@@ -220,7 +262,7 @@ class _SingelProfileState extends State<SingelProfile> {
                   childAspectRatio: MediaQuery.of(context).size.width /
                       (MediaQuery.of(context).size.height / 5),
                 ),
-                itemCount: 6,
+                itemCount: expdata!.length,
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
@@ -228,7 +270,18 @@ class _SingelProfileState extends State<SingelProfile> {
                         EdgeInsets.symmetric(vertical: 1.h, horizontal: 1.w),
                     child: Container(
                       decoration: BoxDecoration(color: AppColors.themeimgbg),
-                      child: Center(child: Text("data")),
+                      child:  Container(
+                      decoration: BoxDecoration(color: AppColors.themeimgbg,
+                      image:  DecorationImage(
+                          image:
+                              CachedNetworkImageProvider(AppAppis.myexpartimag+expdata[index].profileImage.toString()),
+                          fit: BoxFit.cover),
+                      borderRadius: BorderRadius.circular(10)),
+                      
+                      
+                     
+                     // child: Center(child: Text(expdata[index].profileImage.toString())),
+                    ),
                     ),
                   );
                 },
@@ -238,5 +291,7 @@ class _SingelProfileState extends State<SingelProfile> {
         ),
       ],
     );
+    });
+    
   }
 }

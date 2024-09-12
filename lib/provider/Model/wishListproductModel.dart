@@ -1,17 +1,17 @@
 import 'dart:convert';
 
-class AllProductModel {
+class AllWishlistProductModel {
   String? message;
-  List<Products>? products;
+  List<WishlistProduct>? products;
 
-  AllProductModel({this.message, this.products});
+  AllWishlistProductModel({this.message, this.products});
 
-  AllProductModel.fromJson(Map<String, dynamic> json) {
+  AllWishlistProductModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     if (json['products'] != null) {
-      products = <Products>[];
+      products = <WishlistProduct>[];
       json['products'].forEach((v) {
-        products!.add(Products.fromJson(v));
+        products!.add(WishlistProduct.fromJson(v));
       });
     }
   }
@@ -26,7 +26,7 @@ class AllProductModel {
   }
 }
 
-class Products {
+class WishlistProduct {
   int? id;
   String? agentId;
   String? categoryId;
@@ -45,7 +45,7 @@ class Products {
   String? createdAt;
   String? updatedAt;
 
-  Products(
+  WishlistProduct(
       {this.id,
       this.agentId,
       this.categoryId,
@@ -64,7 +64,7 @@ class Products {
       this.createdAt,
       this.updatedAt});
 
-  Products.fromJson(Map<String, dynamic> json) {
+  WishlistProduct.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     agentId = json['agent_id'];
     categoryId = json['category_id'];

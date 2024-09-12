@@ -2,11 +2,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:shebeauty/profile/Screens/editprofile.dart';
+import 'package:shebeauty/profile/Screens/locationselection.dart';
 import 'package:shebeauty/routes/AppRouts.dart';
+import 'package:shebeauty/utils/appApis.dart';
 import 'package:shebeauty/utils/appColors.dart';
 import 'package:shebeauty/utils/appFonts.dart';
 import 'package:shebeauty/utils/custom%20widget/CustomAppbar.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../auth/Controllers/userContoller.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -16,6 +21,8 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+ final Usercontoller ucon = Get.put(Usercontoller());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,8 +49,8 @@ class _ProfileState extends State<Profile> {
                         radius: 45,
                         backgroundColor: AppColors.themeColer,
                         backgroundImage:  CachedNetworkImageProvider(
-                              
-                                  "https://foru.co.id/wp-content/uploads/2015/05/Memilih-advertising-agency.jpg"),),
+                                ucon.profile.value['img']==null?   "https://foru.co.id/wp-content/uploads/2015/05/Memilih-advertising-agency.jpg":(AppAppis.profileimg+ucon.profile.value['img']).toString()
+                                 ),),
                     ),
                        
                        
@@ -56,15 +63,24 @@ class _ProfileState extends State<Profile> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "john Deo",
+                        ucon.user['name']==null? "john Deo":ucon.user['name'].toString(),
                             style: AppFonts.fontH5semi(AppColors.themeColer),
                           ),
                           Text(
-                            "johndeo@gmail.com",
+                            ucon.user['email']==null?  "johndeo@gmail.com":ucon.user['email'].toString(),
+                           
                             style: AppFonts.fontH6semi(AppColors.themeBlack),
                           ),
                           Text(
-                            "1234567890",
+                              ucon.profile.value['mobilenumber'].toString()==null?  "1234567890":ucon.profile.value['mobilenumber'].toString(),
+                           
+                            
+                            style: AppFonts.fontH6regular(AppColors.themeBlack),
+                          ),
+                          Text(
+                              ucon.profile.value['address'].toString(),
+                           
+                            
                             style: AppFonts.fontH6regular(AppColors.themeBlack),
                           ),
                         ],
@@ -87,17 +103,27 @@ class _ProfileState extends State<Profile> {
               children: [
               Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(children: [
-                Icon(Icons.settings),SizedBox(width: 2.h,) ,Text("Settings",style: AppFonts.fontH5regular(AppColors.themeBlack),)
-              ],),
+              child: GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (_)=>EditProfile()));
+                },
+                child: Row(children: [
+                  Icon(Icons.settings),SizedBox(width: 2.h,) ,Text("Edit Profile",style: AppFonts.fontH5regular(AppColors.themeBlack),)
+                ],),
+              ),
             ),
             SizedBox(height: 1.h,),
                 //************************************* location *****************************
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(children: [
-                Icon(Icons.location_city),SizedBox(width: 2.h,) ,Text("Locations",style: AppFonts.fontH5regular(AppColors.themeBlack),)
-              ],),
+            GestureDetector(
+              onTap: (){
+                     Navigator.push(context, MaterialPageRoute(builder: (_)=>CityLocationFilter()));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(children: [
+                  Icon(Icons.location_city),SizedBox(width: 2.h,) ,Text("Locations",style: AppFonts.fontH5regular(AppColors.themeBlack),)
+                ],),
+              ),
             ),
             SizedBox(height: 1.h,),
                 //************************************* newz *****************************

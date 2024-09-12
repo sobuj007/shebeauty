@@ -27,7 +27,7 @@ class AllProvider extends StatefulWidget {
 }
 
 class _AllProviderState extends State<AllProvider> {
-     final ProductController controller = Get.put(ProductController());
+     final AllProductController controller = Get.put(AllProductController());
   List<Item> _items = [];
   List<Item> _filteredItems = [];
   String _selectedLocation = 'All';

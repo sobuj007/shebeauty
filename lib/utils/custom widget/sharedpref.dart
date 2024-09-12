@@ -14,7 +14,7 @@ class Mypref{
   await prefs.setString('token', token);
   print("stored");
   }
-  Future<Map<String, dynamic>?> retrieveDataDynamically() async {
+ retrieveDataDynamically() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   // Retrieve the JSON strings

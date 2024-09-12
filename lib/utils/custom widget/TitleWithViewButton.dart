@@ -36,7 +36,7 @@ class _TitleWithViewButtonState extends State<TitleWithViewButton> {
               onPressed: () {
                 print(widget.routeData);
                 if (widget.route == 'c') {
-                  Get.toNamed('/category',arguments: widget.routeData);
+                  Get.toNamed('/category',arguments: {"gender":widget.routeData});
                   // Navigator.push(context,
                   //     MaterialPageRoute(builder: (_) => AppCategory(catedata: widget.routeData,)));
                 }else {

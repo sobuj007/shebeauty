@@ -23,7 +23,7 @@ class AppCategory extends StatefulWidget {
 class _AppCategoryState extends State<AppCategory> {
  
    final AllinfoController con=Get.find();
-  //final arg=Get.arguments();
+   final arguments = Get.arguments as Map<String, dynamic>;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +38,9 @@ class _AppCategoryState extends State<AppCategory> {
               padding: const EdgeInsets.all(8.0),
               child: ListView(
                 padding: EdgeInsets.zero,
-                children: [category(context)],
+                children: [
+                  category(context)
+                  ],
               ),
             ),
           ),
@@ -57,27 +59,29 @@ class _AppCategoryState extends State<AppCategory> {
           Expanded(
             child: Obx(
               () {
-                 if (con.getCategoriesByGender(widget.catedata.toString()) == null) {
+                 if (con.categories == null) {
           return Center(child: CircularProgressIndicator());
         }
 
         if (con.categories!.isEmpty) {
           return Center(child: Text('No categories available'));
         }
+        final data =
+                            con.getCategoriesByGender(arguments['gender']);
                 return GridView.builder(
                   padding: EdgeInsets.zero,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                   ),
-                  itemCount:con.categories!.length,
+                  itemCount:data.length,
                   itemBuilder: (BuildContext context, int index) {
-                    final cate=con.getCategoriesByGender(widget.catedata)![index];
+                  final vdata=data  [index];
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
                         onTap: (() {
                           Navigator.push(context,
-                              MaterialPageRoute(builder: (_) => AppSubCategory(cat_id: cate.id,)));
+                              MaterialPageRoute(builder: (_) => AppSubCategory(cat_id: vdata.id,)));
                         }),
                         child: Container(
                         height: 16.h,
@@ -94,13 +98,13 @@ class _AppCategoryState extends State<AppCategory> {
                                   width: 10.w,
                                   child: Image(
                                     image: CachedNetworkImageProvider(
-                                 cate.image
+                                 vdata.image
                                   ),
                                     fit: BoxFit.contain,
                                   ),
                                 ),
                                 Text(
-                                  cate.name
+                                  vdata.name
                                       .toString()
                                       .toUpperCase(),
                                   style: AppFonts.fontH7semi(Colors.black),

@@ -3,13 +3,29 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shebeauty/category/Model/getAllinfoData.dart';
+import 'package:shebeauty/provider/Model/allProductModel.dart';
+
 // GetX Controller
 class AllinfoController extends GetxController {
-    var allinfoModel = Rx<AllinfoModel?>(null);
+  var allinfoModel = Rx<AllinfoModel?>(null);
+ 
+  var filteredLocations = <Location>[].obs;
+  var selectedCityId = Rx<int?>(null);
+  var selectedLocations = <int>[].obs;
+
+ @override
+  void onInit() {
+    super.onInit();
+    fetchData();
+    loadStoredData();
+  }
 
   Future<void> fetchData() async {
-    var headersList = {'Accept': 'application/json',};
+    var headersList = {
+      'Accept': 'application/json',
+    };
     var url = Uri.parse('http://softisan.xyz/api/getall');
 
     try {
@@ -28,7 +44,6 @@ class AllinfoController extends GetxController {
 
         // Update the observable with the parsed data
         allinfoModel.value = allInfo;
-     
       } else {
         // print(res.reasonPhrase);
       }
@@ -36,28 +51,50 @@ class AllinfoController extends GetxController {
       print('Error: $e');
     }
   }
-    List<Categories>? get categories => allinfoModel.value?.categories;
-  List<Subcategories>? get subcategories => allinfoModel.value?.subcategories;
-  List<BodyParts>? get bodyParts => allinfoModel.value?.bodyParts;
+
+  List<Category>? get categories => allinfoModel.value?.category;
+  List<Subcategory>? get subcategories => allinfoModel.value?.subcategory;
+  List<Bodypart>? get bodyParts => allinfoModel.value?.bodypart;
   List<Cities>? get cities => allinfoModel.value?.cities;
-  List<Locations>? get locations => allinfoModel.value?.locations;
+  List<Location>? get locations => allinfoModel.value?.location;
   // Method to filter categories by gender
-   getCategoriesByGender(String gender) {
+  getCategoriesByGender(String gender) {
     // print(gender);
     //return
-  return allinfoModel.value?.categories?.where((category) =>
-        category.gender == gender || category.gender == 'both').toList();
-        
+    return allinfoModel.value?.category
+        ?.where((category) =>
+            category.gender == gender || category.gender == 'both')
+        .toList();
   }
-    // Method to filter subcategories by name
+
+  // Method to filter subcategories by name
   filterSubcategoriesByName(String id) {
-    return subcategories?.where((subcategory) => subcategory.categoryId == id).toList();
+    return subcategories
+        ?.where((subcategory) => subcategory.categoryId == id)
+        .toList();
   }
-  filterBodypartsByName(String id) {
-    return bodyParts?.where((bodypart) => bodypart.subcategoryId == id).toList();
+
+  // filterBodypartsByName(String id) {
+  //   return bodyParts?.where((bodypart) => bodypart.subcategoryId == id).toList();
+  // }
+  List<String?> filterBodypartsByName(String id) {
+    return bodyParts!
+        .where((bodypart) => bodypart.subcategoryId == id)
+        .map((bodypart) => bodypart.name)
+        .toList();
   }
+
+  //  getlocationBycityid(String id) {
+  //   // print(gender);
+  //   //return
+  // return allinfoModel.value?.location?.where((category) =>
+  //       locations?.citiesId == id ).toList();
+
+  // }
+
 // name category...............
-    String? getSubcategoryNameById (int id) {
+  String? getSubcategoryNameById(int id) {
+
     if (subcategories == null) return null;
 
     // Search for the category with the matching ID
@@ -68,8 +105,9 @@ class AllinfoController extends GetxController {
     }
     return null; // Return null if no match is found
   }
+
 // name category...............
-    String? getCategoryNameById(int id) {
+  String? getCategoryNameById(int id) {
     if (categories == null) return null;
 
     // Search for the category with the matching ID
@@ -81,54 +119,101 @@ class AllinfoController extends GetxController {
     return null; // Return null if no match is found
   }
 
+  void selectCity(int? cityId) {
+    selectedCityId.value = cityId;
+    filterLocations(cityId);
+  }
+
+  void filterLocations(cityId) {
+    if (selectedCityId.value == null) {
+      filteredLocations.clear();
+    } else {
+      if (locations != null) {
+  filteredLocations.value = locations!.where((location) => location.citiesId == cityId.toString()).toList();
+} else {
+  // Handle the case when locations is null, e.g., set filteredLocations to an empty list
+  filteredLocations.value = [];
 }
+      // filteredLocations.value = locations!.where((location) => location.citiesId == cityId.toString()).toList();
+    }
+    print(filteredLocations);
+  }
 
-//   List<Categories>? get categories => allinfoModel.value?.categories;
-//   List<Subcategories>? get subcategories => allinfoModel.value?.subcategories;
-//   List<BodyParts>? get bodyParts => allinfoModel.value?.bodyParts;
-//   List<Cities>? get cities => allinfoModel.value?.cities;
-//   List<Locations>? get locations => allinfoModel.value?.locations;
-// // Method to filter categories by gender
-//    getCategoriesByGender(String gender) {
-//     print(gender);
-//     //return
-//    var p=  allinfoModel.value?.categories?.where((category) =>
-//         category.gender == gender || category.gender == 'both').toList();
-//         print(categories);
-//   }
-//     // Method to filter subcategories by name
-//   filterSubcategoriesByName(String id) {
-//     return subcategories?.where((subcategory) => subcategory.categoryId == id).toList();
-//   }
-//   filterBodypartsByName(String id) {
-//     return bodyParts?.where((bodypart) => bodypart.subcategoryId == id).toList();
-//   }
-// // name category...............
-//     String? getSubcategoryNameById (int id) {
-//     if (subcategories == null) return null;
+  void toggleLocation(int locationId) {
+    if (selectedLocations.contains(locationId)) {
+      selectedLocations.remove(locationId);
+    } else {
+      selectedLocations.add(locationId);
+    }
+    saveSelectedLocations();
+  }
 
-//     // Search for the category with the matching ID
-//     for (var subcategory in subcategories!) {
-//       if (subcategory.id == id) {
-//         return subcategory.subcategoryName; // Return the name if found
-//       }
-//     }
-//     return null; // Return null if no match is found
-//   }
-// // name category...............
-//     String? getCategoryNameById(int id) {
-//     if (categories == null) return null;
 
-//     // Search for the category with the matching ID
-//     for (var category in categories!) {
-//       if (category.id == id) {
-//         return category.name; // Return the name if found
-//       }
-//     }
-//     return null; // Return null if no match is found
-//   }
 
-  // // Method to filter subcategories by multiple names
-  // void filterSubcategoriesByNames(List<String> names) {
-  //   filteredSubcategories.value = subcategories.where((subcategory) => names.contains(subcategory.name)).toList();
-  // }
+
+  Future<void> saveSelectedLocations() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedLocations', jsonEncode(selectedLocations));
+    print("saved");
+  }
+
+  Future<void> saveSelectedCity(int? cityId) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('selectedCity', cityId ?? -1);
+  }
+
+  Future<void> loadStoredData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final cityId = prefs.getInt('selectedCity');
+    final locationsJson = prefs.getString('selectedLocations');
+
+    if (cityId != null && cityId != -1) {
+      selectedCityId.value = cityId;
+      filterLocations(cityId);
+    }
+
+    if (locationsJson != null) {
+      selectedLocations.value = List<int>.from(jsonDecode(locationsJson));
+    }
+  }
+
+  // Future<void> saveSelectedLocationsToServer() async {
+  //   if (selectedCityId.value == null || selectedLocations.isEmpty) {
+  //     print('No city or locations selected');
+  //     return;
+  //   }
+
+  //   var url = Uri.parse('http://softisan.xyz/api/saveLocations');
+  //   var headers = {
+  //     'Accept': 'application/json',
+  //     'Content-Type': 'application/json',
+  //     'Authorization': 'Bearer YOUR_TOKEN' // Replace with your actual token
+  //   };
+
+  //   var body = jsonEncode({
+  //     'city_id': selectedCityId.value,
+  //     'locations': selectedLocations,
+  //   });
+
+  //   try {
+  //     var response = await http.post(url, headers: headers, body: body);
+  //     if (response.statusCode == 200) {
+  //       print('Locations saved successfully');
+  //     } else {
+  //       print('Failed to save locations: ${response.statusCode}');
+  //     }
+  //   } catch (e) {
+  //     print('Error saving locations: $e');
+  //   }
+ // }
+
+
+
+
+
+
+
+
+  }
+
+

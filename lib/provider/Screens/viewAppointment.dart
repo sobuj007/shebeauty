@@ -1,9 +1,10 @@
-import 'dart:ffi';
+
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shebeauty/auth/Controllers/userContoller.dart';
 import 'package:shebeauty/provider/Model/allproviderDataModel.dart';
 import 'package:shebeauty/utils/appLanguage.dart';
 import 'package:shebeauty/utils/appStyle.dart';
@@ -29,6 +30,7 @@ class ViewAppointment extends StatefulWidget {
 
 class _ViewAppointmentState extends State<ViewAppointment> {
   bool isfav = false;
+  var ucon=Get.put(Usercontoller());
  
   TimeOfDay _selectedTime = TimeOfDay.now();
   int productQun = 1;
@@ -77,6 +79,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
                       
                       child: ListView(
                         shrinkWrap: true,
+                        
                         padding: EdgeInsets.zero, children: [
                         Expanded(
                           child: Container(
@@ -93,7 +96,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
                                           image: CachedNetworkImageProvider(
-                                            args.item.img_url,
+                                            args.img,
                                           ),
                                           fit: BoxFit.cover),
                                       borderRadius: BorderRadius.circular(10)),
@@ -136,7 +139,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
                                                     ),
                                                     Text(
                                                       applng.getLang(16) +
-                                                          args.item.category,
+                                                          args.item.categoryId.toString(),
                                                       style: AppFonts.fontH7semi(
                                                           AppColors.themeBlack),
                                                       maxLines: 2,
@@ -144,7 +147,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
                                                     ),
                                                     Text(
                                                       applng.getLang(17) +
-                                                          args.item.subcategory,
+                                                          args.item.subcategoryId.toString(),
                                                       style: AppFonts.fontH7semi(
                                                           AppColors.themeBlack),
                                                       maxLines: 2,
@@ -158,56 +161,17 @@ class _ViewAppointmentState extends State<ViewAppointment> {
                                                           children: [
                                                             TextSpan(
                                                                 text: args.item
-                                                                        .servicePrice +
+                                                                        .sprice +
                                                                     "Tk",
                                                                 style:
-                                                                    AppFonts.fontH2semi(
+                                                                    AppFonts.fontH6semi(
                                                                         AppColors
                                                                             .themeColer))
                                                           ]),
                                                     ),
                                                   ],
                                                 ),
-                                                Column(
-                                                  children: [
-                                                    IconButton(
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            isfav = !isfav;
-                                                            if (wishListItem.contains(
-                                                                args)) {
-                                                              wishListItem
-                                                                  .remove(args);
-                                                            } else {
-                                                              wishListItem
-                                                                  .add(args);
-                                                              //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: content))
-                                                              AppStyle.snackbar(
-                                                                  'Wishlist',
-                                                                  'Product add to wishlist');
-                                                            }
-                                                            //wishList.add(items);
-                                                          });
-                                                        },
-                                                        icon: isfav
-                                                            ? Icon(
-                                                                Icons.favorite,
-                                                                color: AppColors
-                                                                    .themeColer,
-                                                              )
-                                                            : Icon(
-                                                                Icons
-                                                                    .favorite_border_outlined,
-                                                                color: const Color
-                                                                    .fromARGB(
-                                                                    255, 56, 45, 49),
-                                                              )),
-                                                    Rattings(
-                                                      rate:
-                                                          args.item.rating.toString(),
-                                                    ),
-                                                  ],
-                                                )
+                                                
                                               ],
                                             ),
                                           ),
@@ -255,9 +219,9 @@ class _ViewAppointmentState extends State<ViewAppointment> {
                                                       children: [
                                                         TextSpan(
                                                             text: " " +
-                                                                args.item.price +
+                                                                args.pprice +
                                                                 "Tk",
-                                                            style: AppFonts.fontH1semi(
+                                                            style: AppFonts.fontH6semi(
                                                                 AppColors.themeColer))
                                                       ]),
                                                 ),
@@ -282,16 +246,16 @@ class _ViewAppointmentState extends State<ViewAppointment> {
                                   applng.getLang(21),
                                   style: AppFonts.fontH6regular(AppColors.themeColer),
                                 ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      border: Border.all(
-                                          width: 1, color: AppColors.themehint)),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(args.item.available),
-                                  ),
-                                )
+                                // Container(
+                                //   decoration: BoxDecoration(
+                                //       borderRadius: BorderRadius.circular(5),
+                                //       border: Border.all(
+                                //           width: 1, color: AppColors.themehint)),
+                                //   child: Padding(
+                                //     padding: const EdgeInsets.all(8.0),
+                                //     child: Text(args.item.available),
+                                //   ),
+                                // )
                               ],
                             ),
                             Column(
@@ -300,16 +264,16 @@ class _ViewAppointmentState extends State<ViewAppointment> {
                                   applng.getLang(32),
                                   style: AppFonts.fontH6regular(AppColors.themeColer),
                                 ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      border: Border.all(
-                                          width: 1, color: AppColors.themehint)),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(args.item.slot.toString()),
-                                  ),
-                                )
+                                // Container(
+                                //   decoration: BoxDecoration(
+                                //       borderRadius: BorderRadius.circular(5),
+                                //       border: Border.all(
+                                //           width: 1, color: AppColors.themehint)),
+                                //   child: Padding(
+                                //     padding: const EdgeInsets.all(8.0),
+                                //     child: Text(args.item.slot.toString()),
+                                //   ),
+                                // )
                               ],
                             ),
                           ],
@@ -336,16 +300,29 @@ class _ViewAppointmentState extends State<ViewAppointment> {
                         cartController.removeItem(args.id);
                          var  date2 = (date.day.toString() + "/" + date.month.toString()+ "/" +date.year.toString())
                 .toString();
-              //          final CartItem sampleItem = CartItem(
-              //   id: args.id.toString(),
-              //   name: args.name.toString(),
-              //   img: args.img_url.toString(),
-              //   selectedTime: _selectedTime.toString(),
-              //   selectedDate: date2,
-              //   selectedServicsQun: servicesQun.toString(),
-              //   selectedProductQun:  productQun.toString(),
-              //   item: args,
-              // );
+                     var customTime = _formatTimeOfDay(_selectedTime);
+
+                  // cartmodelproduct.Product=widget.item;
+                                   final CartItem sampleItem = CartItem(
+                    id: widget.item.id.toString(),
+                    name: widget.item.name.toString(),
+                    img: widget.item.image.toString(),
+                    selectedTime: customTime.toString(),
+                    selectedDate: date2,
+                    selectedServicsQun: servicesQun.toString(),
+                    selectedProductQun:  productQun.toString(),
+                    sprice: widget.item.servicePrice.toString(),
+                    pprice:  widget.item.productPrice.toString(),
+                    agentid:widget.item.agentId,
+                    userid:ucon.user.value['id'].toString(),
+                     item: widget.item,
+                  );
+                 
+
+              
+                    AppStyle.snackbar('Cart', 'Product added to Cart');
+                    cartController.addItem(sampleItem);
+                
               setState(() {
                         AppStyle.snackbar('Cart updated', ' Cart updated');
                      //  cartController.addItem(sampleItem);
@@ -366,7 +343,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
                           borderRadius: BorderRadius.circular(15)),
                       alignment: Alignment.center,
                       child: Text(
-                        applng.getLang(36),
+                        "view Details",
                         style: AppFonts.fontH4semi(AppColors.themeWhite),
                       ),
                     )),
@@ -374,6 +351,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
                       if(cartController.itemExists(args.name)){
                         cartController.removeItem(args.id);
                          AppStyle.snackbar('Item Delete', ' Cart Item Delete');
+                         Navigator.pop(context);
                         }
                     }, icon: Icon(Icons.delete))
           ],
@@ -381,7 +359,12 @@ class _ViewAppointmentState extends State<ViewAppointment> {
       ),
     );
   }
-
+// Function to format TimeOfDay to a string
+  String _formatTimeOfDay(TimeOfDay timeOfDay) {
+    final hours = timeOfDay.hour.toString().padLeft(2, '0');
+    final minutes = timeOfDay.minute.toString().padLeft(2, '0');
+    return '$hours:$minutes';
+  }
   timeslot() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -581,8 +564,8 @@ class _ViewAppointmentState extends State<ViewAppointment> {
   }
 
   coutntotal() {
-    var p = int.parse(args.item.price) * productQun;
-    var s = int.parse(args.item.servicePrice) * servicesQun;
+    var p = double.parse(args.pprice) * productQun;
+    var s = double.parse(args.sprice) * servicesQun;
 
     setState(() {
       total = double.parse((p + s).toString());

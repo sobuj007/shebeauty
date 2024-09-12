@@ -87,8 +87,8 @@ class _MyCartState extends State<MyCart> {
                       });
                 },
                 children: [
-              //   Wishlist(),
-              //  MyListedCart()
+                Wishlist(),
+                MyListedCart()
              
        
        

@@ -1,23 +1,24 @@
-
+import 'dart:convert';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shebeauty/provider/Model/allproviderDataModel.dart';
-import 'package:shebeauty/utils/appLanguage.dart';
+import 'package:shebeauty/auth/Controllers/userContoller.dart';
+import 'package:shebeauty/cart/Model/cartModel.dart';
+
 import 'package:shebeauty/utils/appStyle.dart';
-import 'package:shebeauty/utils/custom%20widget/CustomAppbar.dart';
 import 'package:sizer/sizer.dart';
 
+import 'package:shebeauty/cart/Model/cartModel.dart' as CartProduct;
 import '../../cart/Controllers/cartCOntroller.dart';
-import '../../cart/Model/cartModel.dart';
+
 import '../../main.dart';
-import '../../routes/AppRouts.dart';
 import '../../utils/appColors.dart';
 import '../../utils/appFonts.dart';
-import '../../utils/custom widget/Customratings.dart';
-import '../../utils/custom widget/custom_counter.dart';
+import '../Controllers/WishlistController.dart';
+import '../Controllers/agentProfileContoller.dart';
+import '../Model/allProductModel.dart';
 
 class SingelAppointment extends StatefulWidget {
   final item;
@@ -28,21 +29,26 @@ class SingelAppointment extends StatefulWidget {
 }
 
 class _SingelAppointmentState extends State<SingelAppointment> {
+  var agentcontroller = Get.put(AgentProfileController());
+  var ucon = Get.put(Usercontoller());
   bool isfav = false;
   String date = "";
   TimeOfDay _selectedTime = TimeOfDay.now();
   int productQun = 1;
   int servicesQun = 1;
   double total = 0;
-   final CartController cartController = Get.put(CartController());
-
+  final CartController cartController = Get.put(CartController());
+  final WishlistController wishcontroller = Get.put(WishlistController());
   @override
   void initState() {
     super.initState();
     coutntotal();
-    date =
-        (DateTime.now().day.toString() + "/" + DateTime.now().month.toString()+ "/" +DateTime.now().year.toString())
-            .toString();
+    date = (DateTime.now().day.toString() +
+            "/" +
+            DateTime.now().month.toString() +
+            "/" +
+            DateTime.now().year.toString())
+        .toString();
     if (wishListItem.contains(widget.item)) {
       isfav = true;
       setState(() {});
@@ -56,7 +62,6 @@ class _SingelAppointmentState extends State<SingelAppointment> {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
         child: Column(
           children: [
-           
             Expanded(
               child: ListView(padding: EdgeInsets.zero, children: [
                 Expanded(
@@ -74,7 +79,7 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                           decoration: BoxDecoration(
                               image: DecorationImage(
                                   image: CachedNetworkImageProvider(
-                                    widget.item.img_url,
+                                    widget.item.image,
                                   ),
                                   fit: BoxFit.cover),
                               borderRadius: BorderRadius.circular(10)),
@@ -95,82 +100,39 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Container(
-                                    height: 15.h,
-                                    width: 58.w,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            Text(
-                                              widget.item.name.toUpperCase(),
-                                              style: AppFonts.fontH6bold(
-                                                  AppColors.themeBlack),
-                                              maxLines: 2,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                            Text(
-                                              applng.getLang(16) +
-                                                  widget.item.category,
-                                              style: AppFonts.fontH7semi(
-                                                  AppColors.themeBlack),
-                                              maxLines: 2,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                            Text(
-                                              applng.getLang(17) +
-                                                  widget.item.subcategory,
-                                              style: AppFonts.fontH7semi(
-                                                  AppColors.themeBlack),
-                                              maxLines: 2,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                            RichText(
-                                              text: TextSpan(
-                                                  text: applng.getLang(18),
-                                                  style: AppFonts.fontH7semi(
-                                                      AppColors.themeBlack),
-                                                  children: [
-                                                    TextSpan(
-                                                        text: widget.item
-                                                                .servicePrice +
-                                                            "Tk",
-                                                        style:
-                                                            AppFonts.fontH2semi(
-                                                                AppColors
-                                                                    .themeColer))
-                                                  ]),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
+                                  Stack(
+                                    children: [
+                                      Positioned(
+                                        right: 0,
+                                        child: Column(
                                           children: [
                                             IconButton(
                                                 onPressed: () {
-                                                  setState(() {
-                                                    isfav = !isfav;
-                                                    if (wishListItem.contains(
-                                                        widget.item)) {
-                                                      wishListItem
-                                                          .remove(widget.item);
-                                                    } else {
-                                                      wishListItem
-                                                          .add(widget.item);
-                                                      //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: content))
-                                                      AppStyle.snackbar(
-                                                          'Wishlist',
-                                                          'Product add to wishlist');
-                                                    }
-                                                    //wishList.add(items);
-                                                  });
-                                                },
-                                                icon: isfav
+                                                  isfav = !isfav;
+                                                  //     if (isfav==false) {
+                                                  //  wishcontroller.removeFromWishlist(widget.item.name);
+                                                  //     } else {}
+                                                  if (wishcontroller
+                                                      .isProductInWishlist(
+                                                          widget.item.id!)) {
+                                                    wishcontroller
+                                                        .removeProductFromWishlist(
+                                                            widget.item.id!);
+                                                  } else {
+                                                    wishcontroller
+                                                        .addProductToWishlist(widget
+                                                            .item); // Adding Products to wishlist
+                                                    //  AppStyle.snackbar(
+                                                    //                                           'Wishlist',
+                                                    //                                           'Product add to wishlist');
+                                                  }
+                                                  //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: content))
+                                                }
+                                                //wishList.add(items);
+
+                                                ,
+                                                icon:  wishcontroller. isProductInWishlist(widget.item.id!) 
+
                                                     ? Icon(
                                                         Icons.favorite,
                                                         color: AppColors
@@ -183,14 +145,79 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                                             .fromARGB(
                                                             255, 56, 45, 49),
                                                       )),
-                                            Rattings(
-                                              rate:
-                                                  widget.item.rating.toString(),
+                                            // Rattings(
+                                            //   rate:
+                                            //       widget.item.rating.toString(),
+                                            // ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        height: 12.h,
+                                        width: 58.w,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                Expanded(
+                                                  child: Text(
+                                                    widget.item.name
+                                                        .toUpperCase(),
+                                                    style: AppFonts.fontH6bold(
+                                                        AppColors.themeBlack),
+                                                    maxLines: 2,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  applng.getLang(16) +
+                                                      widget.item.categoryId,
+                                                  style: AppFonts.fontH7semi(
+                                                      AppColors.themeBlack),
+                                                  maxLines: 2,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                                Text(
+                                                  applng.getLang(17) +
+                                                      widget.item.subcategoryId,
+                                                  style: AppFonts.fontH7semi(
+                                                      AppColors.themeBlack),
+                                                  maxLines: 2,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                                RichText(
+                                                  text: TextSpan(
+                                                      text: applng.getLang(18),
+                                                      style:
+                                                          AppFonts.fontH7semi(
+                                                              AppColors
+                                                                  .themeBlack),
+                                                      children: [
+                                                        TextSpan(
+                                                            text: widget.item
+                                                                    .servicePrice +
+                                                                "Tk",
+                                                            style: AppFonts
+                                                                .fontH5semi(
+                                                                    AppColors
+                                                                        .themeColer))
+                                                      ]),
+                                                ),
+                                              ],
                                             ),
                                           ],
-                                        )
-                                      ],
-                                    ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                   // SizedBox(
                                   //   width: 58.w,
@@ -236,9 +263,18 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                               children: [
                                                 TextSpan(
                                                     text: " " +
-                                                        widget.item.price +
-                                                        "Tk",
-                                                    style: AppFonts.fontH1semi(
+                                                        widget
+                                                            .item.productPrice,
+                                                    children: [
+                                                      TextSpan(
+                                                        text: "Tk",
+                                                        style:
+                                                            AppFonts.fontH6semi(
+                                                                AppColors
+                                                                    .themeColer),
+                                                      )
+                                                    ],
+                                                    style: AppFonts.fontH5semi(
                                                         AppColors.themeColer))
                                               ]),
                                         ),
@@ -263,16 +299,16 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                           applng.getLang(21),
                           style: AppFonts.fontH6regular(AppColors.themeColer),
                         ),
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(
-                                  width: 1, color: AppColors.themehint)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(widget.item.available),
-                          ),
-                        )
+                        // Container(
+                        //   decoration: BoxDecoration(
+                        //       borderRadius: BorderRadius.circular(5),
+                        //       border: Border.all(
+                        //           width: 1, color: AppColors.themehint)),
+                        //   child: Padding(
+                        //     padding: const EdgeInsets.all(8.0),
+                        //     child: Text(widget.item.available),
+                        //   ),
+                        // )
                       ],
                     ),
                     Column(
@@ -288,7 +324,7 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                   width: 1, color: AppColors.themehint)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(widget.item.slot.toString()),
+                            child: Text(widget.item.slotId.toString()),
                           ),
                         )
                       ],
@@ -303,41 +339,34 @@ class _SingelAppointmentState extends State<SingelAppointment> {
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: cartController.itemExists(widget.item.name)
-            ? Container(
-                height: 6.h,
-                width: 100.w,
-                decoration: BoxDecoration(
-                    color: AppColors.themedisable,
-                    borderRadius: BorderRadius.circular(15)),
-                alignment: Alignment.center,
-                child: Text(
-                  applng.getLang(33),
-                  style: AppFonts.fontH7regular(AppColors.themehint),
-                ),
-              )
-            : GestureDetector(
+        child: GestureDetector(
                 onTap: () {
-                   var customTime = _formatTimeOfDay(_selectedTime);
-  //                  final CartItem sampleItem = CartItem(
-  //   id: widget.item.id.toString(),
-  //   name: widget.item.name.toString(),
-  //   img: widget.item.img_url.toString(),
-  //   selectedTime: customTime.toString(),
-  //   selectedDate: date,
-  //   selectedServicsQun: servicesQun.toString(),
-  //   selectedProductQun:  productQun.toString(),
-  //   // orderfor:widget.item.,
-  //   // orderby:,
-  //   item: widget.item,
-  // );
+                  var customTime = _formatTimeOfDay(_selectedTime);
+                  var d=[];
+             
+            
+         final CartProducts cartProduct = convertToCartProducts(widget.item);
+                                  final CartProduct.CartItem sampleItem = CartProduct.CartItem(
+  id: widget.item.id?.toString() ?? '0', // Handle null case
+  name: widget.item.name ?? 'Unknown', // Default value if null
+  img: widget.item.image ?? '', // Default image
+  selectedTime: customTime ?? '', // Custom time
+  selectedDate: date, // Selected date
+  selectedServicsQun: servicesQun?.toString() ?? '1', // Default quantity
+  selectedProductQun: productQun?.toString() ?? '1', // Default product quantity
+  sprice: widget.item.servicePrice ?? '0.00', // Handle null price
+  pprice: widget.item.productPrice ?? '0.00', // Handle null price
+  agentid: widget.item.agentId ?? 'Unknown Agent', // Handle null agentId
+  userid: ucon.user['id'].toString(), // Assuming user id is always present
+  item: cartProduct, // Pass the entire product object directly
+);
 
-                
-                  setState(() {
+                 
+
+              
                     AppStyle.snackbar('Cart', 'Product added to Cart');
-                  // cartController.addItem(sampleItem);
-                   
-                  });
+                     cartController.addItem(sampleItem);
+                
                 },
                 child: Container(
                   height: 6.h,
@@ -361,6 +390,32 @@ class _SingelAppointmentState extends State<SingelAppointment> {
     final minutes = timeOfDay.minute.toString().padLeft(2, '0');
     return '$hours:$minutes';
   }
+  CartProducts convertToCartProducts(Products product) {
+  final jsonMap = product.toJson();
+
+  return CartProducts(
+    id: jsonMap['id']?.toString() ?? '',
+    name: jsonMap['name'] ?? '',
+    img: jsonMap['image'] ?? '',
+    sprice: jsonMap['service_price'] ?? '0.00',
+    pprice: jsonMap['product_price'] ?? '0.00',
+    agentid: jsonMap['agent_id'] ?? '',
+    categoryId: jsonMap['category_id'] ?? '',
+    subcategoryId: jsonMap['subcategory_id'] ?? '',
+    bodypartId: jsonMap['bodypart_id'] ?? '',
+    cityId: jsonMap['city_id'] ?? '',
+    locationIds: jsonMap['location_ids'] ?? '',
+    slotId: jsonMap['slot_id'] ?? '',
+    appointmentSlotIds: jsonMap['appointment_slot_ids'] ?? '',
+    description: jsonMap['description'] ?? '',
+    gender: jsonMap['gender'] ?? '',
+    createdAt: jsonMap['created_at'] ?? '',
+    updatedAt: jsonMap['updated_at'] ?? '',
+  );
+}
+List<CartProducts> convertProductsList(List<Products> productsList) {
+  return productsList.map((product) => convertToCartProducts(product)).toList();
+}
   timeslot() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -368,8 +423,12 @@ class _SingelAppointmentState extends State<SingelAppointment> {
         EasyDateTimeLine(
           initialDate: DateTime.now(),
           onDateChange: (selectedDate) {
-            date = (selectedDate.day.toString() + "/" + selectedDate.month.toString()+ "/" +selectedDate.year.toString())
-            .toString();
+            date = (selectedDate.day.toString() +
+                    "/" +
+                    selectedDate.month.toString() +
+                    "/" +
+                    selectedDate.year.toString())
+                .toString();
           },
           activeColor: AppColors.themeColer,
           dayProps: EasyDayProps(
@@ -559,29 +618,71 @@ class _SingelAppointmentState extends State<SingelAppointment> {
   }
 
   coutntotal() {
-    var p = int.parse(widget.item.price) * productQun;
-    var s = int.parse(widget.item.servicePrice) * servicesQun;
+    var p = double.parse(widget.item.productPrice) *
+        double.parse(productQun.toString());
+    var s = double.parse(widget.item.servicePrice) *
+        double.parse(servicesQun.toString());
 
     setState(() {
       total = double.parse((p + s).toString());
     });
   }
 
-  recomandation(context) => Container(
-        height: MediaQuery.of(context).size.height * .18,
-        //color: Colors.green,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return Card(
-              color: Colors.blue,
-              child: Container(
-                width: 38.w,
-                height: 13.h,
-              ),
-            );
-          },
-        ),
-      );
+  var reconpro;
+  recomandation(context) => Obx(() {
+        if (agentcontroller.productrecomandation == null) {
+          return CircularProgressIndicator();
+        }
+        reconpro = agentcontroller.productrecomandation;
+        return Container(
+          height: MediaQuery.of(context).size.height * .18,
+          //color: Colors.green,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: reconpro.length,
+            itemBuilder: (context, index) {
+              return Card(
+                child: Container(
+                  width: 38.w,
+                  height: 13.h,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image:
+                              CachedNetworkImageProvider(reconpro[index].image),
+                          fit: BoxFit.cover),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: const Color.fromARGB(60, 100, 99, 99),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: AppColors.themeColer,
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: .5.w, horizontal: 2.w),
+                                child: Text(
+                                  reconpro[index].name,
+                                  style:
+                                      AppFonts.fontH7semi(AppColors.themeWhite),
+                                ),
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        );
+      });
 }
