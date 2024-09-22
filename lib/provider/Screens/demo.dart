@@ -1,7 +1,7 @@
 // import 'package:cached_network_image/cached_network_image.dart';
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
-// import 'package:shebeauty/provider/Model/allProductModel.dart';
+// import 'package:Ghore_Parlor/provider/Model/allProductModel.dart';
 // import 'package:sizer/sizer.dart';
 
 // import '../../category/Controllers/getAllinfocontoller.dart';

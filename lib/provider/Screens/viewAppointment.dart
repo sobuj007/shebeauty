@@ -4,10 +4,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shebeauty/auth/Controllers/userContoller.dart';
-import 'package:shebeauty/provider/Model/allproviderDataModel.dart';
-import 'package:shebeauty/utils/appLanguage.dart';
-import 'package:shebeauty/utils/appStyle.dart';
+import 'package:Ghore_Parlor/auth/Controllers/userContoller.dart';
+import 'package:Ghore_Parlor/provider/Model/allproviderDataModel.dart';
+import 'package:Ghore_Parlor/utils/appLanguage.dart';
+import 'package:Ghore_Parlor/utils/appStyle.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../cart/Controllers/cartCOntroller.dart';

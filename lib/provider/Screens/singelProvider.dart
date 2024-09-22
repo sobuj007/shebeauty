@@ -1,10 +1,10 @@
 
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
-// import 'package:shebeauty/main.dart';
-// import 'package:shebeauty/provider/Screens/SingelAppointment.dart';
-// import 'package:shebeauty/utils/appColors.dart';
-// import 'package:shebeauty/utils/appFonts.dart';
+// import 'package:Ghore_Parlor/main.dart';
+// import 'package:Ghore_Parlor/provider/Screens/SingelAppointment.dart';
+// import 'package:Ghore_Parlor/utils/appColors.dart';
+// import 'package:Ghore_Parlor/utils/appFonts.dart';
 // import 'package:sizer/sizer.dart';
 
 // import '../../utils/custom widget/CustomAppbar.dart';
@@ -136,7 +136,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shebeauty/provider/Controllers/agentProfileContoller.dart';
+import 'package:Ghore_Parlor/provider/Controllers/agentProfileContoller.dart';
 
 import '../../utils/appColors.dart';
 import '../../utils/appFonts.dart';

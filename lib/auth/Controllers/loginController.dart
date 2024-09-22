@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:shebeauty/main.dart';
+import 'package:Ghore_Parlor/main.dart';
 
-import 'package:shebeauty/utils/appApis.dart';
-import 'package:shebeauty/utils/appStyle.dart';
-import 'package:shebeauty/utils/custom%20widget/Temp.dart';
-import 'package:shebeauty/utils/custom%20widget/sharedpref.dart';
+import 'package:Ghore_Parlor/utils/appApis.dart';
+import 'package:Ghore_Parlor/utils/appStyle.dart';
+import 'package:Ghore_Parlor/utils/custom%20widget/Temp.dart';
+import 'package:Ghore_Parlor/utils/custom%20widget/sharedpref.dart';
 
 class LoginContoller  {
 

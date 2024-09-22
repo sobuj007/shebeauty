@@ -2,7 +2,7 @@
 
 // import 'package:get/get.dart';
 // import 'package:http/http.dart'as http;
-// import 'package:shebeauty/getservices/Model/ServicesModel.dart';
+// import 'package:Ghore_Parlor/getservices/Model/ServicesModel.dart';
 
 // class GetServicesContoller extends GetxController{
 // var servicesModel = ServicsModel().obs;

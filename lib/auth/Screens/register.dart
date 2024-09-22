@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shebeauty/auth/Controllers/loginController.dart';
-import 'package:shebeauty/main.dart';
-import 'package:shebeauty/utils/appColors.dart';
-import 'package:shebeauty/utils/appFonts.dart';
-import 'package:shebeauty/utils/appStyle.dart';
+import 'package:Ghore_Parlor/auth/Controllers/loginController.dart';
+import 'package:Ghore_Parlor/main.dart';
+import 'package:Ghore_Parlor/utils/appColors.dart';
+import 'package:Ghore_Parlor/utils/appFonts.dart';
+import 'package:Ghore_Parlor/utils/appStyle.dart';
 import 'package:sizer/sizer.dart';
 
 class Register extends StatefulWidget {

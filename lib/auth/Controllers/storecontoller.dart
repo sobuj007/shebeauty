@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:shebeauty/auth/Controllers/userContoller.dart';
-import 'package:shebeauty/auth/Model/storeprofileModel.dart';
+import 'package:Ghore_Parlor/auth/Controllers/userContoller.dart';
+import 'package:Ghore_Parlor/auth/Model/storeprofileModel.dart';
 import 'package:http/http.dart' as http;
-import 'package:shebeauty/main.dart';
+import 'package:Ghore_Parlor/main.dart';
 
 
   

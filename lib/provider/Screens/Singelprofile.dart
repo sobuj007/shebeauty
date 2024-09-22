@@ -2,10 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shebeauty/main.dart';
-import 'package:shebeauty/utils/appApis.dart';
+import 'package:Ghore_Parlor/main.dart';
+import 'package:Ghore_Parlor/utils/appApis.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../order/review/ratingcontoller.dart';
 import '../../utils/appColors.dart';
 import '../../utils/appFonts.dart';
 import '../../utils/custom widget/Customratings.dart';
@@ -22,8 +23,10 @@ class SingelProfile extends StatefulWidget {
 
 class _SingelProfileState extends State<SingelProfile> {
     var agentcontroller = Get.put(AgentProfileController());
+     final ReviewController reviewController = Get.put(ReviewController());
   @override
   Widget build(BuildContext context) {
+    reviewController.fetchReviews(widget.item.id);
     return Scaffold(
       body: SafeArea(
           child: Padding(
@@ -131,48 +134,62 @@ class _SingelProfileState extends State<SingelProfile> {
     ));
   }
 
-  customerReview() {
+   Widget customerReview() {
     return SizedBox(
       height: 20.h,
       width: 100.w,
-      child: Swiper(
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
+      child: Obx(() {
+        // Show a loading indicator when data is being fetched
+        if (reviewController.isLoading.value) {
+          return Center(child: CircularProgressIndicator());
+        }
+
+        // Show the swiper with reviews if available
+        if (reviewController.reviewsList.isEmpty) {
+          return Center(child: Text('No reviews available'));
+        }
+
+        return Swiper(
+          itemBuilder: (BuildContext context, int index) {
+            var review = reviewController.reviewsList[index];
+            return Container(
               height: 150,
+              width: MediaQuery.of(context).size.width,
               child: Column(
                 children: [
+                  // Display reviewer's image if available
                   CircleAvatar(
                     radius: 35,
                     backgroundImage: CachedNetworkImageProvider(
-                      "https://foru.co.id/wp-content/uploads/2015/05/Memilih-advertising-agency.jpg",
+                      review.image==null ? "https://via.placeholder.com/150": AppAppis.profileimg+review.image.toString(), // Use a placeholder if image is null
                     ),
                   ),
+                  SizedBox(height: 1.h),
+                  // Display reviewer's name
                   Text(
-                    "Jhone Deo",
+                    review.reviewername ?? "Unknown",
                     style: AppFonts.fontH6semi(AppColors.themeColer),
                   ),
+                  SizedBox(height: 1.h),
+                  // Display reviewer's comment
                   Text(
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+                    review.comment ?? "No comment provided",
                     style: AppFonts.fontH7normal(AppColors.themeBlack),
                     textAlign: TextAlign.center,
                   ),
+
                 ],
               ),
-              width: MediaQuery.of(context).size.width);
-
-          // return Image.network(
-          //   // "https://via.placeholder.com/288x188",
-          //   "https://foru.co.id/wp-content/uploads/2015/05/Memilih-advertising-agency.jpg",
-          //   fit: BoxFit.fill,
-          // );
-        },
-        autoplay: true,
-        duration: 1000,
-        autoplayDelay: 8000,
-        itemCount: 10,
-        viewportFraction: 1,
-        scale: 0.9,
-      ),
+            );
+          },
+          autoplay: true,
+          duration: 1000,
+          autoplayDelay: 8000,
+          itemCount: reviewController.reviewsList.length, // Use the length of reviewsList
+          viewportFraction: 1,
+          scale: 0.9,
+        );
+      }),
     );
   }
 

@@ -2,10 +2,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shebeauty/category/Controllers/getAllinfocontoller.dart';
-import 'package:shebeauty/category/Model/getAllinfoData.dart';
-import 'package:shebeauty/category/Screens/SubCategory.dart';
-import 'package:shebeauty/utils/appFonts.dart';
+import 'package:Ghore_Parlor/category/Controllers/getAllinfocontoller.dart';
+import 'package:Ghore_Parlor/category/Model/getAllinfoData.dart';
+import 'package:Ghore_Parlor/category/Screens/SubCategory.dart';
+import 'package:Ghore_Parlor/utils/appFonts.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../utils/appApis.dart';

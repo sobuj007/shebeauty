@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shebeauty/utils/appColors.dart';
+import 'package:Ghore_Parlor/utils/appColors.dart';
 import 'package:sizer/sizer.dart';
 
 mixin AppStyle{

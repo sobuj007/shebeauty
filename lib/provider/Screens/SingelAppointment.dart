@@ -4,13 +4,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shebeauty/auth/Controllers/userContoller.dart';
-import 'package:shebeauty/cart/Model/cartModel.dart';
+import 'package:Ghore_Parlor/auth/Controllers/userContoller.dart';
+import 'package:Ghore_Parlor/cart/Model/cartModel.dart';
 
-import 'package:shebeauty/utils/appStyle.dart';
+import 'package:Ghore_Parlor/utils/appStyle.dart';
 import 'package:sizer/sizer.dart';
 
-import 'package:shebeauty/cart/Model/cartModel.dart' as CartProduct;
+import 'package:Ghore_Parlor/cart/Model/cartModel.dart' as CartProduct;
 import '../../cart/Controllers/cartCOntroller.dart';
 
 import '../../main.dart';
@@ -34,7 +34,7 @@ class _SingelAppointmentState extends State<SingelAppointment> {
   bool isfav = false;
   String date = "";
   TimeOfDay _selectedTime = TimeOfDay.now();
-  int productQun = 1;
+  int productQun = 0;
   int servicesQun = 1;
   double total = 0;
   final CartController cartController = Get.put(CartController());
@@ -337,12 +337,12 @@ class _SingelAppointmentState extends State<SingelAppointment> {
           ],
         ),
       ),
-      bottomNavigationBar: Padding(
+      bottomNavigationBar: cartController.itemExists(widget.item.id.toString())? SizedBox():Padding(
         padding: const EdgeInsets.all(8.0),
         child: GestureDetector(
                 onTap: () {
                   var customTime = _formatTimeOfDay(_selectedTime);
-                  var d=[];
+               
              
             
          final CartProducts cartProduct = convertToCartProducts(widget.item);
@@ -350,12 +350,12 @@ class _SingelAppointmentState extends State<SingelAppointment> {
   id: widget.item.id?.toString() ?? '0', // Handle null case
   name: widget.item.name ?? 'Unknown', // Default value if null
   img: widget.item.image ?? '', // Default image
-  selectedTime: customTime ?? '', // Custom time
-  selectedDate: date, // Selected date
+  selectedTime: customTime.toString() ?? '', // Custom time
+  selectedDate: date.toString(), // Selected date
   selectedServicsQun: servicesQun?.toString() ?? '1', // Default quantity
   selectedProductQun: productQun?.toString() ?? '1', // Default product quantity
-  sprice: widget.item.servicePrice ?? '0.00', // Handle null price
-  pprice: widget.item.productPrice ?? '0.00', // Handle null price
+  sprice: widget.item.servicePrice.toString() ?? '0.00', // Handle null price
+  pprice: widget.item.productPrice.toString() ?? '0.00', // Handle null price
   agentid: widget.item.agentId ?? 'Unknown Agent', // Handle null agentId
   userid: ucon.user['id'].toString(), // Assuming user id is always present
   item: cartProduct, // Pass the entire product object directly
@@ -482,7 +482,7 @@ List<CartProducts> convertProductsList(List<Products> productsList) {
               applng.getLang(27),
               style: AppFonts.fontH6semi(AppColors.themeBlack),
             ),
-            CustomCounterproduct(
+            CustomCounterService(
               context,
             )
           ],
@@ -494,7 +494,7 @@ List<CartProducts> convertProductsList(List<Products> productsList) {
               applng.getLang(25),
               style: AppFonts.fontH6semi(AppColors.themeBlack),
             ),
-            CustomCounterService(context)
+             CustomCounterproduct(context)
           ],
         ),
         /************************************ */
@@ -545,7 +545,7 @@ List<CartProducts> convertProductsList(List<Products> productsList) {
             icon: Icon(Icons.remove, size: 15),
             onPressed: () {
               setState(() {
-                if (productQun > 1) {
+                if (productQun > 0) {
                   productQun--;
 
                   coutntotal();

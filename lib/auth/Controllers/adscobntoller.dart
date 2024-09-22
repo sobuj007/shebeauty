@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:shebeauty/auth/Model/promotionsModel.dart';
+import 'package:Ghore_Parlor/auth/Model/promotionsModel.dart';
 import 'package:http/http.dart' as http;
 
 

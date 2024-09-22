@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:shebeauty/cart/Screens/MyListedCart.dart';
+import 'package:Ghore_Parlor/cart/Screens/MyListedCart.dart';
 
-import 'package:shebeauty/cart/Screens/wishlist.dart';
+import 'package:Ghore_Parlor/cart/Screens/wishlist.dart';
 
-import 'package:shebeauty/main.dart';
-import 'package:shebeauty/utils/appColors.dart';
-import 'package:shebeauty/utils/appFonts.dart';
+import 'package:Ghore_Parlor/main.dart';
+import 'package:Ghore_Parlor/utils/appColors.dart';
+import 'package:Ghore_Parlor/utils/appFonts.dart';
 
 class MyCart extends StatefulWidget {
   const MyCart({super.key});

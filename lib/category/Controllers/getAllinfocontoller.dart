@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shebeauty/category/Model/getAllinfoData.dart';
-import 'package:shebeauty/provider/Model/allProductModel.dart';
+import 'package:Ghore_Parlor/category/Model/getAllinfoData.dart';
+import 'package:Ghore_Parlor/provider/Model/allProductModel.dart';
 
 // GetX Controller
 class AllinfoController extends GetxController {

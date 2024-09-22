@@ -3,11 +3,14 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:Ghore_Parlor/dashboard/Controllers/nearMeController.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../auth/Controllers/storecontoller.dart';
 import '../../category/Controllers/getAllinfocontoller.dart';
 import '../../main.dart';
+import '../../provider/Screens/Each Provider/EachProvider.dart';
+import '../../routes/AppRouts.dart';
 import '../../utils/appColors.dart';
 import '../../utils/appFonts.dart';
 import '../../utils/custom widget/TitleWithViewButton.dart';
@@ -136,7 +139,7 @@ class _ManState extends State<Man> {
                         );
                       }
                     })),
-                /********************************* provider bloc ************* */
+                  /********************************* provider bloc ************* */
                 TitleWithViewButton(
                   title: applng.getLang(7),
                   route: 'p',
@@ -165,7 +168,8 @@ class _ManState extends State<Man> {
 // }
                       return GestureDetector(
                         onTap: (){
-
+                           Navigator.push(context,MaterialPageRoute(builder: (_)=>EachProvider(item: storeController.stores[index].agentId,)));
+                          
                         },
                         child: Card(
                           color: Colors.blue,
@@ -220,15 +224,23 @@ class _ManState extends State<Man> {
       ),
     );
   }
-
-  var place = true;
+ final ServiceProductNearMeController nearMeController = Get.put(ServiceProductNearMeController());
+  var place = false;
   neaarMe(context) {
     if (place) {
       return Center(
         child: Text("Please update your Profile"),
       );
     } else {
-      return Container(
+    return  Obx(() {
+        if (nearMeController.isLoading.value) {
+          return Center(child: CircularProgressIndicator());
+        }
+
+        if (nearMeController.error.isNotEmpty) {
+          return Center(child: Text(nearMeController.error.value)); }
+
+           return Container(
         height: 250,
         width: MediaQuery.of(context).size.width,
         child: Flexible(
@@ -236,21 +248,59 @@ class _ManState extends State<Man> {
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
             ),
-            itemCount: 6,
+            itemCount:  nearMeController.nearProductData.length,
             itemBuilder: (BuildContext context, int index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  height: 200,
-                  width: 100,
-                  color: Colors.amber,
+              final product = nearMeController.nearProductData[index];
+              return GestureDetector(onTap: (){
+                Get.toNamed(AppRoutes.appsingelprovider,arguments:product);
+              },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 200,
+                    width: 100,
+                      decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                    image: CachedNetworkImageProvider(
+                                      errorListener: (e){
+                
+                                      },
+                                product.image==null?"https://softisan.xyz/uploads/category/1725218338--beautytreatment.png":product.image.toString()
+                                       ),
+                                    fit: BoxFit.fill,),
+                              ) ,
+                    child: Container(
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10) ,color: Colors.black38,),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 3.5.h,
+                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: AppColors.themeWhite),
+                              child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Text(product.name.toString(),style: AppFonts.fontH6semi(AppColors.themeBlack),),
+                            )),
+                          ],
+                        ),
+                      ),
+                    ),
+                
+                  ),
                 ),
               );
             },
           ),
         ),
       );
-    }
+   
+        });
+     }
   }
-}
 
+
+
+}

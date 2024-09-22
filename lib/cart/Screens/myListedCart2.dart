@@ -4,11 +4,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:shebeauty/category/Controllers/getAllinfocontoller.dart';
-import 'package:shebeauty/main.dart';
-import 'package:shebeauty/utils/appFonts.dart';
-import 'package:shebeauty/utils/custom%20widget/CustomAppbar.dart';
-import 'package:shebeauty/utils/custom%20widget/Customratings.dart';
+import 'package:Ghore_Parlor/category/Controllers/getAllinfocontoller.dart';
+import 'package:Ghore_Parlor/main.dart';
+import 'package:Ghore_Parlor/utils/appFonts.dart';
+import 'package:Ghore_Parlor/utils/custom%20widget/CustomAppbar.dart';
+import 'package:Ghore_Parlor/utils/custom%20widget/Customratings.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../provider/Model/allproviderDataModel.dart';

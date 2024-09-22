@@ -3,11 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:group_button/group_button.dart';
-import 'package:shebeauty/category/Controllers/getAllinfocontoller.dart';
-import 'package:shebeauty/category/Model/getAllinfoData.dart';
-import 'package:shebeauty/provider/Screens/myprovider.dart';
-import 'package:shebeauty/provider/Screens/myprovider2.dart';
-import 'package:shebeauty/utils/appColors.dart';
+import 'package:Ghore_Parlor/category/Controllers/getAllinfocontoller.dart';
+import 'package:Ghore_Parlor/category/Model/getAllinfoData.dart';
+import 'package:Ghore_Parlor/provider/Screens/myprovider.dart';
+import 'package:Ghore_Parlor/provider/Screens/myprovider2.dart';
+import 'package:Ghore_Parlor/utils/appColors.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../provider/Screens/Allprovider.dart';
@@ -87,7 +87,7 @@ class _AppSubCategoryState extends State<AppSubCategory> {
               }
 
               if (con.categories!.isEmpty) {
-                return Center(child: Text('No categories available'));
+                return Center(child: Text('No Subcategories available'));
               }
               final data =
                   con.filterSubcategoriesByName(widget.cat_id.toString());
@@ -136,7 +136,7 @@ class _AppSubCategoryState extends State<AppSubCategory> {
                                           ),
                                           Text(
                                             vdata.name.toString().toUpperCase(),
-                                            style: AppFonts.fontH7semi(
+                                            style: AppFonts.fontH8semi(
                                                 Colors.black),
                                           ),
                                         ],

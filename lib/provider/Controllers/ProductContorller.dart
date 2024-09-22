@@ -3,10 +3,10 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:shebeauty/main.dart';
+import 'package:Ghore_Parlor/main.dart';
 import 'dart:convert';
 
-import 'package:shebeauty/provider/Model/allProductModel.dart';
+import 'package:Ghore_Parlor/provider/Model/allProductModel.dart';
 // Adjust the import as needed
 
 class AllProductController extends GetxController {

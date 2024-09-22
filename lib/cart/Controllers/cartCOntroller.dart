@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shebeauty/provider/Model/allproviderDataModel.dart';
+import 'package:Ghore_Parlor/provider/Model/allproviderDataModel.dart';
 import 'dart:convert';
 
 import '../Model/cartModel.dart';
@@ -28,8 +28,12 @@ class CartController extends GetxController {
     }
   }
 
-  void clearCart() {
+  Future<void> clearCart() async {
     items.clear();
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('cartItems');
+  
+
   }
   getitems()=>items;
 
@@ -76,23 +80,33 @@ class CartController extends GetxController {
   }
 
    // Function that returns a list of item ids
-  List<String> getItemIds() {
+   getItemIds() {
     return items.map((item) => item.item.id.toString()).toList();
   }
-  List<String> getItemsquan() {
+ getItemsquan() {
     return items.map((item) => item.selectedServicsQun.toString()).toList();
   }
-    List<String> getItempquan() {
+ getItempquan() {
     return items.map((item) => item.selectedProductQun.toString()).toList();
   }
-      List<String> getItempprice() {
-    return items.map((item) => item.pprice.toString()).toList();
+ getItempprice() {
+    return items.map((item) => item.pprice).toList();
   }
-    List<String> getItemsprice() {
-    return items.map((item) => item.sprice.toString()).toList();
+   getItemsprice() {
+    return items.map((item) => item.sprice).toList();
   }
 
- List<String> getItemsreqtime() {
+ getItemsreqtime() {
+    return items.map((item) => item.selectedTime.toString()).toList();
+  }
+ getItemsagents() {
+    return items.map((item) => item.agentid.toString()).toList();
+  }
+  
+ getOrderDate() {
+    return items.map((item) => item.selectedDate.toString()).toList();
+  }
+ getOrderReqTime() {
     return items.map((item) => item.selectedTime.toString()).toList();
   }
   

@@ -1,21 +1,21 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shebeauty/auth/Screens/login_page.dart';
-import 'package:shebeauty/auth/Screens/register.dart';
-import 'package:shebeauty/cart/Screens/MyListedCart.dart';
-import 'package:shebeauty/cart/Screens/myListedCart2.dart';
+import 'package:Ghore_Parlor/auth/Screens/login_page.dart';
+import 'package:Ghore_Parlor/auth/Screens/register.dart';
+import 'package:Ghore_Parlor/cart/Screens/MyListedCart.dart';
+import 'package:Ghore_Parlor/cart/Screens/myListedCart2.dart';
 
-import 'package:shebeauty/category/Screens/Category.dart';
-import 'package:shebeauty/category/Screens/SubCategory.dart';
-import 'package:shebeauty/dashboard/Screens/layout.dart';
-import 'package:shebeauty/notification/Screens/NotificationsPage.dart';
-import 'package:shebeauty/provider/Screens/Allprovider.dart';
-import 'package:shebeauty/provider/Screens/myprovider.dart';
-import 'package:shebeauty/provider/Screens/myprovider2.dart';
-import 'package:shebeauty/provider/Screens/singelProvider.dart';
-import 'package:shebeauty/provider/Screens/viewAppointment.dart';
-import 'package:shebeauty/splash_page.dart';
+import 'package:Ghore_Parlor/category/Screens/Category.dart';
+import 'package:Ghore_Parlor/category/Screens/SubCategory.dart';
+import 'package:Ghore_Parlor/dashboard/Screens/layout.dart';
+import 'package:Ghore_Parlor/notification/Screens/NotificationsPage.dart';
+import 'package:Ghore_Parlor/provider/Screens/Allprovider.dart';
+import 'package:Ghore_Parlor/provider/Screens/myprovider.dart';
+import 'package:Ghore_Parlor/provider/Screens/myprovider2.dart';
+import 'package:Ghore_Parlor/provider/Screens/singelProvider.dart';
+import 'package:Ghore_Parlor/provider/Screens/viewAppointment.dart';
+import 'package:Ghore_Parlor/splash_page.dart';
 
 abstract class AppRoutes{
   AppRoutes._();

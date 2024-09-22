@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shebeauty/auth/Controllers/loginController.dart';
+import 'package:Ghore_Parlor/auth/Controllers/loginController.dart';
 
-import 'package:shebeauty/provider/Model/allproviderDataModel.dart';
-import 'package:shebeauty/routes/AppRouts.dart';
-import 'package:shebeauty/utils/appLanguage.dart';
-import 'package:shebeauty/utils/custom%20widget/Temp.dart';
+import 'package:Ghore_Parlor/provider/Model/allproviderDataModel.dart';
+import 'package:Ghore_Parlor/routes/AppRouts.dart';
+import 'package:Ghore_Parlor/utils/appLanguage.dart';
+import 'package:Ghore_Parlor/utils/custom%20widget/Temp.dart';
 import 'package:sizer/sizer.dart';
 
 import 'category/Controllers/getAllinfocontoller.dart';

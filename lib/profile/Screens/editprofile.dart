@@ -7,9 +7,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shebeauty/auth/Controllers/userContoller.dart';
-import 'package:shebeauty/main.dart';
-import 'package:shebeauty/utils/appStyle.dart';
+import 'package:Ghore_Parlor/auth/Controllers/userContoller.dart';
+import 'package:Ghore_Parlor/main.dart';
+import 'package:Ghore_Parlor/utils/appStyle.dart';
 
 import '../../utils/custom widget/CustomAppbar.dart';
 

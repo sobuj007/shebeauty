@@ -2,13 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shebeauty/main.dart';
-import 'package:shebeauty/provider/Screens/myprovider2.dart';
-import 'package:shebeauty/utils/appColors.dart';
-import 'package:shebeauty/utils/appFonts.dart';
+import 'package:Ghore_Parlor/main.dart';
+import 'package:Ghore_Parlor/provider/Screens/myprovider2.dart';
+import 'package:Ghore_Parlor/utils/appColors.dart';
+import 'package:Ghore_Parlor/utils/appFonts.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../category/Screens/Category.dart';
+import '../../provider/Screens/providerAll.dart';
 
 
 class TitleWithViewButton extends StatefulWidget {
@@ -39,8 +40,9 @@ class _TitleWithViewButtonState extends State<TitleWithViewButton> {
                   Get.toNamed('/category',arguments: {"gender":widget.routeData});
                   // Navigator.push(context,
                   //     MaterialPageRoute(builder: (_) => AppCategory(catedata: widget.routeData,)));
-                }else {
-                  Get.to(MyProvider2());
+                }else if(widget.route == 'p'){
+                   Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ProviderAll()));
+                       
                 }
               },
               child: Text(

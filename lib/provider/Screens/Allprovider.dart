@@ -2,15 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
-import 'package:shebeauty/main.dart';
+import 'package:Ghore_Parlor/main.dart';
 
-import 'package:shebeauty/routes/AppRouts.dart';
-import 'package:shebeauty/utils/appApis.dart';
-import 'package:shebeauty/utils/appColors.dart';
-import 'package:shebeauty/utils/appFonts.dart';
-import 'package:shebeauty/utils/appThemes.dart';
-import 'package:shebeauty/utils/custom%20widget/CustomAppbar2.dart';
-import 'package:shebeauty/utils/custom%20widget/Customratings.dart';
+import 'package:Ghore_Parlor/routes/AppRouts.dart';
+import 'package:Ghore_Parlor/utils/appApis.dart';
+import 'package:Ghore_Parlor/utils/appColors.dart';
+import 'package:Ghore_Parlor/utils/appFonts.dart';
+import 'package:Ghore_Parlor/utils/appThemes.dart';
+import 'package:Ghore_Parlor/utils/custom%20widget/CustomAppbar2.dart';
+import 'package:Ghore_Parlor/utils/custom%20widget/Customratings.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../utils/custom widget/CustomAppbar.dart';
