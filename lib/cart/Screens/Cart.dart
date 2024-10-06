@@ -47,8 +47,9 @@ class _MyCartState extends State<MyCart> {
                     ),
                     onTap: (() {
                       selectpage = 0;
-                      controller.animateToPage(selectpage,
-                          duration: Duration(seconds: 1), curve: Curves.easeIn);
+                      controller.jumpToPage(selectpage);
+                      // controller.animateToPage(selectpage,
+                      //     duration: Duration(seconds: 1), curve: Curves.f);
                       setState(() {});
                     }),
                   ),
@@ -68,8 +69,9 @@ class _MyCartState extends State<MyCart> {
                     ),
                     onTap: () {
                       selectpage = 1;
-                      controller.animateToPage(selectpage,
-                          duration: Duration(seconds: 1), curve: Curves.easeIn);
+                      controller.jumpToPage(selectpage);
+                      // controller.animateToPage(selectpage,
+                      //     duration: Duration(seconds: 1), curve: Curves.easeIn);
                       setState(() {});
                     },
                   ),

@@ -59,7 +59,7 @@ class MyProvider2 extends StatelessWidget {
     return Scaffold(
         body: Column(children: [
       CustomAppbar2(
-        title: "All provider 2",
+        title: "All provider",
       ),
      
       myserach(controller, context),

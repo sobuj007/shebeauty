@@ -7,7 +7,7 @@ class AppLanguage{
 
 
   Map<int,String> En={
-    0:'Ghore Parlor ',
+    0:'Ghore Parlour ',
     1:'Welcome To Beauty App',
     2:'Usename/Email',
     3:'Password',
@@ -27,7 +27,7 @@ class AppLanguage{
     17:"Sub-Category : ",
     18:"Service price : ",
     19:"Gender : ",
-    20:"Price",
+    20:"Product Price",
     21:"Provider Availability : ",
     22:"Time",
     23:"Time Slot",

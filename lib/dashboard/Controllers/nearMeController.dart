@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:Ghore_Parlor/dashboard/Model/nearMeProductModel.dart';
 
 import '../../main.dart';
+import '../../utils/appApis.dart';
 
 class ServiceProductNearMeController extends GetxController {
   var nearService = <NearServiceProductModel>[].obs;
@@ -40,7 +41,7 @@ class ServiceProductNearMeController extends GetxController {
       'Content-Type': 'application/json'
     };
     var url = Uri.parse(
-        'https://softisan.xyz/api/service-products/filter-by-locations');
+        AppAppis.endpoint +'service-products/filter-by-locations');
 
     var body = {"location_ids": selectedLocations.value};
 
@@ -60,6 +61,7 @@ class ServiceProductNearMeController extends GetxController {
 // nearService.value=NearProduct.fromJson(d)
       print(nearProductData.value);
     } else {
+      error.value ="Pleases Select your location from Settings";
       print(res.reasonPhrase);
     }
     isLoading.value = false;

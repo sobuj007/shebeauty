@@ -1,5 +1,4 @@
-
-
+import 'package:Ghore_Parlor/category/Controllers/getAllinfocontoller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
@@ -30,351 +29,383 @@ class ViewAppointment extends StatefulWidget {
 
 class _ViewAppointmentState extends State<ViewAppointment> {
   bool isfav = false;
-  var ucon=Get.put(Usercontoller());
- 
+  var ucon = Get.put(Usercontoller());
+  var allcon = Get.put(AllinfoController());
+
   TimeOfDay _selectedTime = TimeOfDay.now();
   int productQun = 1;
   int servicesQun = 1;
   double total = 0;
-   final CartController cartController = Get.put(CartController());
- var args=Get.arguments;
- var  date = DateTime.now();
-      
+  final CartController cartController = Get.put(CartController());
+  var args = Get.arguments;
+  var date = DateTime.now();
+
   @override
   void initState() {
     super.initState();
     coutntotal();
-  
+
     if (wishListItem.contains(args)) {
       isfav = true;
       setState(() {});
     } else {}
     print(args);
 
-   setState(() {
-        productQun = int.parse(args.selectedProductQun);
-   servicesQun = int.parse(args.selectedServicsQun);
-   date=AppStyle.stringToDate(args.selectedDate) ;
-   _selectedTime=AppStyle.stringToTime(args.selectedTime) ;
-   
-   });
+    setState(() {
+      productQun = int.parse(args.selectedProductQun);
+      servicesQun = int.parse(args.selectedServicsQun);
+      date = AppStyle.stringToDate(args.selectedDate);
+      _selectedTime = AppStyle.stringToTime(args.selectedTime);
+    });
   }
 
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-            CustomAppbar(
+          CustomAppbar(
             title: "My Cart",
           ),
           Expanded(
             child: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
                 child: Column(
                   children: [
-                    
                     Expanded(
-                      
                       child: ListView(
-                        shrinkWrap: true,
-                        
-                        padding: EdgeInsets.zero, children: [
-                        Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                                border:
-                                    Border.all(width: 1, color: AppColors.themeborder),
-                                borderRadius: BorderRadius.circular(10)),
-                            margin: EdgeInsets.symmetric(horizontal: 0, vertical: 1.h),
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 20.h,
-                                  width: 30.w,
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: CachedNetworkImageProvider(
-                                            args.img,
-                                          ),
-                                          fit: BoxFit.cover),
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                      color: const Color.fromARGB(60, 100, 99, 99),
-                                    ),
-                                  ),
-                                ),
-                                Column(
+                          shrinkWrap: true,
+                          padding: EdgeInsets.zero,
+                          children: [
+                            Expanded(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        width: 1, color: AppColors.themeborder),
+                                    borderRadius: BorderRadius.circular(10)),
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: 0, vertical: 1.h),
+                                child: Row(
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0, vertical: 2),
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            height: 15.h,
-                                            width: 58.w,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                    Container(
+                                      height: 20.h,
+                                      width: 30.w,
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: CachedNetworkImageProvider(
+                                                args.img,
+                                              ),
+                                              fit: BoxFit.cover),
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          color: const Color.fromARGB(
+                                              60, 100, 99, 99),
+                                        ),
+                                      ),
+                                    ),
+                                    Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8.0, vertical: 2),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Container(
+                                                height: 15.h,
+                                                width: 58.w,
+                                                child: Row(
                                                   mainAxisAlignment:
-                                                      MainAxisAlignment.spaceAround,
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceAround,
+                                                      children: [
+                                                        Text(
+                                                          args.name
+                                                              .toUpperCase(),
+                                                          style: AppFonts
+                                                              .fontH6bold(AppColors
+                                                                  .themeBlack),
+                                                          maxLines: 2,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                        ),
+                                                        Text(
+                                                          applng.getLang(16) +
+                                                            allcon.getCategoryNameById(  int.parse(args.item
+                                                                  .categoryId))
+                                                                  .toString(),
+                                                          style: AppFonts
+                                                              .fontH7semi(AppColors
+                                                                  .themeBlack),
+                                                          maxLines: 2,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                        ),
+                                                        Text(
+                                                          applng.getLang(17) +
+                                                             allcon.getSubcategoryNameById(int.parse( args.item
+                                                                  .subcategoryId
+                                                                  .toString())),
+                                                          style: AppFonts
+                                                              .fontH7semi(AppColors
+                                                                  .themeBlack),
+                                                          maxLines: 2,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                        ),
+                                                        RichText(
+                                                          text: TextSpan(
+                                                              text: applng
+                                                                  .getLang(18),
+                                                              style: AppFonts
+                                                                  .fontH7semi(
+                                                                      AppColors
+                                                                          .themeBlack),
+                                                              children: [
+                                                                TextSpan(
+                                                                    text: args
+                                                                            .item
+                                                                            .sprice +
+                                                                        "Tk",
+                                                                    style: AppFonts.fontH6semi(
+                                                                        AppColors
+                                                                            .themeColer))
+                                                              ]),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              // SizedBox(
+                                              //   width: 58.w,
+                                              //   height: 3.5.h,
+                                              //   child: Row(
+                                              //     children: [
+                                              //       Expanded(
+                                              //         child: Text(
+                                              //           args.description,
+                                              //           style: AppFonts.fontH6semi(
+                                              //               AppColors.themeBlack),
+                                              //           maxLines: 2,
+                                              //           overflow: TextOverflow.ellipsis,
+                                              //         ),
+                                              //       ),
+                                              //     ],
+                                              //   ),
+                                              // ),
+                                              /************************** gender */
+                                              Container(
+                                                height: 4.h,
+                                                width: 58.w,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                   children: [
                                                     Text(
-                                                      args.name.toUpperCase(),
-                                                      style: AppFonts.fontH6bold(
-                                                          AppColors.themeBlack),
-                                                      maxLines: 2,
-                                                      overflow: TextOverflow.ellipsis,
-                                                    ),
-                                                    Text(
-                                                      applng.getLang(16) +
-                                                          args.item.categoryId.toString(),
-                                                      style: AppFonts.fontH7semi(
-                                                          AppColors.themeBlack),
-                                                      maxLines: 2,
-                                                      overflow: TextOverflow.ellipsis,
-                                                    ),
-                                                    Text(
-                                                      applng.getLang(17) +
-                                                          args.item.subcategoryId.toString(),
-                                                      style: AppFonts.fontH7semi(
-                                                          AppColors.themeBlack),
-                                                      maxLines: 2,
-                                                      overflow: TextOverflow.ellipsis,
+                                                      applng.getLang(19) +
+                                                          args.item.gender
+                                                              .toString()
+                                                              .toUpperCase(),
+                                                      style:
+                                                          AppFonts.fontH7semi(
+                                                              AppColors
+                                                                  .themeBlack),
+                                                      maxLines: 1,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      textAlign:
+                                                          TextAlign.start,
                                                     ),
                                                     RichText(
                                                       text: TextSpan(
-                                                          text: applng.getLang(18),
-                                                          style: AppFonts.fontH7semi(
-                                                              AppColors.themeBlack),
+                                                          text: applng
+                                                              .getLang(20),
+                                                          style: AppFonts
+                                                              .fontH5semi(AppColors
+                                                                  .themeBlack),
                                                           children: [
                                                             TextSpan(
-                                                                text: args.item
-                                                                        .sprice +
+                                                                text: " " +
+                                                                    args
+                                                                        .pprice +
                                                                     "Tk",
-                                                                style:
-                                                                    AppFonts.fontH6semi(
+                                                                style: AppFonts
+                                                                    .fontH6semi(
                                                                         AppColors
                                                                             .themeColer))
                                                           ]),
                                                     ),
                                                   ],
                                                 ),
-                                                
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
-                                          // SizedBox(
-                                          //   width: 58.w,
-                                          //   height: 3.5.h,
-                                          //   child: Row(
-                                          //     children: [
-                                          //       Expanded(
-                                          //         child: Text(
-                                          //           args.description,
-                                          //           style: AppFonts.fontH6semi(
-                                          //               AppColors.themeBlack),
-                                          //           maxLines: 2,
-                                          //           overflow: TextOverflow.ellipsis,
-                                          //         ),
-                                          //       ),
-                                          //     ],
-                                          //   ),
-                                          // ),
-                                          /************************** gender */
-                                          Container(
-                                            height: 4.h,
-                                            width: 58.w,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text(
-                                                  applng.getLang(19) +
-                                                      args.item.gender
-                                                          .toString()
-                                                          .toUpperCase(),
-                                                  style: AppFonts.fontH7semi(
-                                                      AppColors.themeBlack),
-                                                  maxLines: 1,
-                                                  overflow: TextOverflow.ellipsis,
-                                                  textAlign: TextAlign.start,
-                                                ),
-                                                RichText(
-                                                  text: TextSpan(
-                                                      text: applng.getLang(20),
-                                                      style: AppFonts.fontH5semi(
-                                                          AppColors.themeBlack),
-                                                      children: [
-                                                        TextSpan(
-                                                            text: " " +
-                                                                args.pprice +
-                                                                "Tk",
-                                                            style: AppFonts.fontH6semi(
-                                                                AppColors.themeColer))
-                                                      ]),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                        ),
+                                      ],
+                                    )
                                   ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              children: [
-                                Text(
-                                  applng.getLang(21),
-                                  style: AppFonts.fontH6regular(AppColors.themeColer),
                                 ),
-                                // Container(
-                                //   decoration: BoxDecoration(
-                                //       borderRadius: BorderRadius.circular(5),
-                                //       border: Border.all(
-                                //           width: 1, color: AppColors.themehint)),
-                                //   child: Padding(
-                                //     padding: const EdgeInsets.all(8.0),
-                                //     child: Text(args.item.available),
-                                //   ),
-                                // )
-                              ],
+                              ),
                             ),
-                            Column(
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  applng.getLang(32),
-                                  style: AppFonts.fontH6regular(AppColors.themeColer),
+                                Column(
+                                  children: [
+                                    Text(
+                                      applng.getLang(21),
+                                      style: AppFonts.fontH6regular(
+                                          AppColors.themeColer),
+                                    ),
+                                    // Container(
+                                    //   decoration: BoxDecoration(
+                                    //       borderRadius: BorderRadius.circular(5),
+                                    //       border: Border.all(
+                                    //           width: 1, color: AppColors.themehint)),
+                                    //   child: Padding(
+                                    //     padding: const EdgeInsets.all(8.0),
+                                    //     child: Text(args.item.available),
+                                    //   ),
+                                    // )
+                                  ],
                                 ),
-                                // Container(
-                                //   decoration: BoxDecoration(
-                                //       borderRadius: BorderRadius.circular(5),
-                                //       border: Border.all(
-                                //           width: 1, color: AppColors.themehint)),
-                                //   child: Padding(
-                                //     padding: const EdgeInsets.all(8.0),
-                                //     child: Text(args.item.slot.toString()),
-                                //   ),
-                                // )
+                                Column(
+                                  children: [
+                                    Text(
+                                      applng.getLang(32),
+                                      style: AppFonts.fontH6regular(
+                                          AppColors.themeColer),
+                                    ),
+                                    // Container(
+                                    //   decoration: BoxDecoration(
+                                    //       borderRadius: BorderRadius.circular(5),
+                                    //       border: Border.all(
+                                    //           width: 1, color: AppColors.themehint)),
+                                    //   child: Padding(
+                                    //     padding: const EdgeInsets.all(8.0),
+                                    //     child: Text(args.item.slot.toString()),
+                                    //   ),
+                                    // )
+                                  ],
+                                ),
                               ],
                             ),
-                          ],
-                        ),
-                        timeslot()
-                      ]),
+                            timeslot()
+                          ]),
                     ),
                   ],
                 ),
               ),
             ),
           ),
-        ],
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
             
-            GestureDetector(
-                    onTap: () {
-                      if(cartController.itemExists(args.name)){
-                        cartController.removeItem(args.id);
-                         var  date2 = (date.day.toString() + "/" + date.month.toString()+ "/" +date.year.toString())
-                .toString();
-                     var customTime = _formatTimeOfDay(_selectedTime);
+              height: 6.h,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                      onTap: () {
+                        if (cartController.itemExists(args.id)) {
+                          cartController.removeItem(args.id);
+                          var date2 = (date.day.toString() +
+                                  "/" +
+                                  date.month.toString() +
+                                  "/" +
+                                  date.year.toString())
+                              .toString();
+                          var customTime = _formatTimeOfDay(_selectedTime);
 
-                  // cartmodelproduct.Product=widget.item;
-                                   final CartItem sampleItem = CartItem(
-                    id: widget.item.id.toString(),
-                    name: widget.item.name.toString(),
-                    img: widget.item.image.toString(),
-                    selectedTime: customTime.toString(),
-                    selectedDate: date2,
-                    selectedServicsQun: servicesQun.toString(),
-                    selectedProductQun:  productQun.toString(),
-                    sprice: widget.item.servicePrice.toString(),
-                    pprice:  widget.item.productPrice.toString(),
-                    agentid:widget.item.agentId,
-                    userid:ucon.user.value['id'].toString(),
-                     item: widget.item,
-                  );
-                 
+                          // cartmodelproduct.Product=widget.item;
+                          final CartItem sampleItem = CartItem(
+                            id: args.id.toString(),
+                            name: args.name.toString(),
+                            img: args.img.toString(),
+                            selectedTime: customTime.toString(),
+                            selectedDate: date2,
+                            selectedServicsQun: servicesQun.toString(),
+                            selectedProductQun: productQun.toString(),
+                            sprice: args.sprice.toString(),
+                            pprice: args.pprice.toString(),
+                            agentid: args.agentid,
+                            userid: ucon.user.value['id'].toString(),
+                            item: args.item,
+                          );
 
-              
-                    AppStyle.snackbar('Cart', 'Product added to Cart');
-                    cartController.addItem(sampleItem);
-                
-              setState(() {
-                        AppStyle.snackbar('Cart updated', ' Cart updated');
-                     //  cartController.addItem(sampleItem);
-                       
-                      });
-                      }
-            
-                   
-            
-                    
-                      
-                    },
-                    child: Container(
-                      height: 6.h,
-                      width: 70.w,
-                      decoration: BoxDecoration(
-                          color: AppColors.themeColer,
-                          borderRadius: BorderRadius.circular(15)),
-                      alignment: Alignment.center,
-                      child: Text(
-                        "view Details",
-                        style: AppFonts.fontH4semi(AppColors.themeWhite),
-                      ),
-                    )),
-                    IconButton(onPressed: (){
-                      if(cartController.itemExists(args.name)){
-                        cartController.removeItem(args.id);
-                         AppStyle.snackbar('Item Delete', ' Cart Item Delete');
-                         Navigator.pop(context);
+                          cartController.addItem(sampleItem);
+
+                          setState(() {
+                            AppStyle.snackbar('Cart updated', ' Cart updated');
+                            //  cartController.addItem(sampleItem);
+                          });
                         }
-                    }, icon: Icon(Icons.delete))
-          ],
-        ),
+                      },
+                      child: Container(
+                        height: 6.h,
+                        width: 70.w,
+                        decoration: BoxDecoration(
+                            color: AppColors.themeColer,
+                            borderRadius: BorderRadius.circular(15)),
+                        alignment: Alignment.center,
+                        child: Text(
+                          "Update",
+                          style: AppFonts.fontH4semi(AppColors.themeWhite),
+                        ),
+                      )),
+                  IconButton(
+                      onPressed: () {
+                        if (cartController.itemExists(args.id)) {
+                          cartController.removeItem(args.id);
+                          AppStyle.snackbar('Item Delete', ' Cart Item Delete');
+                          Navigator.pop(context);
+                        }
+                      },
+                      icon: Icon(Icons.delete))
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
+
 // Function to format TimeOfDay to a string
   String _formatTimeOfDay(TimeOfDay timeOfDay) {
     final hours = timeOfDay.hour.toString().padLeft(2, '0');
     final minutes = timeOfDay.minute.toString().padLeft(2, '0');
     return '$hours:$minutes';
   }
+
   timeslot() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         EasyDateTimeLine(
-          initialDate:date,
-          
+          initialDate: date,
           onDateChange: (selectedDate) {
-           date = selectedDate;
-            
+            date = selectedDate;
           },
           activeColor: AppColors.themeColer,
           dayProps: EasyDayProps(
@@ -466,7 +497,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
         SizedBox(
           height: 1.5.h,
         ),
-       // recomandation(context)
+        // recomandation(context)
       ],
     );
   }
@@ -491,7 +522,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
             icon: Icon(Icons.remove, size: 15),
             onPressed: () {
               setState(() {
-                if (productQun > 1) {
+                if (productQun > 0) {
                   productQun--;
 
                   coutntotal();
@@ -564,8 +595,10 @@ class _ViewAppointmentState extends State<ViewAppointment> {
   }
 
   coutntotal() {
-    var p = double.parse(args.pprice) * productQun;
-    var s = double.parse(args.sprice) * servicesQun;
+    var p = double.parse(args.pprice) *
+        double.parse(productQun.toString());
+    var s = double.parse(args.sprice) *
+        double.parse(servicesQun.toString());
 
     setState(() {
       total = double.parse((p + s).toString());

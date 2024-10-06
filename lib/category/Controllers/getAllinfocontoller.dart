@@ -7,6 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:Ghore_Parlor/category/Model/getAllinfoData.dart';
 import 'package:Ghore_Parlor/provider/Model/allProductModel.dart';
 
+import '../../utils/appApis.dart';
+
 // GetX Controller
 class AllinfoController extends GetxController {
   var allinfoModel = Rx<AllinfoModel?>(null);
@@ -26,7 +28,7 @@ class AllinfoController extends GetxController {
     var headersList = {
       'Accept': 'application/json',
     };
-    var url = Uri.parse('http://softisan.xyz/api/getall');
+    var url = Uri.parse(AppAppis.endpoint +'getall');
 
     try {
       var req = http.Request('GET', url);
@@ -155,6 +157,7 @@ class AllinfoController extends GetxController {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('selectedLocations', jsonEncode(selectedLocations));
     print("saved");
+  
   }
 
   Future<void> saveSelectedCity(int? cityId) async {

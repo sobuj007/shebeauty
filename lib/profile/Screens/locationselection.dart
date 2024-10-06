@@ -7,10 +7,12 @@ import 'package:Ghore_Parlor/utils/custom%20widget/CustomAppbar.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../category/Controllers/getAllinfocontoller.dart';
+import '../../dashboard/Controllers/nearMeController.dart';
 // Update with actual path
 
 class CityLocationFilter extends StatelessWidget {
   final AllinfoController allinfoController = Get.put(AllinfoController());
+  final ServiceProductNearMeController nearMeController = Get.put(ServiceProductNearMeController());
   var loc=[].obs;
   var selectcityid=0.obs;
 
@@ -30,7 +32,8 @@ class CityLocationFilter extends StatelessWidget {
               if (allinfoController.cities!.isEmpty || allinfoController.locations!.isEmpty) {
                 return Center(child: CircularProgressIndicator());
               }
-            
+            print("object");
+            print(allinfoController.selectedCityId.value);
               return Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -40,7 +43,7 @@ class CityLocationFilter extends StatelessWidget {
                     DropdownButton<int>(
                       hint: Text("Select City"),
                       value: allinfoController.selectedCityId.value != null
-            ? allinfoController.selectedCityId.value 
+            ? allinfoController.selectedCityId.value
             : null,
                       onChanged: (int? newCityId) {
                         allinfoController.selectCity(newCityId);
@@ -87,6 +90,8 @@ class CityLocationFilter extends StatelessWidget {
                             allinfoController.saveSelectedCity(selectcityid .value);
                             allinfoController.saveSelectedLocations();
                             AppStyle.snackbar("Locations Save", "Locations Save succesful");
+                            nearMeController.fetchServiceProductsByLocations();
+                              Get.offAndToNamed('/layout');
                       },
                       child: Text('Save Selected Locations'),
                     ),

@@ -33,7 +33,7 @@ class _TitleWithViewButtonState extends State<TitleWithViewButton> {
           Text(widget.title.toString(),
               style: AppFonts.fontH4normal(AppColors.themeColer)),
           SizedBox(),
-          TextButton(
+         widget.route==null? SizedBox(): TextButton(
               onPressed: () {
                 print(widget.routeData);
                 if (widget.route == 'c') {

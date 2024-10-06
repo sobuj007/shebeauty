@@ -1,3 +1,4 @@
+import 'package:Ghore_Parlor/auth/Controllers/userContoller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -10,7 +11,9 @@ import 'package:Ghore_Parlor/utils/custom%20widget/CustomAppbar.dart';
 import 'package:sizer/sizer.dart';
 
 import '../utils/appStyle.dart';
-
+final TextEditingController addressController = TextEditingController();
+final TextEditingController notesController = TextEditingController();
+final TextEditingController mobile = TextEditingController();
 class PaymentPage extends StatefulWidget {
   const PaymentPage({super.key});
 
@@ -20,8 +23,11 @@ class PaymentPage extends StatefulWidget {
 
 class _PaymentPageState extends State<PaymentPage> {
   var cartItems = Get.put(CartController());
+  var usercon = Get.put(Usercontoller());
   @override
   Widget build(BuildContext context) {
+    addressController.text=usercon.profile['address'];
+    mobile.text=usercon.profile['mobilenumber'].toString();
     return Scaffold(
       // appBar: AppBar(
       //   title: Text('Invoice'),
@@ -71,7 +77,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                     AppFonts.fontH7semi(AppColors.themeBlack),
                               ),
                               Text(
-                                'Price: ${data.pprice}',
+                             data.selectedProductQun==0?"N/A":   'Price: ${data.pprice}',
                                 style:
                                     AppFonts.fontH7semi(AppColors.themeBlack),
                               ),
@@ -136,9 +142,7 @@ class _PaymentPageState extends State<PaymentPage> {
   }
 }
 
-final TextEditingController addressController = TextEditingController();
-final TextEditingController notesController = TextEditingController();
-final TextEditingController mobile = TextEditingController();
+
 
 class PaymentModal extends StatefulWidget {
   @override

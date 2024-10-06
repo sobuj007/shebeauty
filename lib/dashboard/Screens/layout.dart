@@ -43,158 +43,160 @@ class _LayoutState extends State<Layout> {
   //  controller.fetchData();
   //  storeController.fetchData();
     return Obx(() {
-      return Scaffold(
-          body: SafeArea(
-            child: selectPageIndex == 0 || selectPageIndex == 1
-                ? Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 1.5.h, horizontal: 2.h),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Welcome, ${(ucon.getUser() ?? {})['name'].toString()}",
-                              style:
-                                  AppFonts.fontH4regular(AppColors.themeColer),
-                            ),
-                            Icon(
-                              Icons.notifications,
-                              color: AppColors.themeColer,
-                            )
-                          ],
+      return SafeArea(
+        child: Scaffold(
+            body: SafeArea(
+              child: selectPageIndex == 0 || selectPageIndex == 1
+                  ? Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 1.5.h, horizontal: 2.h),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Welcome, ${(ucon.getUser() ?? {})['name'].toString()}",
+                                style:
+                                    AppFonts.fontH4regular(AppColors.themeColer),
+                              ),
+                              Icon(
+                                Icons.notifications,
+                                color: AppColors.themeColer,
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                      Container(
-                        //height: 22.h,
-                        height: 19.h,
-                        child: Stack(
-                          children: [
-                            Positioned(
-                                child: Container(
-                              height: 18.h,
-                              width: 100.w,
-                              child: (adsController.adslist.isEmpty)
-                                  ? Center(child: CircularProgressIndicator())
-                                  : Container(
-                                      height: 19.h,
-                                      child: adsController.adslist.isNotEmpty
-                                          ? Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 2.h,
-                                                  vertical: 1.h),
-                                              child: Swiper(
-                                                itemBuilder:
-                                                    (BuildContext context,
-                                                        int index) {
-                                                  return Container(
-                                                    height: 150,
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.black26,
-                                                      image: DecorationImage(
-                                                        image:
-                                                            CachedNetworkImageProvider(
-                                                                adsController
-                                                                    .adslist[
-                                                                        index]
-                                                                    .image),
-                                                        fit: BoxFit.fill,
+                        Container(
+                          //height: 22.h,
+                          height: 19.h,
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                  child: Container(
+                                height: 18.h,
+                                width: 100.w,
+                                child: (adsController.adslist.isEmpty)
+                                    ? Center(child: CircularProgressIndicator())
+                                    : Container(
+                                        height: 19.h,
+                                        child: adsController.adslist.isNotEmpty
+                                            ? Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 2.h,
+                                                    vertical: 1.h),
+                                                child: Swiper(
+                                                  itemBuilder:
+                                                      (BuildContext context,
+                                                          int index) {
+                                                    return Container(
+                                                      height: 150,
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.black26,
+                                                        image: DecorationImage(
+                                                          image:
+                                                              CachedNetworkImageProvider(
+                                                                  adsController
+                                                                      .adslist[
+                                                                          index]
+                                                                      .image),
+                                                          fit: BoxFit.fill,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                15),
                                                       ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15),
-                                                    ),
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                            .size
-                                                            .width,
-                                                  );
-                                                },
-                                                autoplay: true,
-                                                duration: 1000,
-                                                autoplayDelay: 8000,
-                                                itemCount: adsController
-                                                    .adslist.length,
-                                                viewportFraction: 1,
-                                                scale: 0.9,
-                                              ),
-                                            )
-                                          : Center(
-                                              child:
-                                                  CircularProgressIndicator()),
-                                    ),
-                            )),
-                            Positioned(
-                              bottom: 1,
-                              child: SizedBox(),
-                              // child: Padding(
-                              //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                              //   child: Center(
-                              //     child: Row(
-                              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              //       crossAxisAlignment: CrossAxisAlignment.center,
-                              //       children: [
-                              //         Container(
-                              //           width: 77.w,
-                              //           decoration: BoxDecoration(
-                              //               color: Colors.white,
-                              //               borderRadius: BorderRadius.circular(15)),
-                              //           child: TextField(
-                              //             controller: serachController,
-                              //             decoration: InputDecoration(
-                              //                 contentPadding: EdgeInsets.symmetric(
-                              //                     horizontal: 2.0, vertical: 1.0),
-                              //                 prefixIcon: Icon(Icons.search),
-                              //                 border: OutlineInputBorder(
-                              //                   borderRadius: BorderRadius.circular(15),
-                              //                 )),
-                              //           ),
-                              //         ),
-                              //         Card(
-                              //             shape: RoundedRectangleBorder(
-                              //                 borderRadius: BorderRadius.circular(15)),
-                              //             child: IconButton(
-                              //                 onPressed: () {
-                              //                   //showpopup(context);
-                              //                 },
-                              //                 icon: Icon(Icons.sort)))
-                              //       ],
-                              //     ),
-                              //   ),
-                              // )
-                            ),
-                          ],
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                              .size
+                                                              .width,
+                                                    );
+                                                  },
+                                                  autoplay: true,
+                                                  duration: 1000,
+                                                  autoplayDelay: 8000,
+                                                  itemCount: adsController
+                                                      .adslist.length,
+                                                  viewportFraction: 1,
+                                                  scale: 0.9,
+                                                ),
+                                              )
+                                            : Center(
+                                                child:
+                                                    CircularProgressIndicator()),
+                                      ),
+                              )),
+                              Positioned(
+                                bottom: 1,
+                                child: SizedBox(),
+                                // child: Padding(
+                                //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                //   child: Center(
+                                //     child: Row(
+                                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                //       crossAxisAlignment: CrossAxisAlignment.center,
+                                //       children: [
+                                //         Container(
+                                //           width: 77.w,
+                                //           decoration: BoxDecoration(
+                                //               color: Colors.white,
+                                //               borderRadius: BorderRadius.circular(15)),
+                                //           child: TextField(
+                                //             controller: serachController,
+                                //             decoration: InputDecoration(
+                                //                 contentPadding: EdgeInsets.symmetric(
+                                //                     horizontal: 2.0, vertical: 1.0),
+                                //                 prefixIcon: Icon(Icons.search),
+                                //                 border: OutlineInputBorder(
+                                //                   borderRadius: BorderRadius.circular(15),
+                                //                 )),
+                                //           ),
+                                //         ),
+                                //         Card(
+                                //             shape: RoundedRectangleBorder(
+                                //                 borderRadius: BorderRadius.circular(15)),
+                                //             child: IconButton(
+                                //                 onPressed: () {
+                                //                   //showpopup(context);
+                                //                 },
+                                //                 icon: Icon(Icons.sort)))
+                                //       ],
+                                //     ),
+                                //   ),
+                                // )
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      pagelist[selectPageIndex]
-                    ],
-                  )
-                : pagelist[selectPageIndex],
-          ),
-          bottomNavigationBar: bottomnab()
-
-          //  BottomNavigationBar(
-          //   currentIndex: selectPageIndex,
-          //   selectedItemColor: AppColors.themeColer,
-          //   selectedFontSize:12.sp,
-          //   unselectedItemColor: Colors.black54,
-          //   onTap: (value) {
-          //     selectPageIndex = value;
-          //     setState(() {});
-          //   },
-          //   items: [
-          //     BottomNavigationBarItem(icon: Icon(Icons.woman), label: "Woman",),
-          //     BottomNavigationBarItem(icon: Icon(Icons.man), label: "Man"),
-          //     BottomNavigationBarItem(
-          //         icon: Icon(Icons.shopping_cart), label: "Wishlist"),
-          //     BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-          //   ],
-          // )
-          // Container(width: MediaQuery.of(context).size.width,
-          // child: ,
-          // ),
-          );
+                        pagelist[selectPageIndex]
+                      ],
+                    )
+                  : pagelist[selectPageIndex],
+            ),
+            bottomNavigationBar: bottomnab()
+        
+            //  BottomNavigationBar(
+            //   currentIndex: selectPageIndex,
+            //   selectedItemColor: AppColors.themeColer,
+            //   selectedFontSize:12.sp,
+            //   unselectedItemColor: Colors.black54,
+            //   onTap: (value) {
+            //     selectPageIndex = value;
+            //     setState(() {});
+            //   },
+            //   items: [
+            //     BottomNavigationBarItem(icon: Icon(Icons.woman), label: "Woman",),
+            //     BottomNavigationBarItem(icon: Icon(Icons.man), label: "Man"),
+            //     BottomNavigationBarItem(
+            //         icon: Icon(Icons.shopping_cart), label: "Wishlist"),
+            //     BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+            //   ],
+            // )
+            // Container(width: MediaQuery.of(context).size.width,
+            // child: ,
+            // ),
+            ),
+      );
     });
   }
 
@@ -249,7 +251,7 @@ class _LayoutState extends State<Layout> {
             // tabBorder: Border.all(color: AppColors.themeColer, width: 1), // tab button border
             //tabShadow: [BoxShadow(color: Colors.grey.withOpacity(0.5), blurRadius: 8)], // tab button shadow
             curve: Curves.easeOutExpo, // tab animation curves
-            duration: Duration(milliseconds: 900), // tab animation duration
+            duration: Duration(milliseconds: 100), // tab animation duration
             gap: 8, // the tab button gap between icon and text
             //color: Colors.grey[800], // unselected icon color
             activeColor: AppColors.bgColer, // selected icon and text color

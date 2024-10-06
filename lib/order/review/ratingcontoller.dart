@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:Ghore_Parlor/main.dart';
 import 'package:Ghore_Parlor/order/review/ratingingmodel.dart';
 
+import '../../utils/appApis.dart';
+
 class ReviewController extends GetxController {
   // Observable list for reviews
   var reviewsList = <Reviews>[].obs;
@@ -21,7 +23,7 @@ class ReviewController extends GetxController {
         'Content-Type': 'application/json'
       };
 
-      var url = Uri.parse('https://softisan.xyz/api/reviews/agent/$agentId');
+      var url = Uri.parse(AppAppis.endpoint +'reviews/agent/$agentId');
 
       var req = http.Request('GET', url);
       req.headers.addAll(headersList);

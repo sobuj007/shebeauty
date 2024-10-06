@@ -61,6 +61,7 @@ class _HistoryPageState extends State<HistoryPage> {
 
         return PageView(
           controller: _pageController,
+          
           children: [
             buildOrderList("Completed Orders", historyController.historyModel.value.completedorders),
             buildOrderList("Pending Orders", historyController.historyModel.value.pendingorders),
@@ -70,15 +71,25 @@ class _HistoryPageState extends State<HistoryPage> {
       }),
     );
   }
+  var selectpage=0;
 
   Widget buildTabButton(String title, int pageIndex) {
     return TextButton(
       onPressed: () {
+        selectpage=pageIndex;
         _pageController.jumpToPage(pageIndex);
+        setState(() {
+          
+        });
       },
-      child: Text(
-        title,
-        style: TextStyle(color: AppColors.themeWhite),
+      child: Column(
+        children: [
+          Text(
+            title,
+            style: TextStyle(color: AppColors.themeWhite),
+          ),
+        selectpage==pageIndex? Container(height: .2.h,width: 20.w,color: AppColors.themeWhite,):SizedBox()
+        ],
       ),
     );
   }

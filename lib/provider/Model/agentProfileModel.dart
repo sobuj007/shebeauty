@@ -64,6 +64,7 @@ class Profiles {
   String? storename;
   String? coverImage;
   String? tradelicence;
+  String? servicestime;
   String? address;
   String? mobile;
   String? logo;
@@ -80,6 +81,7 @@ class Profiles {
       this.storename,
       this.coverImage,
       this.tradelicence,
+      this.servicestime,
       this.address,
       this.mobile,
       this.logo,
@@ -96,6 +98,7 @@ class Profiles {
     storename = json['storename'];
     coverImage = json['coverImage'];
     tradelicence = json['tradelicence'];
+    servicestime = json['servicestime'];
     address = json['address'];
     mobile = json['mobile'];
     logo = json['logo'];
@@ -114,6 +117,7 @@ class Profiles {
     data['storename'] = this.storename;
     data['coverImage'] = this.coverImage;
     data['tradelicence'] = this.tradelicence;
+    data['servicestime'] = this.servicestime;
     data['address'] = this.address;
     data['mobile'] = this.mobile;
     data['logo'] = this.logo;

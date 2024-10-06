@@ -6,6 +6,8 @@ import 'package:Ghore_Parlor/auth/Model/storeprofileModel.dart';
 import 'package:http/http.dart' as http;
 import 'package:Ghore_Parlor/main.dart';
 
+import '../../utils/appApis.dart';
+
 
   
 class StorProfileController extends GetxController {
@@ -24,7 +26,7 @@ class StorProfileController extends GetxController {
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
     };
-    var url = Uri.parse('https://softisan.xyz/api/storeprofiles/get');
+    var url = Uri.parse(AppAppis.endpoint +'storeprofiles/get');
 
     try {
       var req = http.Request('GET', url);

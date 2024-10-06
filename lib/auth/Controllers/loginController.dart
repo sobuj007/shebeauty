@@ -12,12 +12,14 @@ import 'package:Ghore_Parlor/utils/custom%20widget/sharedpref.dart';
 
 class LoginContoller  {
 
-  logins(username, password, context) async {
+  logins(username, password, context,isremind) async {
     try {
       AppStyle.showloader(context);
 
       var headersList = {'Content-Type': 'application/json'};
-      var url = Uri.parse(AppAppis.login);
+      var udata=AppAppis.login;
+      print(udata);
+      var url = Uri.parse(udata);
 
       var body = {"email": username, "password": password};
 
@@ -35,10 +37,12 @@ class LoginContoller  {
           //   Mypref().saveprofile(d,jsonResponse['user'],jsonResponse['token']);
           //  }
       
-        Mypref().saveprofile(jsonResponse['profile']?? {},jsonResponse['user'],jsonResponse['token']);
+        Mypref().saveprofile(jsonResponse['profile']?? {},jsonResponse['user'],jsonResponse['token'],isremind);
       tdata.setuser(jsonResponse['token']);
-      print(jsonResponse['token']);
-      print(jsonResponse['profile']);
+      // print("FILE");
+      // print(jsonResponse['token']);
+      // print(jsonResponse['profile']);
+      // print(isremind.toString());
  
       // var data = await AllinfoController().addItem();print(data);
         if ( jsonResponse['user']['role'].toString()=='user') {
@@ -94,10 +98,52 @@ class LoginContoller  {
         Get.offNamed('/login');
       } else {
         print("lol" + res.reasonPhrase.toString());
+        if(res.reasonPhrase=='Found'){
+            AppStyle.snackbar("Account", "Email Alreday in Use");
+        }else{
+             AppStyle.snackbar("Error",  res.reasonPhrase.toString());
+        }
+      
         Navigator.pop(context);
       }
     } catch (e) {
       print(e);
     }
   }
+
+ checkTokenValidity(tok) async {
+  String token = tok.value; 
+
+  final response = await http.get(
+    Uri.parse(AppAppis.endpoint +'user'),
+    headers: {
+      'Authorization': 'Bearer $token',
+    },
+  );
+
+  if (response.statusCode == 200) {
+    // Token is valid
+    var userData = jsonDecode(response.body);
+    print("User Data: $userData");
+    return true;
+  } else if (response.statusCode == 401) {
+    // Token is expired or invalid
+    var errorMessage = jsonDecode(response.body);
+    print("Error: ${errorMessage['error']}");
+    if (errorMessage['error'] == 'Token has expired') {
+      // Handle token expiration (e.g., refresh token or ask user to log in)
+      print("Token has expired. Please log in again.");
+      AppStyle.snackbar("Authentication", "Token has expired. Please log in again.");
+      return false;
+    } else {
+      print("Authentication error. Token is invalid.");
+       AppStyle.snackbar("Authentication", "Token is invalid. Please log in again.");
+      return false;
+    }
+   
+  }
+}
+
+
+
 }

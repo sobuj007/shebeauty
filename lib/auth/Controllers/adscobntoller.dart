@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:Ghore_Parlor/utils/appApis.dart';
 import 'package:get/get.dart';
 import 'package:Ghore_Parlor/auth/Model/promotionsModel.dart';
 import 'package:http/http.dart' as http;
@@ -15,7 +16,7 @@ class AdsController extends GetxController {
        'Accept': 'application/json' 
      
     };
-    var url = Uri.parse('https://softisan.xyz/api/promotion-banners');
+    var url = Uri.parse(AppAppis.endpoint +'promotion-banners');
 
     try {
       var req = http.Request('GET', url);

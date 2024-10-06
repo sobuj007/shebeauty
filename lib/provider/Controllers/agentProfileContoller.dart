@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import '../../main.dart';
+import '../../utils/appApis.dart';
 import '../Model/agentProfileModel.dart';
 
 
@@ -22,7 +23,7 @@ var token = tdata.getuser();
       };
 
       // API URL
-      var url = Uri.parse('https://softisan.xyz/api/storeprofiles/$data/getagent');
+      var url = Uri.parse(AppAppis.endpoint +'storeprofiles/$data/getagent');
 
       // Create request
       var req = http.Request('GET', url);
@@ -36,6 +37,7 @@ var token = tdata.getuser();
       if (res.statusCode >= 200 && res.statusCode < 300) {
         var jsonData = jsonDecode(resBody); // Decode the JSON
         agentProfile.value = AgentprofileModel.fromJson(jsonData); // Parse data into model
+        print("object");
         print(agentProfile.value);
       } else {
         // Error handling

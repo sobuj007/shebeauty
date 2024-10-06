@@ -6,6 +6,7 @@ import 'package:Ghore_Parlor/auth/Controllers/userContoller.dart';
 import 'package:Ghore_Parlor/main.dart';
 import 'package:Ghore_Parlor/utils/appStyle.dart';
 
+import '../../utils/appApis.dart';
 import '../../utils/appColors.dart';
 import '../../utils/appFonts.dart';
 import 'package:http/http.dart' as http;
@@ -51,7 +52,7 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
  'Content-Type': 'application/json',
  'Authorization': 'Bearer $token' 
 };
-var url = Uri.parse('https://softisan.xyz/api/reviews');
+var url = Uri.parse(AppAppis.endpoint +'reviews');
 
 var body = // {
 

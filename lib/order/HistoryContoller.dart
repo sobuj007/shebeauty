@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:Ghore_Parlor/auth/Controllers/userContoller.dart';
 import 'package:Ghore_Parlor/main.dart';
 
+import '../utils/appApis.dart';
 import 'model/HistoryModel.dart';
 
 class HistoryController extends GetxController {
@@ -34,7 +35,7 @@ fetchHistory(id) async {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       };
-      var url = Uri.parse('https://softisan.xyz/api/userorders/get');
+      var url = Uri.parse(AppAppis.endpoint +'userorders/get');
       
       var body = {
         "user_id": id

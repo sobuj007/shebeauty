@@ -35,6 +35,7 @@ class SheBeauty extends StatelessWidget {
    return Sizer(builder: (context,oriantation,screenType)=>  GetMaterialApp(
       initialRoute: APpPageRoutes.INITPage,
       getPages: APpPageRoutes.routes,
+      debugShowCheckedModeBanner: false,
      
     ));
   }

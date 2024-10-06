@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:Ghore_Parlor/category/Controllers/getAllinfocontoller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:Ghore_Parlor/auth/Controllers/userContoller.dart';
 import 'package:Ghore_Parlor/cart/Model/cartModel.dart';
 
 import 'package:Ghore_Parlor/utils/appStyle.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:sizer/sizer.dart';
 
 import 'package:Ghore_Parlor/cart/Model/cartModel.dart' as CartProduct;
@@ -31,17 +33,24 @@ class SingelAppointment extends StatefulWidget {
 class _SingelAppointmentState extends State<SingelAppointment> {
   var agentcontroller = Get.put(AgentProfileController());
   var ucon = Get.put(Usercontoller());
-  bool isfav = false;
+  var allcon = Get.put(AllinfoController());
+  
+  bool isfav= false;
   String date = "";
   TimeOfDay _selectedTime = TimeOfDay.now();
-  int productQun = 0;
+  int productQun = 1;
   int servicesQun = 1;
   double total = 0;
   final CartController cartController = Get.put(CartController());
   final WishlistController wishcontroller = Get.put(WishlistController());
   @override
   void initState() {
-    super.initState();
+    super.initState();   if (wishcontroller.isProductInWishlist(widget.item.id)) {
+      isfav = true;
+     setState(() {
+       
+     });
+    } 
     coutntotal();
     date = (DateTime.now().day.toString() +
             "/" +
@@ -49,14 +58,12 @@ class _SingelAppointmentState extends State<SingelAppointment> {
             "/" +
             DateTime.now().year.toString())
         .toString();
-    if (wishListItem.contains(widget.item)) {
-      isfav = true;
-      setState(() {});
-    } else {}
+ 
   }
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
@@ -109,6 +116,7 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                             IconButton(
                                                 onPressed: () {
                                                   isfav = !isfav;
+                                                  print(isfav);
                                                   //     if (isfav==false) {
                                                   //  wishcontroller.removeFromWishlist(widget.item.name);
                                                   //     } else {}
@@ -118,20 +126,29 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                                     wishcontroller
                                                         .removeProductFromWishlist(
                                                             widget.item.id!);
+                                                                 AppStyle.snackbar(
+                                                                                              'Wishlist',
+                                                                                              'Product delete from wishlist');
+                                             
                                                   } else {
                                                     wishcontroller
                                                         .addProductToWishlist(widget
                                                             .item); // Adding Products to wishlist
-                                                    //  AppStyle.snackbar(
-                                                    //                                           'Wishlist',
-                                                    //                                           'Product add to wishlist');
+                                                        
+                                                     AppStyle.snackbar(
+                                                                                              'Wishlist',
+                                                                                              'Product add to wishlist');
                                                   }
+                                                  setState(() {
+                                                    
+                                                  });
                                                   //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: content))
                                                 }
+                                                
                                                 //wishList.add(items);
 
                                                 ,
-                                                icon:  wishcontroller. isProductInWishlist(widget.item.id!) 
+                                                icon: isfav==true
 
                                                     ? Icon(
                                                         Icons.favorite,
@@ -177,8 +194,8 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  applng.getLang(16) +
-                                                      widget.item.categoryId,
+                                                 applng.getLang(16) +
+                                                     allcon.getCategoryNameById(int.parse( widget.item.categoryId)),
                                                   style: AppFonts.fontH7semi(
                                                       AppColors.themeBlack),
                                                   maxLines: 2,
@@ -187,31 +204,25 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                                 ),
                                                 Text(
                                                   applng.getLang(17) +
-                                                      widget.item.subcategoryId,
+                                                      allcon.getSubcategoryNameById(int.parse(widget.item.subcategoryId)),
                                                   style: AppFonts.fontH7semi(
                                                       AppColors.themeBlack),
                                                   maxLines: 2,
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                 ),
-                                                RichText(
-                                                  text: TextSpan(
-                                                      text: applng.getLang(18),
-                                                      style:
-                                                          AppFonts.fontH7semi(
-                                                              AppColors
-                                                                  .themeBlack),
-                                                      children: [
-                                                        TextSpan(
-                                                            text: widget.item
-                                                                    .servicePrice +
-                                                                "Tk",
-                                                            style: AppFonts
-                                                                .fontH5semi(
-                                                                    AppColors
-                                                                        .themeColer))
-                                                      ]),
-                                                ),
+                                                 Text(
+                                          applng.getLang(19) +
+                                              widget.item.gender
+                                                  .toString()
+                                                  .toUpperCase(),
+                                          style: AppFonts.fontH7semi(
+                                              AppColors.themeBlack),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          textAlign: TextAlign.start,
+                                        ),
+                                                
                                               ],
                                             ),
                                           ],
@@ -238,27 +249,34 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                   // ),
                                   /************************** gender */
                                   Container(
-                                    height: 4.h,
+                                    height: 6.h,
                                     width: 58.w,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          applng.getLang(19) +
-                                              widget.item.gender
-                                                  .toString()
-                                                  .toUpperCase(),
-                                          style: AppFonts.fontH7semi(
-                                              AppColors.themeBlack),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          textAlign: TextAlign.start,
-                                        ),
+                                       RichText(
+                                                  text: TextSpan(
+                                                      text: applng.getLang(18),
+                                                      style:
+                                                          AppFonts.fontH7semi(
+                                                              AppColors
+                                                                  .themeBlack),
+                                                      children: [
+                                                        TextSpan(
+                                                            text: widget.item
+                                                                    .servicePrice +
+                                                                "Tk",
+                                                            style: AppFonts
+                                                                .fontH5semi(
+                                                                    AppColors
+                                                                        .themeColer))
+                                                      ]),
+                                                ),
                                         RichText(
                                           text: TextSpan(
                                               text: applng.getLang(20),
-                                              style: AppFonts.fontH5semi(
+                                              style: AppFonts.fontH7semi(
                                                   AppColors.themeBlack),
                                               children: [
                                                 TextSpan(
@@ -324,7 +342,15 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                   width: 1, color: AppColors.themehint)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(widget.item.slotId.toString()),
+                            child: Obx((){
+                              if(agentcontroller.profilesdata==null){
+                                return CircularProgressIndicator();
+                              }
+                              var prof= agentcontroller.profilesdata;
+                                 return prof![0].servicestime==null?Container(): Text(prof![0].servicestime.toString());
+                              
+                             
+                            }),
                           ),
                         )
                       ],

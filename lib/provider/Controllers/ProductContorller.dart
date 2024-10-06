@@ -7,6 +7,8 @@ import 'package:Ghore_Parlor/main.dart';
 import 'dart:convert';
 
 import 'package:Ghore_Parlor/provider/Model/allProductModel.dart';
+
+import '../../utils/appApis.dart';
 // Adjust the import as needed
 
 class AllProductController extends GetxController {
@@ -42,7 +44,7 @@ var isAllProductsChecked = false.obs; // Checkbox state
       'Authorization': 'Bearer $token',
       'Content-Type': 'application/json',
     };
-    var url = Uri.parse('https://softisan.xyz/api/serviceproducts/getall');
+    var url = Uri.parse(AppAppis.endpoint +'serviceproducts/getall');
     var req = http.Request('GET', url);
     req.headers.addAll(headersList);
 

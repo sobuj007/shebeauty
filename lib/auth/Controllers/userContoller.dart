@@ -9,6 +9,7 @@ var profile = {}.obs;
  var user ={}.obs;
   var token = ''.obs;
     var userdata={}.obs;
+    var isremind=''.obs;
 
 @override
   void onInit() {
@@ -22,7 +23,7 @@ var profile = {}.obs;
 
   // Retrieve data dynamically and check if it's null
   var retrievedData = await Mypref().retrieveDataDynamically();
-  
+   print(retrievedData);
   // Ensure userdata is not null before assigning
   if (retrievedData != null) {
     userdata.value = retrievedData;
@@ -31,6 +32,7 @@ var profile = {}.obs;
     profile.assignAll(userdata['profile'] ?? {});
     user.assignAll(userdata['user'] ?? {});
     token.value = userdata['token'] ?? '';
+    isremind.value = userdata['remeberme'].toString() ?? '';
   } else {
     // Handle the case when userdata is null
     print("No data found.");
@@ -40,4 +42,7 @@ var profile = {}.obs;
   getUser()=>user.value;
   getProfile()=>profile.value;
   getToken()=>token.value;
+  getRememberMe()=>isremind.value;
+
+
 }

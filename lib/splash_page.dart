@@ -4,6 +4,8 @@ import 'package:Ghore_Parlor/utils/appColors.dart';
 import 'package:Ghore_Parlor/utils/appConstant.dart';
 import 'package:Ghore_Parlor/utils/appFonts.dart';
 import 'package:sizer/sizer.dart';
+
+import 'auth/Controllers/userContoller.dart';
 class Splash extends StatefulWidget {
   const Splash({super.key});
 
@@ -14,12 +16,15 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
 
   startTimer(){
+    
 
     Future.delayed(Duration(seconds: 2)).then((value)=>{
-      Get.toNamed("/login")
+      Get.offAndToNamed("/login")
     });
 
   }
+var usercon=Get.put(Usercontoller());
+  
   @override
   void initState() {
     // TODO: implement initState

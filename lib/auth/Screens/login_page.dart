@@ -1,3 +1,6 @@
+import 'package:Ghore_Parlor/auth/Controllers/userContoller.dart';
+import 'package:Ghore_Parlor/forgetpass/forgetpads.dart';
+import 'package:Ghore_Parlor/utils/appStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:Ghore_Parlor/auth/Controllers/loginController.dart';
@@ -18,9 +21,50 @@ class _LoginState extends State<Login> {
   TextEditingController password = TextEditingController();
   bool ischeck = false;
   bool isPassview = true;
+   var usercon=Get.put(Usercontoller());
+   var checkValid=false.obs;
+   var token=''.obs;
+       var isRemember=''.obs;
+   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+     // Schedule the function to run after the build completes
+  // WidgetsBinding.instance.addPostFrameCallback((_) {
+  //   // Perform any actions on the widget tree here
+  //   context.visitChildElements((child) { c
+  //     // Your logic to traverse or manipulate child elements
+  //   });
+  // });
+ checkSavedUser();
+
+   
+  }
+      
+  checkSavedUser()async{
+    
+   token.value= usercon.getToken();
+    isRemember.value=usercon.getRememberMe();
+  print(token.value);
+    if( isRemember=='true'){
+       checkValid.value=await LoginContoller().checkTokenValidity(token);
+     tdata.setuser(token);
+     print(checkValid.value);
+      if(checkValid.value){
+        Navigator.pop(context);
+        Get.toNamed('/layout');
+      }
+      else{
+        Navigator.pop(context);
+        AppStyle.snackbar("Token Expired", "Pleases,Login Again");
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+   
+    return token.value.isNotEmpty&& isRemember.value=='true'? Container(color: AppColors.themeWhite,child: Center(child: CircularProgressIndicator(),)): Scaffold(
       body: SafeArea(
           child: Padding(
         padding: EdgeInsets.all(2.h),
@@ -31,7 +75,7 @@ class _LoginState extends State<Login> {
               child: Center(
                 child: Text(
                   applng.getLang(0),
-                  style: AppFonts.fontSplashtitle(AppColors.applogo),
+                  style: AppFonts.fontSplashtitle(AppColors.themeColer),
                 ),
               ),
             ),
@@ -123,9 +167,14 @@ class _LoginState extends State<Login> {
                     )
                   ],
                 ),
-                Text(
-                  applng.getLang(4),
-                  style: AppFonts.fontH5normal(AppColors.themeBlack),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (_)=>ForgotPasswordScreen()));
+                  },
+                  child: Text(
+                    applng.getLang(4),
+                    style: AppFonts.fontH5normal(AppColors.themeBlack),
+                  ),
                 ),
               ],
             ),
@@ -136,7 +185,7 @@ class _LoginState extends State<Login> {
             GestureDetector(
               onTap: (){
                
-                LoginContoller().logins(username.text, password.text,context);
+                LoginContoller().logins(username.text, password.text,context,ischeck);
 
 
                 // Get.toNamed('/layout');
