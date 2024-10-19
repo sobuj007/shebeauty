@@ -42,7 +42,9 @@ class NearProduct {
   String? gender;
   String? createdAt;
   String? updatedAt;
+  int? averageRating;
   List<Locations2>? locations2;
+  List<ReviewRatings>? reviewRatings;
 
   NearProduct(
       {this.id,
@@ -62,7 +64,9 @@ class NearProduct {
       this.gender,
       this.createdAt,
       this.updatedAt,
-      this.locations2});
+      this.averageRating,
+      this.locations2,
+      this.reviewRatings});
 
   NearProduct.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -82,10 +86,17 @@ class NearProduct {
     gender = json['gender'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    averageRating = json['average_rating'];
     if (json['locations2'] != null) {
       locations2 = <Locations2>[];
       json['locations2'].forEach((v) {
         locations2!.add(new Locations2.fromJson(v));
+      });
+    }
+    if (json['review_ratings'] != null) {
+      reviewRatings = <ReviewRatings>[];
+      json['review_ratings'].forEach((v) {
+        reviewRatings!.add(new ReviewRatings.fromJson(v));
       });
     }
   }
@@ -109,8 +120,13 @@ class NearProduct {
     data['gender'] = this.gender;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    data['average_rating'] = this.averageRating;
     if (this.locations2 != null) {
       data['locations2'] = this.locations2!.map((v) => v.toJson()).toList();
+    }
+    if (this.reviewRatings != null) {
+      data['review_ratings'] =
+          this.reviewRatings!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -170,6 +186,59 @@ class Pivot {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['service_product_id'] = this.serviceProductId;
     data['location_id'] = this.locationId;
+    return data;
+  }
+}
+
+class ReviewRatings {
+  int? id;
+  String? serviceproductId;
+  String? agentId;
+  String? userId;
+  String? reviewername;
+  String? image;
+  String? rating;
+  String? comment;
+  String? createdAt;
+  String? updatedAt;
+
+  ReviewRatings(
+      {this.id,
+      this.serviceproductId,
+      this.agentId,
+      this.userId,
+      this.reviewername,
+      this.image,
+      this.rating,
+      this.comment,
+      this.createdAt,
+      this.updatedAt});
+
+  ReviewRatings.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    serviceproductId = json['serviceproduct_id'];
+    agentId = json['agent_id'];
+    userId = json['user_id'];
+    reviewername = json['reviewername'];
+    image = json['image'];
+    rating = json['rating'];
+    comment = json['comment'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['serviceproduct_id'] = this.serviceproductId;
+    data['agent_id'] = this.agentId;
+    data['user_id'] = this.userId;
+    data['reviewername'] = this.reviewername;
+    data['image'] = this.image;
+    data['rating'] = this.rating;
+    data['comment'] = this.comment;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
     return data;
   }
 }

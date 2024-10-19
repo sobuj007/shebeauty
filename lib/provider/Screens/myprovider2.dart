@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:Ghore_Parlor/provider/Model/allProductModel.dart';
-import 'package:Ghore_Parlor/utils/appLanguage.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../category/Controllers/getAllinfocontoller.dart';
@@ -12,7 +12,6 @@ import '../../utils/appApis.dart';
 import '../../utils/appColors.dart';
 import '../../utils/appFonts.dart';
 import '../../utils/custom widget/CustomAppbar2.dart';
-import '../../utils/custom widget/Customratings.dart';
 import '../Controllers/ProductContorller.dart';
 
 class MyProvider2 extends StatelessWidget {
@@ -33,7 +32,6 @@ class MyProvider2 extends StatelessWidget {
   // RxString for single selected value (example)
   var selectedGender = 'Both'.obs;
   var selectedRating = 1.0.obs;
-  
 
   // Function to update selected gender
   void updateSelectedGender(String gender) {
@@ -44,36 +42,33 @@ class MyProvider2 extends StatelessWidget {
   void updateSelectedRating(double rating) {
     selectedRating.value = rating;
   }
-  
+
   @override
   Widget build(BuildContext context) {
     controller.fetchProducts();
- var  argsData = Get.arguments;
+    var argsData = Get.arguments;
 
+    final id = argsData?['subid'];
+    print("this is" + id.toString());
 
-    final id = argsData?['subid']; 
-    print("this is"+id.toString());
-    
-          
-        
     return Scaffold(
         body: Column(children: [
       CustomAppbar2(
         title: "All provider",
       ),
-     
       myserach(controller, context),
       Expanded(child: Obx(() {
-          if(id.toString().isNotEmpty&&controller.isAllProductsChecked.value==false){
-           controller.filterBySubcategory(id.toString());
-          }
+        if (id.toString().isNotEmpty &&
+            controller.isAllProductsChecked.value == false) {
+          controller.filterBySubcategory(id.toString());
+        }
         if (controller.isLoading.value) {
           return Center(child: CircularProgressIndicator());
         } else if (controller.filteredList.isEmpty) {
           return Center(child: Text('No products available'));
         } else {
-          _filteredItems= controller.filteredList;
-          
+          _filteredItems = controller.filteredList;
+
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: .5.h),
             child: ListView.builder(
@@ -82,7 +77,7 @@ class MyProvider2 extends StatelessWidget {
               itemBuilder: (context, index) {
                 var product = _filteredItems[index];
                 return Container(
-                  height: 20.h,
+                  height: 23.h,
                   width: 100.w,
                   decoration: BoxDecoration(
                       border:
@@ -92,8 +87,8 @@ class MyProvider2 extends StatelessWidget {
                   child: Row(
                     children: [
                       Container(
-                        height: 20.h,
-                        width: 30.w,
+                        height: 23.h,
+                        width: 26.w,
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 image: CachedNetworkImageProvider(
@@ -115,24 +110,50 @@ class MyProvider2 extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Container(
-                                  width: 58.w,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      width: 54.w,
+                                      child: Text(
                                         product.name ?? "",
                                         style: AppFonts.fontH5semi(
                                             AppColors.themeBlack),
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    SizedBox(
+                                      width: 1.w,
+                                    ),
+                                    Column(
+                                      children: [
+                                        RatingBarIndicator(
+                                          rating: calculateAverageRating(
+                                              product.reviewRatings),
+                                          itemCount: 1,
+                                          itemSize: 18.0,
+                                          direction: Axis.horizontal,
+                                          unratedColor: Colors.grey,
+                                          itemBuilder: (context, _) => Icon(
+                                            Icons.star,
+                                            color: Colors.amber,
+                                          ),
+                                        ),
+                                        SizedBox(height: 3),
+                                        Text(
+                                          '${calculateAverageRating(product.reviewRatings).toString()} ',
+                                          style: AppFonts.fontH6semi(
+                                              AppColors.themeColer),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(
-                                  width: 58.w,
+                                  width: 44.w,
                                   height: 3.5.h,
                                   child: Row(
                                     children: [
@@ -155,34 +176,63 @@ class MyProvider2 extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        "Gender : " + product.gender.toString(),
-                                        style: AppFonts.fontH6semi(
-                                            AppColors.themeBlack),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.start,
-                                      ),
                                       RichText(
-                                        text: TextSpan(
-                                            text: "price ",
-                                            style: AppFonts.fontH6semi(
-                                                AppColors.themeBlack),
-                                            children: [
-                                              TextSpan(
-                                                  text: product.servicePrice,
-                                                  style: AppFonts.fontH3semi(
-                                                      AppColors.themeColer))
-                                            ]),
-                                      )
+                                          text: TextSpan(
+                                              text: "Provider's Gender : ",
+                                              style: AppFonts.fontH7regular(
+                                                AppColors.themeBlack,
+                                              ),
+                                              children: [
+                                            TextSpan(
+                                              text: product.gender
+                                                  .toString()
+                                                  .toUpperCase(),
+                                              style: AppFonts.fontH7bold(
+                                                  const Color.fromARGB(
+                                                      221, 26, 1, 1)),
+                                            )
+                                          ])),
                                     ],
                                   ),
                                 ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    RichText(
+                                      text: TextSpan(
+                                          text: "S:Price : ",
+                                          style: AppFonts.fontH7semi(
+                                              AppColors.themeBlack),
+                                          children: [
+                                            TextSpan(
+                                                text: product.servicePrice,
+                                                style: AppFonts.fontH5semi(
+                                                    AppColors.themeColer))
+                                          ]),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    RichText(
+                                      text: TextSpan(
+                                          text: "P: Price : ",
+                                          style: AppFonts.fontH7semi(
+                                              AppColors.themeBlack),
+                                          children: [
+                                            TextSpan(
+                                                text: product.productPrice,
+                                                style: AppFonts.fontH5semi(
+                                                    AppColors.themeColer))
+                                          ]),
+                                    )
+                                  ],
+                                )
                               ],
                             ),
                           ),
                           Container(
-                            width: 63.2.w,
+                            width: 65.0.w,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -225,7 +275,8 @@ class MyProvider2 extends StatelessWidget {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                     Get.toNamed(AppRoutes.appsingelprovider,arguments:_filteredItems[index]);
+                                    Get.toNamed(AppRoutes.appsingelprovider,
+                                        arguments: _filteredItems[index]);
                                   },
                                   child: Container(
                                     height: 5.h,
@@ -259,6 +310,15 @@ class MyProvider2 extends StatelessWidget {
     ]));
   }
 
+  // Function to calculate the average rating
+  double calculateAverageRating(reviewRatings) {
+    if (reviewRatings.isEmpty) return 0.0;
+
+    double sum = reviewRatings.fold(
+        0.0, (sum, review) => sum + double.parse(review.rating));
+    return sum / reviewRatings.length;
+  }
+
   myserach(controller, context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
@@ -289,7 +349,7 @@ class MyProvider2 extends StatelessWidget {
               ),
               style: AppFonts.fontH4regular(AppColors.themeBlack),
               onChanged: (v) {
-              controller.filterItemsQuery(v);
+                controller.filterItemsQuery(v);
               },
             ),
           ),
@@ -311,139 +371,167 @@ class MyProvider2 extends StatelessWidget {
     );
   }
 
+  var h2l = false.obs;
   void _showFilterDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              applng.getLang(44),
-              style: AppFonts.fontH5semi(AppColors.themeBlack),
-            ),
-            IconButton(
-                onPressed: () {
-                  Get.close(1);
-                },
-                icon: Icon(Icons.close))
-          ],
-        ),
-        content: Obx(() {
-          return Container(
-            height: 30.h,
-            child: Column(
-              children: [
-                SizedBox(height: 2.w),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(applng.getLang(43)),
-                    Checkbox(
-                      value: controller.isAllProductsChecked.value,
-                      onChanged: (v) {
-                        controller.toggleAllProducts(v!);
-                        Get.back();
-                        _filteredItems.refresh();
-                      },
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      width: 18.w,
-                      child: Text(
-                        applng.getLang(41),
-                        style: AppFonts.fontH6semi(AppColors.themeBlack),
-                      ),
-                    ),
-                    SizedBox(width: 2.w),
-                    Expanded(
-                      child: DropdownButton<double>(
-                        value: selectedRating.value,
-                        underline: SizedBox(),
-                        items: _selectedRating.map((double value) {
-                          return DropdownMenuItem<double>(
-                            value: value,
-                            child: Text(
-                              value.toString(),
-                              style: AppFonts.fontH6semi(
-                                  AppColors.themeBlack),
-                            ),
-                          );
-                        }).toList(),
-                        onChanged: (newValue) {
-                          selectedRating.value = newValue!;
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                applng.getLang(44),
+                style: AppFonts.fontH5semi(AppColors.themeBlack),
+              ),
+              IconButton(
+                  onPressed: () {
+                    Get.close(1);
+                  },
+                  icon: Icon(Icons.close))
+            ],
+          ),
+          content: Obx(() {
+            return Container(
+              height: 33.h,
+              child: Column(
+                children: [
+                  SizedBox(height: 2.w),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(applng.getLang(43)),
+                      Checkbox(
+                        value: controller.isAllProductsChecked.value,
+                        onChanged: (v) {
+                          controller.toggleAllProducts(v!);
+                          Get.back();
+                          _filteredItems.refresh();
                         },
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 1.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      width: 18.w,
-                      child: Text(
-                        applng.getLang(42),
-                        style: AppFonts.fontH6semi(AppColors.themeBlack),
-                      ),
-                    ),
-                    SizedBox(width: 2.w),
-                    Expanded(
-                      child: DropdownButton<String>(
-                        value: selectedGender.value,
-                        underline: SizedBox(),
-                        items: _selectedGender.map((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
-                              style: AppFonts.fontH6semi(AppColors.themeBlack),
-                            ),
-                          );
-                        }).toList(),
-                        onChanged: (newValue) {
-                          selectedGender.value = newValue!;
-                          controller.updateSelectedGender(newValue);
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 1.h),
-                Padding(
-                  padding: EdgeInsets.only(right: 8.w),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Container(
-                      height: 5.h,
-                      width: 35.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: AppColors.themeColer,
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        "Apply",
-                        style: AppFonts.fontH6semi(AppColors.themeWhite),
-                      ),
-                    ),
+                      )
+                    ],
                   ),
-                )
-              ],
-            ),
-          );
-        }),
-      );
-    },
-  );
-}
-
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: 18.w,
+                        child: Text(
+                          applng.getLang(41),
+                          style: AppFonts.fontH7semi(AppColors.themeBlack),
+                        ),
+                      ),
+                      SizedBox(width: 2.w),
+                      Expanded(
+                        child: DropdownButton<double>(
+                          value: selectedRating.value,
+                          underline: SizedBox(),
+                          isExpanded: true,
+                          items: _selectedRating.map((double value) {
+                            return DropdownMenuItem<double>(
+                              value: value,
+                              child: Center(
+                                child: Text(
+                                  value.toString(),
+                                  style:
+                                      AppFonts.fontH6semi(AppColors.themeBlack),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (newValue) {
+                            selectedRating.value = newValue!;
+                            controller.applyRatingFilter(newValue);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: .5.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: 18.w,
+                        child: Text(
+                          applng.getLang(42),
+                          style: AppFonts.fontH7semi(AppColors.themeBlack),
+                        ),
+                      ),
+                      SizedBox(width: 1.w),
+                      Expanded(
+                        child: DropdownButton<String>(
+                          value: selectedGender.value,
+                          underline: SizedBox(),
+                          isExpanded: true,
+                          items: _selectedGender.map((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Center(
+                                child: Text(
+                                  value,
+                                  style:
+                                      AppFonts.fontH6semi(AppColors.themeBlack),
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (newValue) {
+                            selectedGender.value = newValue!;
+                            controller.updateSelectedGender(newValue);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: .5.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Sort by Price:",
+                        style: AppFonts.fontH7semi(AppColors.themeBlack),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          h2l.value = !h2l.value;
+                          controller.sortByservicePrice(isHighToLow: h2l.value);
+                        },
+                        child: Text(
+                          h2l.value ? 'High to Low' : 'Low to High',
+                          style: AppFonts.fontH6semi(AppColors.themeBlack),
+                        ),
+                      ),
+                    ],
+                  ),
+                  // Padding(
+                  //   padding: EdgeInsets.only(right: 8.w),
+                  //   child: GestureDetector(
+                  //     onTap: () {
+                  //       Navigator.of(context).pop();
+                  //     },
+                  //     child: Container(
+                  //       height: 5.h,
+                  //       width: 35.w,
+                  //       decoration: BoxDecoration(
+                  //         borderRadius: BorderRadius.circular(5),
+                  //         color: AppColors.themeColer,
+                  //       ),
+                  //       alignment: Alignment.center,
+                  //       child: Text(
+                  //         "Apply",
+                  //         style: AppFonts.fontH6semi(AppColors.themeWhite),
+                  //       ),
+                  //    ),
+                  // ),
+                  //  )
+                ],
+              ),
+            );
+          }),
+        );
+      },
+    );
+  }
 }

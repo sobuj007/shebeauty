@@ -17,7 +17,6 @@ import '../../utils/custom widget/CustomAppbar.dart';
 import '../Controllers/ProductContorller.dart';
 import '../Model/allproviderDataModel.dart';
 
-
 class AllProvider extends StatefulWidget {
   List<String> selectedBody;
   AllProvider({required this.selectedBody, super.key});
@@ -27,7 +26,7 @@ class AllProvider extends StatefulWidget {
 }
 
 class _AllProviderState extends State<AllProvider> {
-     final AllProductController controller = Get.put(AllProductController());
+  final AllProductController controller = Get.put(AllProductController());
   List<Item> _items = [];
   List<Item> _filteredItems = [];
   String _selectedLocation = 'All';
@@ -91,16 +90,15 @@ class _AllProviderState extends State<AllProvider> {
               ],
             ),
           ),
-          Obx((){
+          Obx(() {
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: .5.h),
               child: ListView.builder(
                 // shrinkWrap: true,
                 padding: EdgeInsets.zero,
-            
+
                 itemCount: _filteredItems.length,
                 itemBuilder: (context, index) {
-            
                   return Container(
                     height: 20.h,
                     width: 100.w,
@@ -117,11 +115,14 @@ class _AllProviderState extends State<AllProvider> {
                           decoration: BoxDecoration(
                               image: DecorationImage(
                                   image: CachedNetworkImageProvider(
-                                   AppAppis.makeimgUrl (_filteredItems[index].img_url),
+                                    AppAppis.makeimgUrl(
+                                        _filteredItems[index].img_url),
                                   ),
                                   fit: BoxFit.cover),
                               borderRadius: BorderRadius.circular(10)),
-                            child: Container(color: const Color.fromARGB(60, 100, 99, 99),),
+                          child: Container(
+                            color: const Color.fromARGB(60, 100, 99, 99),
+                          ),
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -141,7 +142,7 @@ class _AllProviderState extends State<AllProvider> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          _filteredItems[index].name??"",
+                                          _filteredItems[index].name ?? "",
                                           style: AppFonts.fontH5semi(
                                               AppColors.themeBlack),
                                           maxLines: 2,
@@ -172,7 +173,7 @@ class _AllProviderState extends State<AllProvider> {
                                       ],
                                     ),
                                   ),
-                                       /************************** gender */
+                                  /************************** gender */
                                   Container(
                                     height: 4.h,
                                     width: 58.w,
@@ -191,16 +192,19 @@ class _AllProviderState extends State<AllProvider> {
                                           overflow: TextOverflow.ellipsis,
                                           textAlign: TextAlign.start,
                                         ),
-                                        RichText(text: TextSpan(
-                                          text: "price ",
-                                          style: AppFonts.fontH6semi(AppColors.themeBlack),
-            
-                                          children: [
-                                            TextSpan(text: _filteredItems[index].price,
-                                          style: AppFonts.fontH3semi(
-                                              AppColors.themeColer))
-            
-                                        ]),)
+                                        RichText(
+                                          text: TextSpan(
+                                              text: "price ",
+                                              style: AppFonts.fontH6semi(
+                                                  AppColors.themeBlack),
+                                              children: [
+                                                TextSpan(
+                                                    text: _filteredItems[index]
+                                                        .price,
+                                                    style: AppFonts.fontH5semi(
+                                                        AppColors.themeColer))
+                                              ]),
+                                        )
                                         // Text(
                                         //   "price" + _filteredItems[index].price,
                                         //   style: AppFonts.fontH4semi(
@@ -218,33 +222,39 @@ class _AllProviderState extends State<AllProvider> {
                             Container(
                               width: 63.2.w,
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                    child: Column( crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                            _filteredItems[index].category,
-                                            style: AppFonts.fontH7semi(
-                                                AppColors.themeBlack),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
+                                          _filteredItems[index].category,
+                                          style: AppFonts.fontH7semi(
+                                              AppColors.themeBlack),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
                                         Text(
-                                            _filteredItems[index].subcategory,
-                                            style: AppFonts.fontH7semi(
-                                                AppColors.themeBlack),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                    
-                                    ],),
+                                          _filteredItems[index].subcategory,
+                                          style: AppFonts.fontH7semi(
+                                              AppColors.themeBlack),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                   GestureDetector(
-                                    onTap: (){
-                                      Get.toNamed(AppRoutes.appsingelprovider,arguments: _filteredItems[index]);
+                                    onTap: () {
+                                      Get.toNamed(AppRoutes.appsingelprovider,
+                                          arguments: _filteredItems[index]);
                                     },
                                     child: Container(
                                       height: 5.h,
@@ -273,287 +283,319 @@ class _AllProviderState extends State<AllProvider> {
                 },
               ),
             );
-
           })
-         
         ],
       ),
     );
   }
 
- 
-   void _showFilterDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('Filter Options',style: AppFonts.fontH5semi(AppColors.themeBlack),),
-            IconButton(onPressed: (){
-              Get.close(1);
-            }, icon: Icon(Icons.close))
-          ],
-        ),
-        content: StatefulBuilder(
-          builder: (BuildContext context, setState) {
-            return Container(
-              color: AppColors.themeWhite,
-              height: 30.h,
-              child: Column(
-                children: [
-                  /*************************************************Location******************************** */
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: 18.w,
-                        child: Text(
-                          "Location :",
-                          style: AppFonts.fontH6semi(AppColors.themeBlack),
-                        ),
-                      ),
-                      SizedBox(width: 2.w),
-                      Expanded(
-                        
-                        child: Container(
-                          // width: 35.w,
-                        height: 6.h,
-                        alignment: Alignment.bottomRight,
-                        decoration: BoxDecoration(
-                          border: Border.all(width: 1, color: AppColors.themeborder),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                          child: DropdownButton<String>(
-                            alignment: Alignment.centerRight, isExpanded: true, 
-                            padding: EdgeInsets.symmetric(horizontal: 5.w),
-                            underline: SizedBox(),
-                            value: _selectedLocation,
-                            items: ['All', 'Mirpur-1', 'bijoy Soroni', 'banani', 'shamoly', 'badda', 'Bashundhara R/A']
-                                .map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(
-                                  value,
-                                  style: AppFonts.fontH6semi(AppColors.themeColer),
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                _selectedLocation = newValue!;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 2.w),
-                  /**************************************rating*************************** */
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: 18.w,
-                        child: Text(
-                          "Rating :",
-                          style: AppFonts.fontH6semi(AppColors.themeBlack),
-                        ),
-                      ),
-                      SizedBox(width: 2.w),
-                      Expanded(
-                        child: Container(
-                       
-                          height: 5.h,
-                          alignment: Alignment.bottomRight,
-                          decoration: BoxDecoration(
-                            border: Border.all(width: 1, color: AppColors.themeborder),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                           padding: EdgeInsets.symmetric(horizontal: 5.w),
-                          child: DropdownButton<double>(
-                            value: _selectedRating,
-                             underline: Container(),
-
-                                padding: EdgeInsets.symmetric(horizontal: 5),
-                                 isExpanded: true, 
-                            items: [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0].map((double value) {
-                              return DropdownMenuItem<double>(
-                                value: value,
-                                child: Text(
-                                  value.toString(),
-                                  style: AppFonts.fontH6semi(AppColors.themeColer),
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (double? newValue) {
-                              setState(() {
-                                _selectedRating = newValue!;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 2.w),
-                  /****************************************************body part**************** */
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: 18.w,
-                        child: Text(
-                          "BodyPart :",
-                          style: AppFonts.fontH6semi(AppColors.themeBlack),
-                        ),
-                      ),
-                      SizedBox(width: 2.w),
-                      Expanded(
-                        child: Container(
-                   
-                          height: 5.h,
-                          alignment: Alignment.bottomRight,
-                          decoration: BoxDecoration(
-                            border: Border.all(width: 1, color: AppColors.themeborder),
-                            borderRadius: BorderRadius.circular(10),
-                          ), padding: EdgeInsets.symmetric(horizontal: 5.w),
-                          child: DropdownButton<String>(
-                            value: _selectedBodyPart,isExpanded: true,  underline: Container(),
-                            items: ['All', 'hand', 'face', 'leg'].map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                 
-                                child: Text(
-                                  value.toString(),
-                                  style: AppFonts.fontH6semi(AppColors.themeColer),
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                _selectedBodyPart = newValue!;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 2.w),
-                  /*********************************************time*************  */
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: 18.w,
-                        child: Text(
-                          "Time :",
-                          style: AppFonts.fontH6semi(AppColors.themeBlack),
-                        ),
-                      ),
-                      SizedBox(width: 2.w),
-                      Expanded(
-                        child: Container(
-                        
-                          height: 5.h,
-                          alignment: Alignment.bottomRight,
-                          decoration: BoxDecoration(
-                            border: Border.all(width: 1, color: AppColors.themeborder),
-                            borderRadius: BorderRadius.circular(10),
-                          ), padding: EdgeInsets.symmetric(horizontal: 5.w),
-                          child: DropdownButton<String>(
-                            value: _selectedTime, isExpanded: true, 
-                            underline: Container(),
-                            items: ['All', '10.5', '5.30', '8.00'].map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(
-                                  value,
-                                  style: AppFonts.fontH6semi(AppColors.themeColer),
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                _selectedTime = newValue!;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 2.w),
-                  /*********************************************Gender*************  */
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: 18.w,
-                        child: Text(
-                          "Gender :",
-                          style: AppFonts.fontH6semi(AppColors.themeBlack),
-                        ),
-                      ),
-                      SizedBox(width: 2.w),
-                      Expanded(
-                        child: Container(
-                        
-                          height: 5.h,
-                          alignment: Alignment.bottomRight,
-                          decoration: BoxDecoration(
-                            border: Border.all(width: 1, color: AppColors.themeborder),
-                            borderRadius: BorderRadius.circular(10),
-                          ), padding: EdgeInsets.symmetric(horizontal: 5.w),
-                          child: DropdownButton<String>(
-                            value: _selectedGender, isExpanded: true, 
-                            underline: Container(),
-                            items: ['All', 'Female', 'Male', 'Both'].map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(
-                                  value,
-                                  style: AppFonts.fontH6semi(AppColors.themeColer),
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                _selectedGender = newValue!;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+  void _showFilterDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Filter Options',
+                style: AppFonts.fontH5semi(AppColors.themeBlack),
               ),
-            );
-          },
-        ),
-        actions: [
-          TextButton(
-            child: Text('Apply',style: AppFonts.fontH5black(AppColors.themeColer
-            ),
-            ),
-            onPressed: () {
-              setState(() {
-              //  _applyFilters();
-              });
-              Navigator.of(context).pop();
+              IconButton(
+                  onPressed: () {
+                    Get.close(1);
+                  },
+                  icon: Icon(Icons.close))
+            ],
+          ),
+          content: StatefulBuilder(
+            builder: (BuildContext context, setState) {
+              return Container(
+                color: AppColors.themeWhite,
+                height: 30.h,
+                child: Column(
+                  children: [
+                    /*************************************************Location******************************** */
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: 18.w,
+                          child: Text(
+                            "Location :",
+                            style: AppFonts.fontH6semi(AppColors.themeBlack),
+                          ),
+                        ),
+                        SizedBox(width: 2.w),
+                        Expanded(
+                          child: Container(
+                            // width: 35.w,
+                            height: 6.h,
+                            alignment: Alignment.bottomRight,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: 1, color: AppColors.themeborder),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: DropdownButton<String>(
+                              alignment: Alignment.centerRight,
+                              isExpanded: true,
+                              padding: EdgeInsets.symmetric(horizontal: 5.w),
+                              underline: SizedBox(),
+                              value: _selectedLocation,
+                              items: [
+                                'All',
+                                'Mirpur-1',
+                                'bijoy Soroni',
+                                'banani',
+                                'shamoly',
+                                'badda',
+                                'Bashundhara R/A'
+                              ].map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(
+                                    value,
+                                    style: AppFonts.fontH6semi(
+                                        AppColors.themeColer),
+                                  ),
+                                );
+                              }).toList(),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  _selectedLocation = newValue!;
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 2.w),
+                    /**************************************rating*************************** */
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: 18.w,
+                          child: Text(
+                            "Rating :",
+                            style: AppFonts.fontH6semi(AppColors.themeBlack),
+                          ),
+                        ),
+                        SizedBox(width: 2.w),
+                        Expanded(
+                          child: Container(
+                            height: 5.h,
+                            alignment: Alignment.bottomRight,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: 1, color: AppColors.themeborder),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            padding: EdgeInsets.symmetric(horizontal: 5.w),
+                            child: DropdownButton<double>(
+                              value: _selectedRating,
+                              underline: Container(),
+                              padding: EdgeInsets.symmetric(horizontal: 5),
+                              isExpanded: true,
+                              items: [
+                                0.0,
+                                0.5,
+                                1.0,
+                                1.5,
+                                2.0,
+                                2.5,
+                                3.0,
+                                3.5,
+                                4.0,
+                                4.5,
+                                5.0
+                              ].map((double value) {
+                                return DropdownMenuItem<double>(
+                                  value: value,
+                                  child: Text(
+                                    value.toString(),
+                                    style: AppFonts.fontH6semi(
+                                        AppColors.themeColer),
+                                  ),
+                                );
+                              }).toList(),
+                              onChanged: (double? newValue) {
+                                setState(() {
+                                  _selectedRating = newValue!;
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 2.w),
+                    /****************************************************body part**************** */
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: 18.w,
+                          child: Text(
+                            "BodyPart :",
+                            style: AppFonts.fontH6semi(AppColors.themeBlack),
+                          ),
+                        ),
+                        SizedBox(width: 2.w),
+                        Expanded(
+                          child: Container(
+                            height: 5.h,
+                            alignment: Alignment.bottomRight,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: 1, color: AppColors.themeborder),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            padding: EdgeInsets.symmetric(horizontal: 5.w),
+                            child: DropdownButton<String>(
+                              value: _selectedBodyPart,
+                              isExpanded: true,
+                              underline: Container(),
+                              items: ['All', 'hand', 'face', 'leg']
+                                  .map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(
+                                    value.toString(),
+                                    style: AppFonts.fontH6semi(
+                                        AppColors.themeColer),
+                                  ),
+                                );
+                              }).toList(),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  _selectedBodyPart = newValue!;
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 2.w),
+                    /*********************************************time*************  */
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: 18.w,
+                          child: Text(
+                            "Time :",
+                            style: AppFonts.fontH6semi(AppColors.themeBlack),
+                          ),
+                        ),
+                        SizedBox(width: 2.w),
+                        Expanded(
+                          child: Container(
+                            height: 5.h,
+                            alignment: Alignment.bottomRight,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: 1, color: AppColors.themeborder),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            padding: EdgeInsets.symmetric(horizontal: 5.w),
+                            child: DropdownButton<String>(
+                              value: _selectedTime,
+                              isExpanded: true,
+                              underline: Container(),
+                              items: ['All', '10.5', '5.30', '8.00']
+                                  .map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(
+                                    value,
+                                    style: AppFonts.fontH6semi(
+                                        AppColors.themeColer),
+                                  ),
+                                );
+                              }).toList(),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  _selectedTime = newValue!;
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 2.w),
+                    /*********************************************Gender*************  */
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: 18.w,
+                          child: Text(
+                            "Gender :",
+                            style: AppFonts.fontH6semi(AppColors.themeBlack),
+                          ),
+                        ),
+                        SizedBox(width: 2.w),
+                        Expanded(
+                          child: Container(
+                            height: 5.h,
+                            alignment: Alignment.bottomRight,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: 1, color: AppColors.themeborder),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            padding: EdgeInsets.symmetric(horizontal: 5.w),
+                            child: DropdownButton<String>(
+                              value: _selectedGender,
+                              isExpanded: true,
+                              underline: Container(),
+                              items: ['All', 'Female', 'Male', 'Both']
+                                  .map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(
+                                    value,
+                                    style: AppFonts.fontH6semi(
+                                        AppColors.themeColer),
+                                  ),
+                                );
+                              }).toList(),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  _selectedGender = newValue!;
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              );
             },
           ),
-        ],
-      );
-    },
-  );
-}
-
-  
-  
-
+          actions: [
+            TextButton(
+              child: Text(
+                'Apply',
+                style: AppFonts.fontH5black(AppColors.themeColer),
+              ),
+              onPressed: () {
+                setState(() {
+                  //  _applyFilters();
+                });
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 }

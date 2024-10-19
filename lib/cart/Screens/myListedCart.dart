@@ -52,7 +52,7 @@ class _MyListedCartState extends State<MyListedCart> {
               child: cartController.items.isEmpty
                   ? Center(
                       child: Text(
-                        "MyListedCart is Empty",
+                        "Your Listed Cart is Empty",
                         style: AppFonts.fontH5semi(AppColors.themeColer),
                       ),
                     )
@@ -127,10 +127,10 @@ class _MyListedCartState extends State<MyListedCart> {
                                                 allinfoController
                                                     .getCategoryNameById(
                                                         int.parse(cartController
-                                                            .items[index]
-                                                            .item
+                                                            .items[index].items.
+                                                            
                                                             .categoryId))
-                                                   .toString(),
+                                                    .toString(),
                                                 style: AppFonts.fontH7semi(
                                                     AppColors.themeBlack),
                                                 maxLines: 2,
@@ -142,8 +142,8 @@ class _MyListedCartState extends State<MyListedCart> {
                                                     .getSubcategoryNameById(
                                                         int.parse(cartController
                                                             .items[index]
-                                                            .item
-                                                            .subcategoryId))
+                                                            .
+                                                            .subcategoryid))
                                                     .toString(),
                                                 style: AppFonts.fontH7semi(
                                                     AppColors.themeBlack),
@@ -297,8 +297,8 @@ class _MyListedCartState extends State<MyListedCart> {
       bottomNavigationBar: cartController.items.isEmpty
           ? SizedBox()
           : Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 2.h,vertical: 1.w),
-            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 2.h, vertical: 1.w),
+              child: Container(
                 height: 10.h,
                 child: Column(
                   children: [
@@ -310,23 +310,29 @@ class _MyListedCartState extends State<MyListedCart> {
                       ],
                     ),
                     GestureDetector(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (_)=>PaymentPage()));
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => PaymentPage()));
                       },
                       child: Container(
-                        decoration: BoxDecoration(color: AppColors.themeColer,borderRadius: BorderRadius.circular(15)),
+                        decoration: BoxDecoration(
+                            color: AppColors.themeColer,
+                            borderRadius: BorderRadius.circular(15)),
                         width: 100.w,
                         alignment: Alignment.center,
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: Text("Checkout now",style: AppFonts.fontH5semi(AppColors.themeWhite),),
+                          child: Text(
+                            "Checkout now",
+                            style: AppFonts.fontH5semi(AppColors.themeWhite),
+                          ),
                         ),
                       ),
                     )
                   ],
                 ),
               ),
-          ),
+            ),
     );
   }
 

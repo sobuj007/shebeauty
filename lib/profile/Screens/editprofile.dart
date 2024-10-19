@@ -171,16 +171,17 @@ class _EditprofileState extends State<Editprofile> {
                       style: AppFonts.fontH5semi(AppColors.themeBlack),
                     ),
                     Container(
-                      height: 10.h,
+                      height: 12.h,
                       width: 100.w,
                       decoration: BoxDecoration(
                           border: Border.all(
                               width: .03.h, color: AppColors.themeborder),
                           borderRadius: BorderRadius.circular(10)),
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding:  EdgeInsets.symmetric(horizontal: 1.5.h,vertical: 1.h),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
                               'Fullname : \t ${ucon.user['name'].toString().toUpperCase()}',

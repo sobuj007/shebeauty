@@ -4,6 +4,7 @@ import 'package:Ghore_Parlor/category/Controllers/getAllinfocontoller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:Ghore_Parlor/auth/Controllers/userContoller.dart';
 import 'package:Ghore_Parlor/cart/Model/cartModel.dart';
@@ -34,8 +35,8 @@ class _SingelAppointmentState extends State<SingelAppointment> {
   var agentcontroller = Get.put(AgentProfileController());
   var ucon = Get.put(Usercontoller());
   var allcon = Get.put(AllinfoController());
-  
-  bool isfav= false;
+
+  bool isfav = false;
   String date = "";
   TimeOfDay _selectedTime = TimeOfDay.now();
   int productQun = 1;
@@ -45,12 +46,11 @@ class _SingelAppointmentState extends State<SingelAppointment> {
   final WishlistController wishcontroller = Get.put(WishlistController());
   @override
   void initState() {
-    super.initState();   if (wishcontroller.isProductInWishlist(widget.item.id)) {
+    super.initState();
+    if (wishcontroller.isProductInWishlist(int.parse(widget.item.id))) {
       isfav = true;
-     setState(() {
-       
-     });
-    } 
+      setState(() {});
+    }
     coutntotal();
     date = (DateTime.now().day.toString() +
             "/" +
@@ -58,12 +58,10 @@ class _SingelAppointmentState extends State<SingelAppointment> {
             "/" +
             DateTime.now().year.toString())
         .toString();
- 
   }
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
@@ -76,20 +74,20 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                     decoration: BoxDecoration(
                         border:
                             Border.all(width: 1, color: AppColors.themeborder),
-                        borderRadius: BorderRadius.circular(10)),
+                        borderRadius: BorderRadius.circular(15)),
                     margin: EdgeInsets.symmetric(horizontal: 0, vertical: 1.h),
                     child: Row(
                       children: [
                         Container(
-                          height: 20.h,
-                          width: 30.w,
+                          height: 21.h,
+                          width: 28.w,
                           decoration: BoxDecoration(
                               image: DecorationImage(
                                   image: CachedNetworkImageProvider(
-                                    widget.item.image,
+                                    widget.item.img,
                                   ),
                                   fit: BoxFit.cover),
-                              borderRadius: BorderRadius.circular(10)),
+                              borderRadius: BorderRadius.circular(20)),
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
@@ -100,78 +98,20 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                         Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8.0, vertical: 2),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 1.h, vertical: .5.h),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                // mainAxisAlignment:
+                                //     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Stack(
+                                    // crossAxisAlignment:
+                                    //     CrossAxisAlignment.start,
                                     children: [
-                                      Positioned(
-                                        right: 0,
-                                        child: Column(
-                                          children: [
-                                            IconButton(
-                                                onPressed: () {
-                                                  isfav = !isfav;
-                                                  print(isfav);
-                                                  //     if (isfav==false) {
-                                                  //  wishcontroller.removeFromWishlist(widget.item.name);
-                                                  //     } else {}
-                                                  if (wishcontroller
-                                                      .isProductInWishlist(
-                                                          widget.item.id!)) {
-                                                    wishcontroller
-                                                        .removeProductFromWishlist(
-                                                            widget.item.id!);
-                                                                 AppStyle.snackbar(
-                                                                                              'Wishlist',
-                                                                                              'Product delete from wishlist');
-                                             
-                                                  } else {
-                                                    wishcontroller
-                                                        .addProductToWishlist(widget
-                                                            .item); // Adding Products to wishlist
-                                                        
-                                                     AppStyle.snackbar(
-                                                                                              'Wishlist',
-                                                                                              'Product add to wishlist');
-                                                  }
-                                                  setState(() {
-                                                    
-                                                  });
-                                                  //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: content))
-                                                }
-                                                
-                                                //wishList.add(items);
-
-                                                ,
-                                                icon: isfav==true
-
-                                                    ? Icon(
-                                                        Icons.favorite,
-                                                        color: AppColors
-                                                            .themeColer,
-                                                      )
-                                                    : Icon(
-                                                        Icons
-                                                            .favorite_border_outlined,
-                                                        color: const Color
-                                                            .fromARGB(
-                                                            255, 56, 45, 49),
-                                                      )),
-                                            // Rattings(
-                                            //   rate:
-                                            //       widget.item.rating.toString(),
-                                            // ),
-                                          ],
-                                        ),
-                                      ),
                                       Container(
-                                        height: 12.h,
-                                        width: 58.w,
+                                        height: 11.h,
+                                        width: 60.w,
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -194,40 +134,122 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                                   ),
                                                 ),
                                                 Text(
-                                                 applng.getLang(16) +
-                                                     allcon.getCategoryNameById(int.parse( widget.item.categoryId)),
+                                                  applng.getLang(16) +
+                                                      allcon
+                                                          .getCategoryNameById(
+                                                              int.parse(widget
+                                                                  .item
+                                                                  .categoryId)),
                                                   style: AppFonts.fontH7semi(
                                                       AppColors.themeBlack),
                                                   maxLines: 2,
                                                   overflow:
                                                       TextOverflow.ellipsis,
+                                                ),
+                                                SizedBox(
+                                                  height: .5.h,
                                                 ),
                                                 Text(
                                                   applng.getLang(17) +
-                                                      allcon.getSubcategoryNameById(int.parse(widget.item.subcategoryId)),
+                                                      allcon.getSubcategoryNameById(
+                                                          int.parse(widget.item
+                                                              .subcategoryId)),
                                                   style: AppFonts.fontH7semi(
                                                       AppColors.themeBlack),
                                                   maxLines: 2,
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                 ),
-                                                 Text(
-                                          applng.getLang(19) +
-                                              widget.item.gender
-                                                  .toString()
-                                                  .toUpperCase(),
-                                          style: AppFonts.fontH7semi(
-                                              AppColors.themeBlack),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          textAlign: TextAlign.start,
-                                        ),
-                                                
+                                                SizedBox(
+                                                  height: .5.h,
+                                                ),
+                                                Text(
+                                                  applng.getLang(19) +
+                                                      widget.item.gender
+                                                          .toString()
+                                                          .toUpperCase(),
+                                                  style: AppFonts.fontH7regular(
+                                                      AppColors.themeBlack),
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  textAlign: TextAlign.start,
+                                                ),
                                               ],
                                             ),
                                           ],
                                         ),
                                       ),
+                                      Positioned(
+                                        top: 0,
+                                        right: 1,
+                                        child: Column(
+                                          children: [
+                                            IconButton(
+                                                onPressed: () {
+                                                  if (wishcontroller
+                                                          .isProductInWishlist(
+                                                              widget
+                                                                  .item.id!) &&
+                                                      isfav == true) {
+                                                    wishcontroller
+                                                        .removeProductFromWishlist(
+                                                            widget.item.id!);
+                                                    AppStyle.snackbar(
+                                                        'Wishlist',
+                                                        'Product delete from wishlist');
+                                                    isfav = false;
+                                                  } else {
+                                                    wishcontroller
+                                                        .addProductToWishlist(widget
+                                                            .item); // Adding Products to wishlist
+                                                    isfav = true;
+
+                                                    AppStyle.snackbar(
+                                                        'Wishlist',
+                                                        'Product add to wishlist');
+                                                  }
+                                                  setState(() {});
+                                                  //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: content))
+                                                }
+
+                                                //wishList.add(items);
+
+                                                ,
+                                                icon: isfav == true
+                                                    ? Icon(
+                                                        Icons.favorite,
+                                                        color: AppColors
+                                                            .themeColer,
+                                                      )
+                                                    : Icon(
+                                                        Icons
+                                                            .favorite_border_outlined,
+                                                        color: const Color
+                                                            .fromARGB(
+                                                            255, 56, 45, 49),
+                                                      )),
+                                            RatingBarIndicator(
+                                              rating: calculateAverageRating(
+                                                  widget.item.reviewRatings),
+                                              itemCount: 1,
+                                              itemSize: 18.0,
+                                              direction: Axis.horizontal,
+                                              unratedColor: Colors.grey,
+                                              itemBuilder: (context, _) => Icon(
+                                                Icons.star,
+                                                color: Colors.amber,
+                                              ),
+                                            ),
+                                            SizedBox(height: 3),
+                                            Text(
+                                              '${calculateAverageRating(widget.item.reviewRatings).toString()} / 5.0',
+                                              style: AppFonts.fontH7semi(
+                                                  AppColors.themeColer),
+                                            ),
+                                          ],
+                                        ),
+                                      )
                                     ],
                                   ),
                                   // SizedBox(
@@ -249,40 +271,33 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                   // ),
                                   /************************** gender */
                                   Container(
-                                    height: 6.h,
                                     width: 58.w,
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                       RichText(
-                                                  text: TextSpan(
-                                                      text: applng.getLang(18),
-                                                      style:
-                                                          AppFonts.fontH7semi(
-                                                              AppColors
-                                                                  .themeBlack),
-                                                      children: [
-                                                        TextSpan(
-                                                            text: widget.item
-                                                                    .servicePrice +
-                                                                "Tk",
-                                                            style: AppFonts
-                                                                .fontH5semi(
-                                                                    AppColors
-                                                                        .themeColer))
-                                                      ]),
-                                                ),
+                                        RichText(
+                                          text: TextSpan(
+                                              text: applng.getLang(18),
+                                              style: AppFonts.fontH7normal(
+                                                  AppColors.themeBlack),
+                                              children: [
+                                                TextSpan(
+                                                    text: widget.item.sprice +
+                                                        "Tk",
+                                                    style: AppFonts.fontH6semi(
+                                                        AppColors.themeColer))
+                                              ]),
+                                        ),
                                         RichText(
                                           text: TextSpan(
                                               text: applng.getLang(20),
-                                              style: AppFonts.fontH7semi(
+                                              style: AppFonts.fontH7normal(
                                                   AppColors.themeBlack),
                                               children: [
                                                 TextSpan(
                                                     text: " " +
-                                                        widget
-                                                            .item.productPrice,
+                                                        widget.item.pprice,
                                                     children: [
                                                       TextSpan(
                                                         text: "Tk",
@@ -292,7 +307,7 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                                                     .themeColer),
                                                       )
                                                     ],
-                                                    style: AppFonts.fontH5semi(
+                                                    style: AppFonts.fontH6semi(
                                                         AppColors.themeColer))
                                               ]),
                                         ),
@@ -342,14 +357,16 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                   width: 1, color: AppColors.themehint)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Obx((){
-                              if(agentcontroller.profilesdata==null){
+                            child: Obx(() {
+                              if (agentcontroller.profilesdata == null) {
                                 return CircularProgressIndicator();
                               }
-                              var prof= agentcontroller.profilesdata;
-                                 return prof![0].servicestime==null?Container(): Text(prof![0].servicestime.toString());
-                              
-                             
+                              var prof = agentcontroller.profilesdata;
+
+                              print(prof);
+                              return prof!.isEmpty
+                                  ? Container()
+                                  : Text(prof![0].servicestime.toString());
                             }),
                           ),
                         )
@@ -363,51 +380,66 @@ class _SingelAppointmentState extends State<SingelAppointment> {
           ],
         ),
       ),
-      bottomNavigationBar: cartController.itemExists(widget.item.id.toString())? SizedBox():Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GestureDetector(
-                onTap: () {
-                  var customTime = _formatTimeOfDay(_selectedTime);
-               
-             
-            
-         final CartProducts cartProduct = convertToCartProducts(widget.item);
-                                  final CartProduct.CartItem sampleItem = CartProduct.CartItem(
-  id: widget.item.id?.toString() ?? '0', // Handle null case
-  name: widget.item.name ?? 'Unknown', // Default value if null
-  img: widget.item.image ?? '', // Default image
-  selectedTime: customTime.toString() ?? '', // Custom time
-  selectedDate: date.toString(), // Selected date
-  selectedServicsQun: servicesQun?.toString() ?? '1', // Default quantity
-  selectedProductQun: productQun?.toString() ?? '1', // Default product quantity
-  sprice: widget.item.servicePrice.toString() ?? '0.00', // Handle null price
-  pprice: widget.item.productPrice.toString() ?? '0.00', // Handle null price
-  agentid: widget.item.agentId ?? 'Unknown Agent', // Handle null agentId
-  userid: ucon.user['id'].toString(), // Assuming user id is always present
-  item: cartProduct, // Pass the entire product object directly
-);
+      bottomNavigationBar: cartController.itemExists(widget.item.id.toString())
+          ? SizedBox()
+          : Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GestureDetector(
+                  onTap: () {
+                    var customTime = _formatTimeOfDay(_selectedTime);
 
-                 
+                    final CartProducts cartProduct =
+                        convertToCartProducts(widget.item);
+                    final CartProduct.CartItem sampleItem =
+                        CartProduct.CartItem(
+                      id: widget.item.id?.toString() ?? '0', // Handle null case
+                      name: widget.item.name ??
+                          'Unknown', // Default value if null
+                      img: widget.item.img ?? '', // Default image
+                      selectedTime: customTime.toString() ?? '', // Custom time
+                      selectedDate: date.toString(), // Selected date
+                      selectedServicsQun:
+                          servicesQun?.toString() ?? '1', // Default quantity
+                      selectedProductQun: productQun?.toString() ??
+                          '1', // Default product quantity
+                      sprice: widget.item.sprice.toString() ??
+                          '0.00', // Handle null price
+                      pprice: widget.item.pprice.toString() ??
+                          '0.00', // Handle null price
+                      agentid: widget.item.agentid ??
+                          'Unknown Agent', // Handle null agentId
+                      userid: ucon.user['id']
+                          .toString(), // Assuming user id is always present
+                      item:
+                          cartProduct, // Pass the entire product object directly
+                    );
 
-              
                     AppStyle.snackbar('Cart', 'Product added to Cart');
-                     cartController.addItem(sampleItem);
-                
-                },
-                child: Container(
-                  height: 6.h,
-                  width: 100.w,
-                  decoration: BoxDecoration(
-                      color: AppColors.themeColer,
-                      borderRadius: BorderRadius.circular(15)),
-                  alignment: Alignment.center,
-                  child: Text(
-                    applng.getLang(14),
-                    style: AppFonts.fontH4semi(AppColors.themeWhite),
-                  ),
-                )),
-      ),
+                    cartController.addItem(sampleItem);
+                  },
+                  child: Container(
+                    height: 6.h,
+                    width: 100.w,
+                    decoration: BoxDecoration(
+                        color: AppColors.themeColer,
+                        borderRadius: BorderRadius.circular(15)),
+                    alignment: Alignment.center,
+                    child: Text(
+                      applng.getLang(47),
+                      style: AppFonts.fontH4semi(AppColors.themeWhite),
+                    ),
+                  )),
+            ),
     );
+  }
+
+  // Function to calculate the average rating
+  double calculateAverageRating(reviewRatings) {
+    if (reviewRatings == null || reviewRatings.isEmpty) return 0.0;
+
+    double sum = reviewRatings.fold(
+        0.0, (sum, review) => sum + double.parse(review.rating));
+    return sum / reviewRatings.length;
   }
 
 // Function to format TimeOfDay to a string
@@ -416,32 +448,38 @@ class _SingelAppointmentState extends State<SingelAppointment> {
     final minutes = timeOfDay.minute.toString().padLeft(2, '0');
     return '$hours:$minutes';
   }
-  CartProducts convertToCartProducts(Products product) {
-  final jsonMap = product.toJson();
 
-  return CartProducts(
-    id: jsonMap['id']?.toString() ?? '',
-    name: jsonMap['name'] ?? '',
-    img: jsonMap['image'] ?? '',
-    sprice: jsonMap['service_price'] ?? '0.00',
-    pprice: jsonMap['product_price'] ?? '0.00',
-    agentid: jsonMap['agent_id'] ?? '',
-    categoryId: jsonMap['category_id'] ?? '',
-    subcategoryId: jsonMap['subcategory_id'] ?? '',
-    bodypartId: jsonMap['bodypart_id'] ?? '',
-    cityId: jsonMap['city_id'] ?? '',
-    locationIds: jsonMap['location_ids'] ?? '',
-    slotId: jsonMap['slot_id'] ?? '',
-    appointmentSlotIds: jsonMap['appointment_slot_ids'] ?? '',
-    description: jsonMap['description'] ?? '',
-    gender: jsonMap['gender'] ?? '',
-    createdAt: jsonMap['created_at'] ?? '',
-    updatedAt: jsonMap['updated_at'] ?? '',
-  );
-}
-List<CartProducts> convertProductsList(List<Products> productsList) {
-  return productsList.map((product) => convertToCartProducts(product)).toList();
-}
+  CartProducts convertToCartProducts(Products product) {
+    final jsonMap = product.toJson();
+
+    return CartProducts(
+      id: jsonMap['id']?.toString() ?? '',
+      name: jsonMap['name'] ?? '',
+      img: jsonMap['image'] ?? '',
+      sprice: jsonMap['service_price'] ?? '0.00',
+      pprice: jsonMap['product_price'] ?? '0.00',
+      agentid: jsonMap['agent_id'] ?? '',
+      categoryId: jsonMap['category_id'] ?? '',
+      subcategoryId: jsonMap['subcategory_id'] ?? '',
+      bodypartId: jsonMap['bodypart_id'] ?? '',
+      cityId: jsonMap['city_id'] ?? '',
+      locationIds: jsonMap['location_ids'] ?? '',
+      slotId: jsonMap['slot_id'] ?? '',
+      appointmentSlotIds: jsonMap['appointment_slot_ids'] ?? '',
+      description: jsonMap['description'] ?? '',
+      gender: jsonMap['gender'] ?? '',
+      createdAt: jsonMap['created_at'] ?? '',
+      updatedAt: jsonMap['updated_at'] ?? '',
+      reviewRatings: jsonMap['reviewRatings'] ?? '',
+    );
+  }
+
+  List<CartProducts> convertProductsList(List<Products> productsList) {
+    return productsList
+        .map((product) => convertToCartProducts(product))
+        .toList();
+  }
+
   timeslot() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -520,7 +558,7 @@ List<CartProducts> convertProductsList(List<Products> productsList) {
               applng.getLang(25),
               style: AppFonts.fontH6semi(AppColors.themeBlack),
             ),
-             CustomCounterproduct(context)
+            CustomCounterproduct(context)
           ],
         ),
         /************************************ */
@@ -557,10 +595,28 @@ List<CartProducts> convertProductsList(List<Products> productsList) {
       initialTime: _selectedTime,
     );
     if (picked != null && picked != _selectedTime) {
+      final adjustedTime = _adjustToNearestInterval(picked, 15);
+
       setState(() {
-        _selectedTime = picked;
+        _selectedTime = adjustedTime;
       });
     }
+  }
+
+  TimeOfDay _adjustToNearestInterval(TimeOfDay time, int intervalMinutes) {
+    int totalMinutes = time.hour * 60 + time.minute;
+
+    int remainder = totalMinutes % intervalMinutes;
+    if (remainder != 0) {
+      totalMinutes += (remainder > intervalMinutes / 2)
+          ? (intervalMinutes - remainder)
+          : -remainder;
+    }
+
+    final int adjustedHour = totalMinutes ~/ 60;
+    final int adjustedMinutes = totalMinutes % 60;
+
+    return TimeOfDay(hour: adjustedHour, minute: adjustedMinutes);
   }
 
   CustomCounterproduct(BuildContext context) {
@@ -644,10 +700,10 @@ List<CartProducts> convertProductsList(List<Products> productsList) {
   }
 
   coutntotal() {
-    var p = double.parse(widget.item.productPrice) *
-        double.parse(productQun.toString());
-    var s = double.parse(widget.item.servicePrice) *
-        double.parse(servicesQun.toString());
+    var p =
+        double.parse(widget.item.pprice) * double.parse(productQun.toString());
+    var s =
+        double.parse(widget.item.sprice) * double.parse(servicesQun.toString());
 
     setState(() {
       total = double.parse((p + s).toString());

@@ -1,19 +1,47 @@
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/appColors.dart';
 import '../utils/appFonts.dart';
 
-class TermsAndConditionsPage extends StatelessWidget {
+class TermsAndConditionsPage extends StatefulWidget {
+  @override
+  State<TermsAndConditionsPage> createState() => _TermsAndConditionsPageState();
+}
+
+class _TermsAndConditionsPageState extends State<TermsAndConditionsPage> {
+  var isTermsAgreed = false.obs;
+  @override
+  void initState() {
+    // TODO: implement initState
+    loadTermsAgreement();
+    super.initState();
+  }
+
+  Future<void> loadTermsAgreement() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    isTermsAgreed.value = prefs.getBool('isTermsAgreed') ?? false;
+  }
+
+  void toggleTermsAgreement(bool value) {
+    isTermsAgreed.value = value;
+    saveTermsAgreement(value); // Call a function to save this state
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Terms and Conditions',style: AppFonts.fontH4semi(AppColors.themeWhite),),
-         backgroundColor: AppColors.themeColer,
-        iconTheme: IconThemeData(
-          color: AppColors.themeWhite// Change the color of the back arrow here
+        title: Text(
+          'Terms and Conditions',
+          style: AppFonts.fontH4semi(AppColors.themeWhite),
         ),
+        backgroundColor: AppColors.themeColer,
+        iconTheme: IconThemeData(
+            color:
+                AppColors.themeWhite // Change the color of the back arrow here
+            ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -89,23 +117,33 @@ class TermsAndConditionsPage extends StatelessWidget {
                 'We reserve the right, at our sole discretion, to modify or replace these Terms at any time. By continuing to access or use our app after those revisions become effective, you agree to be bound by the revised terms.',
               ),
               SizedBox(height: 40),
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context); // Go back to the previous screen
-                  },
-                  child: Text('I Agree'),
-                  style: ElevatedButton.styleFrom(
-                    overlayColor: Colors.teal,
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                    textStyle: TextStyle(fontSize: 16),
-                  ),
-                ),
-              ),
+              // Center(
+              //   child: ElevatedButton(
+              //     onPressed: () {
+              //       // print(isTermsAgreed.value);
+              //       toggleTermsAgreement(isTermsAgreed.value);
+              //       // saveTermsAgreement(isTermsAgreed.value);
+              //       Navigator.pop(context); // Go back to the previous screen
+              //     },
+              //     child: isTermsAgreed.value
+              //         ? Text('You Accept ')
+              //         : Text('I Agree'),
+              //     style: ElevatedButton.styleFrom(
+              //       overlayColor: Colors.teal,
+              //       padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              //       textStyle: TextStyle(fontSize: 16),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Future<void> saveTermsAgreement(bool value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isTermsAgreed', value);
   }
 }

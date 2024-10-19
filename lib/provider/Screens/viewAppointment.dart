@@ -67,251 +67,264 @@ class _ViewAppointmentState extends State<ViewAppointment> {
           CustomAppbar(
             title: "My Cart",
           ),
-          Expanded(
+          Flexible(
             child: SafeArea(
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+                padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 0.h),
                 child: Column(
                   children: [
-                    Expanded(
-                      child: ListView(
-                          shrinkWrap: true,
-                          padding: EdgeInsets.zero,
-                          children: [
-                            Expanded(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        width: 1, color: AppColors.themeborder),
-                                    borderRadius: BorderRadius.circular(10)),
-                                margin: EdgeInsets.symmetric(
-                                    horizontal: 0, vertical: 1.h),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      height: 20.h,
-                                      width: 30.w,
+                    ListView(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      width: 1, color: AppColors.themeborder),
+                                  borderRadius: BorderRadius.circular(15)),
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 0, vertical: 1.h),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    height: 18.h,
+                                    width: 30.w,
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: CachedNetworkImageProvider(
+                                              args.img,
+                                            ),
+                                            fit: BoxFit.cover),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: Container(
                                       decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                              image: CachedNetworkImageProvider(
-                                                args.img,
-                                              ),
-                                              fit: BoxFit.cover),
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          color: const Color.fromARGB(
-                                              60, 100, 99, 99),
-                                        ),
+                                        borderRadius: BorderRadius.circular(15),
+                                        color: const Color.fromARGB(
+                                            60, 100, 99, 99),
                                       ),
                                     ),
-                                    Column(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 8.0, vertical: 2),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Container(
-                                                height: 15.h,
-                                                width: 58.w,
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceAround,
-                                                      children: [
-                                                        Text(
-                                                          args.name
-                                                              .toUpperCase(),
-                                                          style: AppFonts
-                                                              .fontH6bold(AppColors
-                                                                  .themeBlack),
-                                                          maxLines: 2,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                        ),
-                                                        Text(
-                                                          applng.getLang(16) +
-                                                            allcon.getCategoryNameById(  int.parse(args.item
-                                                                  .categoryId))
-                                                                  .toString(),
-                                                          style: AppFonts
-                                                              .fontH7semi(AppColors
-                                                                  .themeBlack),
-                                                          maxLines: 2,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                        ),
-                                                        Text(
-                                                          applng.getLang(17) +
-                                                             allcon.getSubcategoryNameById(int.parse( args.item
-                                                                  .subcategoryId
-                                                                  .toString())),
-                                                          style: AppFonts
-                                                              .fontH7semi(AppColors
-                                                                  .themeBlack),
-                                                          maxLines: 2,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                        ),
-                                                        RichText(
-                                                          text: TextSpan(
-                                                              text: applng
-                                                                  .getLang(18),
+                                  ),
+                                  Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 8.0, vertical: 1.h),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              width: 58.w,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text(
+                                                        args.name.toUpperCase(),
+                                                        style:
+                                                            AppFonts.fontH6bold(
+                                                                AppColors
+                                                                    .themeBlack),
+                                                        maxLines: 2,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
+                                                      SizedBox(
+                                                        height: 1.h,
+                                                      ),
+                                                      Text(
+                                                        applng.getLang(16) +
+                                                            allcon
+                                                                .getCategoryNameById(
+                                                                    int.parse(args
+                                                                        .item
+                                                                        .categoryId))
+                                                                .toString(),
+                                                        style:
+                                                            AppFonts.fontH7semi(
+                                                                AppColors
+                                                                    .themeBlack),
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
+                                                      SizedBox(
+                                                        height: .5.h,
+                                                      ),
+                                                      Text(
+                                                        applng.getLang(17) +
+                                                            allcon.getSubcategoryNameById(
+                                                                int.parse(args
+                                                                    .item
+                                                                    .subcategoryId
+                                                                    .toString())),
+                                                        style:
+                                                            AppFonts.fontH7semi(
+                                                                AppColors
+                                                                    .themeBlack),
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
+                                                      SizedBox(
+                                                        height: .5.h,
+                                                      ),
+                                                      Text(
+                                                        applng.getLang(19) +
+                                                            args.item.gender
+                                                                .toString()
+                                                                .toUpperCase(),
+                                                        style:
+                                                            AppFonts.fontH7semi(
+                                                                AppColors
+                                                                    .themeBlack),
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            // SizedBox(
+                                            //   width: 58.w,
+                                            //   height: 3.5.h,
+                                            //   child: Row(
+                                            //     children: [
+                                            //       Expanded(
+                                            //         child: Text(
+                                            //           args.description,
+                                            //           style: AppFonts.fontH6semi(
+                                            //               AppColors.themeBlack),
+                                            //           maxLines: 2,
+                                            //           overflow: TextOverflow.ellipsis,
+                                            //         ),
+                                            //       ),
+                                            //     ],
+                                            //   ),
+                                            // ),
+                                            /************************** gender */
+                                            Container(
+                                              height: 5.h,
+                                              width: 58.w,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  RichText(
+                                                    text: TextSpan(
+                                                        text:
+                                                            applng.getLang(18),
+                                                        style:
+                                                            AppFonts.fontH7semi(
+                                                                AppColors
+                                                                    .themeBlack),
+                                                        children: [
+                                                          TextSpan(
+                                                              text: args.item
+                                                                      .sprice +
+                                                                  "Tk",
                                                               style: AppFonts
-                                                                  .fontH7semi(
+                                                                  .fontH6semi(
                                                                       AppColors
-                                                                          .themeBlack),
-                                                              children: [
-                                                                TextSpan(
-                                                                    text: args
-                                                                            .item
-                                                                            .sprice +
-                                                                        "Tk",
-                                                                    style: AppFonts.fontH6semi(
-                                                                        AppColors
-                                                                            .themeColer))
-                                                              ]),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
+                                                                          .themeColer))
+                                                        ]),
+                                                  ),
+                                                  RichText(
+                                                    text: TextSpan(
+                                                        text:
+                                                            applng.getLang(20),
+                                                        style:
+                                                            AppFonts.fontH7semi(
+                                                                AppColors
+                                                                    .themeBlack),
+                                                        children: [
+                                                          TextSpan(
+                                                              text: " " +
+                                                                  args.pprice +
+                                                                  "Tk",
+                                                              style: AppFonts
+                                                                  .fontH6semi(
+                                                                      AppColors
+                                                                          .themeColer))
+                                                        ]),
+                                                  ),
+                                                ],
                                               ),
-                                              // SizedBox(
-                                              //   width: 58.w,
-                                              //   height: 3.5.h,
-                                              //   child: Row(
-                                              //     children: [
-                                              //       Expanded(
-                                              //         child: Text(
-                                              //           args.description,
-                                              //           style: AppFonts.fontH6semi(
-                                              //               AppColors.themeBlack),
-                                              //           maxLines: 2,
-                                              //           overflow: TextOverflow.ellipsis,
-                                              //         ),
-                                              //       ),
-                                              //     ],
-                                              //   ),
-                                              // ),
-                                              /************************** gender */
-                                              Container(
-                                                height: 4.h,
-                                                width: 58.w,
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      applng.getLang(19) +
-                                                          args.item.gender
-                                                              .toString()
-                                                              .toUpperCase(),
-                                                      style:
-                                                          AppFonts.fontH7semi(
-                                                              AppColors
-                                                                  .themeBlack),
-                                                      maxLines: 1,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                    ),
-                                                    RichText(
-                                                      text: TextSpan(
-                                                          text: applng
-                                                              .getLang(20),
-                                                          style: AppFonts
-                                                              .fontH5semi(AppColors
-                                                                  .themeBlack),
-                                                          children: [
-                                                            TextSpan(
-                                                                text: " " +
-                                                                    args
-                                                                        .pprice +
-                                                                    "Tk",
-                                                                style: AppFonts
-                                                                    .fontH6semi(
-                                                                        AppColors
-                                                                            .themeColer))
-                                                          ]),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    )
-                                  ],
-                                ),
+                                      ),
+                                    ],
+                                  )
+                                ],
                               ),
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  children: [
-                                    Text(
-                                      applng.getLang(21),
-                                      style: AppFonts.fontH6regular(
-                                          AppColors.themeColer),
-                                    ),
-                                    // Container(
-                                    //   decoration: BoxDecoration(
-                                    //       borderRadius: BorderRadius.circular(5),
-                                    //       border: Border.all(
-                                    //           width: 1, color: AppColors.themehint)),
-                                    //   child: Padding(
-                                    //     padding: const EdgeInsets.all(8.0),
-                                    //     child: Text(args.item.available),
-                                    //   ),
-                                    // )
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    Text(
-                                      applng.getLang(32),
-                                      style: AppFonts.fontH6regular(
-                                          AppColors.themeColer),
-                                    ),
-                                    // Container(
-                                    //   decoration: BoxDecoration(
-                                    //       borderRadius: BorderRadius.circular(5),
-                                    //       border: Border.all(
-                                    //           width: 1, color: AppColors.themehint)),
-                                    //   child: Padding(
-                                    //     padding: const EdgeInsets.all(8.0),
-                                    //     child: Text(args.item.slot.toString()),
-                                    //   ),
-                                    // )
-                                  ],
-                                ),
-                              ],
-                            ),
-                            timeslot()
-                          ]),
-                    ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                children: [
+                                  Text(
+                                    applng.getLang(21),
+                                    style: AppFonts.fontH6regular(
+                                        AppColors.themeColer),
+                                  ),
+                                  // Container(
+                                  //   decoration: BoxDecoration(
+                                  //       borderRadius: BorderRadius.circular(5),
+                                  //       border: Border.all(
+                                  //           width: 1, color: AppColors.themehint)),
+                                  //   child: Padding(
+                                  //     padding: const EdgeInsets.all(8.0),
+                                  //     child: Text(args.item.available),
+                                  //   ),
+                                  // )
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text(
+                                    applng.getLang(32),
+                                    style: AppFonts.fontH6regular(
+                                        AppColors.themeColer),
+                                  ),
+                                  // Container(
+                                  //   decoration: BoxDecoration(
+                                  //       borderRadius: BorderRadius.circular(5),
+                                  //       border: Border.all(
+                                  //           width: 1, color: AppColors.themehint)),
+                                  //   child: Padding(
+                                  //     padding: const EdgeInsets.all(8.0),
+                                  //     child: Text(args.item.slot.toString()),
+                                  //   ),
+                                  // )
+                                ],
+                              ),
+                            ],
+                          ),
+                          timeslot()
+                        ]),
                   ],
                 ),
               ),
@@ -320,7 +333,6 @@ class _ViewAppointmentState extends State<ViewAppointment> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-            
               height: 6.h,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -595,10 +607,8 @@ class _ViewAppointmentState extends State<ViewAppointment> {
   }
 
   coutntotal() {
-    var p = double.parse(args.pprice) *
-        double.parse(productQun.toString());
-    var s = double.parse(args.sprice) *
-        double.parse(servicesQun.toString());
+    var p = double.parse(args.pprice) * double.parse(productQun.toString());
+    var s = double.parse(args.sprice) * double.parse(servicesQun.toString());
 
     setState(() {
       total = double.parse((p + s).toString());

@@ -11,12 +11,11 @@ class MyOrder {
     var token = tdata.getuser();
     var sendingData = jsonEncode(result);
     var headersList = {
-    
       'Authorization': 'Bearer $token',
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     };
-    var url = Uri.parse(AppAppis.endpoint +'orders/new');
+    var url = Uri.parse(AppAppis.endpoint + 'orders/new');
 
     var body = sendingData;
 
@@ -39,37 +38,41 @@ class MyOrder {
     }
   }
 
-  paymentStore(id, total, transid, type,address,notes,mobile) async {
+  paymentStore(id, total, transid, type, address, notes, mobile) async {
     var token = tdata.getuser();
-
+    print("res");
+    print(id);
+    print(total);
+    print(transid);
+    print(type);
+    print(address);
+    print(notes);
+    print(mobile);
     var headersList = {
-       'Authorization': 'Bearer $token',
+      'Authorization': 'Bearer $token',
       'Content-Type': 'application/json',
       'Accept': 'application/json'
-   
     };
-    var url = Uri.parse(AppAppis.endpoint +'paystore');
+    var url = Uri.parse(AppAppis.endpoint + 'paystore');
 
     var body = {
       "order_id": id.toString(),
       "amount": total,
       "status": type.toString(),
       "trans_type": transid.toString(),
-       "address":address.toString(),
-      "notes":notes.toString(),
-      "mobile":mobile.toString()
+      "address": address.toString(),
+      "notes": notes.toString(),
+      "mobile": mobile
     };
-print( jsonEncode(body));
+    print(jsonEncode(body));
     var req = http.Request('POST', url);
     req.headers.addAll(headersList);
     req.body = jsonEncode(body);
 
     var res = await req.send();
     final resBody = await res.stream.bytesToString();
- print(jsonDecode(resBody));
+    print(jsonDecode(resBody));
     if (res.statusCode >= 200 && res.statusCode < 300) {
-    
-     
       return true;
     } else {
       print(res.reasonPhrase);

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class CartItem {
   String id;
   String name;
@@ -12,7 +10,7 @@ class CartItem {
   String pprice;
   String agentid;
   String userid;
-  CartProducts item; // Product model included here
+  List<CartProducts> itemsdata; // Changed to a list of CartProducts
 
   CartItem({
     required this.id,
@@ -26,11 +24,16 @@ class CartItem {
     required this.pprice,
     required this.agentid,
     required this.userid,
-    required this.item,
+    required this.itemsdata, // Updated to accept a list of CartProducts
   });
 
   // Method to convert from JSON to CartItem
   factory CartItem.fromJson(Map<String, dynamic> json) {
+    var itemsJson = json['itemsdata'] as List; // Get the items list from JSON
+    List<CartProducts> itemList = itemsJson
+        .map((item) => CartProducts.fromJson(item))
+        .toList(); // Convert to List<CartProducts>
+
     return CartItem(
       id: json['id'],
       name: json['name'],
@@ -43,7 +46,7 @@ class CartItem {
       pprice: json['pprice'],
       agentid: json['agentid'],
       userid: json['userid'],
-      item: CartProducts.fromJson(json['item']), // Converting the item field to Products model
+      itemsdata: itemList, // Assign the list of items
     );
   }
 
@@ -61,7 +64,9 @@ class CartItem {
       'pprice': pprice,
       'agentid': agentid,
       'userid': userid,
-      'item': item.toJson(), // Converting the item (Products) back to JSON
+      'itemsdata': itemsdata
+          .map((item) => item.toJson())
+          .toList(), // Converting the list of CartProducts back to JSON
     };
   }
 }
@@ -84,6 +89,7 @@ class CartProducts {
   String gender;
   String createdAt;
   String updatedAt;
+  List<ReviewRatings> reviewRatings; // List of Review Ratings
 
   CartProducts({
     required this.id,
@@ -103,6 +109,7 @@ class CartProducts {
     required this.gender,
     required this.createdAt,
     required this.updatedAt,
+    required this.reviewRatings, // Initialize reviewRatings
   });
 
   factory CartProducts.fromJson(Map<String, dynamic> json) {
@@ -124,6 +131,9 @@ class CartProducts {
       gender: json['gender'] ?? '',
       createdAt: json['created_at'] ?? '',
       updatedAt: json['updated_at'] ?? '',
+      reviewRatings: (json['review_ratings'] as List)
+          .map((i) => ReviewRatings.fromJson(i))
+          .toList(), // Parsing reviewRatings
     );
   }
 
@@ -144,6 +154,67 @@ class CartProducts {
       'appointment_slot_ids': appointmentSlotIds,
       'description': description,
       'gender': gender,
+      'created_at': createdAt,
+      'updated_at': updatedAt,
+      'review_ratings': reviewRatings
+          .map((i) => i.toJson())
+          .toList(), // Converting the review ratings back to JSON
+    };
+  }
+}
+
+class ReviewRatings {
+  String id;
+  String serviceproductId;
+  String agentId;
+  String userId;
+  String reviewername;
+  String image;
+  String rating;
+  String comment;
+  String createdAt;
+  String updatedAt;
+
+  ReviewRatings({
+    required this.id,
+    required this.serviceproductId,
+    required this.agentId,
+    required this.userId,
+    required this.reviewername,
+    required this.image,
+    required this.rating,
+    required this.comment,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  // Factory method to convert JSON to ReviewRatings object
+  factory ReviewRatings.fromJson(Map<String, dynamic> json) {
+    return ReviewRatings(
+      id: json['id'] ?? '',
+      serviceproductId: json['serviceproduct_id'] ?? '',
+      agentId: json['agent_id'] ?? '',
+      userId: json['user_id'] ?? '',
+      reviewername: json['reviewername'] ?? '',
+      image: json['image'] ?? '',
+      rating: json['rating'] ?? '0',
+      comment: json['comment'] ?? '',
+      createdAt: json['created_at'] ?? '',
+      updatedAt: json['updated_at'] ?? '',
+    );
+  }
+
+  // Method to convert ReviewRatings to JSON
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'serviceproduct_id': serviceproductId,
+      'agent_id': agentId,
+      'user_id': userId,
+      'reviewername': reviewername,
+      'image': image,
+      'rating': rating,
+      'comment': comment,
       'created_at': createdAt,
       'updated_at': updatedAt,
     };

@@ -11,9 +11,11 @@ import 'package:Ghore_Parlor/utils/custom%20widget/CustomAppbar.dart';
 import 'package:sizer/sizer.dart';
 
 import '../utils/appStyle.dart';
+
 final TextEditingController addressController = TextEditingController();
 final TextEditingController notesController = TextEditingController();
 final TextEditingController mobile = TextEditingController();
+
 class PaymentPage extends StatefulWidget {
   const PaymentPage({super.key});
 
@@ -25,9 +27,16 @@ class _PaymentPageState extends State<PaymentPage> {
   var cartItems = Get.put(CartController());
   var usercon = Get.put(Usercontoller());
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    addressController.text = usercon.profile['address'].toString();
+    mobile.text = usercon.profile['mobilenumber'].toString();
+    setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
-    addressController.text=usercon.profile['address'];
-    mobile.text=usercon.profile['mobilenumber'].toString();
     return Scaffold(
       // appBar: AppBar(
       //   title: Text('Invoice'),
@@ -77,7 +86,9 @@ class _PaymentPageState extends State<PaymentPage> {
                                     AppFonts.fontH7semi(AppColors.themeBlack),
                               ),
                               Text(
-                             data.selectedProductQun==0?"N/A":   'Price: ${data.pprice}',
+                                data.selectedProductQun == 0
+                                    ? "N/A"
+                                    : 'Price: ${data.pprice}',
                                 style:
                                     AppFonts.fontH7semi(AppColors.themeBlack),
                               ),
@@ -142,8 +153,6 @@ class _PaymentPageState extends State<PaymentPage> {
   }
 }
 
-
-
 class PaymentModal extends StatefulWidget {
   @override
   _PaymentModalState createState() => _PaymentModalState();
@@ -162,7 +171,7 @@ class _PaymentModalState extends State<PaymentModal> {
   late List<String> selectedSlots;
   late var dates;
   late List<String> reqTime;
-  bool res=true;
+  bool res = true;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -263,9 +272,10 @@ class _PaymentModalState extends State<PaymentModal> {
                   var getOrderId = await MyOrder().storeOrder(result);
                   print(getOrderId);
 
-                  if(res){
+                  if (res) {
                     var t = cartitemcontoller.calculateTotalPrice().toString();
-                  submitOrder(getOrderId, t, context);
+                    // cartitemcontoller.clearCart();
+                    submitOrder(getOrderId, t, context);
                   }
                 }
               },
@@ -320,10 +330,9 @@ class _PaymentModalState extends State<PaymentModal> {
 
   submitOrder(orderid, total, context) async {
     if (orderid != null) {
-       res = await MyOrder().paymentStore(orderid, total, 0, paymentMethod,
+      res = await MyOrder().paymentStore(orderid, total, 0, paymentMethod,
           addressController.text, notesController.text, mobile.text);
 
-  
       if (res == true) {
         AppStyle.snackbar("OrderCompleted", "Your order is Placed,Thankyou!");
 

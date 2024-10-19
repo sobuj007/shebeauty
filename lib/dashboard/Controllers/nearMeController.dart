@@ -40,8 +40,8 @@ class ServiceProductNearMeController extends GetxController {
       'Authorization': 'Bearer $token',
       'Content-Type': 'application/json'
     };
-    var url = Uri.parse(
-        AppAppis.endpoint +'service-products/filter-by-locations');
+    var url =
+        Uri.parse(AppAppis.endpoint + 'service-products/filter-by-locations');
 
     var body = {"location_ids": selectedLocations.value};
 
@@ -61,7 +61,7 @@ class ServiceProductNearMeController extends GetxController {
 // nearService.value=NearProduct.fromJson(d)
       print(nearProductData.value);
     } else {
-      error.value ="Pleases Select your location from Settings";
+      error.value = "Pleases Select your location from Profile";
       print(res.reasonPhrase);
     }
     isLoading.value = false;

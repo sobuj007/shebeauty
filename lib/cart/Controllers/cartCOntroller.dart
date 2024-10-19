@@ -4,12 +4,12 @@ import 'package:Ghore_Parlor/provider/Model/allproviderDataModel.dart';
 import 'dart:convert';
 
 import '../Model/cartModel.dart';
- // Import your CartItem model
+// Import your CartItem model
 
 class CartController extends GetxController {
   var items = <CartItem>[].obs;
 
-    @override
+  @override
   void onInit() {
     super.onInit();
     // Load cart items from SharedPreferences when the controller is initialized
@@ -22,8 +22,8 @@ class CartController extends GetxController {
   }
 
   void removeItem(String id) {
-    items.removeWhere((item) => item.item.id == id);
-    if(items.isEmpty){
+    items.removeWhere((item) => item.itemsdata.id == id);
+    if (items.isEmpty) {
       items.clear();
     }
   }
@@ -32,18 +32,15 @@ class CartController extends GetxController {
     items.clear();
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('cartItems');
-  
-
   }
-  getitems()=>items;
+
+  getitems() => items;
 
   // Check if item exists by name
-   itemExists(String id) {
+  itemExists(String id) {
     return items.any((i) => i.item.id == id);
   }
- // Check if item exists by name
-
-   
+  // Check if item exists by name
 
   // Convert cart to JSON
   String toJson() {
@@ -53,7 +50,8 @@ class CartController extends GetxController {
   // Method to save cart items to SharedPreferences
   Future<void> saveCartItems() async {
     final prefs = await SharedPreferences.getInstance();
-    List<String> cartItemsJson = items.map((item) => jsonEncode(item.toJson())).toList();
+    List<String> cartItemsJson =
+        items.map((item) => jsonEncode(item.toJson())).toList();
     await prefs.setStringList('cartItems', cartItemsJson);
   }
 
@@ -69,46 +67,53 @@ class CartController extends GetxController {
     }
     print(cartItemsJson);
   }
-   // Method to calculate the total price of all cart items
+
+  // Method to calculate the total price of all cart items
   // Method to calculate the total price of all cart items
   double calculateTotalPrice() {
     return items.fold(0.0, (total, item1) {
-      double productTotal = double.parse(item1.pprice) * double.parse(item1.selectedProductQun);
-      double serviceTotal =double.parse( item1.sprice )* double.parse(item1.selectedServicsQun);
+      double productTotal =
+          double.parse(item1.pprice) * double.parse(item1.selectedProductQun);
+      double serviceTotal =
+          double.parse(item1.sprice) * double.parse(item1.selectedServicsQun);
       return total + productTotal + serviceTotal;
     });
   }
 
-   // Function that returns a list of item ids
-   getItemIds() {
+  // Function that returns a list of item ids
+  getItemIds() {
     return items.map((item) => item.item.id.toString()).toList();
   }
- getItemsquan() {
+
+  getItemsquan() {
     return items.map((item) => item.selectedServicsQun.toString()).toList();
   }
- getItempquan() {
+
+  getItempquan() {
     return items.map((item) => item.selectedProductQun.toString()).toList();
   }
- getItempprice() {
+
+  getItempprice() {
     return items.map((item) => item.pprice).toList();
   }
-   getItemsprice() {
+
+  getItemsprice() {
     return items.map((item) => item.sprice).toList();
   }
 
- getItemsreqtime() {
+  getItemsreqtime() {
     return items.map((item) => item.selectedTime.toString()).toList();
   }
- getItemsagents() {
+
+  getItemsagents() {
     return items.map((item) => item.agentid.toString()).toList();
   }
-  
- getOrderDate() {
+
+  getOrderDate() {
     return items.map((item) => item.selectedDate.toString()).toList();
   }
- getOrderReqTime() {
+
+  getOrderReqTime() {
     return items.map((item) => item.selectedTime.toString()).toList();
   }
-  
-
 }

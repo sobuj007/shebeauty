@@ -34,13 +34,15 @@ class _MyCartState extends State<MyCart> {
                   GestureDetector(
                     child: Column(
                       children: [
-                        Text("WishList".toUpperCase(),style: AppFonts.fontH5semi(AppColors.themeBlack),),
+                        Text(
+                          "WishList".toUpperCase(),
+                          style: AppFonts.fontH5semi(AppColors.themeBlack),
+                        ),
                         selectpage == 0
                             ? Container(
                                 width: 80,
                                 height: 2,
                                 color: AppColors.themeColer,
-
                               )
                             : SizedBox()
                       ],
@@ -56,8 +58,10 @@ class _MyCartState extends State<MyCart> {
                   GestureDetector(
                     child: Column(
                       children: [
-                        Text("cart".
-                        toUpperCase(),style: AppFonts.fontH5semi(AppColors.themeBlack),),
+                        Text(
+                          "cart".toUpperCase(),
+                          style: AppFonts.fontH5semi(AppColors.themeBlack),
+                        ),
                         selectpage == 1
                             ? Container(
                                 width: 80,
@@ -84,18 +88,12 @@ class _MyCartState extends State<MyCart> {
                 onPageChanged: (value) {
                   selectpage = value;
                   setState(() {
-                        controller.animateToPage(value,
-                      duration: Duration(seconds: 1), curve: Curves.easeIn);
-                      });
+                    controller.jumpToPage(
+                      value,
+                    );
+                  });
                 },
-                children: [
-                Wishlist(),
-                MyListedCart()
-             
-       
-       
-                  
-                ],
+                children: [Wishlist(), MyListedCart()],
               ),
             ),
           ],

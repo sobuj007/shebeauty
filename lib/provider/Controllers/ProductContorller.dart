@@ -19,7 +19,7 @@ class AllProductController extends GetxController {
   var searchQuery = ''.obs;
   var subcatid = ''.obs;
   var fil2 = <Products>[].obs;
-var isAllProductsChecked = false.obs; // Checkbox state
+  var isAllProductsChecked = false.obs; // Checkbox state
   final TextEditingController filterController = TextEditingController();
 
   // RxList for selected genders and ratings
@@ -44,7 +44,7 @@ var isAllProductsChecked = false.obs; // Checkbox state
       'Authorization': 'Bearer $token',
       'Content-Type': 'application/json',
     };
-    var url = Uri.parse(AppAppis.endpoint +'serviceproducts/getall');
+    var url = Uri.parse(AppAppis.endpoint + 'serviceproducts/getall');
     var req = http.Request('GET', url);
     req.headers.addAll(headersList);
 
@@ -70,7 +70,7 @@ var isAllProductsChecked = false.obs; // Checkbox state
         // Update your state with the fetched data
 
         filteredList.value = allProductModel.products!;
-        product.value=allProductModel.products!;
+        product.value = allProductModel.products!;
       } else {
         print('Failed to load products with status code: ${res.statusCode}');
         throw Exception('Failed to load products');
@@ -84,25 +84,23 @@ var isAllProductsChecked = false.obs; // Checkbox state
 
 // Function to filter products by subcategory_id from the 'product' list
   void filterBySubcategory(String id) {
-     
 //    if(subcategoryId.isEmpty){
 // filteredList.value = product;
 //    }else{
-     subcatid.value=id;
+    subcatid.value = id;
     filteredList.value = product.where((prod) {
       return prod.subcategoryId == id.toString();
     }).toList();
-  //  }
+    //  }
   }
- 
 
   // Function to update selected gender
   void updateSelectedGender(String gender) {
     print(gender);
-     filteredList.value = product.where((prod) {
+    filteredList.value = product.where((prod) {
       return prod.gender == gender.toLowerCase();
     }).toList();
-     // Update the filtered products list
+    // Update the filtered products list
   }
 
   // // Function to update selected rating
@@ -110,7 +108,7 @@ var isAllProductsChecked = false.obs; // Checkbox state
   //   selectedRating.value = rating;
   //   // filterProducts(); // Update the filtered products list
   // }
- // Additional filter: for gender and ratings from the 'product' list
+  // Additional filter: for gender and ratings from the 'product' list
   void applyGenderFilter() {
     filteredList.value = product.where((prod) {
       if (selectedGender.value == 'All') {
@@ -120,12 +118,20 @@ var isAllProductsChecked = false.obs; // Checkbox state
     }).toList();
   }
 
-  // void applyRatingFilter(double minRating) {
-  //   // Assuming you have a `rating` field in the Products model
-  //   filteredList.value = product.where((prod) {
-  //     return prod.rating! >= minRating; // Filter products by rating
-  //   }).toList();
-  // }
+  void applyRatingFilter(double minRating) {
+    filteredList.value = product.where((product) {
+      if (product.reviewRatings == null || product.reviewRatings!.isEmpty) {
+        return false; // If no reviews, exclude this product
+      }
+
+      // Check if any of the product's reviews meet or exceed the minRating
+      return product.reviewRatings!.any((review) {
+        double rating = double.tryParse(review.rating ?? '0') ?? 0;
+        return rating >= minRating;
+      });
+    }).toList();
+  }
+
   void filterItemsQuery(String query) {
     final lowerQuery = query.toLowerCase();
     if (lowerQuery.isEmpty) {
@@ -146,30 +152,46 @@ var isAllProductsChecked = false.obs; // Checkbox state
     searchQuery.value = query;
     filterItemsQuery(searchQuery.value);
   }
-   // Toggle between showing all products and filtering by subcategory
-   toggleAllProducts(bool isChecked) {
+
+  // Toggle between showing all products and filtering by subcategory
+  toggleAllProducts(bool isChecked) {
     isAllProductsChecked.value = isChecked;
 
     if (isChecked) {
-     filteredList.value = product; // Show all products
-     
+      filteredList.value = product; // Show all products
     } else {
-       
-   filterBySubcategory(subcatid.value);
-    
+      filterBySubcategory(subcatid.value);
     }
     print(filteredList);
-   
   }
 
   // Call this function when the checkbox changes
-  void updateFilters(bool isChecked,) {
+  void updateFilters(
+    bool isChecked,
+  ) {
     if (isChecked) {
       // No subcategory filter applied, fetch all products
       filteredList.value = product;
     } else {
       // Apply combined filters when checkbox is unchecked
-       filterBySubcategory(subcatid.value);
+      filterBySubcategory(subcatid.value);
+    }
+  }
+
+  // Sorting function by price (High to Low)
+  void sortByservicePrice({required bool isHighToLow}) {
+    if (isHighToLow) {
+      // Sort by price from high to low
+      filteredList.value = product
+          .where((prod) => prod.servicePrice != null)
+          .toList()
+        ..sort((a, b) => b.servicePrice!.compareTo(a.servicePrice!));
+    } else {
+      // Sort by price from low to high
+      filteredList.value = product
+          .where((prod) => prod.servicePrice != null)
+          .toList()
+        ..sort((a, b) => a.servicePrice!.compareTo(b.servicePrice!));
     }
   }
 }

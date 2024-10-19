@@ -1,4 +1,3 @@
-
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 // import 'package:Ghore_Parlor/main.dart';
@@ -24,7 +23,6 @@
 //   int selectpage = 0;
 //     final args = Get.arguments;
 
-  
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
@@ -108,7 +106,7 @@
 //           child: Padding(
 //             padding: EdgeInsets.zero,
 //             child: PageView(
-              
+
 //               controller: controller,
 //               onPageChanged: (value) {
 //                 setState(() {
@@ -128,11 +126,10 @@
 //       ],
 //               ),
 //             ),
-          
+
 //     );
 //   }
 // }
-
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -157,21 +154,20 @@ class SingelProvider extends StatefulWidget {
 class _SingelProviderState extends State<SingelProvider> {
   PageController controller = PageController(initialPage: 0);
 
-  var agentcontroller = Get.put(AgentProfileController  ());
+  var agentcontroller = Get.put(AgentProfileController());
   int selectpage = 0;
   late final dynamic args;
-  var storeProduct=[].obs;
+  var storeProduct = [].obs;
 
   @override
   void initState() {
     super.initState();
-    args = Get.arguments;  // Get the passed data from the previous page
-  agentcontroller.fetchAgentProfileData(args.agentId);
+    args = Get.arguments; // Get the passed data from the previous page
+    agentcontroller.fetchAgentProfileData(args.agentid);
   }
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -179,7 +175,7 @@ class _SingelProviderState extends State<SingelProvider> {
         child: Column(
           children: [
             CustomAppbar(
-              title: args.name.toString(),  // Display the name or title
+              title: args.name.toString(), // Display the name or title
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -265,14 +261,13 @@ class _SingelProviderState extends State<SingelProvider> {
                   onPageChanged: (value) {
                     setState(() {
                       selectpage = value;
-                      controller.animateToPage(value,
-                          duration: Duration(seconds: 1), curve: Curves.easeIn);
+                      controller.jumpToPage(value);
                     });
                   },
                   children: [
-                    SingelAppointment(item: args),  // Pass args to child widget
-                    SingelDescription(item: args),  // Pass args to child widget
-                    SingelProfile(item: args),      // Pass args to child widget
+                    SingelAppointment(item: args), // Pass args to child widget
+                    SingelDescription(item: args), // Pass args to child widget
+                    SingelProfile(item: args), // Pass args to child widget
                   ],
                 ),
               ),

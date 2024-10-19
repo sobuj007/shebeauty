@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:Ghore_Parlor/utils/appColors.dart';
@@ -8,7 +7,6 @@ import 'package:sizer/sizer.dart';
 import '../../utils/custom widget/CustomAppbar.dart';
 import 'singelProvider.dart';
 
-
 class AllProvider extends StatefulWidget {
   List<String> selectedBody;
   AllProvider({required this.selectedBody, super.key});
@@ -17,8 +15,8 @@ class AllProvider extends StatefulWidget {
   State<AllProvider> createState() => _AllProviderState();
 }
 
- class _AllProviderState extends State<AllProvider> {
-   TextEditingController _searchController = TextEditingController();
+class _AllProviderState extends State<AllProvider> {
+  TextEditingController _searchController = TextEditingController();
   List<Item> _allItems = List<Item>.generate(
     100,
     (i) => Item(
@@ -52,8 +50,8 @@ class AllProvider extends StatefulWidget {
         final matchesName = item.name
             .toLowerCase()
             .contains(_searchController.text.toLowerCase());
-        final matchesLocation = _selectedLocation == null ||
-            item.location == _selectedLocation;
+        final matchesLocation =
+            _selectedLocation == null || item.location == _selectedLocation;
         return matchesName && matchesLocation;
       }).toList();
     }
@@ -66,9 +64,20 @@ class AllProvider extends StatefulWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: GestureDetector(child: Icon(Icons.arrow_back_ios,color: AppColors.themeWhite,),onTap: (){Navigator.pop(context);},),
+        leading: GestureDetector(
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: AppColors.themeWhite,
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
         backgroundColor: AppColors.themeColer,
-        title: Text('AllProvider',style: AppFonts.fontH3regular(AppColors.themeWhite),),
+        title: Text(
+          'All Provider',
+          style: AppFonts.fontH3regular(AppColors.themeWhite),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -82,8 +91,7 @@ class AllProvider extends StatefulWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Container(
-                         height: 6.8.h,
-
+                      height: 6.8.h,
                       width: 75.w,
                       child: TextField(
                         controller: _searchController,
@@ -92,33 +100,36 @@ class AllProvider extends StatefulWidget {
                           hintText: "Search here",
                           hintStyle: AppFonts.fontH4semi(AppColors.themehint),
                           prefixIcon: Icon(Icons.search),
-                         
 
-                          contentPadding: EdgeInsets.symmetric(horizontal: 4.w,vertical: 0.w),
-                         // labelText: 'Search',
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 4.w, vertical: 0.w),
+                          // labelText: 'Search',
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15.0),
                           ),
                         ),
                       ),
                     ),
-                     Container(
-                      decoration: BoxDecoration(border: Border.all(width: .5),borderRadius: 
-                      BorderRadius.circular(15)),
-                      child: Padding(
-                       padding: const EdgeInsets.all(8.0),
-                       child: Icon(Icons.sort,color: AppColors.themeBlack,),
-                     )),
-                  //  Card(child: Container(height: 8.h,width: 6.h, child: ))
+                    Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(width: .5),
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.sort,
+                            color: AppColors.themeBlack,
+                          ),
+                        )),
+                    //  Card(child: Container(height: 8.h,width: 6.h, child: ))
                   ],
                 ),
               ),
             ),
             Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 2.w),
+              padding: EdgeInsets.symmetric(horizontal: 2.w),
               child: Row(
-                mainAxisAlignment: 
-                MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   /**************************************** */
                   Container(
@@ -150,7 +161,7 @@ class AllProvider extends StatefulWidget {
                     ),
                   ),
                   /********************************************************  */
-                   Container(
+                  Container(
                     width: 30.w,
                     child: DropdownButton<String>(
                       isExpanded: true,
@@ -179,7 +190,7 @@ class AllProvider extends StatefulWidget {
                     ),
                   ),
                   /****************************************  */
-                   Container(
+                  Container(
                     width: 30.w,
                     child: DropdownButton<String>(
                       isExpanded: true,
@@ -215,20 +226,17 @@ class AllProvider extends StatefulWidget {
                 itemCount: _filteredItems.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
-                    onTap: (){
-                       Get.toNamed(
-           "/singelprovider",
-              arguments: {
-                'id': 1,
-                'name': 'John Doe',
-                'isVerified': true,
-              },
-            );
+                    onTap: () {
+                      // Get.toNamed(
+                      //   "/singelprovider",
+                      //   arguments: {
+                      //     'id': 1,
+                      //     'name': 'John Doe',
+                      //     'isVerified': true,
+                      //   },
+                      // );
                     },
                     child: ListTile(
-                      
-                    
-                      
                       title: Text(_filteredItems[index].name),
                       subtitle: Text(
                           '${_filteredItems[index].location} - ${_filteredItems[index].time}'),
