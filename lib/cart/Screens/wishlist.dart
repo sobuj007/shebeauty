@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:Ghore_Parlor/category/Controllers/getAllinfocontoller.dart';
@@ -8,6 +9,7 @@ import 'package:Ghore_Parlor/provider/Controllers/WishlistController.dart';
 import 'package:Ghore_Parlor/provider/Model/agentProfileModel.dart';
 import 'package:Ghore_Parlor/utils/appFonts.dart';
 import 'package:Ghore_Parlor/utils/custom%20widget/Customratings.dart';
+import 'package:line_icons/line_icon.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../provider/Model/allproviderDataModel.dart';
@@ -41,308 +43,442 @@ class _WishlistState extends State<Wishlist> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Obx(() {
-      if (wcon.wishlist == null) {
-        return Center(child: CircularProgressIndicator());
-      }
-      if (wcon.wishlist.isEmpty) {
-        return Center(
-          child: Text(
-            "WishList is Empty",
-            style: AppFonts.fontH5semi(AppColors.themeColer),
-          ),
-        );
-      }
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          // CustomAppbar(
-          //   title: "All provider",
-          // ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // Container(
-                //   width: 78.w,
-                //   height: 5.8.h,
-                //   child: TextField(
-                //     decoration: InputDecoration(
-                //       contentPadding:
-                //           EdgeInsets.symmetric(horizontal: 3.w, vertical: .5.h),
-                //       hintText: 'Search...',
-                //       border: OutlineInputBorder(
-                //           borderSide:
-                //               BorderSide(width: 1, color: AppColors.themeColer),
-                //           borderRadius: BorderRadius.circular(15)),
-                //       enabledBorder: OutlineInputBorder(
-                //           borderSide:
-                //               BorderSide(width: 1, color: AppColors.themeColer),
-                //           borderRadius: BorderRadius.circular(15)),
-                //       focusedBorder: OutlineInputBorder(
-                //           borderSide:
-                //               BorderSide(width: 1, color: AppColors.themeColer),
-                //           borderRadius: BorderRadius.circular(15)),
-                //       hintStyle: AppFonts.fontH4regular(AppColors.themehint),
-                //     ),
-                //     style: AppFonts.fontH4regular(AppColors.themeBlack),
-                //     onChanged: (query) {
-                //       setState(() {
-                //         _searchQuery = query;
-                //        // _applyFilters();
-                //       });
-                //     },
-                //   ),
-                // ),
-                // Card(
-                //   child: IconButton(
-                //     icon: Icon(Icons.filter_list),
-                //     onPressed: () => _showFilterDialog(context),
-                //   ),
-                // ),
-              ],
+    return Scaffold(
+      body: Obx(() {
+        if (wcon.wishlist == null) {
+          return Center(child: CircularProgressIndicator());
+        }
+        if (wcon.wishlist.isEmpty) {
+          return Center(
+            child: Text(
+              "WishList is Empty",
+              style: AppFonts.fontH5semi(AppColors.themeColer),
             ),
-          ),
-          Flexible(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: .5.h),
-              child: ListView.builder(
-                // shrinkWrap: true,
-                padding: EdgeInsets.zero,
+          );
+        }
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            // CustomAppbar(
+            //   title: "All provider",
+            // ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Container(
+                  //   width: 78.w,
+                  //   height: 5.8.h,
+                  //   child: TextField(
+                  //     decoration: InputDecoration(
+                  //       contentPadding:
+                  //           EdgeInsets.symmetric(horizontal: 3.w, vertical: .5.h),
+                  //       hintText: 'Search...',
+                  //       border: OutlineInputBorder(
+                  //           borderSide:
+                  //               BorderSide(width: 1, color: AppColors.themeColer),
+                  //           borderRadius: BorderRadius.circular(15)),
+                  //       enabledBorder: OutlineInputBorder(
+                  //           borderSide:
+                  //               BorderSide(width: 1, color: AppColors.themeColer),
+                  //           borderRadius: BorderRadius.circular(15)),
+                  //       focusedBorder: OutlineInputBorder(
+                  //           borderSide:
+                  //               BorderSide(width: 1, color: AppColors.themeColer),
+                  //           borderRadius: BorderRadius.circular(15)),
+                  //       hintStyle: AppFonts.fontH4regular(AppColors.themehint),
+                  //     ),
+                  //     style: AppFonts.fontH4regular(AppColors.themeBlack),
+                  //     onChanged: (query) {
+                  //       setState(() {
+                  //         _searchQuery = query;
+                  //        // _applyFilters();
+                  //       });
+                  //     },
+                  //   ),
+                  // ),
+                  // Card(
+                  //   child: IconButton(
+                  //     icon: Icon(Icons.filter_list),
+                  //     onPressed: () => _showFilterDialog(context),
+                  //   ),
+                  // ),
+                ],
+              ),
+            ),
+            Flexible(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: .5.h),
+                child: ListView.builder(
+                  // shrinkWrap: true,
+                  padding: EdgeInsets.zero,
 
-                itemCount: wcon.wishlist.length,
-                itemBuilder: (context, index) {
-                  // return ListTile(
-                  //   title: Text(_filteredItems2[index].name),
-                  //   subtitle: Text(_filteredItems2[index].description),
-                  //   trailing: Text(_filteredItems2[index].rating.toString()),
-                  // );
+                  itemCount: wcon.wishlist.length,
+                  itemBuilder: (context, index) {
+                    // return ListTile(
+                    //   title: Text(_filteredItems2[index].name),
+                    //   subtitle: Text(_filteredItems2[index].description),
+                    //   trailing: Text(_filteredItems2[index].rating.toString()),
+                    // );
 
-                  return Container(
-                    height: 20.h,
-                    width: 100.w,
-                    decoration: BoxDecoration(
-                        border:
-                            Border.all(width: 1, color: AppColors.themeborder),
-                        borderRadius: BorderRadius.circular(10)),
-                    margin: EdgeInsets.symmetric(horizontal: 0, vertical: 1.h),
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 20.h,
-                          width: 30.w,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: CachedNetworkImageProvider(
-                                    wcon.wishlist[index].img.toString(),
-                                  ),
-                                  fit: BoxFit.cover),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Container(
-                            color: const Color.fromARGB(60, 100, 99, 99),
-                          ),
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    return GestureDetector(
+                      onLongPress: () {
+                        _showdeleteWarning(
+                            context,
+                            wcon.wishlist[index].name.toString(),
+                            wcon.wishlist[index].id);
+                      },
+                      child: Container(
+                        height: 22.h,
+                        width: 100.w,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                                width: 1, color: AppColors.themeborder),
+                            borderRadius: BorderRadius.circular(10)),
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 0, vertical: 1.h),
+                        child: Row(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8.0, vertical: 2),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(
-                                    width: 58.w,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          wcon.wishlist[index].name.toString(),
-                                          style: AppFonts.fontH5semi(
-                                              AppColors.themeBlack),
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
+                              padding: const EdgeInsets.all(4.0),
+                              child: Container(
+                                height: 20.h,
+                                width: 28.w,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: CachedNetworkImageProvider(
+                                          wcon.wishlist[index].img.toString(),
                                         ),
-                                        // Rattings(
-                                        //   rate: _filteredItems2[index]
-                                        //       .rating
-                                        //       .toString(),
-                                        // )
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 58.w,
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            wcon.wishlist[index].description
-                                                .toString(),
-                                            style: AppFonts.fontH7normal(
-                                                AppColors.themeBlack),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ).paddingOnly(bottom: .5.h),
-                                  /************************** gender */
-                                  Container(
-                                    width: 58.w,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Provider Gender : " +
-                                              wcon.wishlist[index].gender
-                                                  .toString(),
-                                          style: AppFonts.fontH7normal(
-                                              AppColors.themeBlack),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          textAlign: TextAlign.start,
-                                        ),
-                                        Row(
+                                        fit: BoxFit.cover),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color:
+                                          const Color.fromARGB(60, 100, 99, 99),
+                                      borderRadius: BorderRadius.circular(10)),
+                                ),
+                              ),
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0, vertical: 2),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        width: 58.w,
+                                        child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            RichText(
-                                              text: TextSpan(
-                                                  text: "P.price ",
-                                                  style: AppFonts.fontH7semi(
-                                                      AppColors.themeBlack),
-                                                  children: [
-                                                    TextSpan(
-                                                        text: wcon
-                                                            .wishlist[index]
-                                                            .pprice
-                                                            .toString(),
-                                                        style:
-                                                            AppFonts.fontH5semi(
-                                                                AppColors
-                                                                    .themeColer))
-                                                  ]),
+                                            Text(
+                                              wcon.wishlist[index].name
+                                                  .toString(),
+                                              style: AppFonts.fontH5semi(
+                                                  AppColors.themeBlack),
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
                                             ),
-                                            RichText(
-                                              text: TextSpan(
-                                                  text: "S.price ",
+                                            Column(
+                                              children: [
+                                                RatingBarIndicator(
+                                                  rating: double.parse(wcon
+                                                      .wishlist[index]
+                                                      .averageRating
+                                                      .toString()),
+                                                  itemCount: 1,
+                                                  itemSize: 18.0,
+                                                  direction: Axis.horizontal,
+                                                  unratedColor: Colors.grey,
+                                                  itemBuilder: (context, _) =>
+                                                      Icon(
+                                                    Icons.star,
+                                                    color: Colors.amber,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  wcon.wishlist[index]
+                                                      .averageRating
+                                                      .toString(),
                                                   style: AppFonts.fontH7semi(
-                                                      AppColors.themeBlack),
-                                                  children: [
-                                                    TextSpan(
-                                                        text: wcon
-                                                            .wishlist[index]
-                                                            .sprice
-                                                            .toString(),
-                                                        style:
-                                                            AppFonts.fontH5semi(
-                                                                AppColors
-                                                                    .themeColer))
-                                                  ]),
+                                                      AppColors.themeColer),
+                                                ),
+                                              ],
                                             ),
                                           ],
-                                        )
-                                        // Text(
-                                        //   "price" + _filteredItems2[index].price,
-                                        //   style: AppFonts.fontH4semi(
-                                        //       AppColors.themeBlack),
-                                        //   maxLines: 2,
-                                        //   overflow: TextOverflow.ellipsis,
-                                        // ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            /************************** Book noe button */
-                            Container(
-                              width: 63.2.w,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          acon
-                                              .getCategoryNameById(int.parse(
-                                                  wcon.wishlist[index]
-                                                      .categoryId
-                                                      .toString()))
-                                              .toString(),
-                                          style: AppFonts.fontH7semi(
-                                              AppColors.themeBlack),
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
                                         ),
-                                        Text(
-                                          acon
-                                              .getSubcategoryNameById(int.parse(
-                                                  wcon.wishlist[index]
-                                                      .subcategoryId
-                                                      .toString()))
-                                              .toString(),
-                                          style: AppFonts.fontH7semi(
-                                              AppColors.themeBlack),
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
+                                      ),
+                                      SizedBox(
+                                        width: 58.w,
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                wcon.wishlist[index].description
+                                                    .toString(),
+                                                style: AppFonts.fontH7normal(
+                                                    AppColors.themeBlack),
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
+                                      ).paddingOnly(bottom: .5.h),
+                                      /************************** gender */
+                                      Container(
+                                        width: 58.w,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "Provider Gender : " +
+                                                  wcon.wishlist[index].gender
+                                                      .toString(),
+                                              style: AppFonts.fontH7normal(
+                                                  AppColors.themeBlack),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              textAlign: TextAlign.start,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                RichText(
+                                                  text: TextSpan(
+                                                      text: "P.price ",
+                                                      style:
+                                                          AppFonts.fontH7semi(
+                                                              AppColors
+                                                                  .themeBlack),
+                                                      children: [
+                                                        TextSpan(
+                                                            text: wcon
+                                                                .wishlist[index]
+                                                                .pprice
+                                                                .toString(),
+                                                            style: AppFonts
+                                                                .fontH5semi(
+                                                                    AppColors
+                                                                        .themeColer))
+                                                      ]),
+                                                ),
+                                                RichText(
+                                                  text: TextSpan(
+                                                      text: "S.price ",
+                                                      style:
+                                                          AppFonts.fontH7semi(
+                                                              AppColors
+                                                                  .themeBlack),
+                                                      children: [
+                                                        TextSpan(
+                                                            text: wcon
+                                                                .wishlist[index]
+                                                                .sprice
+                                                                .toString(),
+                                                            style: AppFonts
+                                                                .fontH5semi(
+                                                                    AppColors
+                                                                        .themeColer))
+                                                      ]),
+                                                ),
+                                              ],
+                                            )
+                                            // Text(
+                                            //   "price" + _filteredItems2[index].price,
+                                            //   style: AppFonts.fontH4semi(
+                                            //       AppColors.themeBlack),
+                                            //   maxLines: 2,
+                                            //   overflow: TextOverflow.ellipsis,
+                                            // ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      Get.toNamed(AppRoutes.appsingelprovider,
-                                          arguments: wcon.wishlist[index]);
-                                    },
-                                    child: Container(
-                                      height: 5.h,
-                                      width: 35.w,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                            bottomRight: Radius.circular(10)),
-                                        color: AppColors.themeColer,
+                                ),
+                                /************************** Book noe button */
+                                Container(
+                                  width: 63.2.w,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              acon
+                                                  .getCategoryNameById(
+                                                      int.parse(wcon
+                                                          .wishlist[index]
+                                                          .categoryId
+                                                          .toString()))
+                                                  .toString(),
+                                              style: AppFonts.fontH7semi(
+                                                  AppColors.themeBlack),
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            Text(
+                                              acon
+                                                  .getSubcategoryNameById(
+                                                      int.parse(wcon
+                                                          .wishlist[index]
+                                                          .subcategoryId
+                                                          .toString()))
+                                                  .toString(),
+                                              style: AppFonts.fontH7semi(
+                                                  AppColors.themeBlack),
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        applng.getLang(14),
-                                        style: AppFonts.fontH6semi(
-                                            AppColors.themeWhite),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Get.toNamed(
+                                              AppRoutes.appsingelprovider,
+                                              arguments: wcon.wishlist[index]);
+                                        },
+                                        child: Container(
+                                          height: 5.h,
+                                          width: 35.w,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.only(
+                                                bottomRight:
+                                                    Radius.circular(10)),
+                                            color: AppColors.themeColer,
+                                          ),
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            applng.getLang(14),
+                                            style: AppFonts.fontH6semi(
+                                                AppColors.themeWhite),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
                             )
                           ],
-                        )
-                      ],
-                    ),
-                  );
-                },
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
+          ],
+        );
+      }),
+      floatingActionButton: wcon.wishlist.isEmpty
+          ? SizedBox()
+          : TextButton(
+              onPressed: () {
+                _showLogoutWarning(context);
+              },
+              child: Container(
+                width: 25.w,
+                child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        LineIcon.trash(),
+                        Text(
+                          "Clear",
+                          style: AppFonts.fontH7semi(AppColors.themeColer),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+    );
+  }
+
+  void _showLogoutWarning(BuildContext context) {
+    Get.dialog(
+      AlertDialog(
+        title: Text(
+          'Clear Wishlist',
+          style: AppFonts.fontH5semi(AppColors.themeBlack),
+        ),
+        content: Text('Are you sure you want to Clear?'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back(); // Dismiss the dialog if the user cancels
+            },
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              // Perform logout and close dialog
+              wcon.clearlist();
+              wcon.saveWishlistToPreferences();
+              Get.back(); // Dismiss the dialog after logging out
+            },
+            child:
+                Text('Clear', style: AppFonts.fontH5semi(AppColors.themeColer)),
           ),
         ],
-      );
-    }));
+      ),
+    );
+  }
+
+  void _showdeleteWarning(BuildContext context, name, id) {
+    Get.dialog(
+      AlertDialog(
+        title: Text(
+          'Delete Item ',
+          style: AppFonts.fontH5semi(AppColors.themeBlack),
+        ),
+        content: Text('Are you sure you want to Delete $name?'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back(); // Dismiss the dialog if the user cancels
+            },
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              print(id.toString());
+              wcon.removeProductFromWishlist((int.parse(id)));
+              // wcon.saveWishlistToPreferences();
+              wcon.wishlist;
+              Get.back(); // Dismiss the dialog after logging out
+            },
+            child:
+                Text('Yes', style: AppFonts.fontH5semi(AppColors.themeColer)),
+          ),
+        ],
+      ),
+    );
   }
 
   void _showFilterDialog(BuildContext context) {

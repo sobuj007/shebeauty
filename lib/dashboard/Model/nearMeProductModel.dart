@@ -25,110 +25,102 @@ class NearServiceProductModel {
 }
 
 class NearProduct {
-  int? id;
-  String? agentId;
+  String? id;
+  String? name;
+  String? img;
+  String? sprice;
+  String? pprice;
+  String? agentid;
   String? categoryId;
   String? subcategoryId;
   String? bodypartId;
   String? cityId;
-  String? locationIds;
+  var locationIds;
   String? slotId;
-  String? appointmentSlotIds;
-  String? name;
+  var appointmentSlotIds;
   String? description;
-  String? image;
-  String? productPrice;
-  String? servicePrice;
   String? gender;
   String? createdAt;
   String? updatedAt;
   int? averageRating;
-  List<Locations2>? locations2;
-  List<ReviewRatings>? reviewRatings;
+  List<ReviewRatings>? reviewRatings; // List of Review Ratings
 
-  NearProduct(
-      {this.id,
-      this.agentId,
-      this.categoryId,
-      this.subcategoryId,
-      this.bodypartId,
-      this.cityId,
-      this.locationIds,
-      this.slotId,
-      this.appointmentSlotIds,
-      this.name,
-      this.description,
-      this.image,
-      this.productPrice,
-      this.servicePrice,
-      this.gender,
-      this.createdAt,
-      this.updatedAt,
-      this.averageRating,
-      this.locations2,
-      this.reviewRatings});
+  NearProduct({
+    required this.id,
+    required this.name,
+    required this.img,
+    required this.sprice,
+    required this.pprice,
+    required this.agentid,
+    required this.categoryId,
+    required this.subcategoryId,
+    required this.bodypartId,
+    required this.cityId,
+    required this.locationIds,
+    required this.slotId,
+    required this.appointmentSlotIds,
+    required this.description,
+    required this.gender,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.averageRating,
+    required this.reviewRatings, // Initialize reviewRatings
+  });
 
-  NearProduct.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    agentId = json['agent_id'];
-    categoryId = json['category_id'];
-    subcategoryId = json['subcategory_id'];
-    bodypartId = json['bodypart_id'];
-    cityId = json['city_id'];
-    locationIds = json['location_ids'];
-    slotId = json['slot_id'];
-    appointmentSlotIds = json['appointment_slot_ids'];
-    name = json['name'];
-    description = json['description'];
-    image = json['image'];
-    productPrice = json['product_price'];
-    servicePrice = json['service_price'];
-    gender = json['gender'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    averageRating = json['average_rating'];
-    if (json['locations2'] != null) {
-      locations2 = <Locations2>[];
-      json['locations2'].forEach((v) {
-        locations2!.add(new Locations2.fromJson(v));
-      });
-    }
-    if (json['review_ratings'] != null) {
-      reviewRatings = <ReviewRatings>[];
-      json['review_ratings'].forEach((v) {
-        reviewRatings!.add(new ReviewRatings.fromJson(v));
-      });
-    }
+  // Factory method to parse JSON and create a Products object
+  factory NearProduct.fromJson(Map<String, dynamic> json) {
+    return NearProduct(
+      id: json['id']?.toString() ?? '',
+      name: json['name'] ?? '',
+      img: json['image'] ?? '',
+      sprice: json['service_price'] ?? '0.00',
+      pprice: json['product_price'] ?? '0.00',
+      agentid: json['agent_id'] ?? '',
+      categoryId: json['category_id'] ?? '',
+      subcategoryId: json['subcategory_id'] ?? '',
+      bodypartId: json['bodypart_id'] ?? '',
+      cityId: json['city_id'] ?? '',
+      locationIds: json['location_ids'] ?? '',
+      slotId: json['slot_id'] ?? '',
+      appointmentSlotIds: json['appointment_slot_ids'] ?? '',
+      description: json['description'] ?? '',
+      gender: json['gender'] ?? '',
+      createdAt: json['created_at'] ?? '',
+      updatedAt: json['updated_at'] ?? '',
+      averageRating: json['average_rating'],
+      reviewRatings: json['review_ratings'] != null
+          ? (json['review_ratings'] as List)
+              .map((i) => ReviewRatings.fromJson(i))
+              .toList()
+          : [], // Parsing reviewRatings from JSON
+    );
   }
 
+  // Convert the Products object back to JSON format
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['agent_id'] = this.agentId;
-    data['category_id'] = this.categoryId;
-    data['subcategory_id'] = this.subcategoryId;
-    data['bodypart_id'] = this.bodypartId;
-    data['city_id'] = this.cityId;
-    data['location_ids'] = this.locationIds;
-    data['slot_id'] = this.slotId;
-    data['appointment_slot_ids'] = this.appointmentSlotIds;
-    data['name'] = this.name;
-    data['description'] = this.description;
-    data['image'] = this.image;
-    data['product_price'] = this.productPrice;
-    data['service_price'] = this.servicePrice;
-    data['gender'] = this.gender;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['average_rating'] = this.averageRating;
-    if (this.locations2 != null) {
-      data['locations2'] = this.locations2!.map((v) => v.toJson()).toList();
-    }
-    if (this.reviewRatings != null) {
-      data['review_ratings'] =
-          this.reviewRatings!.map((v) => v.toJson()).toList();
-    }
-    return data;
+    return {
+      'id': id,
+      'name': name,
+      'img': img,
+      'sprice': sprice,
+      'pprice': pprice,
+      'agentid': agentid,
+      'category_id': categoryId,
+      'subcategory_id': subcategoryId,
+      'bodypart_id': bodypartId,
+      'city_id': cityId,
+      'location_ids': locationIds,
+      'slot_id': slotId,
+      'appointment_slot_ids': appointmentSlotIds,
+      'description': description,
+      'gender': gender,
+      'created_at': createdAt,
+      'updated_at': updatedAt,
+      'average_rating': averageRating,
+      'review_ratings': reviewRatings!
+          .map((i) => i.toJson())
+          .toList(), // Converting the review ratings back to JSON
+    };
   }
 }
 
@@ -193,7 +185,7 @@ class Pivot {
 class ReviewRatings {
   int? id;
   String? serviceproductId;
-  String? agentId;
+  String? agentid;
   String? userId;
   String? reviewername;
   String? image;
@@ -205,7 +197,7 @@ class ReviewRatings {
   ReviewRatings(
       {this.id,
       this.serviceproductId,
-      this.agentId,
+      this.agentid,
       this.userId,
       this.reviewername,
       this.image,
@@ -217,7 +209,7 @@ class ReviewRatings {
   ReviewRatings.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     serviceproductId = json['serviceproduct_id'];
-    agentId = json['agent_id'];
+    agentid = json['agent_id'];
     userId = json['user_id'];
     reviewername = json['reviewername'];
     image = json['image'];
@@ -231,7 +223,7 @@ class ReviewRatings {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['serviceproduct_id'] = this.serviceproductId;
-    data['agent_id'] = this.agentId;
+    data['agent_id'] = this.agentid;
     data['user_id'] = this.userId;
     data['reviewername'] = this.reviewername;
     data['image'] = this.image;

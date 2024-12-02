@@ -2,6 +2,7 @@ import 'package:Ghore_Parlor/category/Controllers/getAllinfocontoller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:Ghore_Parlor/auth/Controllers/userContoller.dart';
 import 'package:Ghore_Parlor/provider/Model/allproviderDataModel.dart';
@@ -65,31 +66,33 @@ class _ViewAppointmentState extends State<ViewAppointment> {
       body: Column(
         children: [
           CustomAppbar(
-            title: "My Cart",
+            title: args.name.toUpperCase(),
           ),
           Flexible(
             child: SafeArea(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 0.h),
+                padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 0.h),
                 child: Column(
                   children: [
                     ListView(
                         padding: EdgeInsets.zero,
                         shrinkWrap: true,
                         children: [
-                          Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      width: 1, color: AppColors.themeborder),
-                                  borderRadius: BorderRadius.circular(15)),
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 0, vertical: 1.h),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    height: 18.h,
-                                    width: 30.w,
+                          Container(
+                            height: 21.5.h,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: 1, color: AppColors.themeborder),
+                                borderRadius: BorderRadius.circular(15)),
+                            margin: EdgeInsets.symmetric(
+                                horizontal: 0, vertical: .8.h),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Container(
+                                    height: 20.h,
+                                    width: 28.w,
                                     decoration: BoxDecoration(
                                         image: DecorationImage(
                                             image: CachedNetworkImageProvider(
@@ -106,178 +109,219 @@ class _ViewAppointmentState extends State<ViewAppointment> {
                                       ),
                                     ),
                                   ),
-                                  Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 8.0, vertical: 1.h),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              width: 58.w,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                        args.name.toUpperCase(),
-                                                        style:
-                                                            AppFonts.fontH6bold(
-                                                                AppColors
-                                                                    .themeBlack),
-                                                        maxLines: 2,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                      ),
-                                                      SizedBox(
-                                                        height: 1.h,
-                                                      ),
-                                                      Text(
-                                                        applng.getLang(16) +
-                                                            allcon
-                                                                .getCategoryNameById(
-                                                                    int.parse(args
-                                                                        .item
-                                                                        .categoryId))
-                                                                .toString(),
-                                                        style:
-                                                            AppFonts.fontH7semi(
-                                                                AppColors
-                                                                    .themeBlack),
-                                                        maxLines: 1,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                      ),
-                                                      SizedBox(
-                                                        height: .5.h,
-                                                      ),
-                                                      Text(
-                                                        applng.getLang(17) +
-                                                            allcon.getSubcategoryNameById(
-                                                                int.parse(args
-                                                                    .item
-                                                                    .subcategoryId
-                                                                    .toString())),
-                                                        style:
-                                                            AppFonts.fontH7semi(
-                                                                AppColors
-                                                                    .themeBlack),
-                                                        maxLines: 1,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                      ),
-                                                      SizedBox(
-                                                        height: .5.h,
-                                                      ),
-                                                      Text(
-                                                        applng.getLang(19) +
-                                                            args.item.gender
-                                                                .toString()
+                                ),
+                                Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 4.0, vertical: .5.h),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            width: 58.w,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Container(
+                                                          width: 50.w,
+                                                          child: Text(
+                                                            args.name
                                                                 .toUpperCase(),
-                                                        style:
-                                                            AppFonts.fontH7semi(
-                                                                AppColors
-                                                                    .themeBlack),
-                                                        maxLines: 1,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        textAlign:
-                                                            TextAlign.start,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            // SizedBox(
-                                            //   width: 58.w,
-                                            //   height: 3.5.h,
-                                            //   child: Row(
-                                            //     children: [
-                                            //       Expanded(
-                                            //         child: Text(
-                                            //           args.description,
-                                            //           style: AppFonts.fontH6semi(
-                                            //               AppColors.themeBlack),
-                                            //           maxLines: 2,
-                                            //           overflow: TextOverflow.ellipsis,
-                                            //         ),
-                                            //       ),
-                                            //     ],
-                                            //   ),
-                                            // ),
-                                            /************************** gender */
-                                            Container(
-                                              height: 5.h,
-                                              width: 58.w,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  RichText(
-                                                    text: TextSpan(
-                                                        text:
-                                                            applng.getLang(18),
-                                                        style:
-                                                            AppFonts.fontH7semi(
-                                                                AppColors
-                                                                    .themeBlack),
-                                                        children: [
-                                                          TextSpan(
-                                                              text: args.item
-                                                                      .sprice +
-                                                                  "Tk",
+                                                            style: AppFonts
+                                                                .fontH6bold(
+                                                                    AppColors
+                                                                        .themeBlack),
+                                                            maxLines: 2,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                          ),
+                                                        ),
+                                                        Column(
+                                                          children: [
+                                                            RatingBarIndicator(
+                                                              rating: double.parse(args
+                                                                  .item
+                                                                  .averageRating
+                                                                  .toString()),
+                                                              itemCount: 1,
+                                                              itemSize: 18.0,
+                                                              direction: Axis
+                                                                  .horizontal,
+                                                              unratedColor:
+                                                                  Colors.grey,
+                                                              itemBuilder:
+                                                                  (context,
+                                                                          _) =>
+                                                                      Icon(
+                                                                Icons.star,
+                                                                color: Colors
+                                                                    .amber,
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              args.item
+                                                                  .averageRating
+                                                                  .toString(),
                                                               style: AppFonts
-                                                                  .fontH6semi(
+                                                                  .fontH7semi(
                                                                       AppColors
-                                                                          .themeColer))
-                                                        ]),
-                                                  ),
-                                                  RichText(
-                                                    text: TextSpan(
-                                                        text:
-                                                            applng.getLang(20),
-                                                        style:
-                                                            AppFonts.fontH7semi(
-                                                                AppColors
-                                                                    .themeBlack),
-                                                        children: [
-                                                          TextSpan(
-                                                              text: " " +
-                                                                  args.pprice +
-                                                                  "Tk",
-                                                              style: AppFonts
-                                                                  .fontH6semi(
-                                                                      AppColors
-                                                                          .themeColer))
-                                                        ]),
-                                                  ),
-                                                ],
-                                              ),
+                                                                          .themeColer),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height: .5.h,
+                                                    ),
+                                                    Text(
+                                                      applng.getLang(16) +
+                                                          allcon
+                                                              .getCategoryNameById(
+                                                                  int.parse(args
+                                                                      .item
+                                                                      .categoryId))
+                                                              .toString(),
+                                                      style: AppFonts
+                                                          .fontH7regular(
+                                                              AppColors
+                                                                  .themeBlack),
+                                                      maxLines: 1,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                    SizedBox(
+                                                      height: .5.h,
+                                                    ),
+                                                    Text(
+                                                      applng.getLang(17) +
+                                                          allcon.getSubcategoryNameById(
+                                                              int.parse(args
+                                                                  .item
+                                                                  .subcategoryId
+                                                                  .toString())),
+                                                      style: AppFonts
+                                                          .fontH7regular(
+                                                              AppColors
+                                                                  .themeBlack),
+                                                      maxLines: 1,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                    SizedBox(
+                                                      height: .5.h,
+                                                    ),
+                                                    Text(
+                                                      applng.getLang(19) +
+                                                          args.item.gender
+                                                              .toString()
+                                                              .toUpperCase(),
+                                                      style: AppFonts
+                                                          .fontH7regular(
+                                                              AppColors
+                                                                  .themeBlack),
+                                                      maxLines: 1,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                          // SizedBox(
+                                          //   width: 58.w,
+                                          //   height: 3.5.h,
+                                          //   child: Row(
+                                          //     children: [
+                                          //       Expanded(
+                                          //         child: Text(
+                                          //           args.description,
+                                          //           style: AppFonts.fontH6semi(
+                                          //               AppColors.themeBlack),
+                                          //           maxLines: 2,
+                                          //           overflow: TextOverflow.ellipsis,
+                                          //         ),
+                                          //       ),
+                                          //     ],
+                                          //   ),
+                                          // ),
+                                          /************************** gender */
+                                          Container(
+                                            width: 58.w,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                RichText(
+                                                  text: TextSpan(
+                                                      text: applng.getLang(18),
+                                                      style:
+                                                          AppFonts.fontH7semi(
+                                                              AppColors
+                                                                  .themeBlack),
+                                                      children: [
+                                                        TextSpan(
+                                                            text: args.item
+                                                                    .sprice +
+                                                                "Tk",
+                                                            style: AppFonts
+                                                                .fontH6semi(
+                                                                    AppColors
+                                                                        .themeColer))
+                                                      ]),
+                                                ),
+                                                RichText(
+                                                  text: TextSpan(
+                                                      text: applng.getLang(20),
+                                                      style:
+                                                          AppFonts.fontH7semi(
+                                                              AppColors
+                                                                  .themeBlack),
+                                                      children: [
+                                                        TextSpan(
+                                                            text: " " +
+                                                                args.pprice +
+                                                                "Tk",
+                                                            style: AppFonts
+                                                                .fontH6semi(
+                                                                    AppColors
+                                                                        .themeColer))
+                                                      ]),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  )
-                                ],
-                              ),
+                                    ),
+                                  ],
+                                )
+                              ],
                             ),
                           ),
                           Row(
@@ -387,11 +431,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
                       )),
                   IconButton(
                       onPressed: () {
-                        if (cartController.itemExists(args.id)) {
-                          cartController.removeItem(args.id);
-                          AppStyle.snackbar('Item Delete', ' Cart Item Delete');
-                          Navigator.pop(context);
-                        }
+                        _showDeleteWarning(context);
                       },
                       icon: Icon(Icons.delete))
                 ],
@@ -471,9 +511,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
               applng.getLang(27),
               style: AppFonts.fontH6semi(AppColors.themeBlack),
             ),
-            CustomCounterproduct(
-              context,
-            )
+            CustomCounterService(context)
           ],
         ),
         Row(
@@ -483,7 +521,9 @@ class _ViewAppointmentState extends State<ViewAppointment> {
               applng.getLang(25),
               style: AppFonts.fontH6semi(AppColors.themeBlack),
             ),
-            CustomCounterService(context)
+            CustomCounterproduct(
+              context,
+            )
           ],
         ),
         /************************************ */
@@ -613,6 +653,41 @@ class _ViewAppointmentState extends State<ViewAppointment> {
     setState(() {
       total = double.parse((p + s).toString());
     });
+  }
+
+  void _showDeleteWarning(BuildContext context) {
+    Get.dialog(
+      AlertDialog(
+        title: Text(
+          'Delete Item',
+          style: AppFonts.fontH5semi(AppColors.themeBlack),
+        ),
+        content: Text('Are you sure you want to Delete?'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back(); // Dismiss the dialog if the user cancels
+            },
+            child: Text('Cancle'),
+          ),
+          TextButton(
+            onPressed: () {
+              // Perform logout and close dialog
+              if (cartController.itemExists(args.id)) {
+                cartController.removeItem(args.id);
+                cartController.saveCartItems();
+                Navigator.pop(context);
+                AppStyle.snackbar('Item Delete', ' Cart Item Delete');
+                Navigator.pop(context);
+              }
+              Get.back(); // Dismiss the dialog after logging out
+            },
+            child:
+                Text('Yes', style: AppFonts.fontH5semi(AppColors.themeColer)),
+          ),
+        ],
+      ),
+    );
   }
 
   recomandation(context) => Container(

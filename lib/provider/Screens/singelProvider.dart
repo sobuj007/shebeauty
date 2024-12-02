@@ -163,6 +163,8 @@ class _SingelProviderState extends State<SingelProvider> {
   void initState() {
     super.initState();
     args = Get.arguments; // Get the passed data from the previous page
+    print("object");
+    print(args.agentid);
     agentcontroller.fetchAgentProfileData(args.agentid);
   }
 

@@ -1,3 +1,5 @@
+import 'package:Ghore_Parlor/utils/appColors.dart';
+import 'package:Ghore_Parlor/utils/appFonts.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:Ghore_Parlor/category/Screens/SubCategory.dart';
@@ -38,12 +40,15 @@ class CityLocationFilter extends StatelessWidget {
               print("object");
               print(allinfoController.selectedCityId.value);
               return Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(3.0.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // City Dropdown
                     DropdownButton<int>(
+                      isExpanded: true,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 1.w, vertical: 1.h),
                       hint: Text("Select City"),
                       value: allinfoController.selectedCityId.value != null
                           ? allinfoController.selectedCityId.value
@@ -60,7 +65,7 @@ class CityLocationFilter extends StatelessWidget {
                         );
                       }).toList(),
                     ),
-                    SizedBox(height: 16),
+                    SizedBox(height: 1.h),
 
                     // Location Checkboxes
                     Expanded(
@@ -74,7 +79,11 @@ class CityLocationFilter extends StatelessWidget {
                           children: allinfoController.filteredLocations
                               .map((location) {
                             return CheckboxListTile(
-                              title: Text(location.name ?? ''),
+                              title: Text(
+                                location.name ?? '',
+                                style:
+                                    AppFonts.fontH6semi(AppColors.themeBlack),
+                              ),
                               value: allinfoController.selectedLocations
                                   .contains(location.id),
                               onChanged: (bool? checked) {
@@ -91,25 +100,24 @@ class CityLocationFilter extends StatelessWidget {
                         );
                       }),
                     ),
-                    // Save Button
-                    ElevatedButton(
-                      onPressed: () {
-                        // allinfoController.saveSelectedCity(cityId)
-                        allinfoController.saveSelectedCity(selectcityid.value);
-                        allinfoController.saveSelectedLocations();
-                        AppStyle.snackbar(
-                            "Locations Save", "Locations Save succesful");
-                        nearMeController.fetchServiceProductsByLocations();
-                        Get.offAndToNamed('/layout');
-                      },
-                      child: Text('Save Selected Locations'),
-                    ),
                   ],
                 ),
               );
             }),
           ),
         ],
+      ),
+      floatingActionButton: // Save Button
+          ElevatedButton(
+        onPressed: () {
+          // allinfoController.saveSelectedCity(cityId)
+          allinfoController.saveSelectedCity(selectcityid.value);
+          allinfoController.saveSelectedLocations();
+          AppStyle.snackbar("Locations Save", "Locations Save succesful");
+          nearMeController.fetchServiceProductsByLocations();
+          Get.offAndToNamed('/layout');
+        },
+        child: Text('Save Selected Locations'),
       ),
     );
   }

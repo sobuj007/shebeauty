@@ -328,9 +328,9 @@ class _ManState extends State<Man> {
                         image: DecorationImage(
                           image: CachedNetworkImageProvider(
                               errorListener: (e) {},
-                              product.image == null
+                              product.img == null
                                   ? "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"
-                                  : product.image.toString()),
+                                  : product.img.toString()),
                           fit: BoxFit.fill,
                         ),
                       ),

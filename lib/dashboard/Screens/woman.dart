@@ -1,3 +1,4 @@
+import 'package:Ghore_Parlor/utils/appApis.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -193,22 +194,15 @@ class Woman extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
-                                    image: CachedNetworkImageProvider(
-                                        errorListener: (e) {},
-                                        storeController
-                                                    .stores[index].coverImage ==
-                                                null
-                                            ? "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"
-                                            : storeController
-                                                    .stores[index].coverImage
-                                                    .toString()
-                                                    .contains(
-                                                        'https://softisan.xyz/uploads/storeImages/')
-                                                ? storeController
-                                                    .stores[index].coverImage
-                                                : "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"),
-                                    fit: BoxFit.fill,
-                                  ),
+                                      image: CachedNetworkImageProvider(
+                                          errorListener: (e) {},
+                                          storeController.stores[index]
+                                                      .coverImage ==
+                                                  null
+                                              ? "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"
+                                              : AppAppis.storecover +
+                                                  storeController.stores[index]
+                                                      .coverImage)),
                                 ),
                                 child: Container(
                                   decoration: BoxDecoration(
@@ -234,29 +228,19 @@ class Woman extends StatelessWidget {
                                                 borderRadius:
                                                     BorderRadius.circular(20)),
                                             child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(4.0),
-                                              child: Image(
-                                                image: CachedNetworkImageProvider(
-                                                    storeController
-                                                                .stores[index]
-                                                                .logo ==
-                                                            null
-                                                        ? "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"
-                                                        : storeController
-                                                                .stores[index]
-                                                                .logo
-                                                                .toString()
-                                                                .contains(
-                                                                    'https://softisan.xyz/uploads/category/')
-                                                            ? storeController
-                                                                .stores[index]
-                                                                .logo
-                                                            : "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"),
-                                                width: 7.w,
-                                                height: 7.w,
-                                              ),
-                                            ))
+                                                padding:
+                                                    const EdgeInsets.all(4.0),
+                                                child: Image(
+                                                  image: CachedNetworkImageProvider(
+                                                      storeController
+                                                                  .stores[index]
+                                                                  .logo ==
+                                                              null
+                                                          ? "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"
+                                                          : storeController
+                                                              .stores[index]
+                                                              .logo),
+                                                )))
                                       ],
                                     ),
                                   ),
@@ -335,9 +319,9 @@ class Woman extends StatelessWidget {
                         image: DecorationImage(
                           image: CachedNetworkImageProvider(
                               errorListener: (e) {},
-                              product.image == null
+                              product.img == null
                                   ? "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"
-                                  : product.image.toString()),
+                                  : product.img.toString()),
                           fit: BoxFit.fill,
                         ),
                       ),

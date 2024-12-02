@@ -73,6 +73,9 @@ class NearMeAll extends StatelessWidget {
                   final product = nearMeController.nearProductData[index];
                   return GestureDetector(
                     onTap: () {
+                      print("product");
+                      print(product.toJson());
+
                       Get.toNamed(AppRoutes.appsingelprovider,
                           arguments: product);
                     },
@@ -86,9 +89,9 @@ class NearMeAll extends StatelessWidget {
                           image: DecorationImage(
                             image: CachedNetworkImageProvider(
                                 errorListener: (e) {},
-                                product.image == null
+                                product.img == null
                                     ? "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"
-                                    : product.image.toString()),
+                                    : product.img.toString()),
                             fit: BoxFit.fill,
                           ),
                         ),

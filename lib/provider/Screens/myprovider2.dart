@@ -86,18 +86,24 @@ class MyProvider2 extends StatelessWidget {
                   margin: EdgeInsets.symmetric(horizontal: 0, vertical: 1.h),
                   child: Row(
                     children: [
-                      Container(
-                        height: 23.h,
-                        width: 26.w,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: CachedNetworkImageProvider(
-                                  product.image ?? "${AppAppis.demoimg}",
-                                ),
-                                fit: BoxFit.cover),
-                            borderRadius: BorderRadius.circular(10)),
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
                         child: Container(
-                          color: const Color.fromARGB(60, 100, 99, 99),
+                          height: 22.h,
+                          width: 26.w,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: CachedNetworkImageProvider(
+                                    product.img ?? "${AppAppis.demoimg}",
+                                  ),
+                                  fit: BoxFit.cover),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: const Color.fromARGB(60, 100, 99, 99),
+                            ),
+                          ),
                         ),
                       ),
                       Column(
@@ -206,7 +212,7 @@ class MyProvider2 extends StatelessWidget {
                                               AppColors.themeBlack),
                                           children: [
                                             TextSpan(
-                                                text: product.servicePrice,
+                                                text: product.sprice,
                                                 style: AppFonts.fontH5semi(
                                                     AppColors.themeColer))
                                           ]),
@@ -221,7 +227,7 @@ class MyProvider2 extends StatelessWidget {
                                               AppColors.themeBlack),
                                           children: [
                                             TextSpan(
-                                                text: product.productPrice,
+                                                text: product.pprice,
                                                 style: AppFonts.fontH5semi(
                                                     AppColors.themeColer))
                                           ]),
@@ -231,19 +237,20 @@ class MyProvider2 extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Container(
-                            width: 65.0.w,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 36.w,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 8),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceAround,
                                     children: [
                                       Text(
                                         con
@@ -273,29 +280,33 @@ class MyProvider2 extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Get.toNamed(AppRoutes.appsingelprovider,
-                                        arguments: _filteredItems[index]);
-                                  },
-                                  child: Container(
-                                    height: 5.h,
-                                    width: 35.w,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.only(
-                                          bottomRight: Radius.circular(10)),
-                                      color: AppColors.themeColer,
-                                    ),
-                                    alignment: Alignment.center,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Get.toNamed(AppRoutes.appsingelprovider,
+                                      arguments: _filteredItems[index]);
+                                },
+                                child: Container(
+                                  height: 5.h,
+                                  width: 30.w,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                        bottomRight: Radius.circular(10)),
+                                    color: AppColors.themeColer,
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 2.w, vertical: .5.h),
                                     child: Text(
                                       applng.getLang(14),
                                       style: AppFonts.fontH6semi(
                                           AppColors.themeWhite),
                                     ),
                                   ),
-                                )
-                              ],
-                            ),
+                                ),
+                              )
+                            ],
                           )
                         ],
                       )

@@ -47,7 +47,11 @@ class _SingelAppointmentState extends State<SingelAppointment> {
   @override
   void initState() {
     super.initState();
-    if (wishcontroller.isProductInWishlist(int.parse(widget.item.id))) {
+    print("widget.item");
+    print(widget.item);
+    print(widget.item.agentid.toString());
+    if (wishcontroller
+        .isProductInWishlist(int.parse(widget.item.id.toString()))) {
       isfav = true;
       setState(() {});
     }
@@ -63,335 +67,352 @@ class _SingelAppointmentState extends State<SingelAppointment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView(padding: EdgeInsets.zero, children: [
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border:
-                            Border.all(width: 1, color: AppColors.themeborder),
-                        borderRadius: BorderRadius.circular(15)),
-                    margin: EdgeInsets.symmetric(horizontal: 0, vertical: 1.h),
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 21.h,
-                          width: 28.w,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: CachedNetworkImageProvider(
-                                    widget.item.img,
-                                  ),
-                                  fit: BoxFit.cover),
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Container(
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView(padding: EdgeInsets.zero, children: [
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 1, color: AppColors.themeborder),
+                          borderRadius: BorderRadius.circular(15)),
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 0, vertical: 1.h),
+                      child: Row(
+                        children: [
+                          Container(
+                            height: 21.h,
+                            width: 28.w,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: const Color.fromARGB(60, 100, 99, 99),
+                                image: DecorationImage(
+                                    image: CachedNetworkImageProvider(
+                                      widget.item.img,
+                                    ),
+                                    fit: BoxFit.cover),
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: const Color.fromARGB(60, 100, 99, 99),
+                              ),
                             ),
                           ),
-                        ),
-                        Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 1.h, vertical: .5.h),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                // mainAxisAlignment:
-                                //     MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Stack(
-                                    // crossAxisAlignment:
-                                    //     CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        height: 11.h,
-                                        width: 60.w,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                Expanded(
-                                                  child: Text(
-                                                    widget.item.name
-                                                        .toUpperCase(),
-                                                    style: AppFonts.fontH6bold(
+                          Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 1.h, vertical: .5.h),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  // mainAxisAlignment:
+                                  //     MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Stack(
+                                      // crossAxisAlignment:
+                                      //     CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          height: 11.h,
+                                          width: 60.w,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                children: [
+                                                  Expanded(
+                                                    child: Text(
+                                                      widget.item.name
+                                                          .toUpperCase(),
+                                                      style:
+                                                          AppFonts.fontH6bold(
+                                                              AppColors
+                                                                  .themeBlack),
+                                                      maxLines: 2,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    applng.getLang(16) +
+                                                        allcon.getCategoryNameById(
+                                                            int.parse(widget
+                                                                .item
+                                                                .categoryId)),
+                                                    style: AppFonts.fontH7semi(
                                                         AppColors.themeBlack),
                                                     maxLines: 2,
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                   ),
-                                                ),
-                                                Text(
-                                                  applng.getLang(16) +
-                                                      allcon
-                                                          .getCategoryNameById(
-                                                              int.parse(widget
-                                                                  .item
-                                                                  .categoryId)),
-                                                  style: AppFonts.fontH7semi(
-                                                      AppColors.themeBlack),
-                                                  maxLines: 2,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                ),
-                                                SizedBox(
-                                                  height: .5.h,
-                                                ),
-                                                Text(
-                                                  applng.getLang(17) +
-                                                      allcon.getSubcategoryNameById(
-                                                          int.parse(widget.item
-                                                              .subcategoryId)),
-                                                  style: AppFonts.fontH7semi(
-                                                      AppColors.themeBlack),
-                                                  maxLines: 2,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                ),
-                                                SizedBox(
-                                                  height: .5.h,
-                                                ),
-                                                Text(
-                                                  applng.getLang(19) +
-                                                      widget.item.gender
-                                                          .toString()
-                                                          .toUpperCase(),
-                                                  style: AppFonts.fontH7regular(
-                                                      AppColors.themeBlack),
-                                                  maxLines: 1,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  textAlign: TextAlign.start,
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Positioned(
-                                        top: 0,
-                                        right: 1,
-                                        child: Column(
-                                          children: [
-                                            IconButton(
-                                                onPressed: () {
-                                                  if (wishcontroller
-                                                          .isProductInWishlist(
-                                                              widget
-                                                                  .item.id!) &&
-                                                      isfav == true) {
-                                                    wishcontroller
-                                                        .removeProductFromWishlist(
-                                                            widget.item.id!);
-                                                    AppStyle.snackbar(
-                                                        'Wishlist',
-                                                        'Product delete from wishlist');
-                                                    isfav = false;
-                                                  } else {
-                                                    wishcontroller
-                                                        .addProductToWishlist(widget
-                                                            .item); // Adding Products to wishlist
-                                                    isfav = true;
-
-                                                    AppStyle.snackbar(
-                                                        'Wishlist',
-                                                        'Product add to wishlist');
-                                                  }
-                                                  setState(() {});
-                                                  //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: content))
-                                                }
-
-                                                //wishList.add(items);
-
-                                                ,
-                                                icon: isfav == true
-                                                    ? Icon(
-                                                        Icons.favorite,
-                                                        color: AppColors
-                                                            .themeColer,
-                                                      )
-                                                    : Icon(
-                                                        Icons
-                                                            .favorite_border_outlined,
-                                                        color: const Color
-                                                            .fromARGB(
-                                                            255, 56, 45, 49),
-                                                      )),
-                                            RatingBarIndicator(
-                                              rating: calculateAverageRating(
-                                                  widget.item.reviewRatings),
-                                              itemCount: 1,
-                                              itemSize: 18.0,
-                                              direction: Axis.horizontal,
-                                              unratedColor: Colors.grey,
-                                              itemBuilder: (context, _) => Icon(
-                                                Icons.star,
-                                                color: Colors.amber,
+                                                  SizedBox(
+                                                    height: .5.h,
+                                                  ),
+                                                  Text(
+                                                    applng.getLang(17) +
+                                                        allcon.getSubcategoryNameById(
+                                                            int.parse(widget
+                                                                .item
+                                                                .subcategoryId)),
+                                                    style: AppFonts.fontH7semi(
+                                                        AppColors.themeBlack),
+                                                    maxLines: 2,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                  SizedBox(
+                                                    height: .5.h,
+                                                  ),
+                                                  Text(
+                                                    applng.getLang(19) +
+                                                        widget.item.gender
+                                                            .toString()
+                                                            .toUpperCase(),
+                                                    style:
+                                                        AppFonts.fontH7regular(
+                                                            AppColors
+                                                                .themeBlack),
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    textAlign: TextAlign.start,
+                                                  ),
+                                                ],
                                               ),
-                                            ),
-                                            SizedBox(height: 3),
-                                            Text(
-                                              '${calculateAverageRating(widget.item.reviewRatings).toString()} / 5.0',
-                                              style: AppFonts.fontH7semi(
-                                                  AppColors.themeColer),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
-                                      )
-                                    ],
-                                  ),
-                                  // SizedBox(
-                                  //   width: 58.w,
-                                  //   height: 3.5.h,
-                                  //   child: Row(
-                                  //     children: [
-                                  //       Expanded(
-                                  //         child: Text(
-                                  //           widget.item.description,
-                                  //           style: AppFonts.fontH6semi(
-                                  //               AppColors.themeBlack),
-                                  //           maxLines: 2,
-                                  //           overflow: TextOverflow.ellipsis,
-                                  //         ),
-                                  //       ),
-                                  //     ],
-                                  //   ),
-                                  // ),
-                                  /************************** gender */
-                                  Container(
-                                    width: 58.w,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        RichText(
-                                          text: TextSpan(
-                                              text: applng.getLang(18),
-                                              style: AppFonts.fontH7normal(
-                                                  AppColors.themeBlack),
-                                              children: [
-                                                TextSpan(
-                                                    text: widget.item.sprice +
-                                                        "Tk",
-                                                    style: AppFonts.fontH6semi(
-                                                        AppColors.themeColer))
-                                              ]),
-                                        ),
-                                        RichText(
-                                          text: TextSpan(
-                                              text: applng.getLang(20),
-                                              style: AppFonts.fontH7normal(
-                                                  AppColors.themeBlack),
-                                              children: [
-                                                TextSpan(
-                                                    text: " " +
-                                                        widget.item.pprice,
-                                                    children: [
-                                                      TextSpan(
-                                                        text: "Tk",
-                                                        style:
-                                                            AppFonts.fontH6semi(
-                                                                AppColors
-                                                                    .themeColer),
-                                                      )
-                                                    ],
-                                                    style: AppFonts.fontH6semi(
-                                                        AppColors.themeColer))
-                                              ]),
-                                        ),
+                                        Positioned(
+                                          top: 0,
+                                          right: 1,
+                                          child: Column(
+                                            children: [
+                                              IconButton(
+                                                  onPressed: () {
+                                                    if ((wishcontroller
+                                                            .isProductInWishlist(
+                                                                int.parse(widget
+                                                                    .item.id
+                                                                    .toString()))!) &&
+                                                        isfav == true) {
+                                                      wishcontroller
+                                                          .removeProductFromWishlist(
+                                                              widget.item.id!);
+                                                      AppStyle.snackbar(
+                                                          'Wishlist',
+                                                          'Product delete from wishlist');
+                                                      isfav = false;
+                                                    } else {
+                                                      wishcontroller
+                                                          .addProductToWishlist(
+                                                              widget
+                                                                  .item); // Adding Products to wishlist
+                                                      isfav = true;
+
+                                                      AppStyle.snackbar(
+                                                          'Wishlist',
+                                                          'Product add to wishlist');
+                                                    }
+                                                    setState(() {});
+                                                    //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: content))
+                                                  }
+
+                                                  //wishList.add(items);
+
+                                                  ,
+                                                  icon: isfav == true
+                                                      ? Icon(
+                                                          Icons.favorite,
+                                                          color: AppColors
+                                                              .themeColer,
+                                                        )
+                                                      : Icon(
+                                                          Icons
+                                                              .favorite_border_outlined,
+                                                          color: const Color
+                                                              .fromARGB(
+                                                              255, 56, 45, 49),
+                                                        )),
+                                              RatingBarIndicator(
+                                                rating: double.parse(widget
+                                                    .item.averageRating
+                                                    .toString()),
+                                                itemCount: 1,
+                                                itemSize: 18.0,
+                                                direction: Axis.horizontal,
+                                                unratedColor: Colors.grey,
+                                                itemBuilder: (context, _) =>
+                                                    Icon(
+                                                  Icons.star,
+                                                  color: Colors.amber,
+                                                ),
+                                              ),
+                                              SizedBox(height: 3),
+                                              Text(
+                                                widget.item.averageRating
+                                                        .toString() +
+                                                    "/ 5.0",
+                                                style: AppFonts.fontH7semi(
+                                                    AppColors.themeColer),
+                                              ),
+                                            ],
+                                          ),
+                                        )
                                       ],
                                     ),
-                                  ),
-                                ],
+                                    // SizedBox(
+                                    //   width: 58.w,
+                                    //   height: 3.5.h,
+                                    //   child: Row(
+                                    //     children: [
+                                    //       Expanded(
+                                    //         child: Text(
+                                    //           widget.item.description,
+                                    //           style: AppFonts.fontH6semi(
+                                    //               AppColors.themeBlack),
+                                    //           maxLines: 2,
+                                    //           overflow: TextOverflow.ellipsis,
+                                    //         ),
+                                    //       ),
+                                    //     ],
+                                    //   ),
+                                    // ),
+                                    /************************** gender */
+                                    Container(
+                                      width: 58.w,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          RichText(
+                                            text: TextSpan(
+                                                text: applng.getLang(18),
+                                                style: AppFonts.fontH7normal(
+                                                    AppColors.themeBlack),
+                                                children: [
+                                                  TextSpan(
+                                                      text: widget.item.sprice +
+                                                          "Tk",
+                                                      style:
+                                                          AppFonts.fontH6semi(
+                                                              AppColors
+                                                                  .themeColer))
+                                                ]),
+                                          ),
+                                          RichText(
+                                            text: TextSpan(
+                                                text: applng.getLang(20),
+                                                style: AppFonts.fontH7normal(
+                                                    AppColors.themeBlack),
+                                                children: [
+                                                  TextSpan(
+                                                      text: " " +
+                                                          widget.item.pprice,
+                                                      children: [
+                                                        TextSpan(
+                                                          text: "Tk",
+                                                          style: AppFonts
+                                                              .fontH6semi(AppColors
+                                                                  .themeColer),
+                                                        )
+                                                      ],
+                                                      style:
+                                                          AppFonts.fontH6semi(
+                                                              AppColors
+                                                                  .themeColer))
+                                                ]),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
-                        )
-                      ],
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      children: [
-                        Text(
-                          applng.getLang(21),
-                          style: AppFonts.fontH6regular(AppColors.themeColer),
-                        ),
-                        // Container(
-                        //   decoration: BoxDecoration(
-                        //       borderRadius: BorderRadius.circular(5),
-                        //       border: Border.all(
-                        //           width: 1, color: AppColors.themehint)),
-                        //   child: Padding(
-                        //     padding: const EdgeInsets.all(8.0),
-                        //     child: Text(widget.item.available),
-                        //   ),
-                        // )
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Text(
-                          applng.getLang(32),
-                          style: AppFonts.fontH6regular(AppColors.themeColer),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(
-                                  width: 1, color: AppColors.themehint)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Obx(() {
-                              if (agentcontroller.profilesdata == null) {
-                                return CircularProgressIndicator();
-                              }
-                              var prof = agentcontroller.profilesdata;
-
-                              print(prof);
-                              return prof!.isEmpty
-                                  ? Container()
-                                  : Text(prof![0].servicestime.toString());
-                            }),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          Text(
+                            applng.getLang(21),
+                            style: AppFonts.fontH6regular(AppColors.themeColer),
                           ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                timeslot()
-              ]),
-            ),
-          ],
-        ),
-      ),
-      bottomNavigationBar: cartController.itemExists(widget.item.id.toString())
-          ? SizedBox()
-          : Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GestureDetector(
-                  onTap: () {
-                    var customTime = _formatTimeOfDay(_selectedTime);
+                          // Container(
+                          //   decoration: BoxDecoration(
+                          //       borderRadius: BorderRadius.circular(5),
+                          //       border: Border.all(
+                          //           width: 1, color: AppColors.themehint)),
+                          //   child: Padding(
+                          //     padding: const EdgeInsets.all(8.0),
+                          //     child: Text(widget.item.available),
+                          //   ),
+                          // )
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            applng.getLang(32),
+                            style: AppFonts.fontH6regular(AppColors.themeColer),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                border: Border.all(
+                                    width: 1, color: AppColors.themehint)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Obx(() {
+                                if (agentcontroller.profilesdata == null) {
+                                  return CircularProgressIndicator();
+                                }
+                                var prof = agentcontroller.profilesdata;
 
-                    final CartProducts cartProduct =
-                        convertToCartProducts(widget.item);
-                    final CartProduct.CartItem sampleItem =
-                        CartProduct.CartItem(
+                                print(prof);
+                                return prof!.isEmpty
+                                    ? Container()
+                                    : Text(prof![0].servicestime.toString());
+                              }),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                  timeslot()
+                ]),
+              ),
+            ],
+          ),
+        ),
+        bottomNavigationBar: Obx(() {
+          if (cartController.itemExists(widget.item.id.toString())) {
+            return SizedBox();
+          }
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GestureDetector(
+                onTap: () {
+                  print(widget.item);
+                  var customTime = _formatTimeOfDay(_selectedTime);
+
+                  final CartProducts cartProduct =
+                      convertToCartProducts(widget.item);
+                  final CartProduct.CartItem sampleItem = CartProduct.CartItem(
                       id: widget.item.id?.toString() ?? '0', // Handle null case
                       name: widget.item.name ??
                           'Unknown', // Default value if null
@@ -411,26 +432,26 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                       userid: ucon.user['id']
                           .toString(), // Assuming user id is always present
                       item:
-                          cartProduct, // Pass the entire product object directly
-                    );
+                          cartProduct // Pass the entire product object directly
+                      );
 
-                    AppStyle.snackbar('Cart', 'Product added to Cart');
-                    cartController.addItem(sampleItem);
-                  },
-                  child: Container(
-                    height: 6.h,
-                    width: 100.w,
-                    decoration: BoxDecoration(
-                        color: AppColors.themeColer,
-                        borderRadius: BorderRadius.circular(15)),
-                    alignment: Alignment.center,
-                    child: Text(
-                      applng.getLang(47),
-                      style: AppFonts.fontH4semi(AppColors.themeWhite),
-                    ),
-                  )),
-            ),
-    );
+                  AppStyle.snackbar('Cart', 'Product added to Cart');
+                  cartController.addItem(sampleItem);
+                },
+                child: Container(
+                  height: 6.h,
+                  width: 100.w,
+                  decoration: BoxDecoration(
+                      color: AppColors.themeColer,
+                      borderRadius: BorderRadius.circular(15)),
+                  alignment: Alignment.center,
+                  child: Text(
+                    applng.getLang(47),
+                    style: AppFonts.fontH4semi(AppColors.themeWhite),
+                  ),
+                )),
+          );
+        }));
   }
 
   // Function to calculate the average rating
@@ -449,28 +470,29 @@ class _SingelAppointmentState extends State<SingelAppointment> {
     return '$hours:$minutes';
   }
 
-  CartProducts convertToCartProducts(Products product) {
+  CartProducts convertToCartProducts(product) {
     final jsonMap = product.toJson();
-
+    print("product");
+    print(jsonMap);
     return CartProducts(
       id: jsonMap['id']?.toString() ?? '',
       name: jsonMap['name'] ?? '',
       img: jsonMap['image'] ?? '',
-      sprice: jsonMap['service_price'] ?? '0.00',
-      pprice: jsonMap['product_price'] ?? '0.00',
-      agentid: jsonMap['agent_id'] ?? '',
-      categoryId: jsonMap['category_id'] ?? '',
-      subcategoryId: jsonMap['subcategory_id'] ?? '',
-      bodypartId: jsonMap['bodypart_id'] ?? '',
-      cityId: jsonMap['city_id'] ?? '',
-      locationIds: jsonMap['location_ids'] ?? '',
-      slotId: jsonMap['slot_id'] ?? '',
-      appointmentSlotIds: jsonMap['appointment_slot_ids'] ?? '',
+      sprice: jsonMap['sprice']?.toString() ?? '0.00',
+      pprice: jsonMap['pprice']?.toString() ?? '0.00',
+      agentid: jsonMap['agent_id']?.toString() ?? '',
+      categoryId: jsonMap['category_id']?.toString() ?? '',
+      subcategoryId: jsonMap['subcategory_id']?.toString() ?? '',
+      bodypartId: jsonMap['bodypart_id']?.toString() ?? '',
+      cityId: jsonMap['city_id']?.toString() ?? '',
+      locationIds: jsonMap['location_ids']?.toString() ?? '',
+      slotId: jsonMap['slot_id']?.toString() ?? '',
+      appointmentSlotIds: jsonMap['appointment_slot_ids']?.toString() ?? '',
       description: jsonMap['description'] ?? '',
       gender: jsonMap['gender'] ?? '',
+      averageRating: jsonMap['average_rating'] ?? 0,
       createdAt: jsonMap['created_at'] ?? '',
       updatedAt: jsonMap['updated_at'] ?? '',
-      reviewRatings: jsonMap['reviewRatings'] ?? '',
     );
   }
 

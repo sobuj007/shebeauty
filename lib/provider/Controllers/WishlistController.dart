@@ -14,42 +14,33 @@ class WishlistController extends GetxController {
     loadWishlistFromPreferences();
   }
 
-  void addProductToWishlist(Products product) {
+  clearlist() {
+    wishlist.clear();
+  }
+
+  void addProductToWishlist(product) {
+    final jsonMap = product.toJson();
+    print("product.sprice");
+    print(jsonMap['agentid']);
     WishlistProduct wishlistProduct = WishlistProduct(
-      id: product.id.toString(),
-      agentid: product.agentId,
-      categoryId: product.categoryId,
-      subcategoryId: product.subcategoryId,
-      bodypartId: product.bodypartId,
-      cityId: product.cityId,
-      locationIds: product.locationIds,
-      appointmentSlotIds: product.appointmentSlotIds,
-      slotId: product.slotId,
-      name: product.name,
-      description: product.description,
-      img: product.image,
-      pprice: product.productPrice,
-      sprice: product.servicePrice,
-      gender: product.gender,
-      createdAt: product.createdAt,
-      updatedAt: product.updatedAt,
-      // Convert reviewRatings from ReviewRatings to WishlistReviewRatings
-      reviewRatings: product.reviewRatings != null
-          ? product.reviewRatings!
-              .map((review) => WishlistReviewRatings(
-                    id: review.id.toString(),
-                    serviceproductId: review.serviceproductId.toString(),
-                    agentId: review.agentId.toString(),
-                    userId: review.userId.toString(),
-                    reviewername: review.reviewername.toString(),
-                    image: review.image.toString(),
-                    rating: review.rating.toString(),
-                    comment: review.comment.toString(),
-                    createdAt: review.createdAt.toString(),
-                    updatedAt: review.updatedAt.toString(),
-                  ))
-              .toList()
-          : [], // Handle null case with an empty list
+      id: jsonMap['id']?.toString() ?? '',
+      name: jsonMap['name'] ?? '',
+      img: jsonMap['img'] ?? '',
+      sprice: jsonMap['sprice']?.toString() ?? '0.00',
+      pprice: jsonMap['pprice']?.toString() ?? '0.00',
+      agentid: jsonMap['agentid']?.toString() ?? '',
+      categoryId: jsonMap['category_id']?.toString() ?? '',
+      subcategoryId: jsonMap['subcategory_id']?.toString() ?? '',
+      bodypartId: jsonMap['bodypart_id']?.toString() ?? '',
+      cityId: jsonMap['city_id']?.toString() ?? '',
+      locationIds: jsonMap['location_ids']?.toString() ?? '',
+      slotId: jsonMap['slot_id']?.toString() ?? '',
+      appointmentSlotIds: jsonMap['appointment_slot_ids']?.toString() ?? '',
+      description: jsonMap['description'] ?? '',
+      gender: jsonMap['gender'] ?? '',
+      averageRating: jsonMap['average_rating'] ?? 0,
+      createdAt: jsonMap['created_at'] ?? '',
+      updatedAt: jsonMap['updated_at'] ?? '',
     );
 
     // Check if the product is already in the wishlist
@@ -62,7 +53,8 @@ class WishlistController extends GetxController {
   }
 
   void removeProductFromWishlist(int id) {
-    wishlist.removeWhere((item) => item.id == id);
+    wishlist.removeWhere((item) => item.id.toString() == id.toString());
+    print(wishlist);
   }
 
   List<WishlistProduct> getWishlist() {

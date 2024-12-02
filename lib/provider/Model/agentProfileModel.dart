@@ -231,9 +231,9 @@ class Products {
   String? agentId;
   String? categoryId;
   String? subcategoryId;
-  String? bodypartId;
+  var bodypartId;
   String? cityId;
-  String? locationIds;
+  var locationIds;
   String? slotId;
   String? appointmentSlotIds;
   String? name;

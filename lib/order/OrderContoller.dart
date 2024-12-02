@@ -10,6 +10,8 @@ class MyOrder {
   storeOrder(result) async {
     var token = tdata.getuser();
     var sendingData = jsonEncode(result);
+    print('sendingData');
+    print(sendingData);
     var headersList = {
       'Authorization': 'Bearer $token',
       'Content-Type': 'application/json',
@@ -29,10 +31,12 @@ class MyOrder {
     final resBody = await res.stream.bytesToString();
 
     if (res.statusCode >= 200 && res.statusCode < 300) {
+      print('resBody');
       print(resBody);
       var geting = jsonDecode(resBody);
       return geting['order']['id'].toString();
     } else {
+      print('error');
       print(res.reasonPhrase);
       return '';
     }

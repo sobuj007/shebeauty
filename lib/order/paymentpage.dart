@@ -86,7 +86,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                     AppFonts.fontH7semi(AppColors.themeBlack),
                               ),
                               Text(
-                                data.selectedProductQun == 0
+                                data.selectedProductQun == '0'
                                     ? "N/A"
                                     : 'Price: ${data.pprice}',
                                 style:
@@ -270,6 +270,7 @@ class _PaymentModalState extends State<PaymentModal> {
                   print(result);
 
                   var getOrderId = await MyOrder().storeOrder(result);
+                  print("getOrderId");
                   print(getOrderId);
 
                   if (res) {
@@ -307,7 +308,7 @@ class _PaymentModalState extends State<PaymentModal> {
       "agent_id": agentIds
           .map((id) => id.toString())
           .toList(), // convert to strings if needed
-      "date": dates.map((date) => date.toString()).toList(),
+      "req_order_date": dates.map((date) => date.toString()).toList(),
       "status": "pending",
       "service_product_ids":
           serviceProductIds.map((id) => id.toString()).toList(),

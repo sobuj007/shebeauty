@@ -22,7 +22,7 @@ class CartController extends GetxController {
   }
 
   void removeItem(String id) {
-    items.removeWhere((item) => item.itemsdata.id == id);
+    items.removeWhere((item) => item.item.id == id);
     if (items.isEmpty) {
       items.clear();
     }

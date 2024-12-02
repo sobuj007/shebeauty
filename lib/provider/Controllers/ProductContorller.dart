@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -182,16 +180,12 @@ class AllProductController extends GetxController {
   void sortByservicePrice({required bool isHighToLow}) {
     if (isHighToLow) {
       // Sort by price from high to low
-      filteredList.value = product
-          .where((prod) => prod.servicePrice != null)
-          .toList()
-        ..sort((a, b) => b.servicePrice!.compareTo(a.servicePrice!));
+      filteredList.value = product.where((prod) => prod.sprice != null).toList()
+        ..sort((a, b) => b.sprice!.compareTo(a.sprice!));
     } else {
       // Sort by price from low to high
-      filteredList.value = product
-          .where((prod) => prod.servicePrice != null)
-          .toList()
-        ..sort((a, b) => a.servicePrice!.compareTo(b.servicePrice!));
+      filteredList.value = product.where((prod) => prod.sprice != null).toList()
+        ..sort((a, b) => a.sprice!.compareTo(b.sprice!));
     }
   }
 }

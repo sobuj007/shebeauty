@@ -27,24 +27,24 @@ class AllWishlistProductModel {
 }
 
 class WishlistProduct {
-  String? id;
-  String? name;
-  String? img;
-  String? sprice;
-  String? pprice;
-  String? agentid;
-  String? categoryId;
-  String? subcategoryId;
-  String? bodypartId;
-  String? cityId;
+  String id;
+  String name;
+  String img;
+  String sprice;
+  String pprice;
+  String agentid;
+  String categoryId;
+  String subcategoryId;
+  String bodypartId;
+  String cityId;
   var locationIds;
-  String? slotId;
+  String slotId;
   var appointmentSlotIds;
-  String? description;
-  String? gender;
-  String? createdAt;
-  String? updatedAt;
-  List<WishlistReviewRatings>? reviewRatings; // List of Review Ratings
+  String description;
+  String gender;
+  int averageRating;
+  String createdAt;
+  String updatedAt;
 
   WishlistProduct({
     required this.id,
@@ -62,19 +62,19 @@ class WishlistProduct {
     required this.appointmentSlotIds,
     required this.description,
     required this.gender,
+    required this.averageRating,
     required this.createdAt,
     required this.updatedAt,
-    required this.reviewRatings, // Initialize reviewRatings
   });
 
   factory WishlistProduct.fromJson(Map<String, dynamic> json) {
     return WishlistProduct(
       id: json['id']?.toString() ?? '',
       name: json['name'] ?? '',
-      img: json['image'] ?? '',
-      sprice: json['service_price'] ?? '0.00',
-      pprice: json['product_price'] ?? '0.00',
-      agentid: json['agent_id'] ?? '',
+      img: json['img'] ?? '',
+      sprice: json['sprice'] ?? '0.00',
+      pprice: json['pprice'] ?? '0.00',
+      agentid: json['agentid'] ?? '',
       categoryId: json['category_id'] ?? '',
       subcategoryId: json['subcategory_id'] ?? '',
       bodypartId: json['bodypart_id'] ?? '',
@@ -84,13 +84,9 @@ class WishlistProduct {
       appointmentSlotIds: json['appointment_slot_ids'] ?? '',
       description: json['description'] ?? '',
       gender: json['gender'] ?? '',
+      averageRating: json['averageRating'] ?? 0,
       createdAt: json['created_at'] ?? '',
       updatedAt: json['updated_at'] ?? '',
-      reviewRatings: json['review_ratings'] != null
-          ? (json['review_ratings'] as List)
-              .map((i) => WishlistReviewRatings.fromJson(i))
-              .toList()
-          : [], // Parsing reviewRatings
     );
   }
 
@@ -111,11 +107,9 @@ class WishlistProduct {
       'appointment_slot_ids': appointmentSlotIds,
       'description': description,
       'gender': gender,
+      'averageRating': averageRating,
       'created_at': createdAt,
       'updated_at': updatedAt,
-      'review_ratings': reviewRatings!
-          .map((i) => i.toJson())
-          .toList(), // Converting the review ratings back to JSON
     };
   }
 }
