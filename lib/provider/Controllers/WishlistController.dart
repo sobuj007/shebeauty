@@ -20,15 +20,16 @@ class WishlistController extends GetxController {
 
   void addProductToWishlist(product) {
     final jsonMap = product.toJson();
+    print(jsonMap);
     print("product.sprice");
-    print(jsonMap['agentid']);
+    print(jsonMap['agentId']);
     WishlistProduct wishlistProduct = WishlistProduct(
       id: jsonMap['id']?.toString() ?? '',
       name: jsonMap['name'] ?? '',
-      img: jsonMap['img'] ?? '',
-      sprice: jsonMap['sprice']?.toString() ?? '0.00',
-      pprice: jsonMap['pprice']?.toString() ?? '0.00',
-      agentid: jsonMap['agentid']?.toString() ?? '',
+      img: jsonMap['image'] ?? '',
+      sprice: jsonMap['service_price']?.toString() ?? '0.00',
+      pprice: jsonMap['product_price']?.toString() ?? '0.00',
+      agentid: jsonMap['agent_id']?.toString() ?? '',
       categoryId: jsonMap['category_id']?.toString() ?? '',
       subcategoryId: jsonMap['subcategory_id']?.toString() ?? '',
       bodypartId: jsonMap['bodypart_id']?.toString() ?? '',
@@ -52,7 +53,7 @@ class WishlistController extends GetxController {
     print(wishlist);
   }
 
-  void removeProductFromWishlist(int id) {
+  void removeProductFromWishlist(String id) {
     wishlist.removeWhere((item) => item.id.toString() == id.toString());
     print(wishlist);
   }
@@ -62,7 +63,7 @@ class WishlistController extends GetxController {
   }
 
   // Check if a product is in the wishlist
-  bool isProductInWishlist(int id) {
+  bool isProductInWishlist(String id) {
     return wishlist.any((item) => item.id == id);
   }
 

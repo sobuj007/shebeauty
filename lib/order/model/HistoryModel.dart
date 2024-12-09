@@ -2,147 +2,116 @@ import 'panddingModel.dart';
 import 'todayModel.dart';
 
 class HistoryModel {
-  String? message;
-  List<Completedorders>? completedorders;
-  List<Pendingorders>? pendingorders;
-  List<Todaylist>? todaylist;
+  List<CompletedOrders>? completedOrders;
+  List<PendingOrders>? pendingOrders;
+  List<TodaysOrders>? todaysOrders;
 
-  HistoryModel(
-      {this.message, this.completedorders, this.pendingorders, this.todaylist});
+  HistoryModel({this.completedOrders, this.pendingOrders, this.todaysOrders});
 
   HistoryModel.fromJson(Map<String, dynamic> json) {
-    message = json['message'];
-    if (json['completedorders'] != null) {
-      completedorders = <Completedorders>[];
-      json['completedorders'].forEach((v) {
-        completedorders!.add(new Completedorders.fromJson(v));
+    if (json['completed_orders'] != null) {
+      completedOrders = <CompletedOrders>[];
+      json['completed_orders'].forEach((v) {
+        completedOrders!.add(new CompletedOrders.fromJson(v));
       });
     }
-    if (json['pendingorders'] != null) {
-      pendingorders = <Pendingorders>[];
-      json['pendingorders'].forEach((v) {
-        pendingorders!.add(new Pendingorders.fromJson(v));
+    if (json['pending_orders'] != null) {
+      pendingOrders = <PendingOrders>[];
+      json['pending_orders'].forEach((v) {
+        pendingOrders!.add(new PendingOrders.fromJson(v));
       });
     }
-    if (json['todaylist'] != null) {
-      todaylist = <Todaylist>[];
-      json['todaylist'].forEach((v) {
-        todaylist!.add(new Todaylist.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message'] = this.message;
-    if (this.completedorders != null) {
-      data['completedorders'] =
-          this.completedorders!.map((v) => v.toJson()).toList();
-    }
-    if (this.pendingorders != null) {
-      data['pendingorders'] =
-          this.pendingorders!.map((v) => v.toJson()).toList();
-    }
-    if (this.todaylist != null) {
-      data['todaylist'] = this.todaylist!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
-
-class Completedorders {
-  int? id;
-  String? userId;
-  String? status;
-  String? orderDate;
-  String? createdAt;
-  String? updatedAt;
-  List<Items2>? items2;
-
-  Completedorders(
-      {this.id,
-      this.userId,
-      this.status,
-      this.orderDate,
-      this.createdAt,
-      this.updatedAt,
-      this.items2});
-
-  Completedorders.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    userId = json['user_id'];
-    status = json['status'];
-    orderDate = json['order_date'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    if (json['items2'] != null) {
-      items2 = <Items2>[];
-      json['items2'].forEach((v) {
-        items2!.add(new Items2.fromJson(v));
+    if (json['todays_orders'] != null) {
+      todaysOrders = <TodaysOrders>[];
+      json['todays_orders'].forEach((v) {
+        todaysOrders!.add(new TodaysOrders.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['user_id'] = this.userId;
-    data['status'] = this.status;
-    data['order_date'] = this.orderDate;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    if (this.items2 != null) {
-      data['items2'] = this.items2!.map((v) => v.toJson()).toList();
+    if (this.completedOrders != null) {
+      data['completed_orders'] =
+          this.completedOrders!.map((v) => v.toJson()).toList();
+    }
+    if (this.pendingOrders != null) {
+      data['pending_orders'] =
+          this.pendingOrders!.map((v) => v.toJson()).toList();
+    }
+    if (this.todaysOrders != null) {
+      data['todays_orders'] =
+          this.todaysOrders!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class Items2 {
+class CompletedOrders {
   int? id;
-  String? orderId;
-  String? vendorId;
-  String? serviceProductId;
-  String? productQuantity;
-  String? serviceQuantity;
+  int? orderId;
+  int? vendorId;
+  int? userId;
+  int? serviceProductId;
+  int? productQuantity;
+  int? serviceQuantity;
   String? productPrice;
   String? servicePrice;
-  String? selected_slot;
+  String? selectedSlot;
   String? userreqtime;
+  String? reqOrderDate;
+  String? status;
+  String? payable;
   String? createdAt;
   String? updatedAt;
-  ServiceProduct2? serviceProduct2;
+  Order? order;
+  ServiceProduct? serviceProduct;
+  Payment2? payment2;
 
-  Items2(
+  CompletedOrders(
       {this.id,
       this.orderId,
       this.vendorId,
+      this.userId,
       this.serviceProductId,
       this.productQuantity,
       this.serviceQuantity,
       this.productPrice,
       this.servicePrice,
-      this.selected_slot,
+      this.selectedSlot,
       this.userreqtime,
+      this.reqOrderDate,
+      this.status,
+      this.payable,
       this.createdAt,
       this.updatedAt,
-      this.serviceProduct2});
+      this.order,
+      this.serviceProduct,
+      this.payment2});
 
-  Items2.fromJson(Map<String, dynamic> json) {
+  CompletedOrders.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     orderId = json['order_id'];
     vendorId = json['vendor_id'];
+    userId = json['user_id'];
     serviceProductId = json['service_product_id'];
     productQuantity = json['product_quantity'];
     serviceQuantity = json['service_quantity'];
     productPrice = json['product_price'];
     servicePrice = json['service_price'];
-    selected_slot = json['selected_slot'];
+    selectedSlot = json['selected_slot'];
     userreqtime = json['userreqtime'];
+    reqOrderDate = json['req_order_date'];
+    status = json['status'];
+    payable = json['payable'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    serviceProduct2 = json['service_product2'] != null
-        ? new ServiceProduct2.fromJson(json['service_product2'])
+    order = json['order'] != null ? new Order.fromJson(json['order']) : null;
+    serviceProduct = json['service_product'] != null
+        ? new ServiceProduct.fromJson(json['service_product'])
+        : null;
+    payment2 = json['payment2'] != null
+        ? new Payment2.fromJson(json['payment2'])
         : null;
   }
 
@@ -151,31 +120,82 @@ class Items2 {
     data['id'] = this.id;
     data['order_id'] = this.orderId;
     data['vendor_id'] = this.vendorId;
+    data['user_id'] = this.userId;
     data['service_product_id'] = this.serviceProductId;
     data['product_quantity'] = this.productQuantity;
     data['service_quantity'] = this.serviceQuantity;
     data['product_price'] = this.productPrice;
     data['service_price'] = this.servicePrice;
-    data['selected_slot'] = this.selected_slot;
+    data['selected_slot'] = this.selectedSlot;
     data['userreqtime'] = this.userreqtime;
+    data['req_order_date'] = this.reqOrderDate;
+    data['status'] = this.status;
+    data['payable'] = this.payable;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
-    if (this.serviceProduct2 != null) {
-      data['service_product2'] = this.serviceProduct2!.toJson();
+    if (this.order != null) {
+      data['order'] = this.order!.toJson();
+    }
+    if (this.serviceProduct != null) {
+      data['service_product'] = this.serviceProduct!.toJson();
+    }
+    if (this.payment2 != null) {
+      data['payment2'] = this.payment2!.toJson();
     }
     return data;
   }
 }
 
-class ServiceProduct2 {
+class Order {
   int? id;
-  String? agentId;
-  String? categoryId;
-  String? subcategoryId;
+  int? userId;
+  String? status;
+  String? totalAmount;
+  String? orderDate;
+  String? createdAt;
+  String? updatedAt;
+
+  Order(
+      {this.id,
+      this.userId,
+      this.status,
+      this.totalAmount,
+      this.orderDate,
+      this.createdAt,
+      this.updatedAt});
+
+  Order.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    userId = json['user_id'];
+    status = json['status'];
+    totalAmount = json['total_amount'];
+    orderDate = json['order_date'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['user_id'] = this.userId;
+    data['status'] = this.status;
+    data['total_amount'] = this.totalAmount;
+    data['order_date'] = this.orderDate;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    return data;
+  }
+}
+
+class ServiceProduct {
+  int? id;
+  int? agentId;
+  int? categoryId;
+  int? subcategoryId;
   String? bodypartId;
-  String? cityId;
-  String? locationIds;
-  String? slotId;
+  int? cityId;
+  List<String>? locationIds;
+  int? slotId;
   String? appointmentSlotIds;
   String? name;
   String? description;
@@ -186,7 +206,7 @@ class ServiceProduct2 {
   String? createdAt;
   String? updatedAt;
 
-  ServiceProduct2(
+  ServiceProduct(
       {this.id,
       this.agentId,
       this.categoryId,
@@ -205,14 +225,14 @@ class ServiceProduct2 {
       this.createdAt,
       this.updatedAt});
 
-  ServiceProduct2.fromJson(Map<String, dynamic> json) {
+  ServiceProduct.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     agentId = json['agent_id'];
     categoryId = json['category_id'];
     subcategoryId = json['subcategory_id'];
     bodypartId = json['bodypart_id'];
     cityId = json['city_id'];
-    locationIds = json['location_ids'];
+    locationIds = json['location_ids'].cast<String>();
     slotId = json['slot_id'];
     appointmentSlotIds = json['appointment_slot_ids'];
     name = json['name'];
@@ -248,76 +268,59 @@ class ServiceProduct2 {
   }
 }
 
+class Payment2 {
+  int? id;
+  int? orderId;
+  Null? productId;
+  String? amount;
+  String? status;
+  String? address;
+  Null? notes;
+  String? mobile;
+  String? transType;
+  String? createdAt;
+  String? updatedAt;
 
-// class Pendingorders {
-//   int? id;
-//   String? userId;
-//   String? status;
-//   String? orderDate;
-//   String? createdAt;
-//   String? updatedAt;
+  Payment2(
+      {this.id,
+      this.orderId,
+      this.productId,
+      this.amount,
+      this.status,
+      this.address,
+      this.notes,
+      this.mobile,
+      this.transType,
+      this.createdAt,
+      this.updatedAt});
 
-//   Pendingorders(
-//       {this.id,
-//       this.userId,
-//       this.status,
-//       this.orderDate,
-//       this.createdAt,
-//       this.updatedAt});
+  Payment2.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    orderId = json['order_id'];
+    productId = json['product_id'];
+    amount = json['amount'];
+    status = json['status'];
+    address = json['address'];
+    notes = json['notes'];
+    mobile = json['mobile'];
+    transType = json['trans_type'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
 
-//   Pendingorders.fromJson(Map<String, dynamic> json) {
-//     id = json['id'];
-//     userId = json['user_id'];
-//     status = json['status'];
-//     orderDate = json['order_date'];
-//     createdAt = json['created_at'];
-//     updatedAt = json['updated_at'];
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = new Map<String, dynamic>();
-//     data['id'] = this.id;
-//     data['user_id'] = this.userId;
-//     data['status'] = this.status;
-//     data['order_date'] = this.orderDate;
-//     data['created_at'] = this.createdAt;
-//     data['updated_at'] = this.updatedAt;
-//     return data;
-//   }
-// }
-// class Todaylist {
-//   int? id;
-//   String? userId;
-//   String? status;
-//   String? orderDate;
-//   String? createdAt;
-//   String? updatedAt;
-
-//   Todaylist(
-//       {this.id,
-//       this.userId,
-//       this.status,
-//       this.orderDate,
-//       this.createdAt,
-//       this.updatedAt});
-
-//   Todaylist.fromJson(Map<String, dynamic> json) {
-//     id = json['id'];
-//     userId = json['user_id'];
-//     status = json['status'];
-//     orderDate = json['order_date'];
-//     createdAt = json['created_at'];
-//     updatedAt = json['updated_at'];
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = new Map<String, dynamic>();
-//     data['id'] = this.id;
-//     data['user_id'] = this.userId;
-//     data['status'] = this.status;
-//     data['order_date'] = this.orderDate;
-//     data['created_at'] = this.createdAt;
-//     data['updated_at'] = this.updatedAt;
-//     return data;
-//   }
-// }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['order_id'] = this.orderId;
+    data['product_id'] = this.productId;
+    data['amount'] = this.amount;
+    data['status'] = this.status;
+    data['address'] = this.address;
+    data['notes'] = this.notes;
+    data['mobile'] = this.mobile;
+    data['trans_type'] = this.transType;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    return data;
+  }
+}

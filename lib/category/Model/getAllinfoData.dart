@@ -71,14 +71,16 @@ class Category {
   String? name;
   String? image;
   String? gender;
+  String? catDescription;
 
-  Category({this.id, this.name, this.image, this.gender});
+  Category({this.id, this.name, this.image, this.gender, this.catDescription});
 
   Category.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     image = json['image'];
     gender = json['gender'];
+    catDescription = json['cat_description'];
   }
 
   Map<String, dynamic> toJson() {
@@ -87,13 +89,14 @@ class Category {
     data['name'] = this.name;
     data['image'] = this.image;
     data['gender'] = this.gender;
+    data['cat_description'] = this.catDescription;
     return data;
   }
 }
 
 class Subcategory {
   int? id;
-  String? categoryId;
+  int? categoryId;
   String? name;
   String? image;
 
@@ -118,7 +121,7 @@ class Subcategory {
 
 class Bodypart {
   int? id;
-  String? subcategoryId;
+  int? subcategoryId;
   String? name;
 
   Bodypart({this.id, this.subcategoryId, this.name});
@@ -159,7 +162,7 @@ class Cities {
 
 class Location {
   int? id;
-  String? citiesId;
+  int? citiesId;
   String? name;
 
   Location({this.id, this.citiesId, this.name});

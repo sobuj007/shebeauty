@@ -5,6 +5,7 @@ import 'package:Ghore_Parlor/auth/Controllers/storecontoller.dart';
 import 'package:Ghore_Parlor/provider/Screens/Each%20Provider/EachProvider.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../utils/appApis.dart';
 import '../../utils/appColors.dart';
 import '../../utils/appFonts.dart';
 import '../../utils/custom widget/CustomAppbar.dart';
@@ -63,26 +64,20 @@ class ProviderAll extends StatelessWidget {
                             //  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                             child: Container(
                               width: 38.w,
-                              height: 16.h,
+                              height: 13.h,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 image: DecorationImage(
-                                  image: CachedNetworkImageProvider(
-                                      errorListener: (e) {},
-                                      storeController
-                                                  .stores[index].coverImage ==
-                                              null
-                                          ? "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"
-                                          : storeController
-                                                  .stores[index].coverImage
-                                                  .toString()
-                                                  .contains(
-                                                      'https://softisan.xyz/uploads/storeImages/')
-                                              ? storeController
-                                                  .stores[index].coverImage
-                                              : "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"),
-                                  fit: BoxFit.fill,
-                                ),
+                                    fit: BoxFit.cover,
+                                    image: CachedNetworkImageProvider(
+                                        errorListener: (e) {},
+                                        storeController
+                                                    .stores[index].coverImage ==
+                                                null
+                                            ? "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"
+                                            : AppAppis.storecover +
+                                                storeController
+                                                    .stores[index].coverImage)),
                               ),
                               child: Container(
                                 decoration: BoxDecoration(
@@ -101,33 +96,27 @@ class ProviderAll extends StatelessWidget {
                                         style: AppFonts.fontH6semi(
                                             AppColors.themeWhite),
                                       ),
-                                      Expanded(child: SizedBox()),
+                                      // Expanded(child: SizedBox()),
                                       Card(
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(20)),
                                           child: Padding(
-                                            padding: const EdgeInsets.all(4.0),
-                                            child: Image(
-                                              image: CachedNetworkImageProvider(
-                                                  storeController.stores[index]
-                                                              .logo ==
-                                                          null
-                                                      ? "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"
-                                                      : storeController
-                                                              .stores[index]
-                                                              .logo
-                                                              .toString()
-                                                              .contains(
-                                                                  'https://softisan.xyz/uploads/category/')
-                                                          ? storeController
-                                                              .stores[index]
-                                                              .logo
-                                                          : "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"),
-                                              width: 7.w,
-                                              height: 7.w,
-                                            ),
-                                          ))
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: Image(
+                                                height: 4.h,
+                                                width: 4.h,
+                                                image: CachedNetworkImageProvider(
+                                                    storeController
+                                                                .stores[index]
+                                                                .logo ==
+                                                            null
+                                                        ? "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"
+                                                        : storeController
+                                                            .stores[index]
+                                                            .logo),
+                                              )))
                                     ],
                                   ),
                                 ),

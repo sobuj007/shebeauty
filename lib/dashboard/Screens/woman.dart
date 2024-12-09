@@ -128,7 +128,7 @@ class Woman extends StatelessWidget {
                                             image: CachedNetworkImageProvider(
                                               category.image,
                                             ),
-                                            fit: BoxFit.contain,
+                                            fit: BoxFit.cover,
                                           ),
                                         ),
                                         Text(
@@ -222,7 +222,7 @@ class Woman extends StatelessWidget {
                                           style: AppFonts.fontH6semi(
                                               AppColors.themeWhite),
                                         ),
-                                        Expanded(child: SizedBox()),
+                                        // Expanded(child: SizedBox()),
                                         Card(
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
@@ -231,6 +231,8 @@ class Woman extends StatelessWidget {
                                                 padding:
                                                     const EdgeInsets.all(4.0),
                                                 child: Image(
+                                                  height: 4.h,
+                                                  width: 4.h,
                                                   image: CachedNetworkImageProvider(
                                                       storeController
                                                                   .stores[index]

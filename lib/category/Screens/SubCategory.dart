@@ -89,8 +89,7 @@ class _AppSubCategoryState extends State<AppSubCategory> {
               if (con.categories!.isEmpty) {
                 return Center(child: Text('No Subcategories available'));
               }
-              final data =
-                  con.filterSubcategoriesByName(widget.cat_id.toString());
+              final data = con.filterSubcategoriesByName(widget.cat_id);
               return data.length != 0
                   ? GridView.builder(
                       padding: EdgeInsets.zero,
@@ -100,19 +99,19 @@ class _AppSubCategoryState extends State<AppSubCategory> {
                       ),
                       itemCount: data.length,
                       itemBuilder: (BuildContext context, int index) {
-                        final vdata = data[index];
+                        var vdata = data[index];
                         return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: GestureDetector(
                                 onTap: (() {
                                   // Navigator.push(context,
                                   //     MaterialPageRoute(builder: (_) => AppSubCategory(cat_id: vdata.id,)));
-                                  con.filterBodypartsByName(vdata.id.toString())!.isEmpty
-                                      ?  Get.to(MyProvider2(), arguments: {
-                                      "subcategory": con.subcategories,
-                                      "bodypart": '',
-                                      "subid": vdata.id
-                                    })
+                                  con.filterBodypartsByName(vdata.id)!.isEmpty
+                                      ? Get.to(MyProvider2(), arguments: {
+                                          "subcategory": con.subcategories,
+                                          "bodypart": '',
+                                          "subid": vdata.id
+                                        })
                                       : showpopup(context, vdata.id);
                                 }),
                                 child: Container(
@@ -214,7 +213,7 @@ class _AppSubCategoryState extends State<AppSubCategory> {
             if (con.categories!.isEmpty) {
               return Center(child: Text('No Body part available'));
             }
-            final data = con.filterBodypartsByName(id.toString());
+            final data = con.filterBodypartsByName(id);
             var listdata = data;
             return Container(
               // height: 15.h+(5.h*bodypart.length/2),
@@ -243,10 +242,12 @@ class _AppSubCategoryState extends State<AppSubCategory> {
                           selectedTextStyle: AppFonts.fontH7semi(Colors.black)),
                       isRadio: false,
                       onSelected: ((value, index, isSelected) {
+                        // print("data[index].toString()");
+                        // print(data[index].toString());
                         if (isSelected) {
-                          selectedBodyValue.add(index.toString());
+                          selectedBodyValue.add(value.toString());
                         } else {
-                          selectedBodyValue.remove(index.toString());
+                          selectedBodyValue.remove(value.toString());
                         }
 // For debugging purposes
                       }),
@@ -257,7 +258,11 @@ class _AppSubCategoryState extends State<AppSubCategory> {
                         Expanded(
                             child: GestureDetector(
                                 onTap: () {
+                                  var selectbody = selectedBodyValue;
+                                  print(selectbody);
+
                                   Navigator.pop(context);
+                                  // selectedBodyValue.clear();
                                   Future.delayed(Duration.zero, () async {
                                     Get.to(MyProvider2(), arguments: {
                                       "subcategory": con.subcategories,

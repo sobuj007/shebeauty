@@ -286,8 +286,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
                                                                   .themeBlack),
                                                       children: [
                                                         TextSpan(
-                                                            text: args.item
-                                                                    .sprice +
+                                                            text: args.sprice +
                                                                 "Tk",
                                                             style: AppFonts
                                                                 .fontH6semi(

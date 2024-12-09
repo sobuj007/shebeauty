@@ -8,8 +8,6 @@ import 'package:Ghore_Parlor/main.dart';
 
 import '../../utils/appApis.dart';
 
-
-  
 class StorProfileController extends GetxController {
   // Observable list of stores
   var stores = [].obs;
@@ -19,14 +17,13 @@ class StorProfileController extends GetxController {
 //     fetchData(); // Fetch data when the controller is initialized
 //   }
   Future<void> fetchData() async {
-    
-    var token= tdata.getuser();
-  
+    var token = tdata.getuser();
+
     var headersList = {
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
     };
-    var url = Uri.parse(AppAppis.endpoint +'storeprofiles/get');
+    var url = Uri.parse(AppAppis.endpoint + 'storeprofiles/get');
 
     try {
       var req = http.Request('GET', url);
@@ -45,7 +42,7 @@ class StorProfileController extends GetxController {
         var data = StoreprofileModel.fromJson(jsonResponse);
 
         // Update the observable list with the parsed data
-        stores.value = data.data; // Updating the list of stores
+        stores.value = data.data!; // Updating the list of stores
 
         // print(stores); // Debug print to verify
       } else {
@@ -56,7 +53,40 @@ class StorProfileController extends GetxController {
     }
   }
 
-   getStores() {
+  getStores() {
     return stores;
+  }
+
+  String? getStoreNameByAgentId(int agentId) {
+    // Find the store with the matching agentId
+    final store = stores.firstWhere(
+      (store) => store.agentId == agentId,
+      orElse: () => null, // Returns null if no match is found
+    );
+
+    // Return the store name if the store is found, otherwise return null
+    return store?.storename;
+  }
+
+  String? getStoreAddressByAgentId(int agentId) {
+    // Find the store with the matching agentId
+    final store = stores.firstWhere(
+      (store) => store.agentId == agentId,
+      orElse: () => null, // Returns null if no match is found
+    );
+
+    // Return the store name if the store is found, otherwise return null
+    return store?.address;
+  }
+
+  String? getStorePhonByAgentId(int agentId) {
+    // Find the store with the matching agentId
+    final store = stores.firstWhere(
+      (store) => store.agentId == agentId,
+      orElse: () => null, // Returns null if no match is found
+    );
+
+    // Return the store name if the store is found, otherwise return null
+    return store?.mobile;
   }
 }

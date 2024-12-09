@@ -117,8 +117,6 @@
 //     return data;
 //   }
 // }
-import 'dart:convert';
-
 class AllProductModel {
   String? message;
   List<Products>? products;
@@ -146,111 +144,110 @@ class AllProductModel {
 }
 
 class Products {
-  String? id;
+  int? id;
+  int? agentid;
+  int? categoryId;
+  int? subcategoryId;
+  String? bodypartId;
+  int? cityId;
+  List<String>? locationIds;
+  int? slotId;
+  String? appointmentSlotIds;
   String? name;
-  String? img;
-  String? sprice;
-  String? pprice;
-  String? agentid;
-  String? categoryId;
-  String? subcategoryId;
-  var bodypartId;
-  String? cityId;
-  var locationIds;
-  String? slotId;
-  var appointmentSlotIds;
   String? description;
+  String? img;
+  String? pprice;
+  String? sprice;
   String? gender;
   String? createdAt;
   String? updatedAt;
   int? averageRating;
-  List<ReviewRatings>? reviewRatings; // List of Review Ratings
+  List<ReviewRatings>? reviewRatings;
 
-  Products({
-    required this.id,
-    required this.name,
-    required this.img,
-    required this.sprice,
-    required this.pprice,
-    required this.agentid,
-    required this.categoryId,
-    required this.subcategoryId,
-    required this.bodypartId,
-    required this.cityId,
-    required this.locationIds,
-    required this.slotId,
-    required this.appointmentSlotIds,
-    required this.description,
-    required this.gender,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.averageRating,
-    required this.reviewRatings, // Initialize reviewRatings
-  });
+  Products(
+      {this.id,
+      this.agentid,
+      this.categoryId,
+      this.subcategoryId,
+      this.bodypartId,
+      this.cityId,
+      this.locationIds,
+      this.slotId,
+      this.appointmentSlotIds,
+      this.name,
+      this.description,
+      this.img,
+      this.pprice,
+      this.sprice,
+      this.gender,
+      this.createdAt,
+      this.updatedAt,
+      this.averageRating,
+      this.reviewRatings});
 
-  factory Products.fromJson(Map<String, dynamic> json) {
-    return Products(
-      id: json['id']?.toString() ?? '',
-      name: json['name'] ?? '',
-      img: json['image'] ?? '',
-      sprice: json['service_price'] ?? '0.00',
-      pprice: json['product_price'] ?? '0.00',
-      agentid: json['agent_id'] ?? '',
-      categoryId: json['category_id'] ?? '',
-      subcategoryId: json['subcategory_id'] ?? '',
-      bodypartId: json['bodypart_id'] ?? '',
-      cityId: json['city_id'] ?? '',
-      locationIds: json['location_ids'] ?? '',
-      slotId: json['slot_id'] ?? '',
-      appointmentSlotIds: json['appointment_slot_ids'] ?? '',
-      description: json['description'] ?? '',
-      gender: json['gender'] ?? '',
-      createdAt: json['created_at'] ?? '',
-      updatedAt: json['updated_at'] ?? '',
-      averageRating: json['average_rating'],
-      reviewRatings: json['review_ratings'] != null
-          ? (json['review_ratings'] as List)
-              .map((i) => ReviewRatings.fromJson(i))
-              .toList()
-          : [], // Parsing reviewRatings
-    );
+  Products.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    agentid = json['agent_id'];
+    categoryId = json['category_id'];
+    subcategoryId = json['subcategory_id'];
+    bodypartId = json['bodypart_id'];
+    cityId = json['city_id'];
+    locationIds = json['location_ids'].cast<String>();
+    slotId = json['slot_id'];
+    appointmentSlotIds = json['appointment_slot_ids'];
+    name = json['name'];
+    description = json['description'];
+    img = json['image'];
+    pprice = json['product_price'];
+    sprice = json['service_price'];
+    gender = json['gender'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    averageRating = json['average_rating'];
+    if (json['review_ratings'] != null) {
+      reviewRatings = <ReviewRatings>[];
+      json['review_ratings'].forEach((v) {
+        reviewRatings!.add(new ReviewRatings.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'img': img,
-      'sprice': sprice,
-      'pprice': pprice,
-      'agentid': agentid,
-      'category_id': categoryId,
-      'subcategory_id': subcategoryId,
-      'bodypart_id': bodypartId,
-      'city_id': cityId,
-      'location_ids': locationIds,
-      'slot_id': slotId,
-      'appointment_slot_ids': appointmentSlotIds,
-      'description': description,
-      'gender': gender,
-      'created_at': createdAt,
-      'updated_at': updatedAt,
-      'average_rating': averageRating,
-      'review_ratings': reviewRatings!
-          .map((i) => i.toJson())
-          .toList(), // Converting the review ratings back to JSON
-    };
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['agent_id'] = this.agentid;
+    data['category_id'] = this.categoryId;
+    data['subcategory_id'] = this.subcategoryId;
+    data['bodypart_id'] = this.bodypartId;
+    data['city_id'] = this.cityId;
+    data['location_ids'] = this.locationIds;
+    data['slot_id'] = this.slotId;
+    data['appointment_slot_ids'] = this.appointmentSlotIds;
+    data['name'] = this.name;
+    data['description'] = this.description;
+    data['image'] = this.img;
+    data['product_price'] = this.pprice;
+    data['service_price'] = this.sprice;
+    data['gender'] = this.gender;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    data['average_rating'] = this.averageRating;
+    if (this.reviewRatings != null) {
+      data['review_ratings'] =
+          this.reviewRatings!.map((v) => v.toJson()).toList();
+    }
+    return data;
   }
 }
 
 class ReviewRatings {
   int? id;
-  String? serviceproductId;
-  String? agentId;
-  String? userId;
+  int? serviceproductId;
+  int? agentId;
+  int? userId;
   String? reviewername;
   String? image;
-  String? rating;
+  int? rating;
   String? comment;
   String? createdAt;
   String? updatedAt;

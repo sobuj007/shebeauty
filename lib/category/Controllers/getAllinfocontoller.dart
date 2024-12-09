@@ -12,12 +12,12 @@ import '../../utils/appApis.dart';
 // GetX Controller
 class AllinfoController extends GetxController {
   var allinfoModel = Rx<AllinfoModel?>(null);
- 
+
   var filteredLocations = <Location>[].obs;
   var selectedCityId = Rx<int?>(null);
   var selectedLocations = <int>[].obs;
 
- @override
+  @override
   void onInit() {
     super.onInit();
     fetchData();
@@ -28,7 +28,7 @@ class AllinfoController extends GetxController {
     var headersList = {
       'Accept': 'application/json',
     };
-    var url = Uri.parse(AppAppis.endpoint +'getall');
+    var url = Uri.parse(AppAppis.endpoint + 'getall');
 
     try {
       var req = http.Request('GET', url);
@@ -43,6 +43,7 @@ class AllinfoController extends GetxController {
         // Parse the JSON response
         var jsonResponse = jsonDecode(resBody);
         var allInfo = AllinfoModel.fromJson(jsonResponse);
+        allinfoModel.value = AllinfoModel.fromJson(jsonResponse);
 
         // Update the observable with the parsed data
         allinfoModel.value = allInfo;
@@ -70,7 +71,7 @@ class AllinfoController extends GetxController {
   }
 
   // Method to filter subcategories by name
-  filterSubcategoriesByName(String id) {
+  filterSubcategoriesByName(int id) {
     return subcategories
         ?.where((subcategory) => subcategory.categoryId == id)
         .toList();
@@ -79,7 +80,7 @@ class AllinfoController extends GetxController {
   // filterBodypartsByName(String id) {
   //   return bodyParts?.where((bodypart) => bodypart.subcategoryId == id).toList();
   // }
-  List<String?> filterBodypartsByName(String id) {
+  List<String?> filterBodypartsByName(int id) {
     return bodyParts!
         .where((bodypart) => bodypart.subcategoryId == id)
         .map((bodypart) => bodypart.name)
@@ -96,7 +97,6 @@ class AllinfoController extends GetxController {
 
 // name category...............
   String? getSubcategoryNameById(int id) {
-
     if (subcategories == null) return null;
 
     // Search for the category with the matching ID
@@ -121,6 +121,18 @@ class AllinfoController extends GetxController {
     return null; // Return null if no match is found
   }
 
+  getCategoryDescriptionById(int id) {
+    if (categories == null) return null;
+
+    // Search for the category with the matching ID
+    for (var category in categories!) {
+      if (category.id == id) {
+        return category.catDescription; // Return the name if found
+      }
+    }
+    return null; // Return null if no match is found
+  }
+
   void selectCity(int? cityId) {
     selectedCityId.value = cityId;
     filterLocations(cityId);
@@ -131,11 +143,13 @@ class AllinfoController extends GetxController {
       filteredLocations.clear();
     } else {
       if (locations != null) {
-  filteredLocations.value = locations!.where((location) => location.citiesId == cityId.toString()).toList();
-} else {
-  // Handle the case when locations is null, e.g., set filteredLocations to an empty list
-  filteredLocations.value = [];
-}
+        filteredLocations.value = locations!
+            .where((location) => location.citiesId == cityId)
+            .toList();
+      } else {
+        // Handle the case when locations is null, e.g., set filteredLocations to an empty list
+        filteredLocations.value = [];
+      }
       // filteredLocations.value = locations!.where((location) => location.citiesId == cityId.toString()).toList();
     }
     print(filteredLocations);
@@ -150,14 +164,10 @@ class AllinfoController extends GetxController {
     saveSelectedLocations();
   }
 
-
-
-
   Future<void> saveSelectedLocations() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('selectedLocations', jsonEncode(selectedLocations));
     print("saved");
-  
   }
 
   Future<void> saveSelectedCity(int? cityId) async {
@@ -208,15 +218,5 @@ class AllinfoController extends GetxController {
   //   } catch (e) {
   //     print('Error saving locations: $e');
   //   }
- // }
-
-
-
-
-
-
-
-
-  }
-
-
+  // }
+}

@@ -49,6 +49,7 @@ class MyProvider2 extends StatelessWidget {
     var argsData = Get.arguments;
 
     final id = argsData?['subid'];
+    final body = argsData?['bodypart'];
     print("this is" + id.toString());
 
     return Scaffold(
@@ -60,7 +61,7 @@ class MyProvider2 extends StatelessWidget {
       Expanded(child: Obx(() {
         if (id.toString().isNotEmpty &&
             controller.isAllProductsChecked.value == false) {
-          controller.filterBySubcategory(id.toString());
+          controller.filterBySubcategory(id);
         }
         if (controller.isLoading.value) {
           return Center(child: CircularProgressIndicator());
@@ -326,7 +327,7 @@ class MyProvider2 extends StatelessWidget {
     if (reviewRatings.isEmpty) return 0.0;
 
     double sum = reviewRatings.fold(
-        0.0, (sum, review) => sum + double.parse(review.rating));
+        0.0, (sum, review) => sum + double.parse(review.rating.toString()));
     return sum / reviewRatings.length;
   }
 

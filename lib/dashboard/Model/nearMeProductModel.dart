@@ -30,13 +30,13 @@ class NearProduct {
   String? img;
   String? sprice;
   String? pprice;
-  String? agentid;
-  String? categoryId;
-  String? subcategoryId;
+  int? agentid;
+  int? categoryId;
+  int? subcategoryId;
   String? bodypartId;
-  String? cityId;
+  int? cityId;
   var locationIds;
-  String? slotId;
+  int? slotId;
   var appointmentSlotIds;
   String? description;
   String? gender;
@@ -75,7 +75,7 @@ class NearProduct {
       img: json['image'] ?? '',
       sprice: json['service_price'] ?? '0.00',
       pprice: json['product_price'] ?? '0.00',
-      agentid: json['agent_id'] ?? '',
+      agentid: json['agent_id'] ?? 0,
       categoryId: json['category_id'] ?? '',
       subcategoryId: json['subcategory_id'] ?? '',
       bodypartId: json['bodypart_id'] ?? '',

@@ -50,51 +50,6 @@ class _MyListedCart2State extends State<MyListedCart2> {
             CustomAppbar(
               title: "My Cart",
             ),
-            // Padding(
-            //   padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //     children: [
-            //       Container(
-            //         width: 78.w,
-            //         height: 5.8.h,
-            //         child: TextField(
-            //           decoration: InputDecoration(
-            //             contentPadding:
-            //                 EdgeInsets.symmetric(horizontal: 3.w, vertical: .5.h),
-            //             hintText: 'Search...',
-            //             border: OutlineInputBorder(
-            //                 borderSide:
-            //                     BorderSide(width: 1, color: AppColors.themeColer),
-            //                 borderRadius: BorderRadius.circular(15)),
-            //             enabledBorder: OutlineInputBorder(
-            //                 borderSide:
-            //                     BorderSide(width: 1, color: AppColors.themeColer),
-            //                 borderRadius: BorderRadius.circular(15)),
-            //             focusedBorder: OutlineInputBorder(
-            //                 borderSide:
-            //                     BorderSide(width: 1, color: AppColors.themeColer),
-            //                 borderRadius: BorderRadius.circular(15)),
-            //             hintStyle: AppFonts.fontH4regular(AppColors.themehint),
-            //           ),
-            //           style: AppFonts.fontH4regular(AppColors.themeBlack),
-            //           onChanged: (query) {
-            //             setState(() {
-            //               _searchQuery = query;
-            //              // _applyFilters();
-            //             });
-            //           },
-            //         ),
-            //       ),
-            //       Card(
-            //         child: IconButton(
-            //           icon: Icon(Icons.filter_list),
-            //           onPressed: () => _showFilterDialog(context),
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
             Flexible(
               child: Padding(
                   padding:
@@ -252,7 +207,6 @@ class _MyListedCart2State extends State<MyListedCart2> {
                                                       "S.Price : " +
                                                           cartController
                                                               .items[index]
-                                                              .item
                                                               .sprice
                                                               .toString(),
                                                       style:
@@ -267,7 +221,6 @@ class _MyListedCart2State extends State<MyListedCart2> {
                                                       "P.Price : " +
                                                           cartController
                                                               .items[index]
-                                                              .item
                                                               .pprice
                                                               .toString(),
                                                       style:

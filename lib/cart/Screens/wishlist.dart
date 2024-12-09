@@ -468,7 +468,7 @@ class _WishlistState extends State<Wishlist> {
           TextButton(
             onPressed: () {
               print(id.toString());
-              wcon.removeProductFromWishlist((int.parse(id)));
+              wcon.removeProductFromWishlist((id.toString()));
               // wcon.saveWishlistToPreferences();
               wcon.wishlist;
               Get.back(); // Dismiss the dialog after logging out

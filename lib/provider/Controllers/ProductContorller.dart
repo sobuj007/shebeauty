@@ -15,7 +15,7 @@ class AllProductController extends GetxController {
   var product = <Products>[].obs;
   var filteredList = <Products>[].obs;
   var searchQuery = ''.obs;
-  var subcatid = ''.obs;
+  var subcatid = 0.obs;
   var fil2 = <Products>[].obs;
   var isAllProductsChecked = false.obs; // Checkbox state
   final TextEditingController filterController = TextEditingController();
@@ -81,14 +81,16 @@ class AllProductController extends GetxController {
   }
 
 // Function to filter products by subcategory_id from the 'product' list
-  void filterBySubcategory(String id) {
+  void filterBySubcategory(int id) {
 //    if(subcategoryId.isEmpty){
 // filteredList.value = product;
 //    }else{
     subcatid.value = id;
     filteredList.value = product.where((prod) {
-      return prod.subcategoryId == id.toString();
+      return prod.subcategoryId == id;
     }).toList();
+    print("filter");
+    print(filteredList);
     //  }
   }
 
@@ -99,6 +101,20 @@ class AllProductController extends GetxController {
       return prod.gender == gender.toLowerCase();
     }).toList();
     // Update the filtered products list
+  }
+
+  String? getProductNameById(id) {
+    // Check if the product list is populated
+    if (product.isEmpty) return null;
+
+    // Search for the product with the matching ID
+    for (var prod in product) {
+      if (prod.id == id) {
+        print("prod.name"); // Print the product name for debugging
+        print(prod.name); // Print the product name for debugging
+        return prod.name; // Return the name if found
+      }
+    }
   }
 
   // // Function to update selected rating
@@ -116,6 +132,26 @@ class AllProductController extends GetxController {
     }).toList();
   }
 
+  // void filterproductbyBodypart(id) {
+  //   filteredList.value = product.where((prod) {
+  //     if (id.contain(prod.bodypartId)) {
+  //       return prod.bodypartId;
+  //     } else {
+  //       return prod;
+  //     }
+  //     //return prod.bodypartId == id;
+  //     // return prod.bodypartId == id;
+  //   }).toList();
+  // }
+  void filterproductbyBodypart(selectedBodyParts) {
+    filteredList.value = product.where((prod) {
+      // Check if the product's bodypart exists in the selectedBodyParts list
+      if (prod.bodypartId == null)
+        return false; // Exclude products without a bodypart
+      return selectedBodyParts.contains(prod.bodypartId);
+    }).toList();
+  }
+
   void applyRatingFilter(double minRating) {
     filteredList.value = product.where((product) {
       if (product.reviewRatings == null || product.reviewRatings!.isEmpty) {
@@ -124,7 +160,7 @@ class AllProductController extends GetxController {
 
       // Check if any of the product's reviews meet or exceed the minRating
       return product.reviewRatings!.any((review) {
-        double rating = double.tryParse(review.rating ?? '0') ?? 0;
+        double rating = double.tryParse(review.rating.toString() ?? "0") ?? 0;
         return rating >= minRating;
       });
     }).toList();

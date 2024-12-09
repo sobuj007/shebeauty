@@ -1,3 +1,4 @@
+import 'package:Ghore_Parlor/category/Controllers/getAllinfocontoller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -17,11 +18,14 @@ class SingelDescription extends StatefulWidget {
 }
 
 class _SingelDescriptionState extends State<SingelDescription> {
+  var allcon = Get.put(AllinfoController());
   final args = Get.arguments;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
+    print("args");
+    print(widget.item);
+    return Scaffold(body: Obx(() {
+      return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
         child: Column(
           children: [
@@ -58,7 +62,19 @@ class _SingelDescriptionState extends State<SingelDescription> {
                       widget.item.name,
                       style: AppFonts.fontH2semi(AppColors.themeColer),
                     ),
-                    Text(widget.item.description.toString()),
+                    Text(
+                      'Description: ',
+                      style: AppFonts.fontH5semi(AppColors.themeBlack),
+                    ),
+
+                    Text(allcon
+                        .getCategoryDescriptionById(
+                            int.parse(widget.item.categoryId.toString()))
+                        .toString()),
+                    Text(
+                      widget.item.description.toString(),
+                      style: AppFonts.fontH7regular(AppColors.themeBlack),
+                    ),
 
                     //                 HtmlWidget(''' <div class="menu-container">
                     //     <div class="menu">
@@ -103,7 +119,7 @@ class _SingelDescriptionState extends State<SingelDescription> {
             ),
           ],
         ),
-      ),
-    );
+      );
+    }));
   }
 }

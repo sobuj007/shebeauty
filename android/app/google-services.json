@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "617816440419",
+    "project_id": "ghoreparlour",
+    "storage_bucket": "ghoreparlour.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617816440419:android:e665b2eb5dd191459c0256",
+        "android_client_info": {
+          "package_name": "com.ghoreparlour.user.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCF_mHc7VygGRV7sZydQpBHe-oTVp0HLQ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
