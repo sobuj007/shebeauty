@@ -39,26 +39,30 @@ class CityLocationFilter extends StatelessWidget {
               }
               print("object");
               print(allinfoController.selectedCityId.value);
+              final cityIds =
+                  allinfoController.cities?.map((city) => city.id).toList();
               return Padding(
                 padding: EdgeInsets.all(3.0.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // City Dropdown
                     DropdownButton<int>(
                       isExpanded: true,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 1.w, vertical: 1.h),
                       hint: Text("Select City"),
-                      value: allinfoController.selectedCityId.value != null
+                      value: allinfoController.cities?.any((city) =>
+                                  city.id ==
+                                  allinfoController.selectedCityId.value) ==
+                              true
                           ? allinfoController.selectedCityId.value
                           : null,
                       onChanged: (int? newCityId) {
-                        allinfoController.selectCity(newCityId);
-                        selectcityid.value = newCityId!;
-                        print(newCityId);
+                        if (newCityId != null) {
+                          allinfoController.selectCity(newCityId);
+                          selectcityid.value = newCityId;
+                          print(newCityId);
+                        }
                       },
-                      items: allinfoController.cities!.map((city) {
+                      items: allinfoController.cities?.map((city) {
                         return DropdownMenuItem(
                           value: city.id,
                           child: Text(city.name ?? ''),
@@ -74,30 +78,50 @@ class CityLocationFilter extends StatelessWidget {
                           return Text(
                               "No locations available for the selected city.");
                         }
-
                         return ListView(
                           children: allinfoController.filteredLocations
                               .map((location) {
-                            return CheckboxListTile(
+                            return RadioListTile<int>(
                               title: Text(
                                 location.name ?? '',
                                 style:
                                     AppFonts.fontH6semi(AppColors.themeBlack),
                               ),
-                              value: allinfoController.selectedLocations
-                                  .contains(location.id),
-                              onChanged: (bool? checked) {
-                                if (checked == true) {
-                                  allinfoController
-                                      .toggleLocation(location.id!);
-                                } else {
-                                  allinfoController
-                                      .toggleLocation(location.id!);
+                              value: location.id!,
+                              groupValue:
+                                  allinfoController.selectedLocationId.value,
+                              onChanged: (int? value) {
+                                if (value != null) {
+                                  allinfoController.setSelectedLocation(value);
                                 }
                               },
                             );
                           }).toList(),
                         );
+
+                        // return ListView(
+                        //   children: allinfoController.filteredLocations
+                        //       .map((location) {
+                        //     return CheckboxListTile(
+                        //       title: Text(
+                        //         location.name ?? '',
+                        //         style:
+                        //             AppFonts.fontH6semi(AppColors.themeBlack),
+                        //       ),
+                        //       value: allinfoController.selectedLocations
+                        //           .contains(location.id),
+                        //       onChanged: (bool? checked) {
+                        //         if (checked == true) {
+                        //           allinfoController
+                        //               .toggleLocation(location.id!);
+                        //         } else {
+                        //           allinfoController
+                        //               .toggleLocation(location.id!);
+                        //         }
+                        //       },
+                        //     );
+                        //   }).toList(),
+                        // );
                       }),
                     ),
                   ],

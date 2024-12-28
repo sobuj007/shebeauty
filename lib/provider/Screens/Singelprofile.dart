@@ -1,3 +1,4 @@
+import 'package:Ghore_Parlor/utils/appStyle.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class _SingelProfileState extends State<SingelProfile> {
   final ReviewController reviewController = Get.put(ReviewController());
   @override
   Widget build(BuildContext context) {
-    reviewController.fetchReviews(int.parse(widget.item.id));
+    reviewController.fetchReviews(int.parse(widget.item.agentid.toString()));
     return Scaffold(
         body: SafeArea(
       child: Padding(
@@ -63,9 +64,19 @@ class _SingelProfileState extends State<SingelProfile> {
                         ),
                       ],
                     ),
-                    // Rattings(
-                    //   rate: widget.item.rating.toString(),
-                    // ),
+                    Container(
+                        decoration: BoxDecoration(
+                            color: AppColors.themeColer,
+                            border: Border.all(
+                                width: 1, color: AppColors.themeColer),
+                            borderRadius: BorderRadius.circular(5)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Text(
+                            prof![0].companyType.toString().toUpperCase(),
+                            style: AppFonts.fontH7semi(AppColors.themeWhite),
+                          ),
+                        ))
                   ],
                 ),
                 SizedBox(
@@ -75,21 +86,23 @@ class _SingelProfileState extends State<SingelProfile> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           applng.getLang(21),
                           style: AppFonts.fontH6regular(AppColors.themeColer),
                         ),
-                        // Container(
-                        //   decoration: BoxDecoration(
-                        //       borderRadius: BorderRadius.circular(5),
-                        //       border:
-                        //           Border.all(width: 1, color: AppColors.themehint)),
-                        //   child: Padding(
-                        //     padding: const EdgeInsets.all(8.0),
-                        //     child: Text(widget.item.available),
-                        //   ),
-                        // )
+                        Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              border: Border.all(
+                                  width: 1, color: AppColors.themehint)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(prof![0].servicestime.toString()),
+                          ),
+                        )
                       ],
                     ),
                     Column(
@@ -98,16 +111,21 @@ class _SingelProfileState extends State<SingelProfile> {
                           applng.getLang(28),
                           style: AppFonts.fontH6regular(AppColors.themeColer),
                         ),
-                        // Container(
-                        //   decoration: BoxDecoration(
-                        //       borderRadius: BorderRadius.circular(5),
-                        //       border:
-                        //           Border.all(width: 1, color: AppColors.themehint)),
-                        //   child: Padding(
-                        //     padding: const EdgeInsets.all(8.0),
-                        //     child: Text(widget.item.available),
-                        //   ),
-                        // )
+                        Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              border: Border.all(
+                                  width: 1, color: AppColors.themehint)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(agentcontroller
+                                        .agentProfile.value.totalorder ==
+                                    0
+                                ? "No Order"
+                                : agentcontroller.agentProfile.value.totalorder
+                                    .toString()),
+                          ),
+                        )
                       ],
                     ),
                   ],

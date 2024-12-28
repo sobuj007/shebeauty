@@ -15,6 +15,7 @@ import 'package:sizer/sizer.dart';
 import '../../provider/Model/allproviderDataModel.dart';
 import '../../routes/AppRouts.dart';
 import '../../utils/appColors.dart';
+import '../../utils/appStyle.dart';
 
 class Wishlist extends StatefulWidget {
   const Wishlist({super.key});
@@ -123,6 +124,10 @@ class _WishlistState extends State<Wishlist> {
                     // );
 
                     return GestureDetector(
+                      onTap: () {
+                        AppStyle.snackbar(
+                            "Wrarning", "Long press to Delete item");
+                      },
                       onLongPress: () {
                         _showdeleteWarning(
                             context,

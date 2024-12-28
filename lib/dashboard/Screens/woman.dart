@@ -1,4 +1,5 @@
 import 'package:Ghore_Parlor/utils/appApis.dart';
+import 'package:Ghore_Parlor/utils/appStyle.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,7 +32,8 @@ class Woman extends StatelessWidget {
   final AllinfoController controller = Get.put(AllinfoController());
   final StorProfileController storeController =
       Get.put(StorProfileController());
-
+  final ServiceProductNearMeController nearMeController =
+      Get.put(ServiceProductNearMeController());
   late Map<String, dynamic> userdata;
 
   RxMap<String, dynamic> profile = <String, dynamic>{}.obs;
@@ -63,6 +65,7 @@ class Woman extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       controller.fetchData();
       storeController.fetchData();
+      nearMeController.fetchServiceProductsByLocations();
     });
 
     return Expanded(
@@ -238,7 +241,7 @@ class Woman extends StatelessWidget {
                                                                   .stores[index]
                                                                   .logo ==
                                                               null
-                                                          ? "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"
+                                                          ? "https://ghoreparlour.com/uploads/category/1725218338--beautytreatment.png"
                                                           : storeController
                                                               .stores[index]
                                                               .logo),
@@ -268,8 +271,6 @@ class Woman extends StatelessWidget {
     );
   }
 
-  final ServiceProductNearMeController nearMeController =
-      Get.put(ServiceProductNearMeController());
   var place = false;
   neaarMe(context) {
     if (place) {
@@ -291,7 +292,16 @@ class Woman extends StatelessWidget {
                         MaterialPageRoute(
                             builder: (_) => CityLocationFilter()));
                   },
-                  child: Text(nearMeController.error.value)));
+                  child: Container(
+                      color: Colors.amber,
+                      child: Text(nearMeController.error.value))));
+        }
+        if (nearMeController.nearProductData.length == 0) {
+          return Center(
+              child: Text(
+            "Services Not Found for Your Location!",
+            style: AppFonts.fontH6regular(AppColors.themeColer),
+          ));
         }
 
         return Container(
@@ -306,57 +316,60 @@ class Woman extends StatelessWidget {
               itemCount: nearMeController.nearProductData.length,
               itemBuilder: (BuildContext context, int index) {
                 final product = nearMeController.nearProductData[index];
-                return GestureDetector(
-                  onTap: () {
-                    Get.toNamed(AppRoutes.appsingelprovider,
-                        arguments: product);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 200,
-                      width: 40.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          image: CachedNetworkImageProvider(
-                              errorListener: (e) {},
-                              product.img == null
-                                  ? "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"
-                                  : product.img.toString()),
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.black38,
-                        ),
+                return nearMeController.nearProductData.length == 0
+                    ? Text("data")
+                    : GestureDetector(
+                        onTap: () {
+                          Get.toNamed(AppRoutes.appsingelprovider,
+                              arguments: product);
+                        },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                  height: 3.5.h,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: AppColors.themeWhite),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Text(
-                                      product.name.toString(),
-                                      style: AppFonts.fontH6semi(
-                                          AppColors.themeBlack),
-                                    ),
-                                  )),
-                            ],
+                          child: Container(
+                            height: 200,
+                            width: 40.w,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                image: CachedNetworkImageProvider(
+                                    errorListener: (e) {},
+                                    product.img == null
+                                        ? "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"
+                                        : product.img.toString()),
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.black38,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                        height: 3.5.h,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: AppColors.themeWhite),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: Text(
+                                            product.name.toString(),
+                                            style: AppFonts.fontH6semi(
+                                                AppColors.themeBlack),
+                                          ),
+                                        )),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                );
+                      );
               },
             ),
           ),

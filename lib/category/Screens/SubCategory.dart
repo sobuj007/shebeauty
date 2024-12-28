@@ -1,3 +1,4 @@
+import 'package:Ghore_Parlor/utils/appLanguage.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +59,7 @@ class _AppSubCategoryState extends State<AppSubCategory> {
       body: Column(
         children: [
           CustomAppbar(
-            title: "Sub Category",
+            title: AppLanguage().getLang(17),
           ),
           Container(
             height: MediaQuery.of(context).size.height * .88,
@@ -125,18 +126,23 @@ class _AppSubCategoryState extends State<AppSubCategory> {
                                         children: [
                                           Container(
                                             // width: 200,
-                                            height: 8.h,
-                                            width: 10.w,
+                                            height: 6.h,
+                                            width: 20.w,
                                             child: Image(
                                               image: CachedNetworkImageProvider(
                                                   vdata.image),
-                                              fit: BoxFit.contain,
+                                              fit: BoxFit.cover,
                                             ),
+                                          ),
+                                          SizedBox(
+                                            height: 2,
                                           ),
                                           Text(
                                             vdata.name.toString().toUpperCase(),
                                             style: AppFonts.fontH8semi(
                                                 Colors.black),
+                                            overflow: TextOverflow.clip,
+                                            textAlign: TextAlign.center,
                                           ),
                                         ],
                                       ),

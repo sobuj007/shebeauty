@@ -1,3 +1,4 @@
+import 'package:Ghore_Parlor/utils/custom%20widget/CustomAppbar2.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:Ghore_Parlor/main.dart';
 import 'package:Ghore_Parlor/utils/appApis.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../order/review/ratingcontoller.dart';
 import '../../../utils/appColors.dart';
 import '../../../utils/appFonts.dart';
 import '../../../utils/custom widget/CustomAppbar.dart';
@@ -31,166 +33,195 @@ class _EachProviderState extends State<EachProvider> {
     agentcontroller.fetchAgentProfileData(args);
   }
 
+  final ReviewController reviewController = Get.put(ReviewController());
   @override
   Widget build(BuildContext context) {
+    reviewController.fetchReviews(int.parse(widget.item.toString()));
     return Scaffold(
-        body: Column(
-      children: [
-        CustomAppbar(
-          title: "Provider",
-        ),
-        Container(
-          height: 88.h,
-          width: 100.w,
-          child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 2.5.h),
-              child: Obx(() {
-                if (agentcontroller.profilesdata == null) {
-                  return Center(child: CircularProgressIndicator());
-                }
-                if (agentcontroller.profilesdata!.isEmpty) {
-                  return Center(
-                    child: Text("No Data Found"),
+        body: SafeArea(
+      child: Column(
+        children: [
+          CustomAppbar(
+            title: "Provider Info",
+          ),
+          Expanded(
+            child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 2.5.h),
+                child: Obx(() {
+                  if (agentcontroller.profilesdata == null) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  if (agentcontroller.profilesdata!.isEmpty) {
+                    return Center(
+                      child: Text("No Data Found"),
+                    );
+                  }
+                  var prof = agentcontroller.profilesdata;
+                  return ListView(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.verified,
+                                color: AppColors.themeColer,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                prof![0].storename.toString().toUpperCase(),
+                                style:
+                                    AppFonts.fontH5bold(AppColors.themeColer),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          ),
+                          // Rattings(
+                          //   rate: widget.item.rating.toString(),
+                          // ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                applng.getLang(21),
+                                style: AppFonts.fontH6regular(
+                                    AppColors.themeColer),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    border: Border.all(
+                                        width: 1, color: AppColors.themehint)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(prof![0].servicestime.toString()),
+                                ),
+                              )
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                applng.getLang(28),
+                                style: AppFonts.fontH6regular(
+                                    AppColors.themeColer),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    border: Border.all(
+                                        width: 1, color: AppColors.themehint)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(agentcontroller
+                                              .agentProfile.value.totalorder ==
+                                          0
+                                      ? "No Order"
+                                      : agentcontroller
+                                          .agentProfile.value.totalorder
+                                          .toString()),
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      Text(
+                        applng.getLang(31),
+                        style: AppFonts.fontH5normal(AppColors.themeColer),
+                      ),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      customerReview(),
+                      /**********************************certificates **************************** */
+                      certificates(context),
+                      Servics(context)
+                    ],
                   );
-                }
-                var prof = agentcontroller.profilesdata;
-                return ListView(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.verified,
-                              color: AppColors.themeColer,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              prof![0].storename.toString().toUpperCase(),
-                              style: AppFonts.fontH5bold(AppColors.themeColer),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
-                        ),
-                        // Rattings(
-                        //   rate: widget.item.rating.toString(),
-                        // ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          children: [
-                            Text(
-                              applng.getLang(21),
-                              style:
-                                  AppFonts.fontH6regular(AppColors.themeColer),
-                            ),
-                            // Container(
-                            //   decoration: BoxDecoration(
-                            //       borderRadius: BorderRadius.circular(5),
-                            //       border:
-                            //           Border.all(width: 1, color: AppColors.themehint)),
-                            //   child: Padding(
-                            //     padding: const EdgeInsets.all(8.0),
-                            //     child: Text(widget.item.available),
-                            //   ),
-                            // )
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Text(
-                              applng.getLang(28),
-                              style:
-                                  AppFonts.fontH6regular(AppColors.themeColer),
-                            ),
-                            // Container(
-                            //   decoration: BoxDecoration(
-                            //       borderRadius: BorderRadius.circular(5),
-                            //       border:
-                            //           Border.all(width: 1, color: AppColors.themehint)),
-                            //   child: Padding(
-                            //     padding: const EdgeInsets.all(8.0),
-                            //     child: Text(widget.item.available),
-                            //   ),
-                            // )
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    Text(
-                      applng.getLang(31),
-                      style: AppFonts.fontH5normal(AppColors.themeColer),
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    customerReview(),
-                    /**********************************certificates **************************** */
-                    certificates(context),
-                    Servics(context)
-                  ],
-                );
-              })),
-        ),
-      ],
+                })),
+          ),
+        ],
+      ),
     ));
   }
 
-  customerReview() {
+  Widget customerReview() {
     return SizedBox(
       height: 20.h,
       width: 100.w,
-      child: Swiper(
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
+      child: Obx(() {
+        // Show a loading indicator when data is being fetched
+        if (reviewController.isLoading.value) {
+          return Center(child: CircularProgressIndicator());
+        }
+
+        // Show the swiper with reviews if available
+        if (reviewController.reviewsList.isEmpty) {
+          return Center(child: Text('No reviews available'));
+        }
+
+        return Swiper(
+          itemBuilder: (BuildContext context, int index) {
+            var review = reviewController.reviewsList[index];
+            return Container(
               height: 150,
+              width: MediaQuery.of(context).size.width,
               child: Column(
                 children: [
+                  // Display reviewer's image if available
                   CircleAvatar(
                     radius: 35,
                     backgroundImage: CachedNetworkImageProvider(
-                      "https://foru.co.id/wp-content/uploads/2015/05/Memilih-advertising-agency.jpg",
+                      review.image == null
+                          ? "https://via.placeholder.com/150"
+                          : AppAppis.profileimg +
+                              review.image
+                                  .toString(), // Use a placeholder if image is null
                     ),
                   ),
+                  SizedBox(height: 1.h),
+                  // Display reviewer's name
                   Text(
-                    "Jhone Deo",
+                    review.reviewername ?? "Unknown",
                     style: AppFonts.fontH6semi(AppColors.themeColer),
                   ),
+                  SizedBox(height: 1.h),
+                  // Display reviewer's comment
                   Text(
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+                    review.comment ?? "No comment provided",
                     style: AppFonts.fontH7normal(AppColors.themeBlack),
                     textAlign: TextAlign.center,
                   ),
                 ],
               ),
-              width: MediaQuery.of(context).size.width);
-
-          // return Image.network(
-          //   // "https://via.placeholder.com/288x188",
-          //   "https://foru.co.id/wp-content/uploads/2015/05/Memilih-advertising-agency.jpg",
-          //   fit: BoxFit.fill,
-          // );
-        },
-        autoplay: true,
-        duration: 1000,
-        autoplayDelay: 8000,
-        itemCount: 10,
-        viewportFraction: 1,
-        scale: 0.9,
-      ),
+            );
+          },
+          autoplay: true,
+          duration: 1000,
+          autoplayDelay: 8000,
+          itemCount: reviewController
+              .reviewsList.length, // Use the length of reviewsList
+          viewportFraction: 1,
+          scale: 0.9,
+        );
+      }),
     );
   }
 

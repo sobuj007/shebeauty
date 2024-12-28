@@ -545,7 +545,7 @@ class Products {
   int? subcategoryId;
   String? bodypartId;
   int? cityId;
-  List<String>? locationIds;
+  // List<String>? locationIds;
   int? slotId;
   String? appointmentSlotIds;
   String? name;
@@ -564,7 +564,7 @@ class Products {
       this.subcategoryId,
       this.bodypartId,
       this.cityId,
-      this.locationIds,
+      // this.locationIds,
       this.slotId,
       this.appointmentSlotIds,
       this.name,
@@ -583,7 +583,7 @@ class Products {
     subcategoryId = json['subcategory_id'];
     bodypartId = json['bodypart_id'];
     cityId = json['city_id'];
-    locationIds = json['location_ids'].cast<String>();
+    // locationIds = json['location_ids'].cast<String>();
     slotId = json['slot_id'];
     appointmentSlotIds = json['appointment_slot_ids'];
     name = json['name'];
@@ -604,7 +604,7 @@ class Products {
     data['subcategory_id'] = this.subcategoryId;
     data['bodypart_id'] = this.bodypartId;
     data['city_id'] = this.cityId;
-    data['location_ids'] = this.locationIds;
+    // data['location_ids'] = this.locationIds;
     data['slot_id'] = this.slotId;
     data['appointment_slot_ids'] = this.appointmentSlotIds;
     data['name'] = this.name;

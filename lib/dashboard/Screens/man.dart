@@ -8,10 +8,12 @@ import 'package:sizer/sizer.dart';
 
 import '../../auth/Controllers/storecontoller.dart';
 import '../../category/Controllers/getAllinfocontoller.dart';
+import '../../category/Screens/SubCategory.dart';
 import '../../main.dart';
 import '../../profile/Screens/locationselection.dart';
 import '../../provider/Screens/Each Provider/EachProvider.dart';
 import '../../routes/AppRouts.dart';
+import '../../utils/appApis.dart';
 import '../../utils/appColors.dart';
 import '../../utils/appFonts.dart';
 import '../../utils/custom widget/TitleWithViewButton.dart';
@@ -27,6 +29,8 @@ class _ManState extends State<Man> {
   final AllinfoController controller = Get.put(AllinfoController());
   final StorProfileController storeController =
       Get.put(StorProfileController());
+  final ServiceProductNearMeController nearMeController =
+      Get.put(ServiceProductNearMeController());
 
   late Map<String, dynamic> userdata;
 
@@ -100,6 +104,12 @@ class _ManState extends State<Man> {
                             final category = data[index];
                             return GestureDetector(
                               onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => AppSubCategory(
+                                              cat_id: category.id,
+                                            )));
                                 //  Navigator.push(context,
                                 //   MaterialPageRoute(builder: (_) => AppSubCategory(cat_id: category.id,)));
                               },
@@ -186,22 +196,15 @@ class _ManState extends State<Man> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
-                                    image: CachedNetworkImageProvider(
-                                        errorListener: (e) {},
-                                        storeController
-                                                    .stores[index].coverImage ==
-                                                null
-                                            ? "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"
-                                            : storeController
-                                                    .stores[index].coverImage
-                                                    .toString()
-                                                    .contains(
-                                                        'https://softisan.xyz/uploads/storeImages/')
-                                                ? storeController
-                                                    .stores[index].coverImage
-                                                : "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"),
-                                    fit: BoxFit.fill,
-                                  ),
+                                      image: CachedNetworkImageProvider(
+                                          errorListener: (e) {},
+                                          storeController.stores[index]
+                                                      .coverImage ==
+                                                  null
+                                              ? "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"
+                                              : AppAppis.storecover +
+                                                  storeController.stores[index]
+                                                      .coverImage)),
                                 ),
                                 child: Container(
                                   decoration: BoxDecoration(
@@ -221,35 +224,27 @@ class _ManState extends State<Man> {
                                           style: AppFonts.fontH6semi(
                                               AppColors.themeWhite),
                                         ),
-                                        Expanded(child: SizedBox()),
+                                        // Expanded(child: SizedBox()),
                                         Card(
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(20)),
                                             child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(4.0),
-                                              child: Image(
-                                                image: CachedNetworkImageProvider(
-                                                    storeController
-                                                                .stores[index]
-                                                                .logo ==
-                                                            null
-                                                        ? "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"
-                                                        : storeController
-                                                                .stores[index]
-                                                                .logo
-                                                                .toString()
-                                                                .contains(
-                                                                    'https://softisan.xyz/uploads/category/')
-                                                            ? storeController
-                                                                .stores[index]
-                                                                .logo
-                                                            : "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"),
-                                                width: 7.w,
-                                                height: 7.w,
-                                              ),
-                                            ))
+                                                padding:
+                                                    const EdgeInsets.all(4.0),
+                                                child: Image(
+                                                  height: 4.h,
+                                                  width: 4.h,
+                                                  image: CachedNetworkImageProvider(
+                                                      storeController
+                                                                  .stores[index]
+                                                                  .logo ==
+                                                              null
+                                                          ? "https://ghoreparlour.com/uploads/category/1725218338--beautytreatment.png"
+                                                          : storeController
+                                                              .stores[index]
+                                                              .logo),
+                                                )))
                                       ],
                                     ),
                                   ),
@@ -275,8 +270,6 @@ class _ManState extends State<Man> {
     );
   }
 
-  final ServiceProductNearMeController nearMeController =
-      Get.put(ServiceProductNearMeController());
   var place = false;
   neaarMe(context) {
     if (place) {
@@ -289,7 +282,8 @@ class _ManState extends State<Man> {
           return Center(child: CircularProgressIndicator());
         }
 
-        if (nearMeController.error.isNotEmpty) {
+        if (nearMeController.error.isNotEmpty ||
+            nearMeController.nearProductData.value == []) {
           return Center(
               child: GestureDetector(
                   onTap: () {
@@ -300,7 +294,13 @@ class _ManState extends State<Man> {
                   },
                   child: Text(nearMeController.error.value)));
         }
-
+        if (nearMeController.nearProductData.length == 0) {
+          return Center(
+              child: Text(
+            "Services Not Found for Your Location!",
+            style: AppFonts.fontH6regular(AppColors.themeColer),
+          ));
+        }
         return Container(
           height: 250,
           width: MediaQuery.of(context).size.width,

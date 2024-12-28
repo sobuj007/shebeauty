@@ -32,16 +32,16 @@ class _LayoutState extends State<Layout> {
   int selectPageIndex = 0;
   final Usercontoller ucon = Get.put(Usercontoller());
   final AdsController adsController = Get.put(AdsController());
-   final AllinfoController controller = Get.put(AllinfoController());
-  final StorProfileController storeController = Get.put(StorProfileController());
-
+  final AllinfoController controller = Get.put(AllinfoController());
+  final StorProfileController storeController =
+      Get.put(StorProfileController());
 
   @override
   Widget build(BuildContext context) {
     ucon.getinfo();
     adsController.fetchData();
-  //  controller.fetchData();
-  //  storeController.fetchData();
+    //  controller.fetchData();
+    //  storeController.fetchData();
     return Obx(() {
       return SafeArea(
         child: Scaffold(
@@ -57,8 +57,8 @@ class _LayoutState extends State<Layout> {
                             children: [
                               Text(
                                 "Welcome, ${(ucon.getUser() ?? {})['name'].toString()}",
-                                style:
-                                    AppFonts.fontH4regular(AppColors.themeColer),
+                                style: AppFonts.fontH4regular(
+                                    AppColors.themeColer),
                               ),
                               Icon(
                                 Icons.notifications,
@@ -103,8 +103,8 @@ class _LayoutState extends State<Layout> {
                                                           fit: BoxFit.fill,
                                                         ),
                                                         borderRadius:
-                                                            BorderRadius.circular(
-                                                                15),
+                                                            BorderRadius
+                                                                .circular(15),
                                                       ),
                                                       width:
                                                           MediaQuery.of(context)
@@ -174,7 +174,7 @@ class _LayoutState extends State<Layout> {
                   : pagelist[selectPageIndex],
             ),
             bottomNavigationBar: bottomnab()
-        
+
             //  BottomNavigationBar(
             //   currentIndex: selectPageIndex,
             //   selectedItemColor: AppColors.themeColer,
@@ -209,6 +209,8 @@ class _LayoutState extends State<Layout> {
           child: Swiper(
             itemBuilder: (BuildContext context, int index) {
               //var ad = adscon.adslist[index];
+              print("Image");
+              print(adsController.adslist[index].image.toString());
               return Container(
                   height: 150,
                   decoration: BoxDecoration(

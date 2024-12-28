@@ -1,249 +1,147 @@
-// import 'dart:convert';
+import 'dart:convert';
 
-// class AllProductModel {
-//   String? message;
-//   List<Products>? products;
+AllProductModel allProductModelFromJson(String str) =>
+    AllProductModel.fromJson(json.decode(str));
 
-//   AllProductModel({this.message, this.products});
+String allProductModelToJson(AllProductModel data) =>
+    json.encode(data.toJson());
 
-//   AllProductModel.fromJson(Map<String, dynamic> json) {
-//     message = json['message'];
-//     if (json['products'] != null) {
-//       products = <Products>[];
-//       json['products'].forEach((v) {
-//         products!.add(Products.fromJson(v));
-//       });
-//     }
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = new Map<String, dynamic>();
-//     data['message'] = this.message;
-//     if (this.products != null) {
-//       data['products'] = this.products!.map((v) => v.toJson()).toList();
-//     }
-//     return data;
-//   }
-// }
-
-// class Products {
-//   int? id;
-//   String? agentId;
-//   String? categoryId;
-//   String? subcategoryId;
-//   String? bodypartId;
-//   String? cityId;
-//   List<String>? locationIds; // Decoded as List<String>
-//   List<String>? appointmentSlotIds; // Decoded as List<String>
-//   String? slotId;
-//   String? name;
-//   String? description;
-//   String? image;
-//   String? productPrice;
-//   String? servicePrice;
-//   String? gender;
-//   String? createdAt;
-//   String? updatedAt;
-
-//   Products(
-//       {this.id,
-//       this.agentId,
-//       this.categoryId,
-//       this.subcategoryId,
-//       this.bodypartId,
-//       this.cityId,
-//       this.locationIds,
-//       this.slotId,
-//       this.appointmentSlotIds,
-//       this.name,
-//       this.description,
-//       this.image,
-//       this.productPrice,
-//       this.servicePrice,
-//       this.gender,
-//       this.createdAt,
-//       this.updatedAt});
-
-//   Products.fromJson(Map<String, dynamic> json) {
-//     id = json['id'];
-//     agentId = json['agent_id'];
-//     categoryId = json['category_id'];
-//     subcategoryId = json['subcategory_id'];
-//     bodypartId = json['bodypart_id'];
-//     cityId = json['city_id'];
-
-//     // Decode JSON-encoded strings
-//     locationIds = (json['location_ids'] != null)
-//         ? List<String>.from(jsonDecode(json['location_ids']))
-//         : null;
-
-//     appointmentSlotIds = (json['appointment_slot_ids'] != null)
-//         ? List<String>.from(jsonDecode(json['appointment_slot_ids']))
-//         : null;
-
-//     slotId = json['slot_id'];
-//     name = json['name'];
-//     description = json['description'];
-//     image = json['image'];
-//     productPrice = json['product_price'];
-//     servicePrice = json['service_price'];
-//     gender = json['gender'];
-//     createdAt = json['created_at'];
-//     updatedAt = json['updated_at'];
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = new Map<String, dynamic>();
-//     data['id'] = this.id;
-//     data['agent_id'] = this.agentId;
-//     data['category_id'] = this.categoryId;
-//     data['subcategory_id'] = this.subcategoryId;
-//     data['bodypart_id'] = this.bodypartId;
-//     data['city_id'] = this.cityId;
-
-//     // Encode lists to JSON strings
-//     data['location_ids'] = jsonEncode(this.locationIds);
-//     data['appointment_slot_ids'] = jsonEncode(this.appointmentSlotIds);
-
-//     data['slot_id'] = this.slotId;
-//     data['name'] = this.name;
-//     data['description'] = this.description;
-//     data['image'] = this.image;
-//     data['product_price'] = this.productPrice;
-//     data['service_price'] = this.servicePrice;
-//     data['gender'] = this.gender;
-//     data['created_at'] = this.createdAt;
-//     data['updated_at'] = this.updatedAt;
-//     return data;
-//   }
-// }
 class AllProductModel {
-  String? message;
-  List<Products>? products;
+  String message;
+  List<Product> products;
 
-  AllProductModel({this.message, this.products});
+  AllProductModel({
+    required this.message,
+    required this.products,
+  });
 
-  AllProductModel.fromJson(Map<String, dynamic> json) {
-    message = json['message'];
-    if (json['products'] != null) {
-      products = <Products>[];
-      json['products'].forEach((v) {
-        products!.add(new Products.fromJson(v));
-      });
-    }
-  }
+  factory AllProductModel.fromJson(Map<String, dynamic> json) =>
+      AllProductModel(
+        message: json["message"],
+        products: List<Product>.from(
+            json["products"].map((x) => Product.fromJson(x))),
+      );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message'] = this.message;
-    if (this.products != null) {
-      data['products'] = this.products!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        "message": message,
+        "products": List<dynamic>.from(products.map((x) => x.toJson())),
+      };
 }
 
-class Products {
-  int? id;
-  int? agentid;
-  int? categoryId;
-  int? subcategoryId;
-  String? bodypartId;
-  int? cityId;
-  List<String>? locationIds;
+class Product {
+  int id;
+  int agentid;
+  int categoryId;
+  int subcategoryId;
+  String bodypartId;
+  int cityId;
+
   int? slotId;
   String? appointmentSlotIds;
-  String? name;
-  String? description;
-  String? img;
-  String? pprice;
-  String? sprice;
-  String? gender;
-  String? createdAt;
-  String? updatedAt;
-  int? averageRating;
+  String name;
+  String description;
+  String productsbrand;
+  String img;
+  double pprice; // Updated to `double`
+  double sprice; // Updated to `double`
+  String gender;
+  DateTime createdAt;
+  DateTime updatedAt;
+  double averageRating; // Updated to `double`
   List<ReviewRatings>? reviewRatings;
 
-  Products(
-      {this.id,
-      this.agentid,
-      this.categoryId,
-      this.subcategoryId,
-      this.bodypartId,
-      this.cityId,
-      this.locationIds,
-      this.slotId,
-      this.appointmentSlotIds,
-      this.name,
-      this.description,
-      this.img,
-      this.pprice,
-      this.sprice,
-      this.gender,
-      this.createdAt,
-      this.updatedAt,
-      this.averageRating,
-      this.reviewRatings});
+  Product({
+    required this.id,
+    required this.agentid,
+    required this.categoryId,
+    required this.subcategoryId,
+    required this.bodypartId,
+    required this.cityId,
+    required this.slotId,
+    required this.appointmentSlotIds,
+    required this.name,
+    required this.description,
+    required this.productsbrand,
+    required this.img,
+    required this.pprice,
+    required this.sprice,
+    required this.gender,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.averageRating,
+    required this.reviewRatings,
+  });
 
-  Products.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    agentid = json['agent_id'];
-    categoryId = json['category_id'];
-    subcategoryId = json['subcategory_id'];
-    bodypartId = json['bodypart_id'];
-    cityId = json['city_id'];
-    locationIds = json['location_ids'].cast<String>();
-    slotId = json['slot_id'];
-    appointmentSlotIds = json['appointment_slot_ids'];
-    name = json['name'];
-    description = json['description'];
-    img = json['image'];
-    pprice = json['product_price'];
-    sprice = json['service_price'];
-    gender = json['gender'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    averageRating = json['average_rating'];
-    if (json['review_ratings'] != null) {
-      reviewRatings = <ReviewRatings>[];
-      json['review_ratings'].forEach((v) {
-        reviewRatings!.add(new ReviewRatings.fromJson(v));
-      });
-    }
+  factory Product.fromJson(Map<String, dynamic> json) {
+    // var locationList = [];
+    // if (json['location_ids'] != null) {
+    //   // Check if location_ids is a string and parse it if so
+    //   String locationIds = json['location_ids'];
+    //   if (locationIds.startsWith('"') && locationIds.endsWith('"')) {
+    //     locationIds =
+    //         locationIds.substring(1, locationIds.length - 1); // Remove quotes
+    //   }
+    //   locationList = List<int>.from(jsonDecode(locationIds));
+    // }
+    return Product(
+      id: json["id"],
+      agentid: json["agent_id"],
+      categoryId: json["category_id"],
+      subcategoryId: json["subcategory_id"],
+      bodypartId: json["bodypart_id"],
+      cityId: json["city_id"],
+      // locationIds: locationList,
+      slotId: json["slot_id"],
+      appointmentSlotIds: json["appointment_slot_ids"],
+      name: json["name"],
+      description: json["description"],
+      productsbrand: json["productsbrand"].toString() ?? '',
+      img: json["image"],
+      pprice: double.tryParse(json["product_price"].toString()) ??
+          0.0, // Safe conversion
+      sprice: double.tryParse(json["service_price"].toString()) ??
+          0.0, // Safe conversion
+      gender: json["gender"],
+      createdAt: DateTime.parse(json["created_at"]),
+      updatedAt: DateTime.parse(json["updated_at"]),
+      averageRating: double.tryParse(json["average_rating"].toString()) ??
+          0.0, // Safe conversion
+      reviewRatings: json['review_ratings'] != null
+          ? (json['review_ratings'] as List)
+              .map((i) => ReviewRatings.fromJson(i))
+              .toList()
+          : [],
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['agent_id'] = this.agentid;
-    data['category_id'] = this.categoryId;
-    data['subcategory_id'] = this.subcategoryId;
-    data['bodypart_id'] = this.bodypartId;
-    data['city_id'] = this.cityId;
-    data['location_ids'] = this.locationIds;
-    data['slot_id'] = this.slotId;
-    data['appointment_slot_ids'] = this.appointmentSlotIds;
-    data['name'] = this.name;
-    data['description'] = this.description;
-    data['image'] = this.img;
-    data['product_price'] = this.pprice;
-    data['service_price'] = this.sprice;
-    data['gender'] = this.gender;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['average_rating'] = this.averageRating;
-    if (this.reviewRatings != null) {
-      data['review_ratings'] =
-          this.reviewRatings!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "agent_id": agentid,
+        "category_id": categoryId,
+        "subcategory_id": subcategoryId,
+        "bodypart_id": bodypartId,
+        "city_id": cityId,
+        // "location_ids": locationIds,
+        "slot_id": slotId,
+        "appointment_slot_ids": appointmentSlotIds,
+        "name": name,
+        "description": description,
+        "productsbrand": productsbrand,
+        "image": img,
+        "product_price": pprice,
+        "service_price": sprice,
+        "gender": gender,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+        "average_rating": averageRating,
+        'review_ratings': reviewRatings?.map((i) => i.toJson()).toList(),
+      };
 }
 
 class ReviewRatings {
   int? id;
   int? serviceproductId;
-  int? agentId;
+  int? agentid;
   int? userId;
   String? reviewername;
   String? image;
@@ -252,43 +150,46 @@ class ReviewRatings {
   String? createdAt;
   String? updatedAt;
 
-  ReviewRatings(
-      {this.id,
-      this.serviceproductId,
-      this.agentId,
-      this.userId,
-      this.reviewername,
-      this.image,
-      this.rating,
-      this.comment,
-      this.createdAt,
-      this.updatedAt});
+  ReviewRatings({
+    this.id,
+    this.serviceproductId,
+    this.agentid,
+    this.userId,
+    this.reviewername,
+    this.image,
+    this.rating,
+    this.comment,
+    this.createdAt,
+    this.updatedAt,
+  });
 
-  ReviewRatings.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    serviceproductId = json['serviceproduct_id'];
-    agentId = json['agent_id'];
-    userId = json['user_id'];
-    reviewername = json['reviewername'];
-    image = json['image'];
-    rating = json['rating'];
-    comment = json['comment'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+  factory ReviewRatings.fromJson(Map<String, dynamic> json) {
+    return ReviewRatings(
+      id: json['id'],
+      serviceproductId: json['serviceproduct_id'],
+      agentid: json['agent_id'],
+      userId: json['user_id'],
+      reviewername: json['reviewername'],
+      image: json['image'],
+      rating: json['rating'],
+      comment: json['comment'],
+      createdAt: json['created_at'],
+      updatedAt: json['updated_at'],
+    );
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['serviceproduct_id'] = this.serviceproductId;
-    data['agent_id'] = this.agentId;
-    data['user_id'] = this.userId;
-    data['reviewername'] = this.reviewername;
-    data['image'] = this.image;
-    data['rating'] = this.rating;
-    data['comment'] = this.comment;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    return data;
+    return {
+      'id': id,
+      'serviceproduct_id': serviceproductId,
+      'agent_id': agentid,
+      'user_id': userId,
+      'reviewername': reviewername,
+      'image': image,
+      'rating': rating,
+      'comment': comment,
+      'created_at': createdAt,
+      'updated_at': updatedAt,
+    };
   }
 }

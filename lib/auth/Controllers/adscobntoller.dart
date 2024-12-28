@@ -5,18 +5,13 @@ import 'package:get/get.dart';
 import 'package:Ghore_Parlor/auth/Model/promotionsModel.dart';
 import 'package:http/http.dart' as http;
 
-
-  
 class AdsController extends GetxController {
   // Observable list of stores
   var adslist = [].obs;
 
   Future<void> fetchData() async {
-    var headersList = {
-       'Accept': 'application/json' 
-     
-    };
-    var url = Uri.parse(AppAppis.endpoint +'promotion-banners');
+    var headersList = {'Accept': 'application/json'};
+    var url = Uri.parse(AppAppis.endpoint + 'promotion-banners');
 
     try {
       var req = http.Request('GET', url);
@@ -39,7 +34,8 @@ class AdsController extends GetxController {
 
         // Update the observable list
         adslist.value = promotionAdsModel.data;
-        print(adslist); // Debug print to verify
+        print("adslist.value"); // Debug print to verify
+        print(adslist.value); // Debug print to verify
       } else {
         print(res.reasonPhrase);
       }
@@ -48,6 +44,5 @@ class AdsController extends GetxController {
     }
   }
 
-  get getStores=> adslist;
-  
+  get getStores => adslist;
 }

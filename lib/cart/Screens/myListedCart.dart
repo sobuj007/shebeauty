@@ -1,3 +1,4 @@
+import 'package:Ghore_Parlor/utils/appStyle.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -73,6 +74,10 @@ class _MyListedCartState extends State<MyListedCart> {
                         // );
 
                         return GestureDetector(
+                          onTap: () {
+                            AppStyle.snackbar(
+                                "press", "Long press to Delete item");
+                          },
                           onLongPress: () {
                             _showdeleteWarning(
                                 context,
@@ -239,7 +244,6 @@ class _MyListedCartState extends State<MyListedCart> {
                                                       "S.Price : " +
                                                           cartController
                                                               .items[index]
-                                                              .item
                                                               .sprice
                                                               .toString(),
                                                       style:
@@ -254,7 +258,6 @@ class _MyListedCartState extends State<MyListedCart> {
                                                       "P.Price : " +
                                                           cartController
                                                               .items[index]
-                                                              .item
                                                               .pprice
                                                               .toString(),
                                                       style:

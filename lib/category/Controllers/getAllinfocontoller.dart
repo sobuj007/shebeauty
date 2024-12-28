@@ -16,12 +16,21 @@ class AllinfoController extends GetxController {
   var filteredLocations = <Location>[].obs;
   var selectedCityId = Rx<int?>(null);
   var selectedLocations = <int>[].obs;
-
+  var selectedLocationId = 0.obs;
   @override
   void onInit() {
     super.onInit();
     fetchData();
     loadStoredData();
+  }
+
+  void setSelectedLocation(int id) {
+    selectedLocations.clear();
+    selectedLocationId.value = id;
+    selectedLocations.add(id);
+    print(" id of lcations");
+
+    print(id);
   }
 
   Future<void> fetchData() async {
@@ -103,6 +112,71 @@ class AllinfoController extends GetxController {
     for (var subcategory in subcategories!) {
       if (subcategory.id == id) {
         return subcategory.name; // Return the name if found
+      }
+    }
+    return null; // Return null if no match is found
+  }
+
+// step category...............
+  String? getSubcategorystep(int id) {
+    if (subcategories == null) return null;
+
+    // Search for the category with the matching ID
+    for (var subcategory in subcategories!) {
+      if (subcategory.id == id) {
+        return subcategory.steps; // Return the name if found
+      }
+    }
+    return null; // Return null if no match is found
+  }
+
+  // necessaryproduct category...............
+  String? getSubcategorynecessaryproduct(int id) {
+    if (subcategories == null) return null;
+
+    // Search for the category with the matching ID
+    for (var subcategory in subcategories!) {
+      if (subcategory.id == id) {
+        return subcategory.necessaryproduct; // Return the name if found
+      }
+    }
+    return null; // Return null if no match is found
+  }
+
+  // afterservicesinstruction category...............
+  String? getSubcategoryafterservicesinstruction(int id) {
+    if (subcategories == null) return null;
+
+    // Search for the category with the matching ID
+    for (var subcategory in subcategories!) {
+      if (subcategory.id == id) {
+        return subcategory.afterservicesinstruction; // Return the name if found
+      }
+    }
+    return null; // Return null if no match is found
+  }
+
+  // providerguideline category...............
+  String? getSubcategoryproviderguideline(int id) {
+    if (subcategories == null) return null;
+
+    // Search for the category with the matching ID
+    for (var subcategory in subcategories!) {
+      if (subcategory.id == id) {
+        return subcategory.providerguideline; // Return the name if found
+      }
+    }
+    return null; // Return null if no match is found
+  }
+
+  // providerguideline category...............
+  String? getSubcategorycustomerguideline(int id) {
+    if (subcategories == null) return null;
+
+    // Search for the category with the matching ID
+    for (var subcategory in subcategories!) {
+      if (subcategory.id == id) {
+        return subcategory.customerguideline; // Return the name if found
       }
     }
     return null; // Return null if no match is found

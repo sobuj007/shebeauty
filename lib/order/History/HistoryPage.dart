@@ -22,6 +22,7 @@ class HistoryPage extends StatefulWidget {
 class _HistoryPageState extends State<HistoryPage> {
   final HistoryController historyController = Get.put(HistoryController());
   PageController _pageController = PageController(initialPage: 0);
+  final ScrollController _scrollController = ScrollController();
   var getcon = Get.put(Usercontoller());
   var procon = Get.put(AllProductController());
   var storecon = Get.put(StorProfileController());
@@ -125,6 +126,7 @@ class _HistoryPageState extends State<HistoryPage> {
     }
 
     return ListView.builder(
+      controller: _scrollController,
       itemCount: orders.length,
       itemBuilder: (context, index) {
         var order = orders[index];

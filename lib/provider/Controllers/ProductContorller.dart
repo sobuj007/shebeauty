@@ -12,11 +12,11 @@ import '../../utils/appApis.dart';
 class AllProductController extends GetxController {
   var isLoading = true.obs;
   var allProducts = [].obs;
-  var product = <Products>[].obs;
-  var filteredList = <Products>[].obs;
+  var product = <Product>[].obs;
+  var filteredList = <Product>[].obs;
   var searchQuery = ''.obs;
   var subcatid = 0.obs;
-  var fil2 = <Products>[].obs;
+  var fil2 = <Product>[].obs;
   var isAllProductsChecked = false.obs; // Checkbox state
   final TextEditingController filterController = TextEditingController();
 
@@ -85,6 +85,7 @@ class AllProductController extends GetxController {
 //    if(subcategoryId.isEmpty){
 // filteredList.value = product;
 //    }else{
+// লাইল্লাহা ইল্লাহ আল আজিম ,আল হালীম , লাইল্লাহা ইল্লাহ রাবুল-আরশিল আজীম,  লাইল্লাহা ইল্লাহ রাবুশসামাওয়াত,ওয়া রাব্বুল ওয়াদ,রাব্বুল আরশিল-কারীম
     subcatid.value = id;
     filteredList.value = product.where((prod) {
       return prod.subcategoryId == id;
@@ -98,7 +99,7 @@ class AllProductController extends GetxController {
   void updateSelectedGender(String gender) {
     print(gender);
     filteredList.value = product.where((prod) {
-      return prod.gender == gender.toLowerCase();
+      return prod!.gender == gender.toLowerCase();
     }).toList();
     // Update the filtered products list
   }
@@ -128,7 +129,7 @@ class AllProductController extends GetxController {
       if (selectedGender.value == 'All') {
         return true; // No filtering by gender if 'All' is selected
       }
-      return prod.gender?.toLowerCase() == selectedGender.value.toLowerCase();
+      return prod!.gender?.toLowerCase() == selectedGender.value.toLowerCase();
     }).toList();
   }
 
@@ -216,12 +217,14 @@ class AllProductController extends GetxController {
   void sortByservicePrice({required bool isHighToLow}) {
     if (isHighToLow) {
       // Sort by price from high to low
-      filteredList.value = product.where((prod) => prod.sprice != null).toList()
-        ..sort((a, b) => b.sprice!.compareTo(a.sprice!));
+      filteredList.value = product
+          .where((prod) => prod?.sprice != null)
+          .toList()
+        ..sort((a, b) => b!.sprice.compareTo(a.sprice));
     } else {
       // Sort by price from low to high
       filteredList.value = product.where((prod) => prod.sprice != null).toList()
-        ..sort((a, b) => a.sprice!.compareTo(b.sprice!));
+        ..sort((a, b) => a.sprice.compareTo(b.sprice));
     }
   }
 }

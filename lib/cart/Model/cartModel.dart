@@ -71,8 +71,8 @@ class CartProducts {
   String id;
   String name;
   String img;
-  String sprice;
-  String pprice;
+  var sprice;
+  var pprice;
   String agentid;
   String categoryId;
   String subcategoryId;
@@ -83,7 +83,7 @@ class CartProducts {
   var appointmentSlotIds;
   String description;
   String gender;
-  int averageRating;
+  double averageRating;
   String createdAt;
   String updatedAt;
 

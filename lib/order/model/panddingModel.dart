@@ -169,7 +169,7 @@ class ServiceProduct {
   int? subcategoryId;
   String? bodypartId;
   int? cityId;
-  List<String>? locationIds;
+  var locationIds;
   int? slotId;
   String? appointmentSlotIds;
   String? name;
@@ -207,7 +207,7 @@ class ServiceProduct {
     subcategoryId = json['subcategory_id'];
     bodypartId = json['bodypart_id'];
     cityId = json['city_id'];
-    locationIds = json['location_ids'].cast<String>();
+    locationIds = json['location_ids'];
     slotId = json['slot_id'];
     appointmentSlotIds = json['appointment_slot_ids'];
     name = json['name'];

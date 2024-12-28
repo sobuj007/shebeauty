@@ -17,7 +17,7 @@ import '../Controllers/ProductContorller.dart';
 class MyProvider2 extends StatelessWidget {
   final AllinfoController con = Get.find();
   var controller = Get.put(AllProductController());
-  var _filteredItems = <Products>[].obs;
+  var _filteredItems = <Product>[].obs;
   var _selectedLocation = 'All'.obs();
 
   var _selectedBodyPart = 'All'.obs();
@@ -50,7 +50,7 @@ class MyProvider2 extends StatelessWidget {
 
     final id = argsData?['subid'];
     final body = argsData?['bodypart'];
-    print("this is" + id.toString());
+    print("this is" + argsData.toString());
 
     return Scaffold(
         body: Column(children: [
@@ -213,7 +213,7 @@ class MyProvider2 extends StatelessWidget {
                                               AppColors.themeBlack),
                                           children: [
                                             TextSpan(
-                                                text: product.sprice,
+                                                text: product.sprice.toString(),
                                                 style: AppFonts.fontH5semi(
                                                     AppColors.themeColer))
                                           ]),
@@ -228,7 +228,7 @@ class MyProvider2 extends StatelessWidget {
                                               AppColors.themeBlack),
                                           children: [
                                             TextSpan(
-                                                text: product.pprice,
+                                                text: product.pprice.toString(),
                                                 style: AppFonts.fontH5semi(
                                                     AppColors.themeColer))
                                           ]),

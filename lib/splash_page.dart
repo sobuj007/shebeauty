@@ -41,7 +41,7 @@ class _SplashState extends State<Splash> {
             child: Image(
           image: AssetImage('assets/GhoreParlor.png'),
           fit: BoxFit.contain,
-          width: 50.w,
+          width: 30.w,
         ))
         // Center(child: Text(AppConstant.appName,style: AppFonts.fontH8semi(AppColors.themeBlack),)),
         // Text(AppConstant.appName,style: AppFonts.custom(AppColors.themeBlack,24.sp,FontWeight.bold),)

@@ -59,20 +59,126 @@ class _SingelDescriptionState extends State<SingelDescription> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.item.name,
+                      widget.item.name.toString().toUpperCase(),
                       style: AppFonts.fontH2semi(AppColors.themeColer),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Admin Description: ',
+                      style: AppFonts.fontH6semi(AppColors.themeBlack),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+
+                    Text(
+                      allcon
+                          .getCategoryDescriptionById(
+                              int.parse(widget.item.categoryId.toString()))
+                          .toString(),
+                      style: AppFonts.fontH7regular(AppColors.themeBlack),
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                     Text(
                       'Description: ',
-                      style: AppFonts.fontH5semi(AppColors.themeBlack),
+                      style: AppFonts.fontH6semi(AppColors.themeBlack),
                     ),
-
-                    Text(allcon
-                        .getCategoryDescriptionById(
-                            int.parse(widget.item.categoryId.toString()))
-                        .toString()),
+                    SizedBox(
+                      height: 5,
+                    ),
                     Text(
                       widget.item.description.toString(),
+                      style: AppFonts.fontH7regular(AppColors.themeBlack),
+                    ),
+
+                    /***************************** Steps *********************** */
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Steps : ',
+                      style: AppFonts.fontH6semi(AppColors.themeBlack),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      allcon
+                          .getSubcategorystep(
+                              int.parse(widget.item.subcategoryId.toString()))
+                          .toString(),
+                      style: AppFonts.fontH7regular(AppColors.themeBlack),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Necessary Product : ',
+                      style: AppFonts.fontH6semi(AppColors.themeBlack),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      allcon
+                          .getSubcategorynecessaryproduct(
+                              int.parse(widget.item.subcategoryId.toString()))
+                          .toString(),
+                      style: AppFonts.fontH7regular(AppColors.themeBlack),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'After Services Instruction : ',
+                      style: AppFonts.fontH6semi(AppColors.themeBlack),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      allcon
+                          .getSubcategoryafterservicesinstruction(
+                              int.parse(widget.item.subcategoryId.toString()))
+                          .toString(),
+                      style: AppFonts.fontH7regular(AppColors.themeBlack),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Provider Guideline : ',
+                      style: AppFonts.fontH6semi(AppColors.themeBlack),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      allcon
+                          .getSubcategoryproviderguideline(
+                              int.parse(widget.item.subcategoryId.toString()))
+                          .toString(),
+                      style: AppFonts.fontH7regular(AppColors.themeBlack),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Customer Guideline : ',
+                      style: AppFonts.fontH6semi(AppColors.themeBlack),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      allcon
+                          .getSubcategorycustomerguideline(
+                              int.parse(widget.item.subcategoryId.toString()))
+                          .toString(),
                       style: AppFonts.fontH7regular(AppColors.themeBlack),
                     ),
 

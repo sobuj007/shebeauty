@@ -308,9 +308,9 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                                       AppColors.themeBlack),
                                                   children: [
                                                     TextSpan(
-                                                        text:
-                                                            widget.item.sprice +
-                                                                "Tk",
+                                                        text: widget.item.sprice
+                                                                .toString() +
+                                                            "Tk",
                                                         style:
                                                             AppFonts.fontH6semi(
                                                                 AppColors
@@ -325,7 +325,8 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                                   children: [
                                                     TextSpan(
                                                         text: " " +
-                                                            widget.item.pprice,
+                                                            widget.item.pprice
+                                                                .toString(),
                                                         children: [
                                                           TextSpan(
                                                             text: "Tk",
@@ -512,7 +513,7 @@ class _SingelAppointmentState extends State<SingelAppointment> {
     );
   }
 
-  List<CartProducts> convertProductsList(List<Products> productsList) {
+  List<CartProducts> convertProductsList(List<Product> productsList) {
     return productsList
         .map((product) => convertToCartProducts(product))
         .toList();
@@ -738,10 +739,10 @@ class _SingelAppointmentState extends State<SingelAppointment> {
   }
 
   coutntotal() {
-    var p =
-        double.parse(widget.item.pprice) * double.parse(productQun.toString());
-    var s =
-        double.parse(widget.item.sprice) * double.parse(servicesQun.toString());
+    var p = double.parse(widget.item.pprice.toString()) *
+        double.parse(productQun.toString());
+    var s = double.parse(widget.item.sprice.toString()) *
+        double.parse(servicesQun.toString());
 
     setState(() {
       total = double.parse((p + s).toString());

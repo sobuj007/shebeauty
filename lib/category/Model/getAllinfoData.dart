@@ -99,13 +99,33 @@ class Subcategory {
   int? categoryId;
   String? name;
   String? image;
+  String? steps;
+  String? necessaryproduct;
+  String? afterservicesinstruction;
+  String? providerguideline;
+  String? customerguideline;
 
-  Subcategory({this.id, this.categoryId, this.name, this.image});
+  Subcategory({
+    this.id,
+    this.categoryId,
+    this.name,
+    this.image,
+    this.steps,
+    this.necessaryproduct,
+    this.afterservicesinstruction,
+    this.providerguideline,
+    this.customerguideline,
+  });
 
   Subcategory.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     categoryId = json['category_id'];
     name = json['name'];
+    steps = json['steps'];
+    necessaryproduct = json['necessaryproduct'];
+    afterservicesinstruction = json['afterservicesinstruction'];
+    providerguideline = json['providerguideline'];
+    customerguideline = json['customerguideline'];
     image = json['image'];
   }
 
@@ -114,6 +134,11 @@ class Subcategory {
     data['id'] = this.id;
     data['category_id'] = this.categoryId;
     data['name'] = this.name;
+    data['steps'] = this.steps;
+    data['necessaryproduct'] = this.necessaryproduct;
+    data['afterservicesinstruction'] = this.afterservicesinstruction;
+    data['providerguideline'] = this.providerguideline;
+    data['customerguideline'] = this.customerguideline;
     data['image'] = this.image;
     return data;
   }
@@ -124,7 +149,11 @@ class Bodypart {
   int? subcategoryId;
   String? name;
 
-  Bodypart({this.id, this.subcategoryId, this.name});
+  Bodypart({
+    this.id,
+    this.subcategoryId,
+    this.name,
+  });
 
   Bodypart.fromJson(Map<String, dynamic> json) {
     id = json['id'];

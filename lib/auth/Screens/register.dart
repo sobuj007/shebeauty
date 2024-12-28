@@ -39,25 +39,25 @@ class _RegisterState extends State<Register> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Center(
-                    child: Text(
-                      applng.getLang(0),
-                      style: AppFonts.fontSplashtitle(Colors.black),
-                    ),
-                  ),
+                      child: Image(
+                    image: AssetImage('assets/2.png'),
+                    fit: BoxFit.contain,
+                    width: 30.w,
+                  )),
                 ],
               ),
-                SizedBox(
+              SizedBox(
                 height: 5.h,
               ),
               Text(
                 applng.getLang(1),
                 style: AppFonts.fontH3semi(Colors.black),
               ),
-              
-          SizedBox(
+
+              SizedBox(
                 height: 2.h,
               ),
-              
+
               /**************************************** usename field ********************************** */
               TextField(
                 controller: fullname,
@@ -102,7 +102,6 @@ class _RegisterState extends State<Register> {
                           : Icon(Icons.visibility),
                       onPressed: () {
                         setState(() {
-                        
                           isPassview = !isPassview;
                         });
                       },
@@ -131,7 +130,6 @@ class _RegisterState extends State<Register> {
                           : Icon(Icons.visibility),
                       onPressed: () {
                         setState(() {
-                        
                           isPassview2 = !isPassview2;
                         });
                       },
@@ -179,34 +177,33 @@ class _RegisterState extends State<Register> {
                       )
                     ],
                   ),
-                 
                 ],
               ),
-                SizedBox(
+              SizedBox(
                 height: 2.8.h,
               ),
               /************* login button ******************* */
               GestureDetector(
-                onTap: (){
-                  if(fullname.text.isEmpty||username.text.isEmpty||password.text.isEmpty){
+                onTap: () {
+                  if (fullname.text.isEmpty ||
+                      username.text.isEmpty ||
+                      password.text.isEmpty) {
                     AppStyle.snackbar('warning', "field can't be empty");
-                  }else{
-                     if(password.text==confirmpass.text){  if(ischeck!=true){
-                         AppStyle.snackbar('warning', " please check the trems condtions");
-                   }else{
-                    LoginContoller().register(fullname.text,username.text, password.text,confirmpass.text,context);
-                   }
-                    
-                    }else{
-                        AppStyle.snackbar('warning', "password and confirm password not match !");
+                  } else {
+                    if (password.text == confirmpass.text) {
+                      if (ischeck != true) {
+                        AppStyle.snackbar(
+                            'warning', " please check the trems condtions");
+                      } else {
+                        LoginContoller().register(fullname.text, username.text,
+                            password.text, confirmpass.text, context);
+                      }
+                    } else {
+                      AppStyle.snackbar('warning',
+                          "password and confirm password not match !");
                     }
-                 
-                  
                   }
-                 
-                  
-          
-          
+
                   // Get.toNamed('/layout');
                 },
                 child: Container(
@@ -221,26 +218,31 @@ class _RegisterState extends State<Register> {
                     style: AppFonts.fontH3bold(AppColors.themeWhite),
                   ),
                 ),
-              ),SizedBox(
+              ),
+              SizedBox(
                 height: 15.h,
               ),
-              Row(mainAxisAlignment: MainAxisAlignment.center,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                Text(
-                  applng.getLang(11).toString(),
-                  style: AppFonts.fontH6regular(AppColors.themeBlack),
-                ),
-                SizedBox(width: 1.w,),
-                GestureDetector(
-                  onTap: (){
-                    Get.offNamed('/login');
-                  },
-                  child: Text(
-                    applng.getLang(10).toString(),
-                    style: AppFonts.fontH4bold(AppColors.themeBlack),
+                  Text(
+                    applng.getLang(11).toString(),
+                    style: AppFonts.fontH6regular(AppColors.themeBlack),
                   ),
-                ),
-              ],)
+                  SizedBox(
+                    width: 1.w,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Get.offNamed('/login');
+                    },
+                    child: Text(
+                      applng.getLang(10).toString(),
+                      style: AppFonts.fontH4bold(AppColors.themeBlack),
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),

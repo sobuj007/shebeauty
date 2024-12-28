@@ -92,7 +92,7 @@ class NearMeAll extends StatelessWidget {
                                 product.img == null
                                     ? "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"
                                     : product.img.toString()),
-                            fit: BoxFit.fill,
+                            fit: BoxFit.cover,
                           ),
                         ),
                         child: Container(
