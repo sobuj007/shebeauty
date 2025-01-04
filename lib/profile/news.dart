@@ -9,7 +9,7 @@ import '../utils/appColors.dart';
 class NewsPage extends StatelessWidget {
   final AdsController adsController = Get.put(AdsController());
 
-  const NewsPage({super.key});
+  NewsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
