@@ -38,6 +38,8 @@ class WishlistController extends GetxController {
       slotId: jsonMap['slot_id']?.toString() ?? '',
       appointmentSlotIds: jsonMap['appointment_slot_ids']?.toString() ?? '',
       description: jsonMap['description'] ?? '',
+      productsbrand: jsonMap['productsbrand'] ?? '',
+      servicesduration: jsonMap['servicesduration'] ?? '',
       gender: jsonMap['gender'] ?? '',
       averageRating: jsonMap['average_rating'] ?? 0,
       createdAt: jsonMap['created_at'] ?? '',

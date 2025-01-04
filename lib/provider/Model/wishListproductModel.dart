@@ -42,6 +42,8 @@ class WishlistProduct {
   var appointmentSlotIds;
   String description;
   String gender;
+  String productsbrand;
+  String servicesduration;
   int averageRating;
   String createdAt;
   String updatedAt;
@@ -62,6 +64,8 @@ class WishlistProduct {
     required this.appointmentSlotIds,
     required this.description,
     required this.gender,
+    required this.productsbrand,
+    required this.servicesduration,
     required this.averageRating,
     required this.createdAt,
     required this.updatedAt,
@@ -84,6 +88,8 @@ class WishlistProduct {
       appointmentSlotIds: json['appointment_slot_ids'] ?? '',
       description: json['description'] ?? '',
       gender: json['gender'] ?? '',
+      productsbrand: json['productsbrand'] ?? '',
+      servicesduration: json['servicesduration'] ?? '',
       averageRating: json['averageRating'] ?? 0,
       createdAt: json['created_at'] ?? '',
       updatedAt: json['updated_at'] ?? '',

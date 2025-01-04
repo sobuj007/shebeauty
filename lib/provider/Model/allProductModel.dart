@@ -45,6 +45,8 @@ class Product {
   double pprice; // Updated to `double`
   double sprice; // Updated to `double`
   String gender;
+
+  String servicesduration;
   DateTime createdAt;
   DateTime updatedAt;
   double averageRating; // Updated to `double`
@@ -62,6 +64,7 @@ class Product {
     required this.name,
     required this.description,
     required this.productsbrand,
+    required this.servicesduration,
     required this.img,
     required this.pprice,
     required this.sprice,
@@ -96,6 +99,7 @@ class Product {
       name: json["name"],
       description: json["description"],
       productsbrand: json["productsbrand"].toString() ?? '',
+      servicesduration: json["servicesduration"].toString() ?? '',
       img: json["image"],
       pprice: double.tryParse(json["product_price"].toString()) ??
           0.0, // Safe conversion
@@ -127,6 +131,7 @@ class Product {
         "name": name,
         "description": description,
         "productsbrand": productsbrand,
+        "servicesduration": servicesduration,
         "image": img,
         "product_price": pprice,
         "service_price": sprice,

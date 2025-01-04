@@ -197,6 +197,7 @@ class Woman extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
+                                      fit: BoxFit.cover,
                                       image: CachedNetworkImageProvider(
                                           errorListener: (e) {},
                                           storeController.stores[index]
@@ -217,6 +218,8 @@ class Woman extends StatelessWidget {
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
                                         Text(
                                           storeController
@@ -226,25 +229,30 @@ class Woman extends StatelessWidget {
                                               AppColors.themeWhite),
                                         ),
                                         // Expanded(child: SizedBox()),
-                                        Card(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(20)),
-                                            child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(4.0),
-                                                child: Image(
-                                                  height: 4.h,
-                                                  width: 4.h,
-                                                  image: CachedNetworkImageProvider(
-                                                      storeController
-                                                                  .stores[index]
-                                                                  .logo ==
-                                                              null
-                                                          ? "https://ghoreparlour.com/uploads/category/1725218338--beautytreatment.png"
-                                                          : storeController
-                                                              .stores[index]
-                                                              .logo),
+                                        Padding(
+                                            padding: const EdgeInsets.all(4.0),
+                                            child: Container(
+                                                height: 5.h,
+                                                width: 5.h,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      width: 1,
+                                                      color: Colors.white),
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  image: DecorationImage(
+                                                    fit: BoxFit.cover,
+                                                    image: CachedNetworkImageProvider(
+                                                        storeController
+                                                                    .stores[
+                                                                        index]
+                                                                    .logo ==
+                                                                null
+                                                            ? "https://ghoreparlour.com/uploads/category/1725218338--beautytreatment.png"
+                                                            : storeController
+                                                                .stores[index]
+                                                                .logo),
+                                                  ),
                                                 )))
                                       ],
                                     ),

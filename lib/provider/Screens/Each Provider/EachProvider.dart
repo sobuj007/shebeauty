@@ -37,9 +37,9 @@ class _EachProviderState extends State<EachProvider> {
   @override
   Widget build(BuildContext context) {
     reviewController.fetchReviews(int.parse(widget.item.toString()));
-    return Scaffold(
-        body: SafeArea(
-      child: Column(
+    return SafeArea(
+        child: Scaffold(
+      body: Column(
         children: [
           CustomAppbar(
             title: "Provider Info",
@@ -80,6 +80,20 @@ class _EachProviderState extends State<EachProvider> {
                               ),
                             ],
                           ),
+                          Container(
+                              decoration: BoxDecoration(
+                                  color: AppColors.themeColer,
+                                  border: Border.all(
+                                      width: 1, color: AppColors.themeColer),
+                                  borderRadius: BorderRadius.circular(5)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Text(
+                                  prof![0].companyType.toString().toUpperCase(),
+                                  style:
+                                      AppFonts.fontH7semi(AppColors.themeWhite),
+                                ),
+                              ))
                           // Rattings(
                           //   rate: widget.item.rating.toString(),
                           // ),

@@ -83,6 +83,8 @@ class CartProducts {
   var appointmentSlotIds;
   String description;
   String gender;
+  String productsbrand;
+  String servicesduration;
   double averageRating;
   String createdAt;
   String updatedAt;
@@ -102,6 +104,8 @@ class CartProducts {
     required this.slotId,
     required this.appointmentSlotIds,
     required this.description,
+    required this.servicesduration,
+    required this.productsbrand,
     required this.gender,
     required this.averageRating,
     required this.createdAt,
@@ -124,8 +128,10 @@ class CartProducts {
       slotId: json['slot_id'] ?? '',
       appointmentSlotIds: json['appointment_slot_ids'] ?? '',
       description: json['description'] ?? '',
+      productsbrand: json['productsbrand'] ?? '',
+      servicesduration: json['servicesduration'] ?? '',
       gender: json['gender'] ?? '',
-      averageRating: json['averageRating'] ?? 0,
+      averageRating: json['averageRating'] ?? 0.0,
       createdAt: json['created_at'] ?? '',
       updatedAt: json['updated_at'] ?? '',
     );

@@ -507,7 +507,9 @@ class _SingelAppointmentState extends State<SingelAppointment> {
       appointmentSlotIds: jsonMap['appointment_slot_ids']?.toString() ?? '',
       description: jsonMap['description'] ?? '',
       gender: jsonMap['gender'] ?? '',
-      averageRating: jsonMap['average_rating'] ?? 0,
+      productsbrand: jsonMap['productsbrand'] ?? '',
+      servicesduration: jsonMap['servicesduration'] ?? '',
+      averageRating: double.parse(jsonMap['average_rating'].toString()) ?? 0.0,
       createdAt: jsonMap['created_at'] ?? '',
       updatedAt: jsonMap['updated_at'] ?? '',
     );

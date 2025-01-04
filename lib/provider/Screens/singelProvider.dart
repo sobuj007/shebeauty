@@ -138,6 +138,7 @@ import 'package:Ghore_Parlor/provider/Controllers/agentProfileContoller.dart';
 import '../../utils/appColors.dart';
 import '../../utils/appFonts.dart';
 import '../../utils/custom widget/CustomAppbar.dart';
+import '../../utils/custom widget/CustomAppbar2.dart';
 import 'SingelAppointment.dart';
 import 'SingelDescription.dart';
 import 'Singelprofile.dart';
@@ -176,7 +177,7 @@ class _SingelProviderState extends State<SingelProvider> {
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
-            CustomAppbar(
+            CustomAppbar2(
               title: args.name.toString(), // Display the name or title
             ),
             Padding(
