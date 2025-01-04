@@ -17,7 +17,7 @@ class MyOrder {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     };
-    var url = Uri.parse(AppAppis.endpoint + 'orders/new');
+    var url = Uri.parse('${AppAppis.endpoint}orders/new');
 
     var body = sendingData;
 
@@ -57,7 +57,7 @@ class MyOrder {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     };
-    var url = Uri.parse(AppAppis.endpoint + 'paystore');
+    var url = Uri.parse('${AppAppis.endpoint}paystore');
 
     var body = {
       "order_id": id.toString(),

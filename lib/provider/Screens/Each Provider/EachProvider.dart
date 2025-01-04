@@ -49,10 +49,10 @@ class _EachProviderState extends State<EachProvider> {
                 padding: EdgeInsets.symmetric(horizontal: 2.5.h),
                 child: Obx(() {
                   if (agentcontroller.profilesdata == null) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   }
                   if (agentcontroller.profilesdata!.isEmpty) {
-                    return Center(
+                    return const Center(
                       child: Text("No Data Found"),
                     );
                   }
@@ -64,11 +64,11 @@ class _EachProviderState extends State<EachProvider> {
                         children: [
                           Row(
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.verified,
                                 color: AppColors.themeColer,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
                               Text(
@@ -89,7 +89,7 @@ class _EachProviderState extends State<EachProvider> {
                               child: Padding(
                                 padding: const EdgeInsets.all(4.0),
                                 child: Text(
-                                  prof![0].companyType.toString().toUpperCase(),
+                                  prof[0].companyType.toString().toUpperCase(),
                                   style:
                                       AppFonts.fontH7semi(AppColors.themeWhite),
                                 ),
@@ -121,7 +121,7 @@ class _EachProviderState extends State<EachProvider> {
                                         width: 1, color: AppColors.themehint)),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text(prof![0].servicestime.toString()),
+                                  child: Text(prof[0].servicestime.toString()),
                                 ),
                               )
                             ],
@@ -183,18 +183,18 @@ class _EachProviderState extends State<EachProvider> {
       child: Obx(() {
         // Show a loading indicator when data is being fetched
         if (reviewController.isLoading.value) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
 
         // Show the swiper with reviews if available
         if (reviewController.reviewsList.isEmpty) {
-          return Center(child: Text('No reviews available'));
+          return const Center(child: Text('No reviews available'));
         }
 
         return Swiper(
           itemBuilder: (BuildContext context, int index) {
             var review = reviewController.reviewsList[index];
-            return Container(
+            return SizedBox(
               height: 150,
               width: MediaQuery.of(context).size.width,
               child: Column(
@@ -242,12 +242,12 @@ class _EachProviderState extends State<EachProvider> {
   certificates(context) {
     return Obx(() {
       if (agentcontroller.certificate == null) {
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       }
       if (agentcontroller.certificate!.isEmpty) {
-        return Center(
+        return const Center(
           child: Text('No Data Found'),
         );
       }
@@ -255,7 +255,7 @@ class _EachProviderState extends State<EachProvider> {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
           Text(
@@ -302,12 +302,12 @@ class _EachProviderState extends State<EachProvider> {
   Servics(context) {
     return Obx(() {
       if (agentcontroller.exparts == null) {
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       }
       if (agentcontroller.exparts!.isEmpty) {
-        return Center(
+        return const Center(
           child: Text('No Data Found'),
         );
       }
@@ -315,7 +315,7 @@ class _EachProviderState extends State<EachProvider> {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
           Text(
@@ -338,7 +338,8 @@ class _EachProviderState extends State<EachProvider> {
                       padding:
                           EdgeInsets.symmetric(vertical: 1.h, horizontal: 1.w),
                       child: Container(
-                        decoration: BoxDecoration(color: AppColors.themeimgbg),
+                        decoration:
+                            const BoxDecoration(color: AppColors.themeimgbg),
                         child: Container(
                           decoration: BoxDecoration(
                               color: AppColors.themeimgbg,

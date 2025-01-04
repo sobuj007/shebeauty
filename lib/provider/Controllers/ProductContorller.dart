@@ -21,8 +21,8 @@ class AllProductController extends GetxController {
   final TextEditingController filterController = TextEditingController();
 
   // RxList for selected genders and ratings
-  var _selectedGender = ['All', 'Male', 'Female'].obs;
-  var _selectedRating = [1.0, 2.0, 3.0, 4.0, 5.0].obs;
+  final _selectedGender = ['All', 'Male', 'Female'].obs;
+  final _selectedRating = [1.0, 2.0, 3.0, 4.0, 5.0].obs;
 
   // RxString for single selected value
   var selectedGender = 'All'.obs;
@@ -42,7 +42,7 @@ class AllProductController extends GetxController {
       'Authorization': 'Bearer $token',
       'Content-Type': 'application/json',
     };
-    var url = Uri.parse(AppAppis.endpoint + 'serviceproducts/getall');
+    var url = Uri.parse('${AppAppis.endpoint}serviceproducts/getall');
     var req = http.Request('GET', url);
     req.headers.addAll(headersList);
 
@@ -67,8 +67,8 @@ class AllProductController extends GetxController {
 
         // Update your state with the fetched data
 
-        filteredList.value = allProductModel.products!;
-        product.value = allProductModel.products!;
+        filteredList.value = allProductModel.products;
+        product.value = allProductModel.products;
       } else {
         print('Failed to load products with status code: ${res.statusCode}');
         throw Exception('Failed to load products');
@@ -99,7 +99,7 @@ class AllProductController extends GetxController {
   void updateSelectedGender(String gender) {
     print(gender);
     filteredList.value = product.where((prod) {
-      return prod!.gender == gender.toLowerCase();
+      return prod.gender == gender.toLowerCase();
     }).toList();
     // Update the filtered products list
   }
@@ -116,6 +116,7 @@ class AllProductController extends GetxController {
         return prod.name; // Return the name if found
       }
     }
+    return null;
   }
 
   // // Function to update selected rating
@@ -129,7 +130,7 @@ class AllProductController extends GetxController {
       if (selectedGender.value == 'All') {
         return true; // No filtering by gender if 'All' is selected
       }
-      return prod!.gender?.toLowerCase() == selectedGender.value.toLowerCase();
+      return prod.gender.toLowerCase() == selectedGender.value.toLowerCase();
     }).toList();
   }
 
@@ -147,8 +148,6 @@ class AllProductController extends GetxController {
   void filterproductbyBodypart(selectedBodyParts) {
     filteredList.value = product.where((prod) {
       // Check if the product's bodypart exists in the selectedBodyParts list
-      if (prod.bodypartId == null)
-        return false; // Exclude products without a bodypart
       return selectedBodyParts.contains(prod.bodypartId);
     }).toList();
   }
@@ -173,9 +172,7 @@ class AllProductController extends GetxController {
       fil2.value = (product);
     } else {
       fil2.value = product
-          .where((prod) =>
-              prod.name != null &&
-              prod.name!.toLowerCase().contains(lowerQuery))
+          .where((prod) => prod.name.toLowerCase().contains(lowerQuery))
           .toList();
     }
     filteredList = fil2;
@@ -217,10 +214,8 @@ class AllProductController extends GetxController {
   void sortByservicePrice({required bool isHighToLow}) {
     if (isHighToLow) {
       // Sort by price from high to low
-      filteredList.value = product
-          .where((prod) => prod?.sprice != null)
-          .toList()
-        ..sort((a, b) => b!.sprice.compareTo(a.sprice));
+      filteredList.value = product.where((prod) => prod.sprice != null).toList()
+        ..sort((a, b) => b.sprice.compareTo(a.sprice));
     } else {
       // Sort by price from low to high
       filteredList.value = product.where((prod) => prod.sprice != null).toList()

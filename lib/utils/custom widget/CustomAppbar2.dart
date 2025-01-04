@@ -13,7 +13,7 @@ import '../appFonts.dart';
 class CustomAppbar2 extends StatelessWidget {
   String? title;
   CustomAppbar2({this.title, super.key});
- final CartController cartController = Get.put(CartController());
+  final CartController cartController = Get.put(CartController());
   @override
   Widget build(BuildContext context) {
     // return Container(
@@ -40,29 +40,55 @@ class CustomAppbar2 extends StatelessWidget {
     //     ),
     //   ),
     // );
-    return  AppBar(
-        leading: GestureDetector(child: Icon(Icons.arrow_back_ios,color: AppColors.themeWhite,),onTap: (){Navigator.pop(context);},),
-        backgroundColor: AppColors.themeColer,
-        title: Text(title.toString().toUpperCase(),style: AppFonts.fontH4regular(AppColors.themeWhite),),
-        actions: [
-         
-          GestureDetector(child: Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 3.w),
-            child: Obx((){
+    return AppBar(
+      leading: GestureDetector(
+        child: const Icon(
+          Icons.arrow_back_ios,
+          color: AppColors.themeWhite,
+        ),
+        onTap: () {
+          Navigator.pop(context);
+        },
+      ),
+      backgroundColor: AppColors.themeColer,
+      title: Text(
+        title.toString().toUpperCase(),
+        style: AppFonts.fontH4regular(AppColors.themeWhite),
+      ),
+      actions: [
+        GestureDetector(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 3.w),
+            child: Obx(() {
               return Stack(
-              children: [
-              
-                Icon(Icons.shopping_bag,color: AppColors.themeWhite,size: 25.sp,),
+                children: [
+                  Icon(
+                    Icons.shopping_bag,
+                    color: AppColors.themeWhite,
+                    size: 25.sp,
+                  ),
                   Positioned(
-                  right: 1,
-                  child:cartController.items.isEmpty?SizedBox(): CircleAvatar(backgroundColor: Colors.green,radius: 10,child: Center(child:  Text(cartController.items.length.toString(),style: AppFonts.fontH7semi(AppColors.themeBlack),))),),
-              ],
-            );
+                    right: 1,
+                    child: cartController.items.isEmpty
+                        ? const SizedBox()
+                        : CircleAvatar(
+                            backgroundColor: Colors.green,
+                            radius: 10,
+                            child: Center(
+                                child: Text(
+                              cartController.items.length.toString(),
+                              style: AppFonts.fontH7semi(AppColors.themeBlack),
+                            ))),
+                  ),
+                ],
+              );
             }),
-          ),onTap: () {
-          Get.toNamed(AppRoutes.myListedCart2);
-          },)
-        ],
-      );
+          ),
+          onTap: () {
+            Get.toNamed(AppRoutes.myListedCart2);
+          },
+        )
+      ],
+    );
   }
 }

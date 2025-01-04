@@ -327,46 +327,46 @@ class AgentprofileModel {
     if (json['profiles'] != null) {
       profiles = <Profiles>[];
       json['profiles'].forEach((v) {
-        profiles!.add(new Profiles.fromJson(v));
+        profiles!.add(Profiles.fromJson(v));
       });
     }
     if (json['exparts'] != null) {
       exparts = <Exparts>[];
       json['exparts'].forEach((v) {
-        exparts!.add(new Exparts.fromJson(v));
+        exparts!.add(Exparts.fromJson(v));
       });
     }
     if (json['certificate'] != null) {
       certificate = <Certificate>[];
       json['certificate'].forEach((v) {
-        certificate!.add(new Certificate.fromJson(v));
+        certificate!.add(Certificate.fromJson(v));
       });
     }
     if (json['products'] != null) {
       products = <Products>[];
       json['products'].forEach((v) {
-        products!.add(new Products.fromJson(v));
+        products!.add(Products.fromJson(v));
       });
     }
     totalorder = json['totalorder'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message'] = this.message;
-    if (this.profiles != null) {
-      data['profiles'] = this.profiles!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['message'] = message;
+    if (profiles != null) {
+      data['profiles'] = profiles!.map((v) => v.toJson()).toList();
     }
-    if (this.exparts != null) {
-      data['exparts'] = this.exparts!.map((v) => v.toJson()).toList();
+    if (exparts != null) {
+      data['exparts'] = exparts!.map((v) => v.toJson()).toList();
     }
-    if (this.certificate != null) {
-      data['certificate'] = this.certificate!.map((v) => v.toJson()).toList();
+    if (certificate != null) {
+      data['certificate'] = certificate!.map((v) => v.toJson()).toList();
     }
-    if (this.products != null) {
-      data['products'] = this.products!.map((v) => v.toJson()).toList();
+    if (products != null) {
+      data['products'] = products!.map((v) => v.toJson()).toList();
     }
-    data['totalorder'] = this.totalorder;
+    data['totalorder'] = totalorder;
     return data;
   }
 }
@@ -424,22 +424,22 @@ class Profiles {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['storename'] = this.storename;
-    data['servicestime'] = this.servicestime;
-    data['coverImage'] = this.coverImage;
-    data['tradelicence'] = this.tradelicence;
-    data['address'] = this.address;
-    data['mobile'] = this.mobile;
-    data['logo'] = this.logo;
-    data['city_id'] = this.cityId;
-    data['location_ids'] = this.locationIds;
-    data['nid'] = this.nid;
-    data['company_type'] = this.companyType;
-    data['agent_id'] = this.agentId;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['storename'] = storename;
+    data['servicestime'] = servicestime;
+    data['coverImage'] = coverImage;
+    data['tradelicence'] = tradelicence;
+    data['address'] = address;
+    data['mobile'] = mobile;
+    data['logo'] = logo;
+    data['city_id'] = cityId;
+    data['location_ids'] = locationIds;
+    data['nid'] = nid;
+    data['company_type'] = companyType;
+    data['agent_id'] = agentId;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }
@@ -482,17 +482,17 @@ class Exparts {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['profile_image'] = this.profileImage;
-    data['expartyear'] = this.expartyear;
-    data['gender'] = this.gender;
-    data['mobile'] = this.mobile;
-    data['certificate_images'] = this.certificateImages;
-    data['agent_id'] = this.agentId;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['profile_image'] = profileImage;
+    data['expartyear'] = expartyear;
+    data['gender'] = gender;
+    data['mobile'] = mobile;
+    data['certificate_images'] = certificateImages;
+    data['agent_id'] = agentId;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }
@@ -526,14 +526,14 @@ class Certificate {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['agent_id'] = this.agentId;
-    data['title'] = this.title;
-    data['description'] = this.description;
-    data['image'] = this.image;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['agent_id'] = agentId;
+    data['title'] = title;
+    data['description'] = description;
+    data['image'] = image;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }
@@ -597,24 +597,24 @@ class Products {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['agent_id'] = this.agentId;
-    data['category_id'] = this.categoryId;
-    data['subcategory_id'] = this.subcategoryId;
-    data['bodypart_id'] = this.bodypartId;
-    data['city_id'] = this.cityId;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['agent_id'] = agentId;
+    data['category_id'] = categoryId;
+    data['subcategory_id'] = subcategoryId;
+    data['bodypart_id'] = bodypartId;
+    data['city_id'] = cityId;
     // data['location_ids'] = this.locationIds;
-    data['slot_id'] = this.slotId;
-    data['appointment_slot_ids'] = this.appointmentSlotIds;
-    data['name'] = this.name;
-    data['description'] = this.description;
-    data['image'] = this.image;
-    data['product_price'] = this.productPrice;
-    data['service_price'] = this.servicePrice;
-    data['gender'] = this.gender;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    data['slot_id'] = slotId;
+    data['appointment_slot_ids'] = appointmentSlotIds;
+    data['name'] = name;
+    data['description'] = description;
+    data['image'] = image;
+    data['product_price'] = productPrice;
+    data['service_price'] = servicePrice;
+    data['gender'] = gender;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }

@@ -22,7 +22,7 @@ class AgentProfileController extends GetxController {
       };
 
       // API URL
-      var url = Uri.parse(AppAppis.endpoint + 'storeprofiles/$data/getagent');
+      var url = Uri.parse('${AppAppis.endpoint}storeprofiles/$data/getagent');
 
       // Create request
       var req = http.Request('GET', url);

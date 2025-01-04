@@ -22,8 +22,8 @@ class Editprofile extends StatefulWidget {
 }
 
 class _EditprofileState extends State<Editprofile> {
-  TextEditingController _addressController = TextEditingController();
-  TextEditingController _mobileController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _mobileController = TextEditingController();
   File? _imageFile;
   final ImagePicker _picker = ImagePicker();
   String? _profileId;
@@ -46,7 +46,7 @@ class _EditprofileState extends State<Editprofile> {
       _isLoading = true;
     });
     var userid = ucon.user.value['id'].toString();
-    final url = Uri.parse(AppAppis.endpoint + 'usercommonprofile/$userid/show');
+    final url = Uri.parse('${AppAppis.endpoint}usercommonprofile/$userid/show');
     final response = await http.get(url, headers: {
       'Authorization': 'Bearer $token',
       'Accept': 'application/json',
@@ -105,8 +105,8 @@ class _EditprofileState extends State<Editprofile> {
     });
 
     final url = _profileId != null
-        ? Uri.parse(AppAppis.endpoint + 'usercommonprofile/$_profileId/update')
-        : Uri.parse(AppAppis.endpoint + 'usercommonprofile/store');
+        ? Uri.parse('${AppAppis.endpoint}usercommonprofile/$_profileId/update')
+        : Uri.parse('${AppAppis.endpoint}usercommonprofile/store');
 
     var request = http.MultipartRequest('POST', url);
 
@@ -153,16 +153,16 @@ class _EditprofileState extends State<Editprofile> {
           style: AppFonts.fontH4semi(AppColors.themeWhite),
         ),
         backgroundColor: AppColors.themeColer,
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
             color:
                 AppColors.themeWhite // Change the color of the back arrow here
             ),
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -178,7 +178,8 @@ class _EditprofileState extends State<Editprofile> {
                               width: .03.h, color: AppColors.themeborder),
                           borderRadius: BorderRadius.circular(10)),
                       child: Padding(
-                        padding:  EdgeInsets.symmetric(horizontal: 1.5.h,vertical: 1.h),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 1.5.h, vertical: 1.h),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -202,7 +203,9 @@ class _EditprofileState extends State<Editprofile> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 2.h,),
+                    SizedBox(
+                      height: 2.h,
+                    ),
                     TextField(
                       controller: _addressController,
                       decoration: InputDecoration(
@@ -220,7 +223,9 @@ class _EditprofileState extends State<Editprofile> {
                         ),
                       ),
                     ),
-                          SizedBox(height: 1.5.h,),
+                    SizedBox(
+                      height: 1.5.h,
+                    ),
                     TextField(
                       controller: _mobileController,
                       maxLength: 11,
@@ -240,18 +245,18 @@ class _EditprofileState extends State<Editprofile> {
                       ),
                       keyboardType: TextInputType.phone,
                     ),
-                    SizedBox(height: 5),
-                      Text(
+                    const SizedBox(height: 5),
+                    Text(
                       'Gender :',
                       style: AppFonts.fontH5semi(AppColors.themeBlack),
                     ),
-                    SizedBox(height: 5),
-                    Container(
+                    const SizedBox(height: 5),
+                    SizedBox(
                       height: 6.h,
                       width: 100.w,
                       child: Row(
                         children: [
-                          Container(
+                          SizedBox(
                             width: 40.w,
                             child: CheckboxListTile(
                               title: Text(
@@ -268,7 +273,7 @@ class _EditprofileState extends State<Editprofile> {
                               },
                             ),
                           ),
-                          Container(
+                          SizedBox(
                             width: 45.w,
                             child: CheckboxListTile(
                               title: Text(
@@ -288,12 +293,12 @@ class _EditprofileState extends State<Editprofile> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     widget.mobile == null
                         ? Container(
                             color: Colors.black,
                           )
-                        : Container(
+                        : SizedBox(
                             height: 10.h,
                             child: proimg == null
                                 ? Container()
@@ -303,14 +308,16 @@ class _EditprofileState extends State<Editprofile> {
                         : Container(),
                     TextButton.icon(
                       onPressed: _pickImage,
-                      icon: Icon(Icons.image),
-                      label: Text('Select Image'),
+                      icon: const Icon(Icons.image),
+                      label: const Text('Select Image'),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     ElevatedButton(
-                      
                       onPressed: _saveProfile,
-                      child: Container(width: 100.w,alignment: Alignment.center,child: Text('Save Profile')),
+                      child: Container(
+                          width: 100.w,
+                          alignment: Alignment.center,
+                          child: const Text('Save Profile')),
                     ),
                   ],
                 ),

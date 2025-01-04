@@ -37,7 +37,7 @@ class AllinfoController extends GetxController {
     var headersList = {
       'Accept': 'application/json',
     };
-    var url = Uri.parse(AppAppis.endpoint + 'getall');
+    var url = Uri.parse('${AppAppis.endpoint}getall');
 
     try {
       var req = http.Request('GET', url);

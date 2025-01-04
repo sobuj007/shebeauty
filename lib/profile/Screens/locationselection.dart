@@ -18,6 +18,8 @@ class CityLocationFilter extends StatelessWidget {
   var loc = [].obs;
   var selectcityid = 0.obs;
 
+  CityLocationFilter({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,13 +31,13 @@ class CityLocationFilter extends StatelessWidget {
           CustomAppbar(
             title: "City & Location Filter",
           ),
-          Container(
+          SizedBox(
             height: 80.h,
             width: 100.w,
             child: Obx(() {
               if (allinfoController.cities!.isEmpty ||
                   allinfoController.locations!.isEmpty) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
               print("object");
               print(allinfoController.selectedCityId.value);
@@ -48,7 +50,7 @@ class CityLocationFilter extends StatelessWidget {
                   children: [
                     DropdownButton<int>(
                       isExpanded: true,
-                      hint: Text("Select City"),
+                      hint: const Text("Select City"),
                       value: allinfoController.cities?.any((city) =>
                                   city.id ==
                                   allinfoController.selectedCityId.value) ==
@@ -75,7 +77,7 @@ class CityLocationFilter extends StatelessWidget {
                     Expanded(
                       child: Obx(() {
                         if (allinfoController.filteredLocations.isEmpty) {
-                          return Text(
+                          return const Text(
                               "No locations available for the selected city.");
                         }
                         return ListView(
@@ -141,7 +143,7 @@ class CityLocationFilter extends StatelessWidget {
           nearMeController.fetchServiceProductsByLocations();
           Get.offAndToNamed('/layout');
         },
-        child: Text('Save Selected Locations'),
+        child: const Text('Save Selected Locations'),
       ),
     );
   }

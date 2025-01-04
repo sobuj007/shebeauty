@@ -15,13 +15,15 @@ import 'itemsDetails.dart';
 import 'itemsDetailsToday.dart';
 
 class HistoryPage extends StatefulWidget {
+  const HistoryPage({super.key});
+
   @override
   _HistoryPageState createState() => _HistoryPageState();
 }
 
 class _HistoryPageState extends State<HistoryPage> {
   final HistoryController historyController = Get.put(HistoryController());
-  PageController _pageController = PageController(initialPage: 0);
+  final PageController _pageController = PageController(initialPage: 0);
   final ScrollController _scrollController = ScrollController();
   var getcon = Get.put(Usercontoller());
   var procon = Get.put(AllProductController());
@@ -48,12 +50,12 @@ class _HistoryPageState extends State<HistoryPage> {
           style: AppFonts.fontH4semi(AppColors.themeWhite),
         ),
         backgroundColor: AppColors.themeColer,
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
             color:
                 AppColors.themeWhite // Change the color of the back arrow here
             ),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(40),
+          preferredSize: const Size.fromHeight(40),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -66,10 +68,10 @@ class _HistoryPageState extends State<HistoryPage> {
       ),
       body: Obx(() {
         if (historyController.isLoading.value) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
         if (historyController.hasError.value) {
-          return Center(child: Text("Error loading data."));
+          return const Center(child: Text("Error loading data."));
         }
 
         return PageView(
@@ -104,7 +106,7 @@ class _HistoryPageState extends State<HistoryPage> {
         children: [
           Text(
             title,
-            style: TextStyle(color: AppColors.themeWhite),
+            style: const TextStyle(color: AppColors.themeWhite),
           ),
           selectpage == pageIndex
               ? Container(
@@ -112,7 +114,7 @@ class _HistoryPageState extends State<HistoryPage> {
                   width: 20.w,
                   color: AppColors.themeWhite,
                 )
-              : SizedBox()
+              : const SizedBox()
         ],
       ),
     );
@@ -171,7 +173,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // Text('Order ID: ${item.id}', style: TextStyle(fontSize: 18)),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -216,19 +218,19 @@ class _HistoryPageState extends State<HistoryPage> {
                           Text('Service',
                               style:
                                   AppFonts.fontH7regular(AppColors.themeBlack)),
-                          Text('${order.serviceQuantity.toString()}',
+                          Text(order.serviceQuantity.toString(),
                               style: AppFonts.fontH6bold(AppColors.themeBlack)),
                           Text('Product',
                               style:
                                   AppFonts.fontH7regular(AppColors.themeBlack)),
-                          Text('${order.productQuantity.toString()}',
+                          Text(order.productQuantity.toString(),
                               style: AppFonts.fontH6bold(AppColors.themeBlack)),
                         ],
                       ),
                     ],
                   ),
-                  SizedBox(height: 8),
-                  Divider(),
+                  const SizedBox(height: 8),
+                  const Divider(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -253,7 +255,7 @@ class _HistoryPageState extends State<HistoryPage> {
                               style:
                                   AppFonts.fontH7regular(AppColors.themeBlack)),
                           Text(
-                            order.payable.toString() + " Tk",
+                            "${order.payable} Tk",
                             style: AppFonts.fontH5semi(AppColors.themeColer),
                           ),
                         ],
@@ -288,7 +290,7 @@ class _HistoryPageState extends State<HistoryPage> {
                             size: 3.h,
                           ),
                           storecon.getStorePhonByAgentId(order.vendorId) == null
-                              ? Text("N/A")
+                              ? const Text("N/A")
                               : GestureDetector(
                                   onLongPress: () {
                                     Clipboard.setData(ClipboardData(
@@ -297,7 +299,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                           .toString(),
                                     )); // Copy to clipboard
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
+                                      const SnackBar(
                                           content:
                                               Text("Copied to clipboard!")),
                                     );

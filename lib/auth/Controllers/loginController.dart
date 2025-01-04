@@ -92,7 +92,7 @@ class LoginContoller {
         AppStyle.snackbar("Success", " User register Successfull");
         Get.offNamed('/login');
       } else {
-        print("lol" + res.reasonPhrase.toString());
+        print("lol${res.reasonPhrase}");
         if (res.reasonPhrase == 'Found') {
           AppStyle.snackbar("Account", "Email Alreday in Use");
         } else {
@@ -110,7 +110,7 @@ class LoginContoller {
     String token = tok.value;
 
     final response = await http.get(
-      Uri.parse(AppAppis.endpoint + 'user'),
+      Uri.parse('${AppAppis.endpoint}user'),
       headers: {
         'Authorization': 'Bearer $token',
       },

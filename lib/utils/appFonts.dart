@@ -5,8 +5,8 @@ import 'package:sizer/sizer.dart';
 mixin AppFonts {
   static const fontFamilyName = 'Poppins';
 
-  static double splashtitle =23.sp;
-  static double h1 =18.sp;
+  static double splashtitle = 23.sp;
+  static double h1 = 18.sp;
   static double h2 = 16.sp;
   static double h3 = 15.sp;
   static double h4 = 13.sp;
@@ -14,23 +14,23 @@ mixin AppFonts {
   static double h6 = 10.sp;
   static double h7 = 8.sp;
   static double h8 = 6.sp;
- /********************************************************** H1 **************************** */
-static  fontSplashtitle(c) {
+
+  /// ******************************************************** H1 ****************************
+  static fontSplashtitle(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.splashtitle,
         fontWeight: FontWeight.w600,
         color: c);
   }
-  static  custom(c,f,fw) {
+
+  static custom(c, f, fw) {
     return TextStyle(
-        fontFamily: fontFamilyName,
-        fontSize: f,
-        fontWeight: fw,
-        color: c);
+        fontFamily: fontFamilyName, fontSize: f, fontWeight: fw, color: c);
   }
- /********************************************************** H1 **************************** */
-static  fontH1light(c) {
+
+  /// ******************************************************** H1 ****************************
+  static fontH1light(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h1,
@@ -38,7 +38,7 @@ static  fontH1light(c) {
         color: c);
   }
 
-static  fontH1regular(c) {
+  static fontH1regular(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h1,
@@ -46,7 +46,7 @@ static  fontH1regular(c) {
         color: c);
   }
 
-static  fontH1normal(c) {
+  static fontH1normal(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h1,
@@ -54,7 +54,7 @@ static  fontH1normal(c) {
         color: c);
   }
 
- static fontH1semi(c) {
+  static fontH1semi(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h1,
@@ -62,7 +62,7 @@ static  fontH1normal(c) {
         color: c);
   }
 
- static fontH1black(c) {
+  static fontH1black(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h1,
@@ -70,7 +70,7 @@ static  fontH1normal(c) {
         color: c);
   }
 
- static fontH1bold(c) {
+  static fontH1bold(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h1,
@@ -78,8 +78,8 @@ static  fontH1normal(c) {
         color: c);
   }
 
- /********************************************************** H2 **************************** */
-static  fontH2light(c) {
+  /// ******************************************************** H2 ****************************
+  static fontH2light(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h2,
@@ -87,7 +87,7 @@ static  fontH2light(c) {
         color: c);
   }
 
- static fontH2regular(c) {
+  static fontH2regular(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h2,
@@ -95,7 +95,7 @@ static  fontH2light(c) {
         color: c);
   }
 
- static fontH2normal(c) {
+  static fontH2normal(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h2,
@@ -103,7 +103,7 @@ static  fontH2light(c) {
         color: c);
   }
 
- static fontH2semi(c) {
+  static fontH2semi(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h2,
@@ -111,7 +111,7 @@ static  fontH2light(c) {
         color: c);
   }
 
- static fontH2black(c) {
+  static fontH2black(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h2,
@@ -119,7 +119,7 @@ static  fontH2light(c) {
         color: c);
   }
 
- static fontH2bold(c) {
+  static fontH2bold(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h2,
@@ -127,8 +127,8 @@ static  fontH2light(c) {
         color: c);
   }
 
- /********************************************************** H3 **************************** */
-static  fontH3light(c) {
+  /// ******************************************************** H3 ****************************
+  static fontH3light(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h3,
@@ -136,7 +136,7 @@ static  fontH3light(c) {
         color: c);
   }
 
-static  fontH3regular(c) {
+  static fontH3regular(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h3,
@@ -144,7 +144,7 @@ static  fontH3regular(c) {
         color: c);
   }
 
- static fontH3normal(c) {
+  static fontH3normal(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h3,
@@ -152,7 +152,7 @@ static  fontH3regular(c) {
         color: c);
   }
 
-static  fontH3semi(c) {
+  static fontH3semi(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h3,
@@ -160,7 +160,7 @@ static  fontH3semi(c) {
         color: c);
   }
 
-static fontH3black(c) {
+  static fontH3black(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h3,
@@ -168,7 +168,7 @@ static fontH3black(c) {
         color: c);
   }
 
- static fontH3bold(c) {
+  static fontH3bold(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h3,
@@ -176,9 +176,8 @@ static fontH3black(c) {
         color: c);
   }
 
-
- /********************************************************** H4 **************************** */
-static  fontH4light(c) {
+  /// ******************************************************** H4 ****************************
+  static fontH4light(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h4,
@@ -186,7 +185,7 @@ static  fontH4light(c) {
         color: c);
   }
 
-static  fontH4regular(c) {
+  static fontH4regular(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h4,
@@ -194,7 +193,7 @@ static  fontH4regular(c) {
         color: c);
   }
 
- static fontH4normal(c) {
+  static fontH4normal(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h4,
@@ -202,7 +201,7 @@ static  fontH4regular(c) {
         color: c);
   }
 
-static  fontH4semi(c) {
+  static fontH4semi(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h4,
@@ -210,7 +209,7 @@ static  fontH4semi(c) {
         color: c);
   }
 
-static  fontH4black(c) {
+  static fontH4black(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h4,
@@ -218,7 +217,7 @@ static  fontH4black(c) {
         color: c);
   }
 
- static fontH4bold(c) {
+  static fontH4bold(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h4,
@@ -226,9 +225,8 @@ static  fontH4black(c) {
         color: c);
   }
 
-
- /********************************************************** H5 **************************** */
-static  fontH5light(c) {
+  /// ******************************************************** H5 ****************************
+  static fontH5light(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h5,
@@ -236,7 +234,7 @@ static  fontH5light(c) {
         color: c);
   }
 
- static fontH5regular(c) {
+  static fontH5regular(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h5,
@@ -244,7 +242,7 @@ static  fontH5light(c) {
         color: c);
   }
 
- static fontH5normal(c) {
+  static fontH5normal(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h5,
@@ -252,7 +250,7 @@ static  fontH5light(c) {
         color: c);
   }
 
- static fontH5semi(c) {
+  static fontH5semi(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h5,
@@ -260,7 +258,7 @@ static  fontH5light(c) {
         color: c);
   }
 
- static fontH5black(c) {
+  static fontH5black(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h5,
@@ -268,7 +266,7 @@ static  fontH5light(c) {
         color: c);
   }
 
- static fontH5bold(c) {
+  static fontH5bold(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h5,
@@ -276,10 +274,8 @@ static  fontH5light(c) {
         color: c);
   }
 
-
-
- /********************************************************** H6 **************************** */
- static fontH6light(c) {
+  /// ******************************************************** H6 ****************************
+  static fontH6light(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h6,
@@ -287,7 +283,7 @@ static  fontH5light(c) {
         color: c);
   }
 
- static fontH6regular(c) {
+  static fontH6regular(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h6,
@@ -295,7 +291,7 @@ static  fontH5light(c) {
         color: c);
   }
 
- static fontH6normal(c) {
+  static fontH6normal(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h6,
@@ -303,7 +299,7 @@ static  fontH5light(c) {
         color: c);
   }
 
- static fontH6semi(c) {
+  static fontH6semi(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h6,
@@ -311,7 +307,7 @@ static  fontH5light(c) {
         color: c);
   }
 
- static fontH6black(c) {
+  static fontH6black(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h6,
@@ -319,7 +315,7 @@ static  fontH5light(c) {
         color: c);
   }
 
- static fontH6bold(c) {
+  static fontH6bold(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h6,
@@ -327,9 +323,8 @@ static  fontH5light(c) {
         color: c);
   }
 
-
- /********************************************************** H7 **************************** */
-static  fontH7light(c) {
+  /// ******************************************************** H7 ****************************
+  static fontH7light(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h7,
@@ -337,7 +332,7 @@ static  fontH7light(c) {
         color: c);
   }
 
- static fontH7regular(c) {
+  static fontH7regular(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h7,
@@ -345,7 +340,7 @@ static  fontH7light(c) {
         color: c);
   }
 
- static fontH7normal(c) {
+  static fontH7normal(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h7,
@@ -353,7 +348,7 @@ static  fontH7light(c) {
         color: c);
   }
 
- static fontH7semi(c) {
+  static fontH7semi(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h7,
@@ -361,7 +356,7 @@ static  fontH7light(c) {
         color: c);
   }
 
- static fontH7black(c) {
+  static fontH7black(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h7,
@@ -369,7 +364,7 @@ static  fontH7light(c) {
         color: c);
   }
 
- static fontH7bold(c) {
+  static fontH7bold(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h7,
@@ -377,9 +372,8 @@ static  fontH7light(c) {
         color: c);
   }
 
-
- /********************************************************** H8 **************************** */
- static fontH8light(c) {
+  /// ******************************************************** H8 ****************************
+  static fontH8light(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h8,
@@ -387,7 +381,7 @@ static  fontH7light(c) {
         color: c);
   }
 
- static fontH8regular(c) {
+  static fontH8regular(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h8,
@@ -395,7 +389,7 @@ static  fontH7light(c) {
         color: c);
   }
 
- static fontH8normal(c) {
+  static fontH8normal(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h8,
@@ -403,7 +397,7 @@ static  fontH7light(c) {
         color: c);
   }
 
- static fontH8semi(c) {
+  static fontH8semi(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h8,
@@ -411,7 +405,7 @@ static  fontH7light(c) {
         color: c);
   }
 
- static fontH8black(c) {
+  static fontH8black(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h8,
@@ -419,28 +413,11 @@ static  fontH7light(c) {
         color: c);
   }
 
- static fontH8bold(c) {
+  static fontH8bold(c) {
     return TextStyle(
         fontFamily: fontFamilyName,
         fontSize: AppFonts.h8,
         fontWeight: FontWeight.bold,
         color: c);
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

@@ -27,14 +27,14 @@ class AllProvider extends StatefulWidget {
 
 class _AllProviderState extends State<AllProvider> {
   final AllProductController controller = Get.put(AllProductController());
-  List<Item> _items = [];
-  List<Item> _filteredItems = [];
+  final List<Item> _items = [];
+  final List<Item> _filteredItems = [];
   String _selectedLocation = 'All';
   double _selectedRating = 0.0;
   String _selectedBodyPart = 'All';
   String _selectedTime = 'All';
   String _selectedGender = 'All';
-  String _searchQuery = '';
+  final String _searchQuery = '';
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class _AllProviderState extends State<AllProvider> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
+                SizedBox(
                   width: 78.w,
                   height: 5.8.h,
                   child: TextField(
@@ -59,16 +59,16 @@ class _AllProviderState extends State<AllProvider> {
                           EdgeInsets.symmetric(horizontal: 3.w, vertical: .5.h),
                       hintText: 'Search...',
                       border: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 1, color: AppColors.themeColer),
+                          borderSide: const BorderSide(
+                              width: 1, color: AppColors.themeColer),
                           borderRadius: BorderRadius.circular(15)),
                       enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 1, color: AppColors.themeColer),
+                          borderSide: const BorderSide(
+                              width: 1, color: AppColors.themeColer),
                           borderRadius: BorderRadius.circular(15)),
                       focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 1, color: AppColors.themeColer),
+                          borderSide: const BorderSide(
+                              width: 1, color: AppColors.themeColer),
                           borderRadius: BorderRadius.circular(15)),
                       hintStyle: AppFonts.fontH4regular(AppColors.themehint),
                     ),
@@ -135,7 +135,7 @@ class _AllProviderState extends State<AllProvider> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     width: 58.w,
                                     child: Row(
                                       mainAxisAlignment:
@@ -174,7 +174,7 @@ class _AllProviderState extends State<AllProvider> {
                                     ),
                                   ),
                                   /************************** gender */
-                                  Container(
+                                  SizedBox(
                                     height: 4.h,
                                     width: 58.w,
                                     child: Row(
@@ -182,10 +182,7 @@ class _AllProviderState extends State<AllProvider> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          "Gender : " +
-                                              _filteredItems[index]
-                                                  .gender
-                                                  .toString(),
+                                          "Gender : ${_filteredItems[index].gender}",
                                           style: AppFonts.fontH6semi(
                                               AppColors.themeBlack),
                                           maxLines: 1,
@@ -219,7 +216,7 @@ class _AllProviderState extends State<AllProvider> {
                               ),
                             ),
                             /************************** Book noe button */
-                            Container(
+                            SizedBox(
                               width: 63.2.w,
                               child: Row(
                                 mainAxisAlignment:
@@ -259,7 +256,7 @@ class _AllProviderState extends State<AllProvider> {
                                     child: Container(
                                       height: 5.h,
                                       width: 35.w,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         borderRadius: BorderRadius.only(
                                             bottomRight: Radius.circular(10)),
                                         color: AppColors.themeColer,
@@ -305,7 +302,7 @@ class _AllProviderState extends State<AllProvider> {
                   onPressed: () {
                     Get.close(1);
                   },
-                  icon: Icon(Icons.close))
+                  icon: const Icon(Icons.close))
             ],
           ),
           content: StatefulBuilder(
@@ -319,7 +316,7 @@ class _AllProviderState extends State<AllProvider> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
+                        SizedBox(
                           width: 18.w,
                           child: Text(
                             "Location :",
@@ -341,7 +338,7 @@ class _AllProviderState extends State<AllProvider> {
                               alignment: Alignment.centerRight,
                               isExpanded: true,
                               padding: EdgeInsets.symmetric(horizontal: 5.w),
-                              underline: SizedBox(),
+                              underline: const SizedBox(),
                               value: _selectedLocation,
                               items: [
                                 'All',
@@ -376,7 +373,7 @@ class _AllProviderState extends State<AllProvider> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
+                        SizedBox(
                           width: 18.w,
                           child: Text(
                             "Rating :",
@@ -397,7 +394,8 @@ class _AllProviderState extends State<AllProvider> {
                             child: DropdownButton<double>(
                               value: _selectedRating,
                               underline: Container(),
-                              padding: EdgeInsets.symmetric(horizontal: 5),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 5),
                               isExpanded: true,
                               items: [
                                 0.0,
@@ -436,7 +434,7 @@ class _AllProviderState extends State<AllProvider> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
+                        SizedBox(
                           width: 18.w,
                           child: Text(
                             "BodyPart :",
@@ -484,7 +482,7 @@ class _AllProviderState extends State<AllProvider> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
+                        SizedBox(
                           width: 18.w,
                           child: Text(
                             "Time :",
@@ -532,7 +530,7 @@ class _AllProviderState extends State<AllProvider> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
+                        SizedBox(
                           width: 18.w,
                           child: Text(
                             "Gender :",

@@ -17,10 +17,10 @@ class AllWishlistProductModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message'] = this.message;
-    if (this.products != null) {
-      data['products'] = this.products!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['message'] = message;
+    if (products != null) {
+      data['products'] = products!.map((v) => v.toJson()).toList();
     }
     return data;
   }

@@ -106,14 +106,14 @@ class StoreprofileModel {
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(Data.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message'] = this.message;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['message'] = message;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -174,22 +174,22 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['storename'] = this.storename;
-    data['servicestime'] = this.servicestime;
-    data['coverImage'] = this.coverImage;
-    data['tradelicence'] = this.tradelicence;
-    data['address'] = this.address;
-    data['mobile'] = this.mobile;
-    data['logo'] = this.logo;
-    data['city_id'] = this.cityId;
-    data['location_ids'] = this.locationIds;
-    data['nid'] = this.nid;
-    data['company_type'] = this.companyType;
-    data['agent_id'] = this.agentId;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['storename'] = storename;
+    data['servicestime'] = servicestime;
+    data['coverImage'] = coverImage;
+    data['tradelicence'] = tradelicence;
+    data['address'] = address;
+    data['mobile'] = mobile;
+    data['logo'] = logo;
+    data['city_id'] = cityId;
+    data['location_ids'] = locationIds;
+    data['nid'] = nid;
+    data['company_type'] = companyType;
+    data['agent_id'] = agentId;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }

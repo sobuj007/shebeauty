@@ -62,14 +62,14 @@ class _SingelDescriptionState extends State<SingelDescription> {
                       widget.item.name.toString().toUpperCase(),
                       style: AppFonts.fontH2semi(AppColors.themeColer),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Text(
                       'Admin Description: ',
                       style: AppFonts.fontH6semi(AppColors.themeBlack),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
 
@@ -80,14 +80,14 @@ class _SingelDescriptionState extends State<SingelDescription> {
                           .toString(),
                       style: AppFonts.fontH7regular(AppColors.themeBlack),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Text(
                       'Description: ',
                       style: AppFonts.fontH6semi(AppColors.themeBlack),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Text(
@@ -96,14 +96,14 @@ class _SingelDescriptionState extends State<SingelDescription> {
                     ),
 
                     /***************************** Steps *********************** */
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Text(
                       'Steps : ',
                       style: AppFonts.fontH6semi(AppColors.themeBlack),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Text(
@@ -113,14 +113,14 @@ class _SingelDescriptionState extends State<SingelDescription> {
                           .toString(),
                       style: AppFonts.fontH7regular(AppColors.themeBlack),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Text(
                       'Necessary Product : ',
                       style: AppFonts.fontH6semi(AppColors.themeBlack),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Text(
@@ -130,14 +130,14 @@ class _SingelDescriptionState extends State<SingelDescription> {
                           .toString(),
                       style: AppFonts.fontH7regular(AppColors.themeBlack),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Text(
                       'After Services Instruction : ',
                       style: AppFonts.fontH6semi(AppColors.themeBlack),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Text(
@@ -147,14 +147,14 @@ class _SingelDescriptionState extends State<SingelDescription> {
                           .toString(),
                       style: AppFonts.fontH7regular(AppColors.themeBlack),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Text(
                       'Provider Guideline : ',
                       style: AppFonts.fontH6semi(AppColors.themeBlack),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Text(
@@ -164,14 +164,14 @@ class _SingelDescriptionState extends State<SingelDescription> {
                           .toString(),
                       style: AppFonts.fontH7regular(AppColors.themeBlack),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Text(
                       'Customer Guideline : ',
                       style: AppFonts.fontH6semi(AppColors.themeBlack),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Text(

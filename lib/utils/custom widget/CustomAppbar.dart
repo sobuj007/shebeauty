@@ -34,10 +34,21 @@ class CustomAppbar extends StatelessWidget {
     //     ),
     //   ),
     // );
-    return  AppBar(
-        leading: GestureDetector(child: Icon(Icons.arrow_back_ios,color: AppColors.themeWhite,),onTap: (){Navigator.pop(context);},),
-        backgroundColor: AppColors.themeColer,
-        title: Text(title.toString().toUpperCase(),style: AppFonts.fontH4regular(AppColors.themeWhite),),
-      );
+    return AppBar(
+      leading: GestureDetector(
+        child: const Icon(
+          Icons.arrow_back_ios,
+          color: AppColors.themeWhite,
+        ),
+        onTap: () {
+          Navigator.pop(context);
+        },
+      ),
+      backgroundColor: AppColors.themeColer,
+      title: Text(
+        title.toString().toUpperCase(),
+        style: AppFonts.fontH4regular(AppColors.themeWhite),
+      ),
+    );
   }
 }

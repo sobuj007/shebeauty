@@ -14,7 +14,8 @@ class TitleWithViewButton extends StatefulWidget {
   final title;
   final route;
   final routeData;
-  TitleWithViewButton({this.title, this.routeData, this.route, super.key});
+  const TitleWithViewButton(
+      {this.title, this.routeData, this.route, super.key});
 
   @override
   State<TitleWithViewButton> createState() => _TitleWithViewButtonState();
@@ -23,14 +24,14 @@ class TitleWithViewButton extends StatefulWidget {
 class _TitleWithViewButtonState extends State<TitleWithViewButton> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 4.h,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(widget.title.toString(),
               style: AppFonts.fontH4normal(AppColors.themeColer)),
-          SizedBox(),
+          const SizedBox(),
           TextButton(
               onPressed: () {
                 print(widget.routeData);
@@ -49,7 +50,7 @@ class _TitleWithViewButtonState extends State<TitleWithViewButton> {
               },
               child: Text(
                 applng.getLang(9),
-                style: TextStyle(fontSize: 12),
+                style: const TextStyle(fontSize: 12),
               ))
         ],
       ),

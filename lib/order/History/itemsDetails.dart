@@ -14,7 +14,7 @@ import '../review/ReviewRatings.dart';
 class ItemDetailPage extends StatelessWidget {
   final item;
 
-  ItemDetailPage({required this.item});
+  ItemDetailPage({super.key, required this.item});
 
   var allinfoController = Get.put(AllinfoController());
   var procon = Get.put(AllProductController());
@@ -29,7 +29,7 @@ class ItemDetailPage extends StatelessWidget {
             style: AppFonts.fontH4semi(AppColors.themeWhite),
           ),
           backgroundColor: AppColors.themeColer,
-          iconTheme: IconThemeData(
+          iconTheme: const IconThemeData(
               color: AppColors
                   .themeWhite // Change the color of the back arrow here
               ),
@@ -69,7 +69,7 @@ class ItemDetailPage extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   // Text('Order ID: ${item.id}', style: TextStyle(fontSize: 18)),
-                                  SizedBox(height: 8),
+                                  const SizedBox(height: 8),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -130,21 +130,23 @@ class ItemDetailPage extends StatelessWidget {
                                               style: AppFonts.fontH7regular(
                                                   AppColors.themeBlack)),
                                           Text(
-                                              '${itemdata.serviceQuantity.toString()}',
+                                              itemdata.serviceQuantity
+                                                  .toString(),
                                               style: AppFonts.fontH6bold(
                                                   AppColors.themeBlack)),
                                           Text('Product',
                                               style: AppFonts.fontH7regular(
                                                   AppColors.themeBlack)),
                                           Text(
-                                              '${itemdata.productQuantity.toString()}',
+                                              itemdata.productQuantity
+                                                  .toString(),
                                               style: AppFonts.fontH6bold(
                                                   AppColors.themeBlack)),
                                         ],
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: 8),
+                                  const SizedBox(height: 8),
                                 ],
                               ),
                             ),

@@ -15,7 +15,8 @@ class AddReviewScreen extends StatefulWidget {
   final agentid;
   final productid;
 
-   AddReviewScreen({required this.agentid,required  this.productid,super.key});
+  const AddReviewScreen(
+      {required this.agentid, required this.productid, super.key});
   @override
   _AddReviewScreenState createState() => _AddReviewScreenState();
 }
@@ -24,64 +25,60 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _reviewerNameController = TextEditingController();
   final TextEditingController _commentController = TextEditingController();
-  var getuser=Get.put(Usercontoller());
+  var getuser = Get.put(Usercontoller());
   int? _rating;
 
   // Function to submit the review
   Future<void> _submitReview() async {
-    var token= tdata.getuser();
-    var userdata=getuser.getUser();
-    var userprofile=getuser.getProfile();
+    var token = tdata.getuser();
+    var userdata = getuser.getUser();
+    var userprofile = getuser.getProfile();
     print(userprofile);
     if (_formKey.currentState!.validate()) {
       // Send review data to server (API call)
-  //     print(userdata['id']);
-  //     print(widget.productid);
-  //     print(widget.agentid);
-  //     print(userdata['name']);
-  //     print(userprofile['img']);
-  //  //   print(getuser.getUser().image);
-  //     print('Rating: $_rating');
-  //     print('Comment: ${_commentController.text}');
+      //     print(userdata['id']);
+      //     print(widget.productid);
+      //     print(widget.agentid);
+      //     print(userdata['name']);
+      //     print(userprofile['img']);
+      //  //   print(getuser.getUser().image);
+      //     print('Rating: $_rating');
+      //     print('Comment: ${_commentController.text}');
 
       // Perform API call to submit the review
       // Use your API function here
       var headersList = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token'
+      };
+      var url = Uri.parse('${AppAppis.endpoint}reviews');
 
- 'Accept': 'application/json',
- 'Content-Type': 'application/json',
- 'Authorization': 'Bearer $token' 
-};
-var url = Uri.parse(AppAppis.endpoint +'reviews');
+      var body = // {
+          {
+        "rating": _rating,
+        "comment": _commentController.text,
+        "reviewername": userdata['name'],
+        "agent_id": widget.agentid,
+        "serviceproduct_id": widget.productid,
+        "image": userprofile['img'],
+        "user_id": userdata['id']
+      };
 
-var body = // {
+      var req = http.Request('POST', url);
+      req.headers.addAll(headersList);
+      req.body = json.encode(body);
 
-{
-    "rating":_rating,
-    "comment":_commentController.text,
-    "reviewername":userdata['name'],
-    "agent_id":widget.agentid,
-    "serviceproduct_id":widget.productid,
-    "image":userprofile['img'],
-    "user_id":userdata['id']
-};
+      var res = await req.send();
+      final resBody = await res.stream.bytesToString();
 
-var req = http.Request('POST', url);
-req.headers.addAll(headersList);
-req.body = json.encode(body);
-
-
-var res = await req.send();
-final resBody = await res.stream.bytesToString();
-
-if (res.statusCode >= 200 && res.statusCode < 300) {
-  print(resBody);
-  AppStyle.snackbar("Rating ", "Thank you for Valuable Comment");
-  Navigator.pop(context);
-}
-else {
-  print(res.reasonPhrase);
-}
+      if (res.statusCode >= 200 && res.statusCode < 300) {
+        print(resBody);
+        AppStyle.snackbar("Rating ", "Thank you for Valuable Comment");
+        Navigator.pop(context);
+      } else {
+        print(res.reasonPhrase);
+      }
     }
   }
 
@@ -89,11 +86,15 @@ else {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Review',style: AppFonts.fontH4semi(AppColors.themeWhite),),
-         backgroundColor: AppColors.themeColer,
-        iconTheme: IconThemeData(
-          color: AppColors.themeWhite// Change the color of the back arrow here
+        title: Text(
+          'Add Review',
+          style: AppFonts.fontH4semi(AppColors.themeWhite),
         ),
+        backgroundColor: AppColors.themeColer,
+        iconTheme: const IconThemeData(
+            color:
+                AppColors.themeWhite // Change the color of the back arrow here
+            ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -115,11 +116,11 @@ else {
               //     return null;
               //   },
               // ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
               // Rating Dropdown
               DropdownButtonFormField<int>(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Rating',
                   border: OutlineInputBorder(),
                 ),
@@ -142,12 +143,12 @@ else {
                   return null;
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
               // Comment
               TextFormField(
                 controller: _commentController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Comment',
                   border: OutlineInputBorder(),
                 ),
@@ -159,12 +160,12 @@ else {
                   return null;
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
               // Submit Button
               ElevatedButton(
                 onPressed: _submitReview,
-                child: Text('Submit Review'),
+                child: const Text('Submit Review'),
               ),
             ],
           ),

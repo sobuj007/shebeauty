@@ -18,7 +18,7 @@ import '../../utils/custom widget/CustomAppbar.dart';
 
 class AppSubCategory extends StatefulWidget {
   final cat_id;
-  AppSubCategory({this.cat_id, super.key});
+  const AppSubCategory({this.cat_id, super.key});
 
   @override
   State<AppSubCategory> createState() => _AppSubCategoryState();
@@ -61,7 +61,7 @@ class _AppSubCategoryState extends State<AppSubCategory> {
           CustomAppbar(
             title: AppLanguage().getLang(17),
           ),
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height * .88,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -76,7 +76,7 @@ class _AppSubCategoryState extends State<AppSubCategory> {
   }
 
   subcategory(context) {
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height * .80,
       width: MediaQuery.of(context).size.width,
       child: Row(
@@ -84,11 +84,11 @@ class _AppSubCategoryState extends State<AppSubCategory> {
           Expanded(
             child: Obx(() {
               if (con.categories == null) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
 
               if (con.categories!.isEmpty) {
-                return Center(child: Text('No Subcategories available'));
+                return const Center(child: Text('No Subcategories available'));
               }
               final data = con.filterSubcategoriesByName(widget.cat_id);
               return data.length != 0
@@ -107,7 +107,7 @@ class _AppSubCategoryState extends State<AppSubCategory> {
                                 onTap: (() {
                                   // Navigator.push(context,
                                   //     MaterialPageRoute(builder: (_) => AppSubCategory(cat_id: vdata.id,)));
-                                  con.filterBodypartsByName(vdata.id)!.isEmpty
+                                  con.filterBodypartsByName(vdata.id).isEmpty
                                       ? Get.to(MyProvider2(), arguments: {
                                           "subcategory": con.subcategories,
                                           "bodypart": '',
@@ -115,7 +115,7 @@ class _AppSubCategoryState extends State<AppSubCategory> {
                                         })
                                       : showpopup(context, vdata.id);
                                 }),
-                                child: Container(
+                                child: SizedBox(
                                   height: 16.h,
                                   width: 25.w,
                                   child: Card(
@@ -124,7 +124,7 @@ class _AppSubCategoryState extends State<AppSubCategory> {
                                       padding: const EdgeInsets.all(4.0),
                                       child: Column(
                                         children: [
-                                          Container(
+                                          SizedBox(
                                             // width: 200,
                                             height: 6.h,
                                             width: 20.w,
@@ -134,7 +134,7 @@ class _AppSubCategoryState extends State<AppSubCategory> {
                                               fit: BoxFit.cover,
                                             ),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 2,
                                           ),
                                           Text(
@@ -151,7 +151,7 @@ class _AppSubCategoryState extends State<AppSubCategory> {
                                 )));
                       },
                     )
-                  : Center(child: Text('No Subcategories available'));
+                  : const Center(child: Text('No Subcategories available'));
             }),
           ),
         ],
@@ -213,15 +213,15 @@ class _AppSubCategoryState extends State<AppSubCategory> {
         builder: ((context) {
           return Obx(() {
             if (con.categories == null) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
 
             if (con.categories!.isEmpty) {
-              return Center(child: Text('No Body part available'));
+              return const Center(child: Text('No Body part available'));
             }
             final data = con.filterBodypartsByName(id);
             var listdata = data;
-            return Container(
+            return SizedBox(
               // height: 15.h+(5.h*bodypart.length/2),
               height: 30.h + (5.h),
               child: Padding(

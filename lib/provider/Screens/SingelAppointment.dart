@@ -55,12 +55,9 @@ class _SingelAppointmentState extends State<SingelAppointment> {
       setState(() {});
     }
     coutntotal();
-    date = (DateTime.now().day.toString() +
-            "/" +
-            DateTime.now().month.toString() +
-            "/" +
-            DateTime.now().year.toString())
-        .toString();
+    date =
+        ("${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}")
+            .toString();
   }
 
   @override
@@ -115,7 +112,7 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                         // crossAxisAlignment:
                                         //     CrossAxisAlignment.start,
                                         children: [
-                                          Container(
+                                          SizedBox(
                                             height: 11.h,
                                             width: 60.w,
                                             child: Row(
@@ -238,17 +235,20 @@ class _SingelAppointmentState extends State<SingelAppointment> {
 
                                                     ,
                                                     icon: isfav == true
-                                                        ? Icon(
+                                                        ? const Icon(
                                                             Icons.favorite,
                                                             color: AppColors
                                                                 .themeColer,
                                                           )
-                                                        : Icon(
+                                                        : const Icon(
                                                             Icons
                                                                 .favorite_border_outlined,
-                                                            color: const Color
-                                                                .fromARGB(255,
-                                                                56, 45, 49),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    56,
+                                                                    45,
+                                                                    49),
                                                           )),
                                                 RatingBarIndicator(
                                                   rating: double.parse(widget
@@ -259,16 +259,14 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                                   direction: Axis.horizontal,
                                                   unratedColor: Colors.grey,
                                                   itemBuilder: (context, _) =>
-                                                      Icon(
+                                                      const Icon(
                                                     Icons.star,
                                                     color: Colors.amber,
                                                   ),
                                                 ),
-                                                SizedBox(height: 3),
+                                                const SizedBox(height: 3),
                                                 Text(
-                                                  widget.item.averageRating
-                                                          .toString() +
-                                                      "/ 5.0",
+                                                  "${widget.item.averageRating}/ 5.0",
                                                   style: AppFonts.fontH7semi(
                                                       AppColors.themeColer),
                                                 ),
@@ -295,7 +293,7 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                       //   ),
                                       // ),
                                       /************************** gender */
-                                      Container(
+                                      SizedBox(
                                         width: 58.w,
                                         child: Column(
                                           crossAxisAlignment:
@@ -308,9 +306,8 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                                       AppColors.themeBlack),
                                                   children: [
                                                     TextSpan(
-                                                        text: widget.item.sprice
-                                                                .toString() +
-                                                            "Tk",
+                                                        text:
+                                                            "${widget.item.sprice}Tk",
                                                         style:
                                                             AppFonts.fontH6semi(
                                                                 AppColors
@@ -324,9 +321,8 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                                       AppColors.themeBlack),
                                                   children: [
                                                     TextSpan(
-                                                        text: " " +
-                                                            widget.item.pprice
-                                                                .toString(),
+                                                        text:
+                                                            " ${widget.item.pprice}",
                                                         children: [
                                                           TextSpan(
                                                             text: "Tk",
@@ -392,14 +388,14 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Obx(() {
                                   if (agentcontroller.profilesdata == null) {
-                                    return CircularProgressIndicator();
+                                    return const CircularProgressIndicator();
                                   }
                                   var prof = agentcontroller.profilesdata;
 
                                   print(prof);
                                   return prof!.isEmpty
                                       ? Container()
-                                      : Text(prof![0].servicestime.toString());
+                                      : Text(prof[0].servicestime.toString());
                                 }),
                               ),
                             )
@@ -416,7 +412,7 @@ class _SingelAppointmentState extends State<SingelAppointment> {
         ),
         bottomNavigationBar: Obx(() {
           if (cartController.itemExists(widget.item.id.toString())) {
-            return SizedBox();
+            return const SizedBox();
           }
           return Padding(
             padding: const EdgeInsets.all(8.0),
@@ -437,8 +433,8 @@ class _SingelAppointmentState extends State<SingelAppointment> {
                       selectedTime: customTime.toString() ?? '', // Custom time
                       selectedDate: date.toString(), // Selected date
                       selectedServicsQun:
-                          servicesQun?.toString() ?? '1', // Default quantity
-                      selectedProductQun: productQun?.toString() ??
+                          servicesQun.toString() ?? '1', // Default quantity
+                      selectedProductQun: productQun.toString() ??
                           '1', // Default product quantity
                       sprice: widget.item.sprice.toString() ??
                           '0.00', // Handle null price
@@ -528,12 +524,9 @@ class _SingelAppointmentState extends State<SingelAppointment> {
         EasyDateTimeLine(
           initialDate: DateTime.now(),
           onDateChange: (selectedDate) {
-            date = (selectedDate.day.toString() +
-                    "/" +
-                    selectedDate.month.toString() +
-                    "/" +
-                    selectedDate.year.toString())
-                .toString();
+            date =
+                ("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}")
+                    .toString();
           },
           activeColor: AppColors.themeColer,
           dayProps: EasyDayProps(
@@ -619,7 +612,7 @@ class _SingelAppointmentState extends State<SingelAppointment> {
         SizedBox(
           height: 1.5.h,
         ),
-        Divider(
+        const Divider(
           height: 1,
         ),
         SizedBox(
@@ -665,7 +658,7 @@ class _SingelAppointmentState extends State<SingelAppointment> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         IconButton(
-            icon: Icon(Icons.remove, size: 15),
+            icon: const Icon(Icons.remove, size: 15),
             onPressed: () {
               setState(() {
                 if (productQun > 0) {
@@ -680,7 +673,7 @@ class _SingelAppointmentState extends State<SingelAppointment> {
           style: AppFonts.fontH3semi(AppColors.themeColer),
         ),
         IconButton(
-          icon: Icon(Icons.add, size: 15),
+          icon: const Icon(Icons.add, size: 15),
           onPressed: () {
             setState(() {
               productQun++;
@@ -698,7 +691,7 @@ class _SingelAppointmentState extends State<SingelAppointment> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         IconButton(
-            icon: Icon(Icons.remove, size: 15),
+            icon: const Icon(Icons.remove, size: 15),
             onPressed: () {
               setState(() {
                 if (servicesQun > 1) {
@@ -713,7 +706,7 @@ class _SingelAppointmentState extends State<SingelAppointment> {
           style: AppFonts.fontH3semi(AppColors.themeColer),
         ),
         IconButton(
-          icon: Icon(Icons.add, size: 15),
+          icon: const Icon(Icons.add, size: 15),
           onPressed: () {
             setState(() {
               servicesQun++;
@@ -754,10 +747,10 @@ class _SingelAppointmentState extends State<SingelAppointment> {
   var reconpro;
   recomandation(context) => Obx(() {
         if (agentcontroller.productrecomandation == null) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         }
         reconpro = agentcontroller.productrecomandation;
-        return Container(
+        return SizedBox(
           height: MediaQuery.of(context).size.height * .18,
           //color: Colors.green,
           child: ListView.builder(

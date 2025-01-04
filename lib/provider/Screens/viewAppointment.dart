@@ -121,7 +121,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Container(
+                                          SizedBox(
                                             width: 58.w,
                                             child: Row(
                                               mainAxisAlignment:
@@ -140,7 +140,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
                                                           MainAxisAlignment
                                                               .spaceBetween,
                                                       children: [
-                                                        Container(
+                                                        SizedBox(
                                                           width: 50.w,
                                                           child: Text(
                                                             args.name
@@ -171,7 +171,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
                                                               itemBuilder:
                                                                   (context,
                                                                           _) =>
-                                                                      Icon(
+                                                                      const Icon(
                                                                 Icons.star,
                                                                 color: Colors
                                                                     .amber,
@@ -268,7 +268,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
                                           //   ),
                                           // ),
                                           /************************** gender */
-                                          Container(
+                                          SizedBox(
                                             width: 58.w,
                                             child: Column(
                                               crossAxisAlignment:
@@ -303,9 +303,8 @@ class _ViewAppointmentState extends State<ViewAppointment> {
                                                                   .themeBlack),
                                                       children: [
                                                         TextSpan(
-                                                            text: " " +
-                                                                args.pprice +
-                                                                "Tk",
+                                                            text:
+                                                                "${" " + args.pprice}Tk",
                                                             style: AppFonts
                                                                 .fontH6semi(
                                                                     AppColors
@@ -375,7 +374,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
+            child: SizedBox(
               height: 6.h,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -384,11 +383,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
                       onTap: () {
                         if (cartController.itemExists(args.id)) {
                           cartController.removeItem(args.id);
-                          var date2 = (date.day.toString() +
-                                  "/" +
-                                  date.month.toString() +
-                                  "/" +
-                                  date.year.toString())
+                          var date2 = ("${date.day}/${date.month}/${date.year}")
                               .toString();
                           var customTime = _formatTimeOfDay(_selectedTime);
 
@@ -432,7 +427,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
                       onPressed: () {
                         _showDeleteWarning(context);
                       },
-                      icon: Icon(Icons.delete))
+                      icon: const Icon(Icons.delete))
                 ],
               ),
             ),
@@ -542,7 +537,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
         SizedBox(
           height: 1.5.h,
         ),
-        Divider(
+        const Divider(
           height: 1,
         ),
         SizedBox(
@@ -570,7 +565,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         IconButton(
-            icon: Icon(Icons.remove, size: 15),
+            icon: const Icon(Icons.remove, size: 15),
             onPressed: () {
               setState(() {
                 if (productQun > 0) {
@@ -585,7 +580,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
           style: AppFonts.fontH3semi(AppColors.themeColer),
         ),
         IconButton(
-          icon: Icon(Icons.add, size: 15),
+          icon: const Icon(Icons.add, size: 15),
           onPressed: () {
             setState(() {
               productQun++;
@@ -603,7 +598,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         IconButton(
-            icon: Icon(Icons.remove, size: 15),
+            icon: const Icon(Icons.remove, size: 15),
             onPressed: () {
               setState(() {
                 if (servicesQun > 1) {
@@ -618,7 +613,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
           style: AppFonts.fontH3semi(AppColors.themeColer),
         ),
         IconButton(
-          icon: Icon(Icons.add, size: 15),
+          icon: const Icon(Icons.add, size: 15),
           onPressed: () {
             setState(() {
               servicesQun++;
@@ -661,13 +656,13 @@ class _ViewAppointmentState extends State<ViewAppointment> {
           'Delete Item',
           style: AppFonts.fontH5semi(AppColors.themeBlack),
         ),
-        content: Text('Are you sure you want to Delete?'),
+        content: const Text('Are you sure you want to Delete?'),
         actions: [
           TextButton(
             onPressed: () {
               Get.back(); // Dismiss the dialog if the user cancels
             },
-            child: Text('Cancle'),
+            child: const Text('Cancle'),
           ),
           TextButton(
             onPressed: () {
@@ -689,7 +684,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
     );
   }
 
-  recomandation(context) => Container(
+  recomandation(context) => SizedBox(
         height: MediaQuery.of(context).size.height * .18,
         //color: Colors.green,
         child: ListView.builder(
@@ -698,7 +693,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
           itemBuilder: (context, index) {
             return Card(
               color: Colors.blue,
-              child: Container(
+              child: SizedBox(
                 width: 38.w,
                 height: 13.h,
               ),

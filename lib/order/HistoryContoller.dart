@@ -34,7 +34,7 @@ class HistoryController extends GetxController {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       };
-      var url = Uri.parse(AppAppis.endpoint + 'orders/history');
+      var url = Uri.parse('${AppAppis.endpoint}orders/history');
 
       var body = {"user_id": id};
 

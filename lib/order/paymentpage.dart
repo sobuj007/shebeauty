@@ -56,8 +56,8 @@ class _PaymentPageState extends State<PaymentPage> {
                   var data = cartItems.items[index];
                   return Card(
                     child: ListTile(
-                      leading: Container(
-                          width: 15.w, child: Image.network(data.img)),
+                      leading:
+                          SizedBox(width: 15.w, child: Image.network(data.img)),
                       title: Text(data.name),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,18 +104,18 @@ class _PaymentPageState extends State<PaymentPage> {
               ),
             ),
           ),
-          Divider(),
+          const Divider(),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Total:',
+                const Text('Total:',
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 Text(cartItems.calculateTotalPrice().toString(),
-                    style:
-                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold)),
               ],
             ),
           ),
@@ -154,6 +154,8 @@ class _PaymentPageState extends State<PaymentPage> {
 }
 
 class PaymentModal extends StatefulWidget {
+  const PaymentModal({super.key});
+
   @override
   _PaymentModalState createState() => _PaymentModalState();
 }
@@ -193,7 +195,7 @@ class _PaymentModalState extends State<PaymentModal> {
               'Choose Payment Method',
               style: AppFonts.fontH5semi(AppColors.themeColer),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             RadioListTile<String>(
               title: Text(
                 'Cash on Delivery',
@@ -220,35 +222,35 @@ class _PaymentModalState extends State<PaymentModal> {
                 });
               },
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextField(
               controller: addressController,
               decoration: InputDecoration(
                 labelText: 'Delivery Address',
                 labelStyle: AppFonts.fontH6semi(AppColors.themeBlack),
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextField(
               controller: notesController,
               decoration: InputDecoration(
                 labelText: 'Notes',
                 labelStyle: AppFonts.fontH6semi(AppColors.themeBlack),
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextField(
               controller: mobile,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: 'Mobile',
                 labelStyle: AppFonts.fontH6semi(AppColors.themeBlack),
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             GestureDetector(
               onTap: () async {
                 // Handle the payment and order confirmation logic here
@@ -339,7 +341,7 @@ class _PaymentModalState extends State<PaymentModal> {
 
         cartitemcontoller.clearCart();
         Navigator.pop(context);
-        Get.offAll(() => Layout());
+        Get.offAll(() => const Layout());
       } else {
         AppStyle.snackbar("Payment Failed", "somthing worng");
         Navigator.pop(context);

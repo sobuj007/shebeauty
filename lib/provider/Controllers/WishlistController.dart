@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import '../Model/allProductModel.dart';
-import '../Model/allProductModel.dart';
 import '../Model/wishListproductModel.dart';
 
 class WishlistController extends GetxController {

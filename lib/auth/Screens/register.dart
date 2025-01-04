@@ -40,7 +40,7 @@ class _RegisterState extends State<Register> {
                 children: [
                   Center(
                       child: Image(
-                    image: AssetImage('assets/2.png'),
+                    image: const AssetImage('assets/2.png'),
                     fit: BoxFit.contain,
                     width: 30.w,
                   )),
@@ -70,7 +70,8 @@ class _RegisterState extends State<Register> {
                     hintStyle: AppFonts.fontH4regular(AppColors.themehint),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: AppColors.themeColer))),
+                        borderSide:
+                            const BorderSide(color: AppColors.themeColer))),
               ),
               SizedBox(
                 height: 2.h,
@@ -86,7 +87,8 @@ class _RegisterState extends State<Register> {
                     hintStyle: AppFonts.fontH4regular(AppColors.themehint),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: AppColors.themeColer))),
+                        borderSide:
+                            const BorderSide(color: AppColors.themeColer))),
               ),
               SizedBox(
                 height: 2.h,
@@ -98,8 +100,8 @@ class _RegisterState extends State<Register> {
                 decoration: InputDecoration(
                     suffixIcon: IconButton(
                       icon: isPassview
-                          ? Icon(Icons.visibility_off)
-                          : Icon(Icons.visibility),
+                          ? const Icon(Icons.visibility_off)
+                          : const Icon(Icons.visibility),
                       onPressed: () {
                         setState(() {
                           isPassview = !isPassview;
@@ -114,7 +116,8 @@ class _RegisterState extends State<Register> {
                     hintStyle: AppFonts.fontH5regular(AppColors.themehint),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: AppColors.themeColer))),
+                        borderSide:
+                            const BorderSide(color: AppColors.themeColer))),
               ),
               SizedBox(
                 height: 1.5.h,
@@ -126,8 +129,8 @@ class _RegisterState extends State<Register> {
                 decoration: InputDecoration(
                     suffixIcon: IconButton(
                       icon: isPassview2
-                          ? Icon(Icons.visibility_off)
-                          : Icon(Icons.visibility),
+                          ? const Icon(Icons.visibility_off)
+                          : const Icon(Icons.visibility),
                       onPressed: () {
                         setState(() {
                           isPassview2 = !isPassview2;
@@ -142,7 +145,8 @@ class _RegisterState extends State<Register> {
                     hintStyle: AppFonts.fontH5regular(AppColors.themehint),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: AppColors.themeColer))),
+                        borderSide:
+                            const BorderSide(color: AppColors.themeColer))),
               ),
               SizedBox(
                 height: 1.5.h,
@@ -155,7 +159,7 @@ class _RegisterState extends State<Register> {
                     children: [
                       Transform.scale(
                         scale: 1,
-                        child: Container(
+                        child: SizedBox(
                           width: 24.0,
                           height: 24.0,
                           child: Checkbox(

@@ -28,12 +28,12 @@ class _WishlistState extends State<Wishlist> {
   final WishlistController wcon = Get.put(WishlistController());
   final AllinfoController acon = Get.put(AllinfoController());
 
-  var _filteredItems2 = <Products>[].obs;
+  final _filteredItems2 = <Products>[].obs;
   String _selectedLocation = 'All';
   double _selectedRating = 0.0;
   String _selectedBodyPart = 'All';
   String _selectedTime = 'All';
-  String _searchQuery = '';
+  final String _searchQuery = '';
 
   @override
   void initState() {
@@ -46,9 +46,6 @@ class _WishlistState extends State<Wishlist> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(() {
-        if (wcon.wishlist == null) {
-          return Center(child: CircularProgressIndicator());
-        }
         if (wcon.wishlist.isEmpty) {
           return Center(
             child: Text(
@@ -65,7 +62,7 @@ class _WishlistState extends State<Wishlist> {
             // ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
-              child: Row(
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // Container(
@@ -177,7 +174,7 @@ class _WishlistState extends State<Wishlist> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         width: 58.w,
                                         child: Row(
                                           mainAxisAlignment:
@@ -203,7 +200,7 @@ class _WishlistState extends State<Wishlist> {
                                                   direction: Axis.horizontal,
                                                   unratedColor: Colors.grey,
                                                   itemBuilder: (context, _) =>
-                                                      Icon(
+                                                      const Icon(
                                                     Icons.star,
                                                     color: Colors.amber,
                                                   ),
@@ -238,7 +235,7 @@ class _WishlistState extends State<Wishlist> {
                                         ),
                                       ).paddingOnly(bottom: .5.h),
                                       /************************** gender */
-                                      Container(
+                                      SizedBox(
                                         width: 58.w,
                                         child: Column(
                                           crossAxisAlignment:
@@ -247,9 +244,7 @@ class _WishlistState extends State<Wishlist> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              "Provider Gender : " +
-                                                  wcon.wishlist[index].gender
-                                                      .toString(),
+                                              "Provider Gender : ${wcon.wishlist[index].gender}",
                                               style: AppFonts.fontH7normal(
                                                   AppColors.themeBlack),
                                               maxLines: 1,
@@ -315,7 +310,7 @@ class _WishlistState extends State<Wishlist> {
                                   ),
                                 ),
                                 /************************** Book noe button */
-                                Container(
+                                SizedBox(
                                   width: 63.2.w,
                                   child: Row(
                                     mainAxisAlignment:
@@ -368,7 +363,7 @@ class _WishlistState extends State<Wishlist> {
                                         child: Container(
                                           height: 5.h,
                                           width: 35.w,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             borderRadius: BorderRadius.only(
                                                 bottomRight:
                                                     Radius.circular(10)),
@@ -399,19 +394,19 @@ class _WishlistState extends State<Wishlist> {
         );
       }),
       floatingActionButton: wcon.wishlist.isEmpty
-          ? SizedBox()
+          ? const SizedBox()
           : TextButton(
               onPressed: () {
                 _showLogoutWarning(context);
               },
-              child: Container(
+              child: SizedBox(
                 width: 25.w,
                 child: Card(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       children: [
-                        LineIcon.trash(),
+                        const LineIcon.trash(),
                         Text(
                           "Clear",
                           style: AppFonts.fontH7semi(AppColors.themeColer),
@@ -432,13 +427,13 @@ class _WishlistState extends State<Wishlist> {
           'Clear Wishlist',
           style: AppFonts.fontH5semi(AppColors.themeBlack),
         ),
-        content: Text('Are you sure you want to Clear?'),
+        content: const Text('Are you sure you want to Clear?'),
         actions: [
           TextButton(
             onPressed: () {
               Get.back(); // Dismiss the dialog if the user cancels
             },
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: () {
@@ -468,7 +463,7 @@ class _WishlistState extends State<Wishlist> {
             onPressed: () {
               Get.back(); // Dismiss the dialog if the user cancels
             },
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: () {
@@ -494,12 +489,12 @@ class _WishlistState extends State<Wishlist> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Filter Options'),
+              const Text('Filter Options'),
               IconButton(
                   onPressed: () {
                     Get.close(1);
                   },
-                  icon: Icon(Icons.close))
+                  icon: const Icon(Icons.close))
             ],
           ),
           content: StatefulBuilder(
@@ -513,7 +508,7 @@ class _WishlistState extends State<Wishlist> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
+                        SizedBox(
                           width: 18.w,
                           child: Text(
                             "Location :",
@@ -532,8 +527,8 @@ class _WishlistState extends State<Wishlist> {
                           ),
                           child: DropdownButton<String>(
                             alignment: Alignment.centerRight,
-                            padding: EdgeInsets.symmetric(horizontal: 5),
-                            underline: SizedBox(),
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
+                            underline: const SizedBox(),
                             value: _selectedLocation,
                             items: [
                               'All',
@@ -567,7 +562,7 @@ class _WishlistState extends State<Wishlist> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
+                        SizedBox(
                           width: 18.w,
                           child: Text(
                             "Rating :",
@@ -622,7 +617,7 @@ class _WishlistState extends State<Wishlist> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
+                        SizedBox(
                           width: 18.w,
                           child: Text(
                             "Body Part :",
@@ -666,7 +661,7 @@ class _WishlistState extends State<Wishlist> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
+                        SizedBox(
                           width: 18.w,
                           child: Text(
                             "Time :",
@@ -712,7 +707,7 @@ class _WishlistState extends State<Wishlist> {
           ),
           actions: [
             TextButton(
-              child: Text('Apply'),
+              child: const Text('Apply'),
               onPressed: () {
                 setState(() {
                   // _applyFilters();

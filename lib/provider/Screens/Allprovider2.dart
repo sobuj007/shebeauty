@@ -16,8 +16,8 @@ class AllProvider extends StatefulWidget {
 }
 
 class _AllProviderState extends State<AllProvider> {
-  TextEditingController _searchController = TextEditingController();
-  List<Item> _allItems = List<Item>.generate(
+  final TextEditingController _searchController = TextEditingController();
+  final List<Item> _allItems = List<Item>.generate(
     100,
     (i) => Item(
       name: 'Item $i',
@@ -65,7 +65,7 @@ class _AllProviderState extends State<AllProvider> {
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
-          child: Icon(
+          child: const Icon(
             Icons.arrow_back_ios,
             color: AppColors.themeWhite,
           ),
@@ -83,14 +83,14 @@ class _AllProviderState extends State<AllProvider> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: <Widget>[
-            Container(
+            SizedBox(
               height: 6.8.h,
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Container(
+                    SizedBox(
                       height: 6.8.h,
                       width: 75.w,
                       child: TextField(
@@ -99,7 +99,7 @@ class _AllProviderState extends State<AllProvider> {
                         decoration: InputDecoration(
                           hintText: "Search here",
                           hintStyle: AppFonts.fontH4semi(AppColors.themehint),
-                          prefixIcon: Icon(Icons.search),
+                          prefixIcon: const Icon(Icons.search),
 
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 4.w, vertical: 0.w),
@@ -114,8 +114,8 @@ class _AllProviderState extends State<AllProvider> {
                         decoration: BoxDecoration(
                             border: Border.all(width: .5),
                             borderRadius: BorderRadius.circular(15)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
                           child: Icon(
                             Icons.sort,
                             color: AppColors.themeBlack,
@@ -132,11 +132,11 @@ class _AllProviderState extends State<AllProvider> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   /**************************************** */
-                  Container(
+                  SizedBox(
                     width: 30.w,
                     child: DropdownButton<String>(
                       isExpanded: true,
-                      hint: Text('Select Location'),
+                      hint: const Text('Select Location'),
                       style: AppFonts.fontH4regular(AppColors.themeBlack),
                       value: _selectedLocation,
                       onChanged: (String? newValue) {
@@ -146,7 +146,7 @@ class _AllProviderState extends State<AllProvider> {
                         });
                       },
                       items: [
-                        DropdownMenuItem(
+                        const DropdownMenuItem(
                           value: null,
                           child: Text('All Locations'),
                         ),
@@ -161,11 +161,11 @@ class _AllProviderState extends State<AllProvider> {
                     ),
                   ),
                   /********************************************************  */
-                  Container(
+                  SizedBox(
                     width: 30.w,
                     child: DropdownButton<String>(
                       isExpanded: true,
-                      hint: Text('Select Location'),
+                      hint: const Text('Select Location'),
                       style: AppFonts.fontH4regular(AppColors.themeBlack),
                       value: _selectedLocation,
                       onChanged: (String? newValue) {
@@ -175,7 +175,7 @@ class _AllProviderState extends State<AllProvider> {
                         });
                       },
                       items: [
-                        DropdownMenuItem(
+                        const DropdownMenuItem(
                           value: null,
                           child: Text('All Locations'),
                         ),
@@ -190,11 +190,11 @@ class _AllProviderState extends State<AllProvider> {
                     ),
                   ),
                   /****************************************  */
-                  Container(
+                  SizedBox(
                     width: 30.w,
                     child: DropdownButton<String>(
                       isExpanded: true,
-                      hint: Text('Select Location'),
+                      hint: const Text('Select Location'),
                       style: AppFonts.fontH4regular(AppColors.themeBlack),
                       value: _selectedLocation,
                       onChanged: (String? newValue) {
@@ -204,7 +204,7 @@ class _AllProviderState extends State<AllProvider> {
                         });
                       },
                       items: [
-                        DropdownMenuItem(
+                        const DropdownMenuItem(
                           value: null,
                           child: Text('All Locations'),
                         ),

@@ -43,7 +43,7 @@ class ServiceProductNearMeController extends GetxController {
       'Content-Type': 'application/json'
     };
     var url =
-        Uri.parse(AppAppis.endpoint + 'service-products/filter-by-locations');
+        Uri.parse('${AppAppis.endpoint}service-products/filter-by-locations');
 
     var body = {"location_ids": selectedLocations.value};
 

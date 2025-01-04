@@ -172,7 +172,7 @@ class _SingelProviderState extends State<SingelProvider> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Column(
@@ -186,6 +186,9 @@ class _SingelProviderState extends State<SingelProvider> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   GestureDetector(
+                    onTap: (() {
+                      controller.jumpToPage(0);
+                    }),
                     child: Column(
                       children: [
                         Padding(
@@ -204,9 +207,6 @@ class _SingelProviderState extends State<SingelProvider> {
                             : SizedBox()
                       ],
                     ),
-                    onTap: (() {
-                      controller.jumpToPage(0);
-                    }),
                   ),
                   GestureDetector(
                     child: Column(
@@ -224,7 +224,7 @@ class _SingelProviderState extends State<SingelProvider> {
                                 height: 2,
                                 color: AppColors.themeColer,
                               )
-                            : SizedBox()
+                            : const SizedBox()
                       ],
                     ),
                     onTap: () {
@@ -247,7 +247,7 @@ class _SingelProviderState extends State<SingelProvider> {
                                   height: 2,
                                   color: AppColors.themeColer,
                                 )
-                              : SizedBox()
+                              : const SizedBox()
                         ],
                       ),
                       onTap: () {

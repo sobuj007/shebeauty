@@ -21,7 +21,7 @@ class _MyCartState extends State<MyCart> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Container(
+          child: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Column(
@@ -32,6 +32,13 @@ class _MyCartState extends State<MyCart> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   GestureDetector(
+                    onTap: (() {
+                      selectpage = 0;
+                      controller.jumpToPage(selectpage);
+                      // controller.animateToPage(selectpage,
+                      //     duration: Duration(seconds: 1), curve: Curves.f);
+                      setState(() {});
+                    }),
                     child: Column(
                       children: [
                         Text(
@@ -47,13 +54,6 @@ class _MyCartState extends State<MyCart> {
                             : SizedBox()
                       ],
                     ),
-                    onTap: (() {
-                      selectpage = 0;
-                      controller.jumpToPage(selectpage);
-                      // controller.animateToPage(selectpage,
-                      //     duration: Duration(seconds: 1), curve: Curves.f);
-                      setState(() {});
-                    }),
                   ),
                   GestureDetector(
                     child: Column(
@@ -68,7 +68,7 @@ class _MyCartState extends State<MyCart> {
                                 height: 2,
                                 color: AppColors.themeColer,
                               )
-                            : SizedBox()
+                            : const SizedBox()
                       ],
                     ),
                     onTap: () {
@@ -93,7 +93,7 @@ class _MyCartState extends State<MyCart> {
                     );
                   });
                 },
-                children: [Wishlist(), MyListedCart()],
+                children: const [Wishlist(), MyListedCart()],
               ),
             ),
           ],

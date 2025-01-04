@@ -27,13 +27,13 @@ class MyListedCart2 extends StatefulWidget {
 
 class _MyListedCart2State extends State<MyListedCart2> {
   var allinfoController = Get.put(AllinfoController());
-  var _items2 = [];
+  final _items2 = [];
   //var cartController.items = [];
   String _selectedLocation = 'All';
   double _selectedRating = 0.0;
   String _selectedBodyPart = 'All';
   String _selectedTime = 'All';
-  String _searchQuery = '';
+  final String _searchQuery = '';
 
   @override
   void initState() {
@@ -123,7 +123,7 @@ class _MyListedCart2State extends State<MyListedCart2> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Container(
+                                          SizedBox(
                                             width: 58.w,
                                             child: Column(
                                               crossAxisAlignment:
@@ -164,7 +164,7 @@ class _MyListedCart2State extends State<MyListedCart2> {
                                                               Colors.grey,
                                                           itemBuilder:
                                                               (context, _) =>
-                                                                  Icon(
+                                                                  const Icon(
                                                             Icons.star,
                                                             color: Colors.amber,
                                                           ),
@@ -184,12 +184,7 @@ class _MyListedCart2State extends State<MyListedCart2> {
                                                   ],
                                                 ),
                                                 Text(
-                                                  "Provider Gender : " +
-                                                      cartController
-                                                          .items[index]
-                                                          .item
-                                                          .gender
-                                                          .toString(),
+                                                  "Provider Gender : ${cartController.items[index].item.gender}",
                                                   style: AppFonts.fontH7normal(
                                                       AppColors.themeBlack),
                                                   maxLines: 1,
@@ -204,11 +199,7 @@ class _MyListedCart2State extends State<MyListedCart2> {
                                                           .spaceBetween,
                                                   children: [
                                                     Text(
-                                                      "S.Price : " +
-                                                          cartController
-                                                              .items[index]
-                                                              .sprice
-                                                              .toString(),
+                                                      "S.Price : ${cartController.items[index].sprice}",
                                                       style:
                                                           AppFonts.fontH7semi(
                                                               AppColors
@@ -218,11 +209,7 @@ class _MyListedCart2State extends State<MyListedCart2> {
                                                           TextOverflow.ellipsis,
                                                     ),
                                                     Text(
-                                                      "P.Price : " +
-                                                          cartController
-                                                              .items[index]
-                                                              .pprice
-                                                              .toString(),
+                                                      "P.Price : ${cartController.items[index].pprice}",
                                                       style:
                                                           AppFonts.fontH7semi(
                                                               AppColors
@@ -239,10 +226,7 @@ class _MyListedCart2State extends State<MyListedCart2> {
                                                           .spaceBetween,
                                                   children: [
                                                     Text(
-                                                      "Date : " +
-                                                          cartController
-                                                              .items[index]
-                                                              .selectedDate,
+                                                      "Date : ${cartController.items[index].selectedDate}",
                                                       style:
                                                           AppFonts.fontH7semi(
                                                               AppColors
@@ -252,10 +236,7 @@ class _MyListedCart2State extends State<MyListedCart2> {
                                                           TextOverflow.ellipsis,
                                                     ),
                                                     Text(
-                                                      "Time : " +
-                                                          cartController
-                                                              .items[index]
-                                                              .selectedTime,
+                                                      "Time : ${cartController.items[index].selectedTime}",
                                                       style:
                                                           AppFonts.fontH7semi(
                                                               AppColors
@@ -278,14 +259,14 @@ class _MyListedCart2State extends State<MyListedCart2> {
                                       ),
                                     ),
                                     /************************** Book noe button */
-                                    Container(
+                                    SizedBox(
                                       width: 63.2.w,
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
+                                          const Padding(
+                                            padding: EdgeInsets.symmetric(
                                                 horizontal: 8.0),
                                             child: Column(
                                               crossAxisAlignment:
@@ -321,7 +302,7 @@ class _MyListedCart2State extends State<MyListedCart2> {
                                             child: Container(
                                               height: 5.h,
                                               width: 35.w,
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                 borderRadius: BorderRadius.only(
                                                     bottomRight:
                                                         Radius.circular(10)),
@@ -352,25 +333,27 @@ class _MyListedCart2State extends State<MyListedCart2> {
         ),
         bottomNavigationBar: Obx(() {
           if (cartController.items.isEmpty) {
-            return SizedBox();
+            return const SizedBox();
           }
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 2.h, vertical: 1.w),
-            child: Container(
+            child: SizedBox(
               height: 10.h,
               child: Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Total"),
+                      const Text("Total"),
                       Text(cartController.calculateTotalPrice().toString())
                     ],
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => PaymentPage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => const PaymentPage()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -402,12 +385,12 @@ class _MyListedCart2State extends State<MyListedCart2> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Filter Options'),
+              const Text('Filter Options'),
               IconButton(
                   onPressed: () {
                     Get.close(1);
                   },
-                  icon: Icon(Icons.close))
+                  icon: const Icon(Icons.close))
             ],
           ),
           content: StatefulBuilder(
@@ -421,7 +404,7 @@ class _MyListedCart2State extends State<MyListedCart2> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
+                        SizedBox(
                           width: 18.w,
                           child: Text(
                             "Location :",
@@ -440,8 +423,8 @@ class _MyListedCart2State extends State<MyListedCart2> {
                           ),
                           child: DropdownButton<String>(
                             alignment: Alignment.centerRight,
-                            padding: EdgeInsets.symmetric(horizontal: 5),
-                            underline: SizedBox(),
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
+                            underline: const SizedBox(),
                             value: _selectedLocation,
                             items: [
                               'All',
@@ -475,7 +458,7 @@ class _MyListedCart2State extends State<MyListedCart2> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
+                        SizedBox(
                           width: 18.w,
                           child: Text(
                             "Rating :",
@@ -530,7 +513,7 @@ class _MyListedCart2State extends State<MyListedCart2> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
+                        SizedBox(
                           width: 18.w,
                           child: Text(
                             "Body Part :",
@@ -574,7 +557,7 @@ class _MyListedCart2State extends State<MyListedCart2> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
+                        SizedBox(
                           width: 18.w,
                           child: Text(
                             "Time :",
@@ -620,7 +603,7 @@ class _MyListedCart2State extends State<MyListedCart2> {
           ),
           actions: [
             TextButton(
-              child: Text('Apply'),
+              child: const Text('Apply'),
               onPressed: () {
                 setState(() {
                   // _applyFilters();
@@ -647,7 +630,7 @@ class _MyListedCart2State extends State<MyListedCart2> {
             onPressed: () {
               Get.back(); // Dismiss the dialog if the user cancels
             },
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: () {

@@ -16,7 +16,7 @@ class Splash extends StatefulWidget {
 
 class _SplashState extends State<Splash> {
   startTimer() {
-    Future.delayed(Duration(seconds: 2))
+    Future.delayed(const Duration(seconds: 2))
         .then((value) => {Get.offAndToNamed("/login")});
   }
 
@@ -39,7 +39,7 @@ class _SplashState extends State<Splash> {
       children: [
         Center(
             child: Image(
-          image: AssetImage('assets/GhoreParlor.png'),
+          image: const AssetImage('assets/GhoreParlor.png'),
           fit: BoxFit.contain,
           width: 30.w,
         ))

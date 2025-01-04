@@ -46,90 +46,88 @@ class _ProfileState extends State<Profile> {
                       onPressed: () {
                         Get.toNamed(AppRoutes.notification);
                       },
-                      icon: Icon(Icons.notifications))
+                      icon: const Icon(Icons.notifications))
                 ],
               ),
             ),
             SizedBox(
               height: 2.h,
             ),
-            Obx((){
-print(ucon.profile);
-              if(ucon.profile==null){
-                return CircularProgressIndicator();
-              } else if(ucon.profile.isEmpty){
-            return Text("Pleases Update profile from Edit profile!");
+            Obx(() {
+              print(ucon.profile);
+              if (ucon.profile.isEmpty) {
+                return Text("Pleases Update profile from Edit profile!");
               }
               // if (ucon.profile.isEmpty){
               //   return Text("Pleases Update profile from Edit profile!");
 
               // }
-              return    Padding(
-              padding: EdgeInsets.symmetric(horizontal: 3.h, vertical: 0.h),
-              child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircleAvatar(
-                      radius: 48,
-                      backgroundColor: AppColors.themeColer,
-                      child: CircleAvatar(
-                        radius: 45,
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: 3.h, vertical: 0.h),
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircleAvatar(
+                        radius: 48,
                         backgroundColor: AppColors.themeColer,
-                        backgroundImage: CachedNetworkImageProvider(ucon
-                                    .profile.value['img'] ==
-                                null
-                            ? "https://foru.co.id/wp-content/uploads/2015/05/Memilih-advertising-agency.jpg"
-                            : (AppAppis.profileimg + ucon.profile.value['img'])
-                                .toString()),
+                        child: CircleAvatar(
+                          radius: 45,
+                          backgroundColor: AppColors.themeColer,
+                          backgroundImage: CachedNetworkImageProvider(ucon
+                                      .profile.value['img'] ==
+                                  null
+                              ? "https://foru.co.id/wp-content/uploads/2015/05/Memilih-advertising-agency.jpg"
+                              : (AppAppis.profileimg +
+                                      ucon.profile.value['img'])
+                                  .toString()),
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 4.w,
-                    ),
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            ucon.user['name'] == null
-                                ? "john Deo"
-                                : ucon.user['name'].toString(),
-                            style: AppFonts.fontH5semi(AppColors.themeColer),
-                          ),
-                          Text(
-                            ucon.user['email'] == null
-                                ? "johndeo@gmail.com"
-                                : ucon.user['email'].toString(),
-                            style: AppFonts.fontH6semi(AppColors.themeBlack),
-                          ),
-                          Text(
-                            ucon.profile.value['mobilenumber'].toString() ==
-                                    null
-                                ? "1234567890"
-                                : ucon.profile.value['mobilenumber'].toString(),
-                            style: AppFonts.fontH6regular(AppColors.themeBlack),
-                          ),
-                          Text(
-                            ucon.profile.value['address'].toString(),
-                            style: AppFonts.fontH6regular(AppColors.themeBlack),
-                          ),
-                        ],
+                      SizedBox(
+                        width: 4.w,
                       ),
-                    )
-                  ],
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              ucon.user['name'] == null
+                                  ? "john Deo"
+                                  : ucon.user['name'].toString(),
+                              style: AppFonts.fontH5semi(AppColors.themeColer),
+                            ),
+                            Text(
+                              ucon.user['email'] == null
+                                  ? "johndeo@gmail.com"
+                                  : ucon.user['email'].toString(),
+                              style: AppFonts.fontH6semi(AppColors.themeBlack),
+                            ),
+                            Text(
+                              ucon.profile.value['mobilenumber'].toString() ??
+                                  "1234567890",
+                              style:
+                                  AppFonts.fontH6regular(AppColors.themeBlack),
+                            ),
+                            Text(
+                              ucon.profile.value['address'].toString(),
+                              style:
+                                  AppFonts.fontH6regular(AppColors.themeBlack),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            );
-           
+              );
             }),
-          SizedBox(
+            SizedBox(
               height: 3.h,
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 3.h),
-              child: Divider(
+              child: const Divider(
                 height: .5,
                 color: AppColors.themeColer,
               ),
@@ -144,12 +142,16 @@ print(ucon.profile);
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (_) => Editprofile(mobile: ucon.profile.value['mobilenumber'].toString())));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => Editprofile(
+                                    mobile: ucon.profile.value['mobilenumber']
+                                        .toString())));
                       },
                       child: Row(
                         children: [
-                          Icon(Icons.settings),
+                          const Icon(Icons.settings),
                           SizedBox(
                             width: 2.h,
                           ),
@@ -176,7 +178,7 @@ print(ucon.profile);
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                          Icon(Icons.location_city),
+                          const Icon(Icons.location_city),
                           SizedBox(
                             width: 2.h,
                           ),
@@ -201,7 +203,7 @@ print(ucon.profile);
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                          Icon(Icons.history),
+                          const Icon(Icons.history),
                           SizedBox(
                             width: 2.h,
                           ),
@@ -218,14 +220,15 @@ print(ucon.profile);
                   ),
                   //************************************* newz *****************************
                   GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (_)=>NewsPage()));
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => NewsPage()));
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                          Icon(Icons.newspaper),
+                          const Icon(Icons.newspaper),
                           SizedBox(
                             width: 2.h,
                           ),
@@ -252,7 +255,7 @@ print(ucon.profile);
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                          Icon(Icons.policy),
+                          const Icon(Icons.policy),
                           SizedBox(
                             width: 2.h,
                           ),
@@ -276,7 +279,7 @@ print(ucon.profile);
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                          Icon(Icons.logout),
+                          const Icon(Icons.logout),
                           SizedBox(
                             width: 2.h,
                           ),
@@ -300,14 +303,14 @@ print(ucon.profile);
   void _showLogoutWarning(BuildContext context) {
     Get.dialog(
       AlertDialog(
-        title: Text('Logout'),
-        content: Text('Are you sure you want to log out?'),
+        title: const Text('Logout'),
+        content: const Text('Are you sure you want to log out?'),
         actions: [
           TextButton(
             onPressed: () {
               Get.back(); // Dismiss the dialog if the user cancels
             },
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: () {

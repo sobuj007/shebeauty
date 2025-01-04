@@ -6,6 +6,8 @@ import '../utils/appColors.dart';
 import '../utils/appFonts.dart';
 
 class TermsAndConditionsPage extends StatefulWidget {
+  const TermsAndConditionsPage({super.key});
+
   @override
   State<TermsAndConditionsPage> createState() => _TermsAndConditionsPageState();
 }
@@ -38,13 +40,13 @@ class _TermsAndConditionsPageState extends State<TermsAndConditionsPage> {
           style: AppFonts.fontH4semi(AppColors.themeWhite),
         ),
         backgroundColor: AppColors.themeColer,
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
             color:
                 AppColors.themeWhite // Change the color of the back arrow here
             ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: const Padding(
+        padding: EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -6,14 +6,14 @@ class UserDataModel {
 
   UserDataModel.fromJson(Map<String, dynamic> json) {
     token = json['token'];
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['token'] = this.token;
-    if (this.user != null) {
-      data['user'] = this.user!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['token'] = token;
+    if (user != null) {
+      data['user'] = user!.toJson();
     }
     return data;
   }
@@ -37,12 +37,12 @@ class User {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['email'] = this.email;
-    data['role'] = this.role;
-    data['is_blocked'] = this.isBlocked;
-    data['subscription'] = this.subscription;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    data['email'] = email;
+    data['role'] = role;
+    data['is_blocked'] = isBlocked;
+    data['subscription'] = subscription;
     return data;
   }
 }

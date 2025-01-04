@@ -13,17 +13,16 @@ class ReviewController extends GetxController {
 
   // Function to fetch reviews by agent_id
   Future<void> fetchReviews(int agentId) async {
-    var token=tdata.getuser();
+    var token = tdata.getuser();
     try {
       isLoading(true);
       var headersList = {
-       
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json'
       };
 
-      var url = Uri.parse(AppAppis.endpoint +'reviews/agent/$agentId');
+      var url = Uri.parse('${AppAppis.endpoint}reviews/agent/$agentId');
 
       var req = http.Request('GET', url);
       req.headers.addAll(headersList);

@@ -11,7 +11,7 @@ class AdsController extends GetxController {
 
   Future<void> fetchData() async {
     var headersList = {'Accept': 'application/json'};
-    var url = Uri.parse(AppAppis.endpoint + 'promotion-banners');
+    var url = Uri.parse('${AppAppis.endpoint}promotion-banners');
 
     try {
       var req = http.Request('GET', url);

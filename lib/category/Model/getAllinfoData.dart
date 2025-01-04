@@ -16,51 +16,51 @@ class AllinfoModel {
     if (json['category'] != null) {
       category = <Category>[];
       json['category'].forEach((v) {
-        category!.add(new Category.fromJson(v));
+        category!.add(Category.fromJson(v));
       });
     }
     if (json['subcategory'] != null) {
       subcategory = <Subcategory>[];
       json['subcategory'].forEach((v) {
-        subcategory!.add(new Subcategory.fromJson(v));
+        subcategory!.add(Subcategory.fromJson(v));
       });
     }
     if (json['bodypart'] != null) {
       bodypart = <Bodypart>[];
       json['bodypart'].forEach((v) {
-        bodypart!.add(new Bodypart.fromJson(v));
+        bodypart!.add(Bodypart.fromJson(v));
       });
     }
     if (json['cities'] != null) {
       cities = <Cities>[];
       json['cities'].forEach((v) {
-        cities!.add(new Cities.fromJson(v));
+        cities!.add(Cities.fromJson(v));
       });
     }
     if (json['location'] != null) {
       location = <Location>[];
       json['location'].forEach((v) {
-        location!.add(new Location.fromJson(v));
+        location!.add(Location.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.category != null) {
-      data['category'] = this.category!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (category != null) {
+      data['category'] = category!.map((v) => v.toJson()).toList();
     }
-    if (this.subcategory != null) {
-      data['subcategory'] = this.subcategory!.map((v) => v.toJson()).toList();
+    if (subcategory != null) {
+      data['subcategory'] = subcategory!.map((v) => v.toJson()).toList();
     }
-    if (this.bodypart != null) {
-      data['bodypart'] = this.bodypart!.map((v) => v.toJson()).toList();
+    if (bodypart != null) {
+      data['bodypart'] = bodypart!.map((v) => v.toJson()).toList();
     }
-    if (this.cities != null) {
-      data['cities'] = this.cities!.map((v) => v.toJson()).toList();
+    if (cities != null) {
+      data['cities'] = cities!.map((v) => v.toJson()).toList();
     }
-    if (this.location != null) {
-      data['location'] = this.location!.map((v) => v.toJson()).toList();
+    if (location != null) {
+      data['location'] = location!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -84,12 +84,12 @@ class Category {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['image'] = this.image;
-    data['gender'] = this.gender;
-    data['cat_description'] = this.catDescription;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['image'] = image;
+    data['gender'] = gender;
+    data['cat_description'] = catDescription;
     return data;
   }
 }
@@ -130,16 +130,16 @@ class Subcategory {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['category_id'] = this.categoryId;
-    data['name'] = this.name;
-    data['steps'] = this.steps;
-    data['necessaryproduct'] = this.necessaryproduct;
-    data['afterservicesinstruction'] = this.afterservicesinstruction;
-    data['providerguideline'] = this.providerguideline;
-    data['customerguideline'] = this.customerguideline;
-    data['image'] = this.image;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['category_id'] = categoryId;
+    data['name'] = name;
+    data['steps'] = steps;
+    data['necessaryproduct'] = necessaryproduct;
+    data['afterservicesinstruction'] = afterservicesinstruction;
+    data['providerguideline'] = providerguideline;
+    data['customerguideline'] = customerguideline;
+    data['image'] = image;
     return data;
   }
 }
@@ -162,10 +162,10 @@ class Bodypart {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['subcategory_id'] = this.subcategoryId;
-    data['name'] = this.name;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['subcategory_id'] = subcategoryId;
+    data['name'] = name;
     return data;
   }
 }
@@ -182,9 +182,9 @@ class Cities {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
     return data;
   }
 }
@@ -203,10 +203,10 @@ class Location {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['cities_id'] = this.citiesId;
-    data['name'] = this.name;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['cities_id'] = citiesId;
+    data['name'] = name;
     return data;
   }
 }

@@ -87,16 +87,16 @@ class RatingModel {
     if (json['reviews'] != null) {
       reviews = <Reviews>[];
       json['reviews'].forEach((v) {
-        reviews!.add(new Reviews.fromJson(v));
+        reviews!.add(Reviews.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message'] = this.message;
-    if (this.reviews != null) {
-      data['reviews'] = this.reviews!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['message'] = message;
+    if (reviews != null) {
+      data['reviews'] = reviews!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -140,17 +140,17 @@ class Reviews {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['serviceproduct_id'] = this.serviceproductId;
-    data['agent_id'] = this.agentId;
-    data['user_id'] = this.userId;
-    data['reviewername'] = this.reviewername;
-    data['image'] = this.image;
-    data['rating'] = this.rating;
-    data['comment'] = this.comment;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['serviceproduct_id'] = serviceproductId;
+    data['agent_id'] = agentId;
+    data['user_id'] = userId;
+    data['reviewername'] = reviewername;
+    data['image'] = image;
+    data['rating'] = rating;
+    data['comment'] = comment;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }

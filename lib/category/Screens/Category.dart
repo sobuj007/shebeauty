@@ -31,7 +31,7 @@ class _AppCategoryState extends State<AppCategory> {
           CustomAppbar(
             title: AppLanguage().getLang(6),
           ),
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height * .88,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -48,7 +48,7 @@ class _AppCategoryState extends State<AppCategory> {
 
   category(context) {
     print(widget.catedata);
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height * .80,
       width: MediaQuery.of(context).size.width,
       child: Row(
@@ -56,11 +56,11 @@ class _AppCategoryState extends State<AppCategory> {
           Expanded(
             child: Obx(() {
               if (con.categories == null) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
 
               if (con.categories!.isEmpty) {
-                return Center(child: Text('No categories available'));
+                return const Center(child: Text('No categories available'));
               }
               final data = con.getCategoriesByGender(arguments['gender']);
               return GridView.builder(
@@ -82,7 +82,7 @@ class _AppCategoryState extends State<AppCategory> {
                                           cat_id: vdata.id,
                                         )));
                           }),
-                          child: Container(
+                          child: SizedBox(
                             height: 19.h,
                             width: 30.w,
                             child: Card(
@@ -91,7 +91,7 @@ class _AppCategoryState extends State<AppCategory> {
                                 padding: const EdgeInsets.all(4.0),
                                 child: Column(
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       // width: 200,
                                       height: 6.h,
                                       width: 20.w,
@@ -101,7 +101,7 @@ class _AppCategoryState extends State<AppCategory> {
                                         fit: BoxFit.cover,
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 2,
                                     ),
                                     Text(

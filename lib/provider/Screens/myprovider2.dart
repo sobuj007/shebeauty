@@ -18,20 +18,22 @@ class MyProvider2 extends StatelessWidget {
   final AllinfoController con = Get.find();
   var controller = Get.put(AllProductController());
   var _filteredItems = <Product>[].obs;
-  var _selectedLocation = 'All'.obs();
+  final _selectedLocation = 'All'.obs();
 
-  var _selectedBodyPart = 'All'.obs();
-  var _selectedTime = 'All'.obs();
+  final _selectedBodyPart = 'All'.obs();
+  final _selectedTime = 'All'.obs();
   var arg = {}.obs();
 
   var searchQuery = ''.obs;
   // RxList for selected genders and ratings
-  var _selectedGender = ['Both', 'Male', 'Female'].obs;
-  var _selectedRating = [1.0, 2.0, 3.0, 4.0, 5.0].obs;
+  final _selectedGender = ['Both', 'Male', 'Female'].obs;
+  final _selectedRating = [1.0, 2.0, 3.0, 4.0, 5.0].obs;
 
   // RxString for single selected value (example)
   var selectedGender = 'Both'.obs;
   var selectedRating = 1.0.obs;
+
+  MyProvider2({super.key});
 
   // Function to update selected gender
   void updateSelectedGender(String gender) {
@@ -50,7 +52,7 @@ class MyProvider2 extends StatelessWidget {
 
     final id = argsData?['subid'];
     final body = argsData?['bodypart'];
-    print("this is" + argsData.toString());
+    print("this is$argsData");
 
     return Scaffold(
         body: Column(children: [
@@ -64,9 +66,9 @@ class MyProvider2 extends StatelessWidget {
           controller.filterBySubcategory(id);
         }
         if (controller.isLoading.value) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (controller.filteredList.isEmpty) {
-          return Center(child: Text('No products available'));
+          return const Center(child: Text('No products available'));
         } else {
           _filteredItems = controller.filteredList;
 
@@ -95,7 +97,7 @@ class MyProvider2 extends StatelessWidget {
                           decoration: BoxDecoration(
                               image: DecorationImage(
                                   image: CachedNetworkImageProvider(
-                                    product.img ?? "${AppAppis.demoimg}",
+                                    product.img ?? AppAppis.demoimg,
                                   ),
                                   fit: BoxFit.cover),
                               borderRadius: BorderRadius.circular(10)),
@@ -122,7 +124,7 @@ class MyProvider2 extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       width: 54.w,
                                       child: Text(
                                         product.name ?? "",
@@ -144,12 +146,13 @@ class MyProvider2 extends StatelessWidget {
                                           itemSize: 18.0,
                                           direction: Axis.horizontal,
                                           unratedColor: Colors.grey,
-                                          itemBuilder: (context, _) => Icon(
+                                          itemBuilder: (context, _) =>
+                                              const Icon(
                                             Icons.star,
                                             color: Colors.amber,
                                           ),
                                         ),
-                                        SizedBox(height: 3),
+                                        const SizedBox(height: 3),
                                         Text(
                                           '${calculateAverageRating(product.reviewRatings).toString()} ',
                                           style: AppFonts.fontH6semi(
@@ -176,7 +179,7 @@ class MyProvider2 extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                Container(
+                                SizedBox(
                                   height: 4.h,
                                   width: 58.w,
                                   child: Row(
@@ -218,7 +221,7 @@ class MyProvider2 extends StatelessWidget {
                                                     AppColors.themeColer))
                                           ]),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 5,
                                     ),
                                     RichText(
@@ -242,7 +245,7 @@ class MyProvider2 extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
+                              SizedBox(
                                 width: 36.w,
                                 child: Padding(
                                   padding:
@@ -290,7 +293,7 @@ class MyProvider2 extends StatelessWidget {
                                 child: Container(
                                   height: 5.h,
                                   width: 30.w,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     borderRadius: BorderRadius.only(
                                         bottomRight: Radius.circular(10)),
                                     color: AppColors.themeColer,
@@ -337,7 +340,7 @@ class MyProvider2 extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
+          SizedBox(
             width: 78.w,
             height: 5.8.h,
             child: TextField(
@@ -347,15 +350,15 @@ class MyProvider2 extends StatelessWidget {
                 hintText: 'Search...',
                 border: OutlineInputBorder(
                     borderSide:
-                        BorderSide(width: 1, color: AppColors.themeColer),
+                        const BorderSide(width: 1, color: AppColors.themeColer),
                     borderRadius: BorderRadius.circular(15)),
                 enabledBorder: OutlineInputBorder(
                     borderSide:
-                        BorderSide(width: 1, color: AppColors.themeColer),
+                        const BorderSide(width: 1, color: AppColors.themeColer),
                     borderRadius: BorderRadius.circular(15)),
                 focusedBorder: OutlineInputBorder(
                     borderSide:
-                        BorderSide(width: 1, color: AppColors.themeColer),
+                        const BorderSide(width: 1, color: AppColors.themeColer),
                     borderRadius: BorderRadius.circular(15)),
                 hintStyle: AppFonts.fontH4regular(AppColors.themehint),
               ),
@@ -369,9 +372,9 @@ class MyProvider2 extends StatelessWidget {
             onTap: () {
               _showFilterDialog(context);
             },
-            child: Card(
+            child: const Card(
                 child: Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: EdgeInsets.all(10.0),
               child: Icon(
                 Icons.sort,
                 color: AppColors.themeColer,
@@ -400,11 +403,11 @@ class MyProvider2 extends StatelessWidget {
                   onPressed: () {
                     Get.close(1);
                   },
-                  icon: Icon(Icons.close))
+                  icon: const Icon(Icons.close))
             ],
           ),
           content: Obx(() {
-            return Container(
+            return SizedBox(
               height: 33.h,
               child: Column(
                 children: [
@@ -426,7 +429,7 @@ class MyProvider2 extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
+                      SizedBox(
                         width: 18.w,
                         child: Text(
                           applng.getLang(41),
@@ -437,7 +440,7 @@ class MyProvider2 extends StatelessWidget {
                       Expanded(
                         child: DropdownButton<double>(
                           value: selectedRating.value,
-                          underline: SizedBox(),
+                          underline: const SizedBox(),
                           isExpanded: true,
                           items: _selectedRating.map((double value) {
                             return DropdownMenuItem<double>(
@@ -464,7 +467,7 @@ class MyProvider2 extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
+                      SizedBox(
                         width: 18.w,
                         child: Text(
                           applng.getLang(42),
@@ -475,7 +478,7 @@ class MyProvider2 extends StatelessWidget {
                       Expanded(
                         child: DropdownButton<String>(
                           value: selectedGender.value,
-                          underline: SizedBox(),
+                          underline: const SizedBox(),
                           isExpanded: true,
                           items: _selectedGender.map((String value) {
                             return DropdownMenuItem<String>(

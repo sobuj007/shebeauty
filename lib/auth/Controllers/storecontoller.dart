@@ -23,7 +23,7 @@ class StorProfileController extends GetxController {
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
     };
-    var url = Uri.parse(AppAppis.endpoint + 'storeprofiles/get');
+    var url = Uri.parse('${AppAppis.endpoint}storeprofiles/get');
 
     try {
       var req = http.Request('GET', url);

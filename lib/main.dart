@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:Ghore_Parlor/auth/Controllers/loginController.dart';
 
 import 'package:Ghore_Parlor/provider/Model/allproviderDataModel.dart';
 import 'package:Ghore_Parlor/routes/AppRouts.dart';
@@ -11,7 +10,6 @@ import 'package:sizer/sizer.dart';
 
 import 'category/Controllers/getAllinfocontoller.dart';
 import 'firebase_options.dart';
-import 'provider/Controllers/ProductContorller.dart';
 
 AppLanguage applng = AppLanguage();
 var wishListItem = <Item>[].obs;

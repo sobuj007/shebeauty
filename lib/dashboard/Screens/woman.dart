@@ -40,6 +40,8 @@ class Woman extends StatelessWidget {
   RxMap<String, dynamic> user = <String, dynamic>{}.obs;
   var token = ''.obs;
 
+  Woman({super.key});
+
   // getinfo() async {
   //   SharedPreferences prefs = await SharedPreferences.getInstance();
   //   userdata = (await Mypref().retrieveDataDynamically())!;
@@ -81,12 +83,12 @@ class Woman extends StatelessWidget {
                   routeData: selectedGender,
                 ),
                 /********************** category bloc *************************** */
-                Container(
+                SizedBox(
                     height: 14.h,
                     //color: Colors.green,
                     child: Obx(() {
                       if (controller.allinfoModel.value == null) {
-                        return Center(child: CircularProgressIndicator());
+                        return const Center(child: CircularProgressIndicator());
                       } else {
                         // if (categories == null) {
                         //       return Center(child: CircularProgressIndicator());
@@ -114,7 +116,7 @@ class Woman extends StatelessWidget {
                                               cat_id: category.id,
                                             )));
                               },
-                              child: Container(
+                              child: SizedBox(
                                 height: 16.h,
                                 width: 25.w,
                                 child: Card(
@@ -123,7 +125,7 @@ class Woman extends StatelessWidget {
                                     padding: const EdgeInsets.all(4.0),
                                     child: Column(
                                       children: [
-                                        Container(
+                                        SizedBox(
                                           // width: 200,
                                           height: 8.h,
                                           width: 10.w,
@@ -157,120 +159,113 @@ class Woman extends StatelessWidget {
                   route: 'p',
                 ),
                 Obx(() {
-                  if (storeController.stores.value == null) {
-                    return Center(child: CircularProgressIndicator());
-                  } else {
-                    // Display the data
+                  // Display the data
 
-                    return Container(
-                      height: MediaQuery.of(context).size.height * .18,
-                      //color: Colors.green,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: storeController.stores.length > 4
-                            ? 3
-                            : storeController.stores.length,
-                        itemBuilder: (context, index) {
-                          var total;
-                          //  var total= double.parse(_filteredItems[index].servicePrice!)+double.parse(_filteredItems[index].price!);
+                  return Container(
+                    height: MediaQuery.of(context).size.height * .18,
+                    //color: Colors.green,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: storeController.stores.length > 4
+                          ? 3
+                          : storeController.stores.length,
+                      itemBuilder: (context, index) {
+                        var total;
+                        //  var total= double.parse(_filteredItems[index].servicePrice!)+double.parse(_filteredItems[index].price!);
 //                     if (index < storeController.stores.length) {
 //    total = double.parse(profile[index].servicePrice!) + double.parse(storeController.stores[index].price!);
 // } else {
 //   print('Index out of bounds');
 // }
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => EachProvider(
-                                            item: storeController
-                                                .stores[index].agentId,
-                                          )));
-                            },
-                            child: Card(
-                              color: Colors.blue,
-                              //  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => EachProvider(
+                                          item: storeController
+                                              .stores[index].agentId,
+                                        )));
+                          },
+                          child: Card(
+                            color: Colors.blue,
+                            //  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                            child: Container(
+                              width: 38.w,
+                              height: 13.h,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: CachedNetworkImageProvider(
+                                        errorListener: (e) {},
+                                        storeController
+                                                    .stores[index].coverImage ==
+                                                null
+                                            ? "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"
+                                            : AppAppis.storecover +
+                                                storeController
+                                                    .stores[index].coverImage)),
+                              ),
                               child: Container(
-                                width: 38.w,
-                                height: 13.h,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: CachedNetworkImageProvider(
-                                          errorListener: (e) {},
-                                          storeController.stores[index]
-                                                      .coverImage ==
-                                                  null
-                                              ? "https://softisan.xyz/uploads/category/1725218338--beautytreatment.png"
-                                              : AppAppis.storecover +
-                                                  storeController.stores[index]
-                                                      .coverImage)),
+                                  color: Colors.black38,
                                 ),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.black38,
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(2.w),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          storeController
-                                              .stores[index].storename!
-                                              .toUpperCase(),
-                                          style: AppFonts.fontH6semi(
-                                              AppColors.themeWhite),
-                                        ),
-                                        // Expanded(child: SizedBox()),
-                                        Padding(
-                                            padding: const EdgeInsets.all(4.0),
-                                            child: Container(
-                                                height: 5.h,
-                                                width: 5.h,
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      width: 1,
-                                                      color: Colors.white),
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                  image: DecorationImage(
-                                                    fit: BoxFit.cover,
-                                                    image: CachedNetworkImageProvider(
-                                                        storeController
-                                                                    .stores[
-                                                                        index]
-                                                                    .logo ==
-                                                                null
-                                                            ? "https://ghoreparlour.com/uploads/category/1725218338--beautytreatment.png"
-                                                            : storeController
-                                                                .stores[index]
-                                                                .logo),
-                                                  ),
-                                                )))
-                                      ],
-                                    ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(2.w),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        storeController.stores[index].storename!
+                                            .toUpperCase(),
+                                        style: AppFonts.fontH6semi(
+                                            AppColors.themeWhite),
+                                      ),
+                                      // Expanded(child: SizedBox()),
+                                      Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: Container(
+                                              height: 5.h,
+                                              width: 5.h,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    width: 1,
+                                                    color: Colors.white),
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                image: DecorationImage(
+                                                  fit: BoxFit.cover,
+                                                  image: CachedNetworkImageProvider(
+                                                      storeController
+                                                                  .stores[index]
+                                                                  .logo ==
+                                                              null
+                                                          ? "https://ghoreparlour.com/uploads/category/1725218338--beautytreatment.png"
+                                                          : storeController
+                                                              .stores[index]
+                                                              .logo),
+                                                ),
+                                              )))
+                                    ],
                                   ),
                                 ),
                               ),
                             ),
-                          );
-                        },
-                      ),
-                    );
-                  }
+                          ),
+                        );
+                      },
+                    ),
+                  );
                 }),
                 /********************************* near me Bloc ******************* */
                 TitleWithViewButton(
                   title: applng.getLang(8),
                 ),
-                Container(height: 20.h, child: neaarMe(context))
+                SizedBox(height: 20.h, child: neaarMe(context))
               ],
             ),
           ],
@@ -282,13 +277,13 @@ class Woman extends StatelessWidget {
   var place = false;
   neaarMe(context) {
     if (place) {
-      return Center(
+      return const Center(
         child: Text("Please update your Profile"),
       );
     } else {
       return Obx(() {
         if (nearMeController.isLoading.value) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
 
         if (nearMeController.error.isNotEmpty) {
@@ -304,7 +299,7 @@ class Woman extends StatelessWidget {
                       color: Colors.amber,
                       child: Text(nearMeController.error.value))));
         }
-        if (nearMeController.nearProductData.length == 0) {
+        if (nearMeController.nearProductData.isEmpty) {
           return Center(
               child: Text(
             "Services Not Found for Your Location!",
@@ -312,7 +307,7 @@ class Woman extends StatelessWidget {
           ));
         }
 
-        return Container(
+        return SizedBox(
           height: 250,
           width: MediaQuery.of(context).size.width,
           child: Flexible(
@@ -324,8 +319,8 @@ class Woman extends StatelessWidget {
               itemCount: nearMeController.nearProductData.length,
               itemBuilder: (BuildContext context, int index) {
                 final product = nearMeController.nearProductData[index];
-                return nearMeController.nearProductData.length == 0
-                    ? Text("data")
+                return nearMeController.nearProductData.isEmpty
+                    ? const Text("data")
                     : GestureDetector(
                         onTap: () {
                           Get.toNamed(AppRoutes.appsingelprovider,

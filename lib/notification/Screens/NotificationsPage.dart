@@ -25,18 +25,20 @@ class _NotificationPageState extends State<NotificationPage> {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 2.w),
               child: ListView.builder(
-                padding: EdgeInsets.symmetric(vertical: 0.0),
+                padding: const EdgeInsets.symmetric(vertical: 0.0),
                 itemCount: 10,
                 itemBuilder: (BuildContext context, int index) {
                   return Card(
                       child: ListTile(
-                    leading: CircleAvatar(
+                    leading: const CircleAvatar(
                       child: Icon(Icons.notifications),
                     ),
-                    title: Text("New Notification"),
+                    title: const Text("New Notification"),
                     titleTextStyle: AppFonts.fontH5normal(AppColors.themeBlack),
-                    subtitle:Expanded(child: Text("New Notification hhghhjhlk llkjjnbn",style:AppFonts.fontH7normal(AppColors.themeBlack))) ,
-                    
+                    subtitle: Expanded(
+                        child: Text("New Notification hhghhjhlk llkjjnbn",
+                            style:
+                                AppFonts.fontH7normal(AppColors.themeBlack))),
                   ));
                 },
               ),

@@ -37,13 +37,13 @@ class NearMeAll extends StatelessWidget {
   var place = false;
   neaarMe(context) {
     if (place) {
-      return Center(
+      return const Center(
         child: Text("Please update your Profile"),
       );
     } else {
       return Obx(() {
         if (nearMeController.isLoading.value) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
 
         if (nearMeController.error.isNotEmpty) {
@@ -58,7 +58,7 @@ class NearMeAll extends StatelessWidget {
                   child: Text(nearMeController.error.value)));
         }
 
-        return Container(
+        return SizedBox(
           width: MediaQuery.of(context).size.width,
           child: Flexible(
             child: Padding(
@@ -129,7 +129,7 @@ class NearMeAll extends StatelessWidget {
                                                     AppColors.themeBlack),
                                               ),
                                             )),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 5,
                                         ),
                                         Container(
@@ -161,12 +161,13 @@ class NearMeAll extends StatelessWidget {
                                               itemSize: 18.0,
                                               direction: Axis.horizontal,
                                               unratedColor: Colors.grey,
-                                              itemBuilder: (context, _) => Icon(
+                                              itemBuilder: (context, _) =>
+                                                  const Icon(
                                                 Icons.star,
                                                 color: Colors.amber,
                                               ),
                                             ),
-                                            SizedBox(height: 3),
+                                            const SizedBox(height: 3),
                                             Text(
                                               '${product.averageRating.toString()} ',
                                               style: AppFonts.fontH6semi(
@@ -190,27 +191,15 @@ class NearMeAll extends StatelessWidget {
                                         child: Row(
                                           children: [
                                             Text(
-                                              "Category: " +
-                                                  allcon
-                                                      .getCategoryNameById(
-                                                          int.parse(product
-                                                              .categoryId
-                                                              .toString()))
-                                                      .toString(),
+                                              "Category: ${allcon.getCategoryNameById(int.parse(product.categoryId.toString()))}",
                                               style: AppFonts.fontH7semi(
                                                   AppColors.themeBlack),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 10,
                                             ),
                                             Text(
-                                              "Sub-Category: " +
-                                                  allcon
-                                                      .getSubcategoryNameById(
-                                                          int.parse(product
-                                                              .subcategoryId
-                                                              .toString()))
-                                                      .toString(),
+                                              "Sub-Category: ${allcon.getSubcategoryNameById(int.parse(product.subcategoryId.toString()))}",
                                               style: AppFonts.fontH7normal(
                                                   AppColors.themeBlack),
                                             ),

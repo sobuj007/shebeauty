@@ -9,16 +9,16 @@ class NearServiceProductModel {
     if (json['nearProduct'] != null) {
       nearProduct = <NearProduct>[];
       json['nearProduct'].forEach((v) {
-        nearProduct!.add(new NearProduct.fromJson(v));
+        nearProduct!.add(NearProduct.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    if (this.nearProduct != null) {
-      data['nearProduct'] = this.nearProduct!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
+    if (nearProduct != null) {
+      data['nearProduct'] = nearProduct!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -32,8 +32,8 @@ class NearProduct {
   String? bodypartId;
   int? cityId;
   String? locationIds;
-  Null? slotId;
-  Null? appointmentSlotIds;
+  Null slotId;
+  Null appointmentSlotIds;
   String? name;
   String? description;
   String? productsbrand;
@@ -91,35 +91,34 @@ class NearProduct {
     if (json['review_ratings'] != null) {
       reviewRatings = <ReviewRatings>[];
       json['review_ratings'].forEach((v) {
-        reviewRatings!.add(new ReviewRatings.fromJson(v));
+        reviewRatings!.add(ReviewRatings.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['agent_id'] = this.agentid;
-    data['category_id'] = this.categoryId;
-    data['subcategory_id'] = this.subcategoryId;
-    data['bodypart_id'] = this.bodypartId;
-    data['city_id'] = this.cityId;
-    data['location_ids'] = this.locationIds;
-    data['slot_id'] = this.slotId;
-    data['appointment_slot_ids'] = this.appointmentSlotIds;
-    data['name'] = this.name;
-    data['description'] = this.description;
-    data['productsbrand'] = this.productsbrand;
-    data['image'] = this.img;
-    data['product_price'] = this.pprice;
-    data['service_price'] = this.sprice;
-    data['gender'] = this.gender;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['average_rating'] = this.averageRating;
-    if (this.reviewRatings != null) {
-      data['review_ratings'] =
-          this.reviewRatings!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['agent_id'] = agentid;
+    data['category_id'] = categoryId;
+    data['subcategory_id'] = subcategoryId;
+    data['bodypart_id'] = bodypartId;
+    data['city_id'] = cityId;
+    data['location_ids'] = locationIds;
+    data['slot_id'] = slotId;
+    data['appointment_slot_ids'] = appointmentSlotIds;
+    data['name'] = name;
+    data['description'] = description;
+    data['productsbrand'] = productsbrand;
+    data['image'] = img;
+    data['product_price'] = pprice;
+    data['service_price'] = sprice;
+    data['gender'] = gender;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['average_rating'] = averageRating;
+    if (reviewRatings != null) {
+      data['review_ratings'] = reviewRatings!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -131,7 +130,7 @@ class ReviewRatings {
   int? agentId;
   int? userId;
   String? reviewername;
-  Null? image;
+  Null image;
   int? rating;
   String? comment;
   String? createdAt;
@@ -163,17 +162,17 @@ class ReviewRatings {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['serviceproduct_id'] = this.serviceproductId;
-    data['agent_id'] = this.agentId;
-    data['user_id'] = this.userId;
-    data['reviewername'] = this.reviewername;
-    data['image'] = this.image;
-    data['rating'] = this.rating;
-    data['comment'] = this.comment;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['serviceproduct_id'] = serviceproductId;
+    data['agent_id'] = agentId;
+    data['user_id'] = userId;
+    data['reviewername'] = reviewername;
+    data['image'] = image;
+    data['rating'] = rating;
+    data['comment'] = comment;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }

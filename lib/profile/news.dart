@@ -6,23 +6,28 @@ import 'package:cached_network_image/cached_network_image.dart';
 import '../auth/Controllers/adscobntoller.dart';
 import '../utils/appColors.dart';
 
-
 class NewsPage extends StatelessWidget {
   final AdsController adsController = Get.put(AdsController());
+
+  const NewsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('News',style: AppFonts.fontH4semi(AppColors.themeWhite),),
-         backgroundColor: AppColors.themeColer,
-        iconTheme: IconThemeData(
-          color: AppColors.themeWhite// Change the color of the back arrow here
+        title: Text(
+          'News',
+          style: AppFonts.fontH4semi(AppColors.themeWhite),
         ),
+        backgroundColor: AppColors.themeColer,
+        iconTheme: const IconThemeData(
+            color:
+                AppColors.themeWhite // Change the color of the back arrow here
+            ),
       ),
       body: Obx(() {
         if (adsController.adslist.isEmpty) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
 
         return ListView.builder(
@@ -33,7 +38,7 @@ class NewsPage extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
-                margin: EdgeInsets.all(10),
+                margin: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   boxShadow: [
@@ -52,8 +57,10 @@ class NewsPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15),
                       child: CachedNetworkImage(
                         imageUrl: ad.image,
-                        placeholder: (context, url) => Center(child: CircularProgressIndicator()),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
+                        placeholder: (context, url) =>
+                            const Center(child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
                         fit: BoxFit.cover,
                         width: double.infinity,
                         height: 200,
@@ -64,7 +71,7 @@ class NewsPage extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         ad.title,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
@@ -75,7 +82,7 @@ class NewsPage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Text(
                         ad.description,
-                        style: TextStyle(fontSize: 14),
+                        style: const TextStyle(fontSize: 14),
                       ),
                     ),
                   ],

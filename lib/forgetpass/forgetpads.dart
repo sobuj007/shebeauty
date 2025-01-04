@@ -8,6 +8,8 @@ import '../utils/appApis.dart';
 import '../utils/appColors.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
+  const ForgotPasswordScreen({super.key});
+
   @override
   _ForgotPasswordScreenState createState() => _ForgotPasswordScreenState();
 }
@@ -21,7 +23,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       isLoading = true;
     });
 
-    var url = Uri.parse(AppAppis.endpoint +'/forgot-password');
+    var url = Uri.parse('${AppAppis.endpoint}/forgot-password');
     var response = await http.post(
       url,
       headers: {'Accept': 'application/json'},
@@ -44,13 +46,16 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(
-        title: Text('Forgot Password',style: AppFonts.fontH4semi(AppColors.themeWhite),),
-         backgroundColor: AppColors.themeColer,
-        iconTheme: IconThemeData(
-          color: AppColors.themeWhite// Change the color of the back arrow here
+        title: Text(
+          'Forgot Password',
+          style: AppFonts.fontH4semi(AppColors.themeWhite),
         ),
+        backgroundColor: AppColors.themeColer,
+        iconTheme: const IconThemeData(
+            color:
+                AppColors.themeWhite // Change the color of the back arrow here
+            ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -58,18 +63,18 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           children: [
             TextFormField(
               controller: _emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Email',
                 border: OutlineInputBorder(),
               ),
               keyboardType: TextInputType.emailAddress,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             isLoading
-                ? CircularProgressIndicator()
+                ? const CircularProgressIndicator()
                 : ElevatedButton(
                     onPressed: sendPasswordResetEmail,
-                    child: Text('Send Reset Link'),
+                    child: const Text('Send Reset Link'),
                   ),
           ],
         ),

@@ -14,7 +14,7 @@ import '../review/ReviewRatings.dart';
 class ItemDetailTodayPage extends StatelessWidget {
   final item;
 
-  ItemDetailTodayPage({required this.item});
+  ItemDetailTodayPage({super.key, required this.item});
 
   var allinfoController = Get.put(AllinfoController());
   var procon = Get.put(AllProductController());
@@ -29,7 +29,7 @@ class ItemDetailTodayPage extends StatelessWidget {
             style: AppFonts.fontH4semi(AppColors.themeWhite),
           ),
           backgroundColor: AppColors.themeColer,
-          iconTheme: IconThemeData(
+          iconTheme: const IconThemeData(
               color: AppColors
                   .themeWhite // Change the color of the back arrow here
               ),
@@ -61,8 +61,8 @@ class ItemDetailTodayPage extends StatelessWidget {
                                 border: Border.all(
                                     width: .2.w, color: AppColors.themeborder),
                                 borderRadius: BorderRadius.circular(10)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment:

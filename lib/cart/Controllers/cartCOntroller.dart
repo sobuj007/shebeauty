@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:Ghore_Parlor/provider/Model/allproviderDataModel.dart';
 import 'dart:convert';
 
 import '../Model/cartModel.dart';

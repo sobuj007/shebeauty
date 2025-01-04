@@ -17,10 +17,10 @@
 mixin AppAppis {
   static String endpoint = "https://ghoreparlour.com/api/";
   static String endpointImg = "https://ghoreparlour.com/storage/";
-  static String login = endpoint + "login";
-  static String register = endpoint + "register";
-  static String user = endpoint + "user";
-  static String getallproduct = endpoint + "getallProducts";
+  static String login = "${endpoint}login";
+  static String register = "${endpoint}register";
+  static String user = "${endpoint}user";
+  static String getallproduct = "${endpoint}getallProducts";
   static String myexpartimag = "https://ghoreparlour.com/uploads/exparts/";
   static String myexpartCertificate =
       "https://ghoreparlour.com/uploads/expartscertificate/";

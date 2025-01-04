@@ -7,16 +7,15 @@ class TodayModel {
     if (json['todays_orders'] != null) {
       todaysOrders = <TodaysOrders>[];
       json['todays_orders'].forEach((v) {
-        todaysOrders!.add(new TodaysOrders.fromJson(v));
+        todaysOrders!.add(TodaysOrders.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.todaysOrders != null) {
-      data['todays_orders'] =
-          this.todaysOrders!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (todaysOrders != null) {
+      data['todays_orders'] = todaysOrders!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -81,41 +80,40 @@ class TodaysOrders {
     payable = json['payable'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    order = json['order'] != null ? new Order.fromJson(json['order']) : null;
+    order = json['order'] != null ? Order.fromJson(json['order']) : null;
     serviceProduct = json['service_product'] != null
-        ? new ServiceProduct.fromJson(json['service_product'])
+        ? ServiceProduct.fromJson(json['service_product'])
         : null;
-    payment2 = json['payment2'] != null
-        ? new Payment2.fromJson(json['payment2'])
-        : null;
+    payment2 =
+        json['payment2'] != null ? Payment2.fromJson(json['payment2']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['order_id'] = this.orderId;
-    data['vendor_id'] = this.vendorId;
-    data['user_id'] = this.userId;
-    data['service_product_id'] = this.serviceProductId;
-    data['product_quantity'] = this.productQuantity;
-    data['service_quantity'] = this.serviceQuantity;
-    data['product_price'] = this.productPrice;
-    data['service_price'] = this.servicePrice;
-    data['selected_slot'] = this.selectedSlot;
-    data['userreqtime'] = this.userreqtime;
-    data['req_order_date'] = this.reqOrderDate;
-    data['status'] = this.status;
-    data['payable'] = this.payable;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    if (this.order != null) {
-      data['order'] = this.order!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['order_id'] = orderId;
+    data['vendor_id'] = vendorId;
+    data['user_id'] = userId;
+    data['service_product_id'] = serviceProductId;
+    data['product_quantity'] = productQuantity;
+    data['service_quantity'] = serviceQuantity;
+    data['product_price'] = productPrice;
+    data['service_price'] = servicePrice;
+    data['selected_slot'] = selectedSlot;
+    data['userreqtime'] = userreqtime;
+    data['req_order_date'] = reqOrderDate;
+    data['status'] = status;
+    data['payable'] = payable;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    if (order != null) {
+      data['order'] = order!.toJson();
     }
-    if (this.serviceProduct != null) {
-      data['service_product'] = this.serviceProduct!.toJson();
+    if (serviceProduct != null) {
+      data['service_product'] = serviceProduct!.toJson();
     }
-    if (this.payment2 != null) {
-      data['payment2'] = this.payment2!.toJson();
+    if (payment2 != null) {
+      data['payment2'] = payment2!.toJson();
     }
     return data;
   }
@@ -150,14 +148,14 @@ class Order {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['user_id'] = this.userId;
-    data['status'] = this.status;
-    data['total_amount'] = this.totalAmount;
-    data['order_date'] = this.orderDate;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['user_id'] = userId;
+    data['status'] = status;
+    data['total_amount'] = totalAmount;
+    data['order_date'] = orderDate;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }
@@ -221,24 +219,24 @@ class ServiceProduct {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['agent_id'] = this.agentId;
-    data['category_id'] = this.categoryId;
-    data['subcategory_id'] = this.subcategoryId;
-    data['bodypart_id'] = this.bodypartId;
-    data['city_id'] = this.cityId;
-    data['location_ids'] = this.locationIds;
-    data['slot_id'] = this.slotId;
-    data['appointment_slot_ids'] = this.appointmentSlotIds;
-    data['name'] = this.name;
-    data['description'] = this.description;
-    data['image'] = this.image;
-    data['product_price'] = this.productPrice;
-    data['service_price'] = this.servicePrice;
-    data['gender'] = this.gender;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['agent_id'] = agentId;
+    data['category_id'] = categoryId;
+    data['subcategory_id'] = subcategoryId;
+    data['bodypart_id'] = bodypartId;
+    data['city_id'] = cityId;
+    data['location_ids'] = locationIds;
+    data['slot_id'] = slotId;
+    data['appointment_slot_ids'] = appointmentSlotIds;
+    data['name'] = name;
+    data['description'] = description;
+    data['image'] = image;
+    data['product_price'] = productPrice;
+    data['service_price'] = servicePrice;
+    data['gender'] = gender;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }
@@ -246,11 +244,11 @@ class ServiceProduct {
 class Payment2 {
   int? id;
   int? orderId;
-  Null? productId;
+  Null productId;
   String? amount;
   String? status;
   String? address;
-  Null? notes;
+  Null notes;
   String? mobile;
   String? transType;
   String? createdAt;
@@ -284,18 +282,18 @@ class Payment2 {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['order_id'] = this.orderId;
-    data['product_id'] = this.productId;
-    data['amount'] = this.amount;
-    data['status'] = this.status;
-    data['address'] = this.address;
-    data['notes'] = this.notes;
-    data['mobile'] = this.mobile;
-    data['trans_type'] = this.transType;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['order_id'] = orderId;
+    data['product_id'] = productId;
+    data['amount'] = amount;
+    data['status'] = status;
+    data['address'] = address;
+    data['notes'] = notes;
+    data['mobile'] = mobile;
+    data['trans_type'] = transType;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }

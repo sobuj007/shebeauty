@@ -62,7 +62,7 @@ class _LoginState extends State<Login> {
     return token.value.isNotEmpty && isRemember.value == 'true'
         ? Container(
             color: AppColors.themeWhite,
-            child: Center(
+            child: const Center(
               child: CircularProgressIndicator(),
             ))
         : Scaffold(
@@ -81,7 +81,7 @@ class _LoginState extends State<Login> {
                     // ),
                     child: Center(
                         child: Image(
-                      image: AssetImage('assets/2.png'),
+                      image: const AssetImage('assets/2.png'),
                       fit: BoxFit.contain,
                       width: 30.w,
                     )),
@@ -110,7 +110,7 @@ class _LoginState extends State<Login> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide:
-                                BorderSide(color: AppColors.themeColer))),
+                                const BorderSide(color: AppColors.themeColer))),
                   ),
                   SizedBox(
                     height: 2.h,
@@ -122,8 +122,8 @@ class _LoginState extends State<Login> {
                     decoration: InputDecoration(
                         suffixIcon: IconButton(
                           icon: isPassview
-                              ? Icon(Icons.visibility_off)
-                              : Icon(Icons.visibility),
+                              ? const Icon(Icons.visibility_off)
+                              : const Icon(Icons.visibility),
                           onPressed: () {
                             setState(() {
                               isPassview = !isPassview;
@@ -139,7 +139,7 @@ class _LoginState extends State<Login> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide:
-                                BorderSide(color: AppColors.themeColer))),
+                                const BorderSide(color: AppColors.themeColer))),
                   ),
                   SizedBox(
                     height: 1.5.h,
@@ -152,7 +152,7 @@ class _LoginState extends State<Login> {
                         children: [
                           Transform.scale(
                             scale: 1,
-                            child: Container(
+                            child: SizedBox(
                               width: 24.0,
                               height: 24.0,
                               child: Checkbox(
@@ -212,7 +212,7 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                   ),
-                  Expanded(child: SizedBox()),
+                  const Expanded(child: SizedBox()),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

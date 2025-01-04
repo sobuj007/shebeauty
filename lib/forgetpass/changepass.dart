@@ -8,6 +8,8 @@ import '../utils/appColors.dart';
 import '../utils/appFonts.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
+  const ResetPasswordScreen({super.key});
+
   @override
   _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
 }
@@ -16,7 +18,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _tokenController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   bool isLoading = false;
 
   Future<void> resetPassword() async {
@@ -29,7 +32,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       isLoading = true;
     });
 
-    var url = Uri.parse(AppAppis.endpoint +'reset-password');
+    var url = Uri.parse('${AppAppis.endpoint}reset-password');
     var response = await http.post(
       url,
       headers: {'Accept': 'application/json'},
@@ -57,13 +60,16 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
-       appBar: AppBar(
-        title: Text('Reset Password',style: AppFonts.fontH4semi(AppColors.themeWhite),),
-         backgroundColor: AppColors.themeColer,
-        iconTheme: IconThemeData(
-          color: AppColors.themeWhite// Change the color of the back arrow here
+      appBar: AppBar(
+        title: Text(
+          'Reset Password',
+          style: AppFonts.fontH4semi(AppColors.themeWhite),
         ),
+        backgroundColor: AppColors.themeColer,
+        iconTheme: const IconThemeData(
+            color:
+                AppColors.themeWhite // Change the color of the back arrow here
+            ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -71,44 +77,44 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           children: [
             TextFormField(
               controller: _emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Email',
                 border: OutlineInputBorder(),
               ),
               keyboardType: TextInputType.emailAddress,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextFormField(
               controller: _tokenController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Token',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextFormField(
               controller: _passwordController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'New Password',
                 border: OutlineInputBorder(),
               ),
               obscureText: true,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextFormField(
               controller: _confirmPasswordController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Confirm Password',
                 border: OutlineInputBorder(),
               ),
               obscureText: true,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             isLoading
-                ? CircularProgressIndicator()
+                ? const CircularProgressIndicator()
                 : ElevatedButton(
                     onPressed: resetPassword,
-                    child: Text('Reset Password'),
+                    child: const Text('Reset Password'),
                   ),
           ],
         ),

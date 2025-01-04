@@ -27,7 +27,7 @@ class Layout extends StatefulWidget {
 }
 
 class _LayoutState extends State<Layout> {
-  List pagelist = [Woman(), Man(), MyCart(), Profile()];
+  List pagelist = [Woman(), const Man(), const MyCart(), const Profile()];
 
   int selectPageIndex = 0;
   final Usercontoller ucon = Get.put(Usercontoller());
@@ -60,25 +60,26 @@ class _LayoutState extends State<Layout> {
                                 style: AppFonts.fontH4regular(
                                     AppColors.themeColer),
                               ),
-                              Icon(
+                              const Icon(
                                 Icons.notifications,
                                 color: AppColors.themeColer,
                               )
                             ],
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           //height: 22.h,
                           height: 19.h,
                           child: Stack(
                             children: [
                               Positioned(
-                                  child: Container(
+                                  child: SizedBox(
                                 height: 18.h,
                                 width: 100.w,
                                 child: (adsController.adslist.isEmpty)
-                                    ? Center(child: CircularProgressIndicator())
-                                    : Container(
+                                    ? const Center(
+                                        child: CircularProgressIndicator())
+                                    : SizedBox(
                                         height: 19.h,
                                         child: adsController.adslist.isNotEmpty
                                             ? Padding(
@@ -121,12 +122,12 @@ class _LayoutState extends State<Layout> {
                                                   scale: 0.9,
                                                 ),
                                               )
-                                            : Center(
+                                            : const Center(
                                                 child:
                                                     CircularProgressIndicator()),
                                       ),
                               )),
-                              Positioned(
+                              const Positioned(
                                 bottom: 1,
                                 child: SizedBox(),
                                 // child: Padding(
@@ -203,7 +204,7 @@ class _LayoutState extends State<Layout> {
   ads() {
     return Obx(() {
       if (adsController.adslist.isEmpty) {
-        return Center(child: CircularProgressIndicator());
+        return const Center(child: CircularProgressIndicator());
       } else {
         return Container(
           child: Swiper(
@@ -253,20 +254,21 @@ class _LayoutState extends State<Layout> {
             // tabBorder: Border.all(color: AppColors.themeColer, width: 1), // tab button border
             //tabShadow: [BoxShadow(color: Colors.grey.withOpacity(0.5), blurRadius: 8)], // tab button shadow
             curve: Curves.easeOutExpo, // tab animation curves
-            duration: Duration(milliseconds: 100), // tab animation duration
+            duration:
+                const Duration(milliseconds: 100), // tab animation duration
             gap: 8, // the tab button gap between icon and text
             //color: Colors.grey[800], // unselected icon color
             activeColor: AppColors.bgColer, // selected icon and text color
             iconSize: 24, // tab button icon size
             tabBackgroundColor: AppColors.themeColer
                 .withOpacity(0.1), // selected tab background color
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
             selectedIndex: selectPageIndex, // navigation bar padding
             onTabChange: (v) {
               selectPageIndex = v;
               setState(() {});
             },
-            tabs: [
+            tabs: const [
               GButton(
                 icon: LineIcons.female,
                 text: 'Woman',
